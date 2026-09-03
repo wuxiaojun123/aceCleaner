@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">AceClean</string>
+    <string name="app_name">Ace Cleaner</string>
+    <string name="loading">Loading...%1$d%%</string>
+    <string name="never_miss_key_tip">Never Miss a Key Tip</string>
+    <string name="clean_up">CLEAN UP</string>
+    <string name="network_traffic">Network Traffic</string>
+    <string name="notification_cleaner">Notification Cleaner</string>
+    <string name="app_manager">APP Manager</string>
+    <string name="screenshot_cleaner">Screenshot Cleaner</string>
+    <string name="big_file_cleaner">Big File Cleaner</string>
+    <string name="duplicate_photo_cleaner">Duplicate Photo Cleaner</string>
+    <string name="video_cleaner">Video Cleaner</string>
+    <string name="feature_coming_soon">This feature is coming soon</string>
+    <string name="scan_percentage">%1$d%%</string>
+    <string name="scanning">Scanning...</string>
+    <string name="one_click_clean">One-click Clean</string>
+    <string name="removable">Removable</string>
+    <string name="cache">Cache</string>
+    <string name="ad_files">Ad files</string>
+    <string name="obsolete_apk_files">Obsolete APK files</string>
+    <string name="residual_files">Residual files</string>
+    <string name="remove_more">Remove more</string>
+    <string name="no_junk">No junk</string>
+    <string name="remove_size">Remove 118.8 MB</string>
+    <string name="clean_complete_message">118.8 MB removed</string>
 </resources>

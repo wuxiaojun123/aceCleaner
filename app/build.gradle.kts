@@ -43,6 +43,9 @@ kotlin {
 dependencies {
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("com.airbnb.android:lottie:6.5.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
