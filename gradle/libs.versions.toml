@@ -1,0 +1,94 @@
+[versions]
+agp = "8.13.1"
+kotlin = "2.2.21"
+coreKtx = "1.10.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+lifecycleRuntimeKtx = "2.6.1"
+fragmentKtx = "1.8.5"
+constraintLayout = "2.2.0"
+coroutines = "1.8.1"
+okio = "3.9.1"
+activityCompose = "1.8.0"
+composeBom = "2024.09.00"
+topon-sdk = "6.5.73.1"
+appcompat = "1.6.1"
+material = "1.10.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+google-review = { module = "com.google.android.play:review", version = "2.0.2" }
+google-review-ktx = { module = "com.google.android.play:review-ktx", version = "2.0.2" }
+
+# commercial
+topon-core = { module = "com.thinkup.sdk:core-tpn", version.ref = "topon-sdk" }
+topon-nativead = { module = "com.thinkup.sdk:nativead-tpn", version.ref = "topon-sdk" }
+topon-banner = { module = "com.thinkup.sdk:banner-tpn", version.ref = "topon-sdk" }
+topon-interstitial = { module = "com.thinkup.sdk:interstitial-tpn", version.ref = "topon-sdk" }
+topon-rewardedvideo = { module = "com.thinkup.sdk:rewardedvideo-tpn", version.ref = "topon-sdk" }
+topon-splash = { module = "com.thinkup.sdk:splash-tpn", version.ref = "topon-sdk" }
+topon-debugui= { module = "com.thinkup.sdk:debugger-ui", version= "1.1.2" }
+topon-adapter-vungle = { module = "com.thinkup.sdk:adapter-tpn-vungle", version = "7.6.1.1.1" }
+topon-adapter-unityads = { module = "com.thinkup.sdk:adapter-tpn-unityads", version = "4.17.0.1.1" }
+topon-adapter-pangle = { module = "com.thinkup.sdk:adapter-tpn-pangle", version = "7.9.1.0.1.0" }
+topon-adapter-admob = { module = "com.thinkup.sdk:adapter-tpn-admob", version = "25.0.0.1.0" }
+topon-adapter-sdm = { module = "com.thinkup.sdk:adapter-tpn-sdm", version = "6.5.66.1.0" }
+topon-adapter-applovin = { module = "com.thinkup.sdk:adapter-tpn-applovin", version = "13.6.0.1.0" }
+topon-adapter-mintegral = { module = "com.thinkup.sdk:adapter-tpn-mintegral", version = "17.0.91.1.0" }
+topon-adapter-yandex = { module = "com.thinkup.sdk:adapter-tpn-yandex", version = "7.15.1.1.0" }
+topon-tramini-plugin = { module = "com.thinkup.sdk:tramini-plugin-tpn", version = "6.5.73" }
+
+admob = { module = "com.google.android.gms:play-services-ads", version = "25.0.0" }
+google-play-services-basement = { module = "com.google.android.gms:play-services-basement", version = "18.1.0" }
+google-play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version = "18.2.0" }
+vungle-ads = { module = "com.vungle:vungle-ads", version = "7.6.1" }
+unity-ads = { module = "com.unity3d.ads:unity-ads", version = "4.17.0" }
+pangle-sdk = { module = "com.pangle.global:pag-sdk", version = "7.9.1.0" }
+smartdigimkttech-sdk = { module = "com.smartdigimkttech.sdk:smartdigimkttech-sdk", version = "6.5.66" }
+applovin-sdk = { module = "com.applovin:applovin-sdk", version = "13.6.0" }
+mintegral-sdk = { module = "com.mbridge.msdk.oversea:mbridge_android_sdk", version = "17.0.91" }
+yandex-mobileads = { module = "com.yandex.android:mobileads", version = "7.15.1" }
+#androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+
+install-ref = { module = "com.android.installreferrer:installreferrer", version = "2.2" }
+
+# Firebase
+build-google-gms-service = { module = "com.google.gms:google-services", version = "4.4.4" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "34.6.0" }
+firebase-config = { module = "com.google.firebase:firebase-config" }
+firebase-analytic = { module = "com.google.firebase:firebase-analytics" }
+firebase-crash = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+
+google-ump = { module = "com.google.android.ump:user-messaging-platform", version = "4.0.0" }
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version = "1.1.7" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
