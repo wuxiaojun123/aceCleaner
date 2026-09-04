@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:layout_marginBottom="7dp"
+    android:background="@drawable/bg_large_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingEnd="10dp">
+
+    <ImageView android:id="@+id/large_file_icon" android:layout_width="34dp" android:layout_height="34dp" android:contentDescription="@null" android:scaleType="centerInside" />
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:layout_weight="1" android:orientation="vertical">
+        <TextView android:id="@+id/large_file_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:textColor="#FF36373C" android:textSize="15sp" android:textStyle="bold" />
+        <TextView android:id="@+id/large_file_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="#FF9A9BA0" android:textSize="12sp" />
+    </LinearLayout>
+    <CheckBox android:id="@+id/large_file_check" android:layout_width="38dp" android:layout_height="38dp" android:buttonTint="#FF191733" android:clickable="false" android:gravity="center" />
+</LinearLayout>

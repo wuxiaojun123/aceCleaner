@@ -18,7 +18,7 @@ class CleanScanFragment : BaseFragment(R.layout.fragment_clean_scan) {
             duration = SCAN_DURATION_MS
             interpolator = LinearInterpolator()
             addUpdateListener { progressText.text = getString(R.string.scan_percentage, it.animatedValue as Int) }
-            doOnEnd { (activity as? MainActivity)?.showCleanResult() }
+            doOnEnd { (activity as? CleanUpActivity)?.showCleanResult() }
             start()
         }
     }

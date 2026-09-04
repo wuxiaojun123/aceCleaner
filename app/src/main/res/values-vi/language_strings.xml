@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Ngôn ngữ</string>
+<string name="language_title">Ngôn ngữ</string>
+<string name="language_english">Tiếng Anh</string>
+<string name="language_japanese">Tiếng Nhật</string>
+<string name="language_hindi">Tiếng Hindi</string>
+<string name="language_korean">Tiếng Hàn</string>
+<string name="language_spanish">Tiếng Tây Ban Nha</string>
+<string name="language_portuguese">Tiếng Bồ Đào Nha</string>
+<string name="language_german">Tiếng Đức</string>
+<string name="language_french">Tiếng Pháp</string>
+<string name="language_turkish">Tiếng Thổ Nhĩ Kỳ</string>
+<string name="language_italian">Tiếng Ý</string>
+<string name="language_afrikaans">Tiếng Afrikaans</string>
+<string name="language_xhosa">Tiếng Xhosa</string>
+<string name="language_zulu">Tiếng Zulu</string>
+<string name="language_russian">Tiếng Nga</string>
+<string name="language_ukrainian">Tiếng Ukraina</string>
+<string name="language_vietnamese">Tiếng Việt</string>
+<string name="language_indonesian">Tiếng Indonesia</string>
+<string name="language_malay">Tiếng Mã Lai</string>
+<string name="language_thai">Tiếng Thái</string>
+<string name="language_filipino">Tiếng Filipino</string>
+<string name="language_tagalog">Tiếng Tagalog</string>
+<string name="language_cebuano">Tiếng Cebuano</string>
+</resources>

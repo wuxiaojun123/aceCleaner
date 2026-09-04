@@ -56,7 +56,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Language"
+                    android:contentDescription="@string/language_entry_content_description"
                     android:padding="8dp"
                     android:src="@drawable/ic_language" />
             </LinearLayout>

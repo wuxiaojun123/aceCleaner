@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Ulwimi</string>
+<string name="language_title">Ulwimi</string>
+<string name="language_english">IsiNgesi</string>
+<string name="language_japanese">IsiJapan</string>
+<string name="language_hindi">IsiHindi</string>
+<string name="language_korean">IsiKorea</string>
+<string name="language_spanish">IsiSpanish</string>
+<string name="language_portuguese">IsiPhuthukezi</string>
+<string name="language_german">IsiJamani</string>
+<string name="language_french">IsiFrentshi</string>
+<string name="language_turkish">IsiTurkey</string>
+<string name="language_italian">IsiTaliyane</string>
+<string name="language_afrikaans">IsiAfrikansi</string>
+<string name="language_xhosa">IsiXhosa</string>
+<string name="language_zulu">IsiZulu</string>
+<string name="language_russian">IsiRashiya</string>
+<string name="language_ukrainian">IsiUkraine</string>
+<string name="language_vietnamese">IsiVietnam</string>
+<string name="language_indonesian">IsiIndonesia</string>
+<string name="language_malay">IsiMalay</string>
+<string name="language_thai">IsiThai</string>
+<string name="language_filipino">IsiFilipino</string>
+<string name="language_tagalog">IsiTagalog</string>
+<string name="language_cebuano">IsiCebuano</string>
+</resources>

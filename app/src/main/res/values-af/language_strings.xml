@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Taal</string>
+<string name="language_title">Taal</string>
+<string name="language_english">Engels</string>
+<string name="language_japanese">Japannees</string>
+<string name="language_hindi">Hindi</string>
+<string name="language_korean">Koreaans</string>
+<string name="language_spanish">Spaans</string>
+<string name="language_portuguese">Portugees</string>
+<string name="language_german">Duits</string>
+<string name="language_french">Frans</string>
+<string name="language_turkish">Turks</string>
+<string name="language_italian">Italiaans</string>
+<string name="language_afrikaans">Afrikaans</string>
+<string name="language_xhosa">Xhosa</string>
+<string name="language_zulu">Zoeloe</string>
+<string name="language_russian">Russies</string>
+<string name="language_ukrainian">Oekraïens</string>
+<string name="language_vietnamese">Viëtnamees</string>
+<string name="language_indonesian">Indonesies</string>
+<string name="language_malay">Maleis</string>
+<string name="language_thai">Thai</string>
+<string name="language_filipino">Filippyns</string>
+<string name="language_tagalog">Tagalog</string>
+<string name="language_cebuano">Cebuano</string>
+</resources>

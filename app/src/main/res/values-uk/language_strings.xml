@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Мова</string>
+<string name="language_title">Мова</string>
+<string name="language_english">Англійська</string>
+<string name="language_japanese">Японська</string>
+<string name="language_hindi">Гінді</string>
+<string name="language_korean">Корейська</string>
+<string name="language_spanish">Іспанська</string>
+<string name="language_portuguese">Португальська</string>
+<string name="language_german">Німецька</string>
+<string name="language_french">Французька</string>
+<string name="language_turkish">Турецька</string>
+<string name="language_italian">Італійська</string>
+<string name="language_afrikaans">Африкаанс</string>
+<string name="language_xhosa">Коса</string>
+<string name="language_zulu">Зулу</string>
+<string name="language_russian">Російська</string>
+<string name="language_ukrainian">Українська</string>
+<string name="language_vietnamese">В’єтнамська</string>
+<string name="language_indonesian">Індонезійська</string>
+<string name="language_malay">Малайська</string>
+<string name="language_thai">Тайська</string>
+<string name="language_filipino">Філіппінська</string>
+<string name="language_tagalog">Тагальська</string>
+<string name="language_cebuano">Себуанська</string>
+</resources>

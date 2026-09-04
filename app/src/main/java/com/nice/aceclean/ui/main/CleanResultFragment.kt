@@ -9,11 +9,11 @@ class CleanResultFragment : BaseFragment(R.layout.fragment_clean_result) {
 
     override fun initViews(root: View) {
         root.findViewById<View>(R.id.clean_result_back).setOnClickListener {
-            parentFragmentManager.popBackStack()
+            requireActivity().finish()
         }
         root.findViewById<View>(R.id.remove_button).setOnClickListener {
             Toast.makeText(requireContext(), R.string.clean_complete_message, Toast.LENGTH_SHORT).show()
-            parentFragmentManager.popBackStack()
+            requireActivity().finish()
         }
     }
 }

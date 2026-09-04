@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nice.aceclean.ui.widget.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:background="@drawable/bg_similar_photo_card"
+    android:clipToOutline="true">
+
+    <ImageView
+        android:id="@+id/similar_photo_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/similar_photo_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_similar_photo_selected"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/similar_photo_best"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_gravity="start|top"
+        android:layout_margin="7dp"
+        android:background="@drawable/bg_dup_best_badge"
+        android:drawableStart="@drawable/ic_dup_star_white"
+        android:drawablePadding="3dp"
+        android:gravity="center"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:text="@string/dup_best_photo"
+        android:textColor="@android:color/white"
+        android:textSize="9.5sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/similar_photo_size"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_gravity="start|bottom"
+        android:layout_margin="7dp"
+        android:background="@drawable/bg_dup_size_pill"
+        android:gravity="center"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:textColor="@android:color/white"
+        android:textSize="10.5sp" />
+
+    <View
+        android:id="@+id/similar_photo_unchecked"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="end|top"
+        android:layout_margin="7dp"
+        android:background="@drawable/bg_dup_checkbox" />
+
+    <FrameLayout
+        android:id="@+id/similar_photo_checked"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="end|top"
+        android:layout_margin="7dp"
+        android:background="@drawable/bg_dup_checkbox_checked"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_dup_check" />
+    </FrameLayout>
+</com.nice.aceclean.ui.widget.SquareFrameLayout>

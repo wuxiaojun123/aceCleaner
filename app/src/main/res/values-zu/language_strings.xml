@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Ulimi</string>
+<string name="language_title">Ulimi</string>
+<string name="language_english">IsiNgisi</string>
+<string name="language_japanese">IsiJapane</string>
+<string name="language_hindi">IsiHindi</string>
+<string name="language_korean">IsiKorea</string>
+<string name="language_spanish">IsiSpanishi</string>
+<string name="language_portuguese">IsiPutukezi</string>
+<string name="language_german">IsiJalimane</string>
+<string name="language_french">IsiFulentshi</string>
+<string name="language_turkish">IsiTurkey</string>
+<string name="language_italian">IsiNtaliyane</string>
+<string name="language_afrikaans">IsiBhunu</string>
+<string name="language_xhosa">IsiXhosa</string>
+<string name="language_zulu">IsiZulu</string>
+<string name="language_russian">IsiRashiya</string>
+<string name="language_ukrainian">Isi-Ukraine</string>
+<string name="language_vietnamese">IsiVietnam</string>
+<string name="language_indonesian">Isi-Indonesia</string>
+<string name="language_malay">IsiMalay</string>
+<string name="language_thai">IsiThai</string>
+<string name="language_filipino">IsiFilipino</string>
+<string name="language_tagalog">IsiTagalog</string>
+<string name="language_cebuano">IsiCebuano</string>
+</resources>

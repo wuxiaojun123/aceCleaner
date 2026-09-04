@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="104dp"
+    android:layout_marginStart="3dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginBottom="9dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <ImageView android:id="@+id/picture_thumbnail" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FFE7E8EC" android:contentDescription="@null" android:scaleType="centerCrop" />
+    <TextView android:id="@+id/picture_size" android:layout_width="match_parent" android:layout_height="30dp" android:layout_gravity="bottom" android:background="#66000000" android:gravity="center_vertical" android:paddingStart="7dp" android:paddingEnd="32dp" android:textColor="#FFFFFFFF" android:textSize="12sp" />
+    <CheckBox android:id="@+id/picture_check" android:layout_width="36dp" android:layout_height="36dp" android:layout_gravity="end|bottom" android:buttonTint="#FFFFFFFF" android:clickable="false" android:gravity="center" />
+</FrameLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Wika</string>
+<string name="language_title">Wika</string>
+<string name="language_english">Ingles</string>
+<string name="language_japanese">Hapon</string>
+<string name="language_hindi">Hindi</string>
+<string name="language_korean">Koreano</string>
+<string name="language_spanish">Espanyol</string>
+<string name="language_portuguese">Portuges</string>
+<string name="language_german">Aleman</string>
+<string name="language_french">Pranses</string>
+<string name="language_turkish">Turko</string>
+<string name="language_italian">Italyano</string>
+<string name="language_afrikaans">Afrikaans</string>
+<string name="language_xhosa">Xhosa</string>
+<string name="language_zulu">Zulu</string>
+<string name="language_russian">Ruso</string>
+<string name="language_ukrainian">Ukrainian</string>
+<string name="language_vietnamese">Vietnamese</string>
+<string name="language_indonesian">Indonesian</string>
+<string name="language_malay">Malay</string>
+<string name="language_thai">Thai</string>
+<string name="language_filipino">Filipino</string>
+<string name="language_tagalog">Tagalog</string>
+<string name="language_cebuano">Cebuano</string>
+</resources>
