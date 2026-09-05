@@ -1,16 +1,14 @@
 package com.nice.aceclean.ui.main
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.NotificationManagerCompat
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.PermissionAutoNavigator
+import com.nice.aceclean.permission.SpecialPermission
+import com.nice.aceclean.permission.SpecialPermissionAccess
 import com.nice.aceclean.ui.base.BaseFragment
-import com.nice.aceclean.util.DeviceStats
 
 enum class FeatureType {
     NETWORK_TRAFFIC,
@@ -19,6 +17,8 @@ enum class FeatureType {
 }
 
 class PermissionGateFragment : BaseFragment(R.layout.fragment_permission_gate) {
+
+    private var permissionNavigator: PermissionAutoNavigator? = null
 
     private val featureType: FeatureType
         get() = FeatureType.valueOf(requireArguments().getString(ARG_FEATURE).orEmpty())
@@ -33,26 +33,18 @@ class PermissionGateFragment : BaseFragment(R.layout.fragment_permission_gate) {
             requireActivity().finish()
         }
         root.findViewById<View>(R.id.permission_allow).setOnClickListener { openSettings() }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        if (hasRequiredAccess()) openFeatureScreen()
-    }
-
-    private fun hasRequiredAccess(): Boolean = when (featureType) {
-        FeatureType.NOTIFICATION_CLEANER ->
-            NotificationManagerCompat.getEnabledListenerPackages(requireContext()).contains(requireContext().packageName)
-        FeatureType.NETWORK_TRAFFIC, FeatureType.APP_MANAGER -> DeviceStats.hasUsageAccess(requireContext())
+        permissionNavigator = PermissionAutoNavigator(
+            lifecycleOwner = viewLifecycleOwner,
+            isGranted = {
+                SpecialPermissionAccess.isGranted(requireContext(), featureType.specialPermission)
+            },
+            onGranted = ::openFeatureScreen,
+        )
     }
 
     private fun openSettings() {
-        val intent = when (featureType) {
-            FeatureType.NOTIFICATION_CLEANER -> Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
-            FeatureType.NETWORK_TRAFFIC, FeatureType.APP_MANAGER ->
-                Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, Uri.parse("package:${requireContext().packageName}"))
-        }
-        startActivity(intent)
+        startActivity(SpecialPermissionAccess.settingsIntent(requireContext(), featureType.specialPermission))
     }
 
     private fun openFeatureScreen() {
@@ -62,6 +54,12 @@ class PermissionGateFragment : BaseFragment(R.layout.fragment_permission_gate) {
             FeatureType.APP_MANAGER -> AppManagerFragment()
         }
         (activity as? FeatureActivity)?.showFeatureScreen(fragment)
+    }
+
+    override fun onDestroyView() {
+        permissionNavigator?.close()
+        permissionNavigator = null
+        super.onDestroyView()
     }
 
     private fun config(): GateConfig = when (featureType) {
@@ -86,6 +84,12 @@ class PermissionGateFragment : BaseFragment(R.layout.fragment_permission_gate) {
     }
 
     private data class GateConfig(val toolbarTitle: Int, val image: Int, val title: Int, val description: Int)
+
+    private val FeatureType.specialPermission: SpecialPermission
+        get() = when (this) {
+            FeatureType.NOTIFICATION_CLEANER -> SpecialPermission.NOTIFICATION_LISTENER
+            FeatureType.NETWORK_TRAFFIC, FeatureType.APP_MANAGER -> SpecialPermission.USAGE_ACCESS
+        }
 
     companion object {
         private const val ARG_FEATURE = "feature"

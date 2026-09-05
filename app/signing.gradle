@@ -1,0 +1,32 @@
+def manKey = [
+        store_file    : new File(rootProject.projectDir, "app/goCleaner.jks").absolutePath,
+        key_alias     : "goCleaner",
+        store_password: "goCleaner",
+        key_password  : "goCleaner",
+]
+
+def signings = manKey
+
+// set signings to all buildType in project
+// apply this gradle in project
+
+if (hasProperty('android')) {
+
+    def releaseConfig = android.signingConfigs.findByName("release")
+    if (releaseConfig == null) {
+        releaseConfig = android.signingConfigs.create("release")
+        println("create release sign!")
+    }
+
+    releaseConfig.storeFile = new File(signings.store_file)
+    releaseConfig.storePassword = signings.store_password
+    releaseConfig.keyAlias = signings.key_alias
+    releaseConfig.keyPassword = signings.key_password
+
+    android.buildTypes.all { it ->
+        println("setting build type:" + it.name)
+        it.signingConfig = android.signingConfigs.release
+    }
+
+    println 'signing set.'
+}

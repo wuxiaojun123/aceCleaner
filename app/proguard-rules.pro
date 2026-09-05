@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# javax.annotation.Nullable is a compile-time-only annotation referenced by a dependency.
+-dontwarn javax.annotation.Nullable

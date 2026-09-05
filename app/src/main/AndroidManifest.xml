@@ -32,7 +32,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AceClean">
+        android:theme="@style/Theme.AceClean"
+        android:name=".App"
+        >
         <service
             android:name=".service.NotificationCollectorService"
             android:exported="false"
