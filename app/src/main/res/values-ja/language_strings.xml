@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">言語</string>
+<string name="language_title">言語</string>
+<string name="language_english">英語</string>
+<string name="language_japanese">日本語</string>
+<string name="language_hindi">ヒンディー語</string>
+<string name="language_korean">韓国語</string>
+<string name="language_spanish">スペイン語</string>
+<string name="language_portuguese">ポルトガル語</string>
+<string name="language_german">ドイツ語</string>
+<string name="language_french">フランス語</string>
+<string name="language_turkish">トルコ語</string>
+<string name="language_italian">イタリア語</string>
+<string name="language_afrikaans">アフリカーンス語</string>
+<string name="language_xhosa">コサ語</string>
+<string name="language_zulu">ズールー語</string>
+<string name="language_russian">ロシア語</string>
+<string name="language_ukrainian">ウクライナ語</string>
+<string name="language_vietnamese">ベトナム語</string>
+<string name="language_indonesian">インドネシア語</string>
+<string name="language_malay">マレー語</string>
+<string name="language_thai">タイ語</string>
+<string name="language_filipino">フィリピン語</string>
+<string name="language_tagalog">タガログ語</string>
+<string name="language_cebuano">セブアノ語</string>
+</resources>

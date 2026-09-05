@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@null" android:scaleType="centerCrop" android:src="@drawable/image_home_not_clean_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <FrameLayout android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginStart="14dp" android:layout_marginEnd="14dp">
+            <ImageButton android:id="@+id/network_back" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:padding="10dp" android:src="@drawable/ic_back" />
+            <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="center" android:gravity="center" android:text="@string/network_traffic" android:textColor="#FF111111" android:textSize="18sp" android:textStyle="bold" />
+        </FrameLayout>
+
+        <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:clipToPadding="false" android:overScrollMode="never" android:paddingBottom="28dp" android:scrollbars="none">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="24dp" android:paddingEnd="24dp">
+
+                <TextView android:id="@+id/network_total" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30dp" android:gravity="center" android:text="0 B" android:textColor="#FF303030" android:textSize="36sp" android:textStyle="bold" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center" android:text="@string/this_month" android:textColor="#FF8D8E96" android:textSize="14sp" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="94dp" android:layout_marginTop="30dp" android:orientation="horizontal">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="7dp" android:layout_weight="1" android:background="@drawable/bg_home_card" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/mobile_data" android:textColor="#FF777982" android:textSize="13sp" />
+                        <TextView android:id="@+id/network_mobile" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0 B" android:textColor="#FF33343A" android:textSize="18sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="7dp" android:layout_weight="1" android:background="@drawable/bg_home_card" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/wifi" android:textColor="#FF777982" android:textSize="13sp" />
+                        <TextView android:id="@+id/network_wifi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="0 B" android:textColor="#FF33343A" android:textSize="18sp" android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="150dp" android:layout_marginTop="16dp" android:background="@drawable/bg_home_card" android:gravity="bottom" android:orientation="horizontal" android:paddingStart="22dp" android:paddingTop="24dp" android:paddingEnd="22dp" android:paddingBottom="18dp">
+                    <View android:layout_width="0dp" android:layout_height="36dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="64dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="48dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="92dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="72dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="104dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                    <View android:layout_width="0dp" android:layout_height="58dp" android:layout_weight="1" android:background="@drawable/bg_usage_bar" />
+                </LinearLayout>
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="28dp" android:text="@string/app_data_ranking" android:textColor="#FF33343A" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:id="@+id/network_app_list" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/bg_home_card" android:orientation="vertical" android:paddingStart="16dp" android:paddingEnd="16dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

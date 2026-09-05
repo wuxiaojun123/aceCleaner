@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_home_card"
+    android:gravity="center_vertical"
+    android:minHeight="76dp"
+    android:orientation="horizontal"
+    android:paddingStart="14dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp">
+    <ImageView android:id="@+id/notification_app_icon" android:layout_width="42dp" android:layout_height="42dp" android:contentDescription="@null" />
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical">
+        <TextView android:id="@+id/notification_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:textColor="#FF33343A" android:textSize="15sp" android:textStyle="bold" />
+        <TextView android:id="@+id/notification_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:ellipsize="end" android:maxLines="2" android:textColor="#FF92939A" android:textSize="12sp" />
+    </LinearLayout>
+    <TextView android:id="@+id/notification_delete" android:layout_width="58dp" android:layout_height="36dp" android:background="@drawable/bg_feature_button" android:gravity="center" android:text="Delete" android:textColor="#FFFFFFFF" android:textSize="12sp" android:textStyle="bold" />
+</LinearLayout>

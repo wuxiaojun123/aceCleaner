@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="language_entry_content_description">Pinulongan</string>
+<string name="language_title">Pinulongan</string>
+<string name="language_english">English</string>
+<string name="language_japanese">&#26085;&#26412;&#35486;</string>
+<string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+<string name="language_korean">&#54620;&#44397;&#50612;</string>
+<string name="language_spanish">Espa&#241;ol</string>
+<string name="language_portuguese">Portugu&#233;s</string>
+<string name="language_german">Deutsch</string>
+<string name="language_french">Francais</string>
+<string name="language_turkish">T&#252;rkee</string>
+<string name="language_italian">Italiano</string>
+<string name="language_afrikaans">Afrikaans</string>
+<string name="language_xhosa">IsiXhosa</string>
+<string name="language_zulu">isiZulu</string>
+<string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+<string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+<string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+<string name="language_indonesian">Bahasa Indonesia</string>
+<string name="language_malay">Bahasa Melayu</string>
+<string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+<string name="language_filipino">Pilipino</string>
+<string name="language_tagalog">Tagalog</string>
+<string name="language_cebuano">Pinulongan sa Cebu</string>
+</resources>
