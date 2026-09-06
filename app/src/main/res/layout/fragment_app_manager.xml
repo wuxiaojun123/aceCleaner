@@ -7,14 +7,14 @@
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:paddingTop="10dp">
         <FrameLayout android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginStart="14dp" android:layout_marginEnd="14dp">
-            <ImageButton android:id="@+id/app_manager_back" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:padding="10dp" android:src="@drawable/ic_back" />
+            <ImageButton android:id="@+id/app_manager_back" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:contentDescription="@string/go_back" android:padding="10dp" android:src="@drawable/ic_back" />
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="center" android:gravity="center" android:text="@string/app_manager" android:textColor="#FF111111" android:textSize="18sp" android:textStyle="bold" />
         </FrameLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:layout_marginStart="20dp" android:layout_marginTop="18dp" android:layout_marginEnd="20dp" android:background="@drawable/bg_soft_blue" android:gravity="center_vertical" android:orientation="horizontal" android:paddingStart="18dp" android:paddingEnd="18dp">
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/uninstall_unused_apps" android:textColor="#FF34353B" android:textSize="17sp" android:textStyle="bold" />
-                <TextView android:id="@+id/app_manager_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0 apps" android:textColor="#FF858791" android:textSize="12sp" />
+                <TextView android:id="@+id/app_manager_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="@string/apps_found_initial" android:textColor="#FF858791" android:textSize="12sp" />
             </LinearLayout>
             <ImageView android:layout_width="42dp" android:layout_height="42dp" android:contentDescription="@null" android:src="@drawable/icon_app_manager" />
         </LinearLayout>

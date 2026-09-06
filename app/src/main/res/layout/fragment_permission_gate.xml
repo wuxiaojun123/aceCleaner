@@ -28,7 +28,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Back"
+                android:contentDescription="@string/go_back"
                 android:padding="10dp"
                 android:src="@drawable/ic_back" />
 

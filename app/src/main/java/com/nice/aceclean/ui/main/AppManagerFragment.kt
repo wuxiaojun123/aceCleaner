@@ -1,5 +1,6 @@
 package com.nice.aceclean.ui.main
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -24,8 +25,16 @@ class AppManagerFragment : BaseFragment(R.layout.fragment_app_manager) {
     private val uninstallQueue = ArrayDeque<String>()
     private lateinit var rootView: View
 
-    private val uninstallLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (uninstallQueue.isNotEmpty()) uninstallNext() else loadApps()
+    private val uninstallLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode != Activity.RESULT_OK) {
+            uninstallQueue.clear()
+            Toast.makeText(requireContext(), R.string.uninstall_cancelled, Toast.LENGTH_SHORT).show()
+            loadApps()
+        } else if (uninstallQueue.isNotEmpty()) {
+            uninstallNext()
+        } else {
+            loadApps()
+        }
     }
 
     override fun initViews(root: View) {
@@ -58,15 +67,16 @@ class AppManagerFragment : BaseFragment(R.layout.fragment_app_manager) {
                 item.findViewById<ImageView>(R.id.app_manager_icon).setImageDrawable(requireContext().packageManager.getApplicationIcon(app.applicationInfo))
                 item.findViewById<TextView>(R.id.app_manager_name).text = app.label
                 item.findViewById<TextView>(R.id.app_manager_meta).text = getString(
-                    R.string.last_used,
-                ) + ": " + DeviceStats.formatLastUsed(app.lastUsed, getString(R.string.never_used))
-                item.findViewById<TextView>(R.id.app_manager_size).text = DeviceStats.formatBytes(app.sizeBytes)
+                    R.string.last_used_value,
+                    DeviceStats.formatLastUsed(app.lastUsed, getString(R.string.never_used)),
+                )
+                item.findViewById<TextView>(R.id.app_manager_size).text = DeviceStats.formatBytes(requireContext(), app.sizeBytes)
                 val check = item.findViewById<CheckBox>(R.id.app_manager_check)
-                item.setOnClickListener {
-                    check.isChecked = !check.isChecked
-                    if (check.isChecked) selectedPackages.add(app.packageName) else selectedPackages.remove(app.packageName)
+                check.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) selectedPackages.add(app.packageName) else selectedPackages.remove(app.packageName)
                     updateButton()
                 }
+                item.setOnClickListener { check.toggle() }
                 container.addView(item)
             }
         }
@@ -87,6 +97,11 @@ class AppManagerFragment : BaseFragment(R.layout.fragment_app_manager) {
             return
         }
         val packageName = uninstallQueue.removeFirst()
-        uninstallLauncher.launch(Intent(Intent.ACTION_DELETE, Uri.parse("package:$packageName")))
+        uninstallLauncher.launch(
+            @Suppress("DEPRECATION")
+            Intent(Intent.ACTION_UNINSTALL_PACKAGE, Uri.parse("package:$packageName")).apply {
+                putExtra(Intent.EXTRA_RETURN_RESULT, true)
+            },
+        )
     }
 }

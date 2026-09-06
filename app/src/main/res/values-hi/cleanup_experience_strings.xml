@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">%1$d फ़ाइलें स्कैन की गईं</string><string name="clean_scan_summary">%1$d फ़ाइलें स्कैन की गईं · %2$d फ़ोल्डर जाँचे गए</string><string name="scan_restricted_summary">%1$d फ़ोल्डर एक्सेस नहीं किए जा सके</string><string name="scan_incomplete">स्कैन सीमा पूरी हो गई; परिणाम अधूरे हो सकते हैं</string><string name="items_found">%1$d आइटम</string><string name="clear_app_cache">ऐप कैश साफ़ करें</string>
+</resources>

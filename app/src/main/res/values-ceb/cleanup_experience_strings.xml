@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">%1$d ka file ang na-scan</string><string name="clean_scan_summary">%1$d ka file ang na-scan · %2$d ka folder ang gisusi</string><string name="scan_restricted_summary">Dili ma-access ang %1$d ka folder</string><string name="scan_incomplete">Naabot ang limitasyon sa scan; mahimong dili kompleto ang resulta</string><string name="items_found">%1$d ka item</string><string name="clear_app_cache">Hawani ang cache sa app</string>
+</resources>

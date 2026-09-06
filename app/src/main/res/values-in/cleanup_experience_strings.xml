@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">%1$d file dipindai</string><string name="clean_scan_summary">%1$d file dipindai · %2$d folder diperiksa</string><string name="scan_restricted_summary">%1$d folder tidak dapat diakses</string><string name="scan_incomplete">Batas pemindaian tercapai; hasil mungkin tidak lengkap</string><string name="items_found">%1$d item</string><string name="clear_app_cache">Hapus cache aplikasi</string>
+</resources>

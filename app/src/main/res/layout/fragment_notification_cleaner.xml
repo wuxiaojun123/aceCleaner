@@ -7,7 +7,7 @@
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:paddingTop="10dp">
         <FrameLayout android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginStart="14dp" android:layout_marginEnd="14dp">
-            <ImageButton android:id="@+id/notification_back" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:padding="10dp" android:src="@drawable/ic_back" />
+            <ImageButton android:id="@+id/notification_back" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:contentDescription="@string/go_back" android:padding="10dp" android:src="@drawable/ic_back" />
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="center" android:gravity="center" android:text="@string/notification_cleaner" android:textColor="#FF111111" android:textSize="18sp" android:textStyle="bold" />
         </FrameLayout>
 

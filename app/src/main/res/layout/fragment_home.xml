@@ -47,7 +47,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Settings"
+                    android:contentDescription="@string/settings"
                     android:padding="8dp"
                     android:src="@drawable/ic_settings" />
 
@@ -110,7 +110,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_home_gauge_inner"
                     android:gravity="center"
-                    android:text="48%"
+                    android:text="@string/zero_percentage"
                     android:textColor="#FFFFFFFF"
                     android:textSize="40sp"
                     android:textStyle="bold" />

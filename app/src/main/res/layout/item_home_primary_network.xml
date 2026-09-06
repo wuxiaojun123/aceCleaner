@@ -14,11 +14,12 @@
     android:paddingBottom="6dp">
 
     <TextView
+        android:id="@+id/home_network_speed"
         android:layout_width="52dp"
         android:layout_height="18dp"
         android:background="@drawable/bg_network_chip"
         android:gravity="center"
-        android:text="3.4 KB/s ↓"
+        android:text="@string/network_speed_placeholder"
         android:textColor="#FF5C82B2"
         android:textSize="9sp"
         android:textStyle="bold" />

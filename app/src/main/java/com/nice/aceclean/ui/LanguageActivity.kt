@@ -15,6 +15,8 @@ import java.util.Locale
 
 class LanguageActivity : BaseActivity(R.layout.activity_language) {
 
+    override val statusBarColorRes: Int = R.color.language_page_background
+
     private lateinit var languageAdapter: LanguageAdapter
     private var isClosing = false
 

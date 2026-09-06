@@ -1,17 +1,19 @@
 package com.nice.aceclean.ui.main
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.StorageAccess
 import com.nice.aceclean.ui.base.BaseActivity
 
 enum class StorageCleanerType { SCREENSHOT, BIG_FILE, VIDEO }
@@ -21,10 +23,10 @@ abstract class StorageCleanerActivity(
 ) : BaseActivity(R.layout.activity_main) {
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        if (hasAccess()) showScanner() else denyAndClose()
+        if (hasAccess()) showScanner() else showPermissionRequired()
     }
     private val settingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (hasAccess()) showScanner() else denyAndClose()
+        if (hasAccess()) showScanner() else showPermissionRequired()
     }
 
     override fun initViews() {
@@ -53,7 +55,11 @@ abstract class StorageCleanerActivity(
                 Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
                 Uri.parse("package:$packageName"),
             )
-            settingsLauncher.launch(intent)
+            try {
+                settingsLauncher.launch(intent)
+            } catch (_: ActivityNotFoundException) {
+                settingsLauncher.launch(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
+            }
             return
         }
         val permissions = buildList {
@@ -72,9 +78,14 @@ abstract class StorageCleanerActivity(
         permissionLauncher.launch(permissions)
     }
 
-    private fun denyAndClose() {
-        Toast.makeText(this, R.string.storage_permission_required, Toast.LENGTH_SHORT).show()
-        finish()
+    private fun showPermissionRequired() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.storage_permission_required)
+            .setMessage(R.string.storage_permission_explanation)
+            .setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
+            .setNeutralButton(R.string.open_app_settings) { _, _ -> settingsLauncher.launch(StorageAccess.appSettingsIntent(this)) }
+            .setPositiveButton(R.string.try_again) { _, _ -> requestAccess() }
+            .show()
     }
 
     private fun showScanner() {

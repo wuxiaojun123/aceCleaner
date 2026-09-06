@@ -7,9 +7,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.service.NotificationCollectorService
 import com.nice.aceclean.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 
 class NotificationCleanerFragment : BaseFragment(R.layout.fragment_notification_cleaner) {
 
@@ -26,16 +30,19 @@ class NotificationCleanerFragment : BaseFragment(R.layout.fragment_notification_
                 Toast.makeText(requireContext(), R.string.notification_access_unavailable, Toast.LENGTH_SHORT).show()
             }
         }
-        refreshNotifications()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                NotificationCollectorService.notificationFlow.collect(::renderNotifications)
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        if (::rootView.isInitialized) refreshNotifications()
+        if (::rootView.isInitialized) renderNotifications(NotificationCollectorService.notifications())
     }
 
-    private fun refreshNotifications() {
-        val notifications = NotificationCollectorService.notifications()
+    private fun renderNotifications(notifications: List<android.service.notification.StatusBarNotification>) {
         val container = rootView.findViewById<LinearLayout>(R.id.notification_list)
         val empty = rootView.findViewById<TextView>(R.id.notification_empty)
         container.removeAllViews()

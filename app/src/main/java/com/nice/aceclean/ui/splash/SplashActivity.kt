@@ -12,6 +12,8 @@ import com.nice.aceclean.ui.main.MainActivity
 
 class SplashActivity : BaseActivity(R.layout.activity_splash) {
 
+    override val statusBarColorRes: Int = R.color.white
+
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView
     private var splashAnimator: ValueAnimator? = null

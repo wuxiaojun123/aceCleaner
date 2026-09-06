@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">Проскановано файлів: %1$d</string><string name="clean_scan_summary">Проскановано файлів: %1$d · перевірено папок: %2$d</string><string name="scan_restricted_summary">Немає доступу до папок: %1$d</string><string name="scan_incomplete">Досягнуто межі сканування; результати можуть бути неповними</string><string name="items_found">Елементів: %1$d</string><string name="clear_app_cache">Очистити кеш програм</string>
+</resources>

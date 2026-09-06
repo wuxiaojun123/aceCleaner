@@ -89,6 +89,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.airbnb.android:lottie:6.5.2")
     implementation("com.github.megatronking.stringfog:xor:5.0.0")
