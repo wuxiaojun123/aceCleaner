@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">Amafayela amakhulu</string>
+    <string name="home_photos">Okufanayo</string>
+    <string name="home_empty">Okungenalutho</string>
+    <string name="home_notifications">Izaziso</string>
+</resources>

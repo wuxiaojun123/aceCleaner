@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">Gros fichiers</string>
+    <string name="home_photos">Similaires</string>
+    <string name="home_empty">Vides</string>
+    <string name="home_notifications">Notifications</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">الملفات الكبيرة</string>
+    <string name="home_photos">متشابهة</string>
+    <string name="home_empty">فارغة</string>
+    <string name="home_notifications">الإشعارات</string>
+</resources>

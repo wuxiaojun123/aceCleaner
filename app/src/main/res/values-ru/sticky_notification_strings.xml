@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">Большие файлы</string>
+    <string name="home_photos">Похожие</string>
+    <string name="home_empty">Пустые</string>
+    <string name="home_notifications">Уведомления</string>
+</resources>

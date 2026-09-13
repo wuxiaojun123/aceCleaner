@@ -15,6 +15,12 @@
     <string name="zero_percentage" translatable="false" formatted="false">0%</string>
     <string name="zero_bytes" translatable="false">0 B</string>
     <string name="network_speed_placeholder" translatable="false">0 B/s ↓</string>
+    <string name="notification_speed_suffix" translatable="false">/s ↓</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
+    <string name="home_large_files">Large Files</string>
+    <string name="home_photos">Similar</string>
+    <string name="home_empty">Empties</string>
+    <string name="home_notifications">Notifications</string>
     <string name="more_indicator" translatable="false">›››</string>
     <string name="language_entry_content_description">Language</string>
     <string name="language_title">Language</string>

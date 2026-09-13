@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">Groot lêers</string>
+    <string name="home_photos">Soortgelyk</string>
+    <string name="home_empty">Leeg</string>
+    <string name="home_notifications">Kennisgewings</string>
+</resources>

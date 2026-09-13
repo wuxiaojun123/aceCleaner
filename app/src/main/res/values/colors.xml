@@ -14,4 +14,5 @@
     <color name="language_check_bg">#6173F4</color>
     <color name="page_status_bar">#FFF3F2</color>
     <color name="language_page_background">#EEF6F9</color>
+    <color name="notification_sticky_divider">#FF82A5C1</color>
 </resources>
