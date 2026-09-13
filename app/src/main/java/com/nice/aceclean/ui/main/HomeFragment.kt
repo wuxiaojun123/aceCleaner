@@ -76,6 +76,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         val storage = DeviceStats.storageSnapshot(requireContext())
         rootView.findViewById<TextView>(R.id.storage_percentage).text =
             getString(R.string.percentage_value, storage.usedPercent)
+        rootView.findViewById<TextView>(R.id.storage_usage).text = getString(
+            R.string.storage_usage_value,
+            DeviceStats.formatBytes(requireContext(), storage.usedBytes),
+            DeviceStats.formatBytes(requireContext(), storage.totalBytes),
+        )
         syncingNotificationSwitch = true
         rootView.findViewById<IosSwitchView>(R.id.notification_switch).isChecked =
             NotificationManagerCompat.getEnabledListenerPackages(requireContext()).contains(requireContext().packageName)
