@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">जारी रखने के साथ, आप निम्नलिखित से सहमत होते हैं</string>
+<string name="app_guide_tips">कृपया ध्यान दें: जंक फाइलों की खोज और आपके फोन के डेटा के विश्लेषण के कारण प्रारंभिक स्कैन में अधिक समय लग सकता है।</string>
+<string name="guide_complete">पूर्ण</string>
+<string name="guide_density">स्क्रीन घनत्व</string>
+<string name="guide_device">डिवाइस</string>
+<string name="guide_engine">इंजन आरंभ किया जा रहा है</string>
+<string name="guide_loading">लोड हो रहा है…</string>
+<string name="guide_screen">स्क्रीन रेजोल्यूशन</string>
+<string name="guide_start">उपयोग शुरू करें</string>
+<string name="guide_storage">उपयोग की गई स्टोरेज</string>
+<string name="guide_system">सिस्टम OS संस्करण</string>
+<string name="privacy_policy">गोपनीयता नीति</string>
+</resources>

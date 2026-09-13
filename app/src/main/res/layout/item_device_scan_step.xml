@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="86dp">
+
+    <ImageView
+        android:id="@+id/guide_step_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter" />
+
+    <View
+        android:id="@+id/guide_step_divider"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_gravity="start|bottom"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:background="#FFE4E4E4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginEnd="46dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/guide_step_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#FF050505"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/guide_step_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#FFA4A4A4"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/guide_step_status"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter" />
+
+</FrameLayout>

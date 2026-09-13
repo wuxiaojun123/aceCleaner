@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Continuando accetti di</string>
+<string name="app_guide_tips">Nota: la scansione iniziale potrebbe richiedere più tempo mentre cerca file spazzatura e analizza i dati del telefono.</string>
+<string name="guide_complete">Completo</string>
+<string name="guide_density">Densità schermo</string>
+<string name="guide_device">Dispositivo</string>
+<string name="guide_engine">Inizializzazione motore</string>
+<string name="guide_loading">Caricamento…</string>
+<string name="guide_screen">Risoluzione schermo</string>
+<string name="guide_start">Inizia a usare</string>
+<string name="guide_storage">Archiviazione utilizzata</string>
+<string name="guide_system">Versione SO sistema</string>
+<string name="privacy_policy">Informativa sulla privacy</string>
+</resources>

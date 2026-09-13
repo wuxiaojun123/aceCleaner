@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">โดยการดำเนินการต่อ คุณยอมรับ</string>
+<string name="app_guide_tips">โปรดทราบ: การสแกนครั้งแรกอาจใช้เวลานานกว่าเนื่องจากค้นหาไฟล์ขยะและวิเคราะห์ข้อมูลโทรศัพท์ของคุณ</string>
+<string name="guide_complete">เสร็จสิ้น</string>
+<string name="guide_density">ความหนาแน่นหน้าจอ</string>
+<string name="guide_device">อุปกรณ์</string>
+<string name="guide_engine">กำลังเริ่มต้นเอนจิน</string>
+<string name="guide_loading">กำลังโหลด…</string>
+<string name="guide_screen">ความละเอียดหน้าจอ</string>
+<string name="guide_start">เริ่มใช้</string>
+<string name="guide_storage">ที่เก็บข้อมูลที่ใช้</string>
+<string name="guide_system">เวอร์ชันระบบปฏิบัติการ</string>
+<string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+</resources>

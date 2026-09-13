@@ -9,6 +9,7 @@ import androidx.core.animation.doOnEnd
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.main.MainActivity
+import com.nice.aceclean.ui.onboarding.DeviceScanActivity
 
 class SplashActivity : BaseActivity(R.layout.activity_splash) {
 
@@ -33,7 +34,12 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
                 loadingText.text = getString(R.string.loading, progress)
             }
             doOnEnd {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                val target = if (DeviceScanActivity.shouldShow(this@SplashActivity)) {
+                    DeviceScanActivity::class.java
+                } else {
+                    MainActivity::class.java
+                }
+                startActivity(Intent(this@SplashActivity, target))
                 finish()
             }
             start()

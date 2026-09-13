@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Deur voort te gaan stem jy in tot</string>
+<string name="app_guide_tips">Let op: Die aanvanklike skandering mag langer neem aangesien dit soek vir rommel lêers en ontleed jou foon se data.</string>
+<string name="guide_complete">Voltooi</string>
+<string name="guide_density">Skerm Digtheid</string>
+<string name="guide_device">Toestel</string>
+<string name="guide_engine">Inisialiseer enjin</string>
+<string name="guide_loading">Laai…</string>
+<string name="guide_screen">Skerm Resolusie</string>
+<string name="guide_start">Begin gebruik</string>
+<string name="guide_storage">Berging gebruik</string>
+<string name="guide_system">Stelsel OS weergawe</string>
+<string name="privacy_policy">Privaatheidsbeleid</string>
+</resources>

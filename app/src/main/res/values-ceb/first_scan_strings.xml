@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Sa pagpadayon ikaw mosunod sa</string>
+<string name="app_guide_tips">Palihug hinumdomi: Ang unang scan mahimong molungtad og mas dugay samtang nangita og junk files ug nagsusi sa data sa imong telepono.</string>
+<string name="guide_complete">Complete</string>
+<string name="guide_density">Screen Density</string>
+<string name="guide_device">Device</string>
+<string name="guide_engine">Initializing engine</string>
+<string name="guide_loading">Loading…</string>
+<string name="guide_screen">Screen Resolution</string>
+<string name="guide_start">Sugdi paggamit</string>
+<string name="guide_storage">Storage used</string>
+<string name="guide_system">System OS version</string>
+<string name="privacy_policy">Privacy Policy</string>
+</resources>

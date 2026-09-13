@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name" translatable="false">Ace Cleaner</string>
     <string name="loading">Loading...%1$d%%</string>
+    <string name="agree_to_battery">By continuing you are agree to</string>
+    <string name="app_guide_tips">"Please note: The initial scan might take longer as it searches for junk files and analyzes your phone's\ndata."</string>
+    <string name="guide_complete">Complete</string>
+    <string name="guide_density">Screen Density</string>
+    <string name="guide_device">Device</string>
+    <string name="guide_engine">Initializing engine</string>
+    <string name="guide_loading">Loading…</string>
+    <string name="guide_screen">Screen Resolution</string>
+    <string name="guide_start">Start to use</string>
+    <string name="guide_storage">Storage used</string>
+    <string name="guide_system">System OS version</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Never Miss a Key Tip</string>
     <string name="clean_up">CLEAN UP</string>
     <string name="network_traffic">Network Traffic</string>
@@ -14,8 +29,8 @@
     <string name="settings">Settings</string>
     <string name="zero_percentage" translatable="false" formatted="false">0%</string>
     <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s ↓</string>
-    <string name="notification_speed_suffix" translatable="false">/s ↓</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Large Files</string>
     <string name="home_photos">Similar</string>
@@ -68,6 +83,7 @@
     <string name="clean_complete_message">118.8 MB removed</string>
     <string name="percentage_value" translatable="false">%1$d%%</string>
     <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Selected</string>
     <string name="remove_selected_size">Remove %1$s</string>
     <string name="clean_confirm_title">Clean selected files?</string>

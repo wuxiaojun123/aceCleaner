@@ -1,7 +1,6 @@
 package com.nice.aceclean.ui.main
 
 import android.content.Intent
-import android.net.TrafficStats
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
@@ -14,6 +13,7 @@ import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.ui.widget.IosSwitchView
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -85,20 +85,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun observeNetworkSpeed() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                var previousBytes = totalReceivedBytes()
+                val speedSampler = NetworkSpeedSampler()
                 while (true) {
                     delay(NETWORK_SAMPLE_INTERVAL_MS)
-                    val currentBytes = totalReceivedBytes()
-                    val bytesPerSecond = (currentBytes - previousBytes).coerceAtLeast(0L) * 1000L / NETWORK_SAMPLE_INTERVAL_MS
-                    previousBytes = currentBytes
+                    val bytesPerSecond = speedSampler.sampleBytesPerSecond()
                     rootView.findViewById<TextView>(R.id.home_network_speed).text =
-                        getString(R.string.download_speed_value, DeviceStats.formatBytes(requireContext(), bytesPerSecond))
+                        getString(R.string.network_speed_value, NetworkSpeedSampler.format(bytesPerSecond))
                 }
             }
         }
     }
-
-    private fun totalReceivedBytes(): Long = TrafficStats.getTotalRxBytes().coerceAtLeast(0L)
 
     private companion object {
         const val NETWORK_SAMPLE_INTERVAL_MS = 1_000L

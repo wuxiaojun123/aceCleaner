@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">بالاستمرار أنت توافق على</string>
+<string name="app_guide_tips">يرجى الملاحظة: قد تستغرق المسحة الأولية وقتًا أطول أثناء البحث عن الملفات غير الضرورية وتحليل بيانات هاتفك.</string>
+<string name="guide_complete">اكتمل</string>
+<string name="guide_density">كثافة الشاشة</string>
+<string name="guide_device">الجهاز</string>
+<string name="guide_engine">جاري تهيئة المحرك</string>
+<string name="guide_loading">جاري التحميل…</string>
+<string name="guide_screen">دقة الشاشة</string>
+<string name="guide_start">بدء الاستخدام</string>
+<string name="guide_storage">تخزين مستخدم</string>
+<string name="guide_system">إصدار النظام</string>
+<string name="privacy_policy">سياسة الخصوصية</string>
+</resources>

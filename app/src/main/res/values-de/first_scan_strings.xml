@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Fortfahren bedeutet Zustimmung zu</string>
+<string name="app_guide_tips">Hinweis: Der erste Scan kann länger dauern, da er nach Junk-Dateien sucht und Ihre Telefondaten analysiert.</string>
+<string name="guide_complete">Fertig</string>
+<string name="guide_density">Bildschirmdichte</string>
+<string name="guide_device">Gerät</string>
+<string name="guide_engine">Initialisiere Engine</string>
+<string name="guide_loading">Lädt…</string>
+<string name="guide_screen">Bildschirmauflösung</string>
+<string name="guide_start">Nutzen starten</string>
+<string name="guide_storage">Belegter Speicher</string>
+<string name="guide_system">Systemversion</string>
+<string name="privacy_policy">Datenschutz</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">続行することで、以下に同意したものとみなされます</string>
+<string name="app_guide_tips">初期スキャンは、ジャンクファイルの検索と端末データの分析を行うため、通常より時間がかかる場合があります。</string>
+<string name="guide_complete">完了</string>
+<string name="guide_density">画面密度</string>
+<string name="guide_device">端末</string>
+<string name="guide_engine">エンジン初期化中</string>
+<string name="guide_loading">読み込み中…</string>
+<string name="guide_screen">画面解像度</string>
+<string name="guide_start">使い始める</string>
+<string name="guide_storage">使用ストレージ</string>
+<string name="guide_system">OSバージョン</string>
+<string name="privacy_policy">プライバシーポリシー</string>
+</resources>

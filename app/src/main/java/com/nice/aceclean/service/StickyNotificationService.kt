@@ -9,7 +9,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.TrafficStats
 import android.os.Build
 import android.os.IBinder
 import android.widget.RemoteViews
@@ -23,8 +22,8 @@ import com.nice.aceclean.ui.main.DuplicatePhotoCleanerActivity
 import com.nice.aceclean.ui.main.MainActivity
 import com.nice.aceclean.ui.main.NetworkTrafficActivity
 import com.nice.aceclean.ui.main.NotificationCleanerActivity
-import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.LocaleHelper
+import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -62,13 +61,10 @@ class StickyNotificationService : Service() {
     private fun startSpeedUpdates() {
         speedUpdateJob?.cancel()
         speedUpdateJob = serviceScope.launch {
-            var previousBytes = receivedBytes()
+            val speedSampler = NetworkSpeedSampler()
             while (isActive) {
                 delay(SPEED_UPDATE_INTERVAL_MS)
-                val currentBytes = receivedBytes()
-                val bytesPerSecond = ((currentBytes - previousBytes).coerceAtLeast(0L) * 1_000L) /
-                    SPEED_UPDATE_INTERVAL_MS
-                previousBytes = currentBytes
+                val bytesPerSecond = speedSampler.sampleBytesPerSecond()
                 val notificationsAllowed = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
                     ContextCompat.checkSelfPermission(
                         this@StickyNotificationService,
@@ -135,7 +131,7 @@ class StickyNotificationService : Service() {
             }
             setTextViewText(
                 R.id.tv_network_speed_text,
-                DeviceStats.formatBytes(localizedContext, bytesPerSecond),
+                NetworkSpeedSampler.format(bytesPerSecond),
             )
             setTextViewText(R.id.tv_network_speed_unit, localizedContext.getString(R.string.notification_speed_suffix))
 
@@ -189,12 +185,10 @@ class StickyNotificationService : Service() {
         manager.createNotificationChannel(channel)
     }
 
-    private fun receivedBytes(): Long = TrafficStats.getTotalRxBytes().coerceAtLeast(0L)
-
     companion object {
         private const val CHANNEL_ID = "sticky_cleaner"
         private const val NOTIFICATION_ID = 1_001
-        private const val SPEED_UPDATE_INTERVAL_MS = 1_000L
+        private const val SPEED_UPDATE_INTERVAL_MS = 5_000L
         private const val REQUEST_HOME = 10
         private const val REQUEST_LARGE_FILES = 11
         private const val REQUEST_SIMILAR_PHOTOS = 12
