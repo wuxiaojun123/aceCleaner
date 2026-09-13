@@ -49,7 +49,8 @@
                     android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/settings"
                     android:padding="8dp"
-                    android:src="@drawable/ic_settings" />
+                    android:src="@drawable/ic_settings"
+                    android:visibility="gone" />
 
                 <ImageButton
                     android:id="@+id/language_button"

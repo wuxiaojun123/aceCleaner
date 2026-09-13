@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Ace Cleaner</string>
+    <string name="app_name" translatable="false">Smart Cleaner</string>
     <string name="loading">Loading...%1$d%%</string>
     <string name="agree_to_battery">By continuing you are agree to</string>
     <string name="app_guide_tips">"Please note: The initial scan might take longer as it searches for junk files and analyzes your phone's\ndata."</string>
