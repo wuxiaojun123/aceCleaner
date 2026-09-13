@@ -15,4 +15,8 @@
     <color name="page_status_bar">#FFF3F2</color>
     <color name="language_page_background">#EEF6F9</color>
     <color name="notification_sticky_divider">#FF82A5C1</color>
+    <color name="ios_switch_track_off">#FFE5E5EA</color>
+    <color name="ios_switch_track_on">#FF34C759</color>
+    <color name="ios_switch_thumb">#FFFFFFFF</color>
+    <color name="ios_switch_thumb_shadow">#33000000</color>
 </resources>

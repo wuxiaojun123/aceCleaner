@@ -88,11 +88,11 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Switch
+                <com.nice.aceclean.ui.widget.IosSwitchView
                     android:id="@+id/notification_switch"
-                    android:layout_width="42dp"
-                    android:layout_height="36dp"
-                    android:showText="false" />
+                    android:layout_width="51dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/notification_cleaner" />
             </LinearLayout>
 
             <FrameLayout

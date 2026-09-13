@@ -5,7 +5,6 @@ import android.net.TrafficStats
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
-import android.widget.Switch
 import android.widget.TextView
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Lifecycle
@@ -13,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseFragment
+import com.nice.aceclean.ui.widget.IosSwitchView
 import com.nice.aceclean.util.DeviceStats
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         root.findViewById<View>(R.id.notification_card).setOnClickListener {
             (activity as? MainActivity)?.openNotificationCleaner()
         }
-        root.findViewById<Switch>(R.id.notification_switch).setOnCheckedChangeListener { _, _ ->
+        root.findViewById<IosSwitchView>(R.id.notification_switch).setOnCheckedChangeListener { _, _ ->
             if (!syncingNotificationSwitch) (activity as? MainActivity)?.openNotificationCleaner()
         }
 
@@ -77,7 +77,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         rootView.findViewById<TextView>(R.id.storage_percentage).text =
             getString(R.string.percentage_value, storage.usedPercent)
         syncingNotificationSwitch = true
-        rootView.findViewById<Switch>(R.id.notification_switch).isChecked =
+        rootView.findViewById<IosSwitchView>(R.id.notification_switch).isChecked =
             NotificationManagerCompat.getEnabledListenerPackages(requireContext()).contains(requireContext().packageName)
         syncingNotificationSwitch = false
     }
