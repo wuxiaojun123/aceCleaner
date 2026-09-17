@@ -1,18 +1,18 @@
 package com.nice.aceclean.ui.main
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.TextView
-import androidx.core.animation.doOnEnd
+import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseFragment
+import com.nice.aceclean.util.MediaStoreRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MediaScanFragment : BaseFragment(R.layout.fragment_media_scan) {
-
-    private var animator: ValueAnimator? = null
 
     override fun initViews(root: View) {
         val type = StorageCleanerType.valueOf(requireArguments().getString(ARG_TYPE).orEmpty())
@@ -27,18 +27,19 @@ class MediaScanFragment : BaseFragment(R.layout.fragment_media_scan) {
             StorageCleanerType.VIDEO -> R.string.scanning_video
         })
         val percentage = root.findViewById<TextView>(R.id.media_scan_percentage)
-        animator = ValueAnimator.ofInt(0, 100).apply {
-            duration = 2_200L
-            interpolator = LinearInterpolator()
-            addUpdateListener { percentage.text = getString(R.string.scan_percentage, it.animatedValue as Int) }
-            doOnEnd { (activity as? StorageCleanerActivity)?.showResult() }
-            start()
+        percentage.text = getString(R.string.scan_percentage, 0)
+        viewLifecycleOwner.lifecycleScope.launch {
+            percentage.text = getString(R.string.scan_percentage, 10)
+            withContext(Dispatchers.IO) {
+                when (type) {
+                    StorageCleanerType.SCREENSHOT -> MediaStoreRepository.pictures(requireContext())
+                    StorageCleanerType.BIG_FILE -> MediaStoreRepository.largeFiles(requireContext())
+                    StorageCleanerType.VIDEO -> MediaStoreRepository.videos(requireContext())
+                }
+            }
+            percentage.text = getString(R.string.scan_percentage, 100)
+            (activity as? StorageCleanerActivity)?.showResult()
         }
-    }
-
-    override fun onDestroyView() {
-        animator?.cancel()
-        super.onDestroyView()
     }
 
     companion object {

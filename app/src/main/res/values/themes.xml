@@ -4,7 +4,7 @@
     <style name="Theme.AceClean" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:statusBarColor">@color/page_status_bar</item>
         <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Devam ederek kabul ediyorsunuz</string>
+<string name="app_guide_tips">Lütfen dikkat: Ön belleği temizleme ve telefon verilerinizi analiz etme işlemi nedeniyle ilk tarama daha uzun sürebilir.</string>
+<string name="guide_complete">Tamamlandı</string>
+<string name="guide_density">Ekran Yoğunluğu</string>
+<string name="guide_device">Cihaz</string>
+<string name="guide_engine">Motor Başlatılıyor</string>
+<string name="guide_loading">Yükleniyor…</string>
+<string name="guide_screen">Ekran Çözünürlüğü</string>
+<string name="guide_start">Kullanmaya Başla</string>
+<string name="guide_storage">Kullanılan Depolama</string>
+<string name="guide_system">Sistem Sürümü</string>
+<string name="privacy_policy">Gizlilik Politikası</string>
+</resources>

@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">%1$d lêers geskandeer</string><string name="clean_scan_summary">%1$d lêers geskandeer · %2$d vouers nagegaan</string><string name="scan_restricted_summary">Geen toegang tot %1$d vouers nie</string><string name="scan_incomplete">Die skanderingslimiet is bereik; resultate kan onvolledig wees</string><string name="items_found">%1$d items</string><string name="clear_app_cache">Maak programkas skoon</string>
+</resources>

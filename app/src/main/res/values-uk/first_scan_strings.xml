@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Продовжуючи, ви погоджуєтеся з</string>
+<string name="app_guide_tips">Зверніть увагу: початкове сканування може зайняти більше часу, оскільки воно шукає сміттєві файли та аналізує дані вашого телефону.</string>
+<string name="guide_complete">Завершено</string>
+<string name="guide_density">Щільність екрана</string>
+<string name="guide_device">Пристрій</string>
+<string name="guide_engine">Ініціалізація двигуна</string>
+<string name="guide_loading">Завантаження…</string>
+<string name="guide_screen">Роздільна здатність екрана</string>
+<string name="guide_start">Почати використання</string>
+<string name="guide_storage">Використане сховище</string>
+<string name="guide_system">Версія ОС</string>
+<string name="privacy_policy">Політика конфіденційності</string>
+</resources>

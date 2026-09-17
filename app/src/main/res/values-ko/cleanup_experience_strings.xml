@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">파일 %1$d개 검사됨</string><string name="clean_scan_summary">파일 %1$d개 검사 · 폴더 %2$d개 확인</string><string name="scan_restricted_summary">폴더 %1$d개에 접근할 수 없음</string><string name="scan_incomplete">검사 한도에 도달하여 결과가 불완전할 수 있습니다</string><string name="items_found">항목 %1$d개</string><string name="clear_app_cache">앱 캐시 지우기</string>
+</resources>

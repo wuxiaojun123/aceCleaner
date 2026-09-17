@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">Ace Cleaner</string>
+    <string name="app_name" translatable="false">Smart Cleaner</string>
     <string name="loading">Loading...%1$d%%</string>
+    <string name="agree_to_battery">By continuing you are agree to</string>
+    <string name="app_guide_tips">"Please note: The initial scan might take longer as it searches for junk files and analyzes your phone's\ndata."</string>
+    <string name="guide_complete">Complete</string>
+    <string name="guide_density">Screen Density</string>
+    <string name="guide_device">Device</string>
+    <string name="guide_engine">Initializing engine</string>
+    <string name="guide_loading">Loading…</string>
+    <string name="guide_screen">Screen Resolution</string>
+    <string name="guide_start">Start to use</string>
+    <string name="guide_storage">Storage used</string>
+    <string name="guide_system">System OS version</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Never Miss a Key Tip</string>
     <string name="clean_up">CLEAN UP</string>
     <string name="network_traffic">Network Traffic</string>
@@ -10,7 +25,30 @@
     <string name="big_file_cleaner">Big File Cleaner</string>
     <string name="duplicate_photo_cleaner">Duplicate Photo Cleaner</string>
     <string name="video_cleaner">Video Cleaner</string>
+    <string name="ram_status">RAM Status</string>
+    <string name="ram_label">Ram</string>
+    <string name="scanning_app_background">Scanning App in background</string>
+    <string name="ok">OK</string>
+    <string name="device_scan">Device Scan</string>
+    <string name="battery_info">Battery Info</string>
+    <string name="network_test">Network Test</string>
     <string name="feature_coming_soon">This feature is coming soon</string>
+    <string name="settings">Settings</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Battery</string>
+    <string name="notification_clean_up">Clean Up</string>
+    <string name="clean_cache_now">Clean Cache Now</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
+    <string name="home_large_files">Large Files</string>
+    <string name="home_photos">Similar</string>
+    <string name="home_empty">Empties</string>
+    <string name="home_notifications">Notifications</string>
+    <string name="more_indicator" translatable="false">›››</string>
     <string name="language_entry_content_description">Language</string>
     <string name="language_title">Language</string>
     <string name="language_english">English</string>
@@ -35,18 +73,34 @@
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage">%1$d%%</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Scanning...</string>
+    <string name="scanned_files_progress">Files scanned: %1$d</string>
+    <string name="clean_scan_summary">Files scanned: %1$d · Folders checked: %2$d</string>
+    <string name="scan_restricted_summary">Folders unavailable: %1$d</string>
+    <string name="scan_incomplete">The scan limit was reached; results may be incomplete</string>
+    <string name="items_found">Items: %1$d</string>
+    <string name="clear_app_cache">Clear app cache</string>
     <string name="one_click_clean">One-click Clean</string>
     <string name="removable">Removable</string>
     <string name="cache">Cache</string>
     <string name="ad_files">Ad files</string>
+    <string name="temporary_files">Temporary files</string>
     <string name="obsolete_apk_files">Obsolete APK files</string>
     <string name="residual_files">Residual files</string>
+    <string name="empty_files">Empty files</string>
     <string name="remove_more">Remove more</string>
-    <string name="no_junk">No junk</string>
+    <string name="no_junk">Your device is clean</string>
     <string name="remove_size">Remove 118.8 MB</string>
     <string name="clean_complete_message">118.8 MB removed</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
+    <string name="selected">Selected</string>
+    <string name="remove_selected_size">Remove %1$s</string>
+    <string name="clean_confirm_title">Clean selected files?</string>
+    <string name="clean_confirm_message">Selected: %1$d · Space to free: %2$s. Delete now?</string>
+    <string name="clean_result_message">Deleted: %1$d · Freed: %2$s · Failed: %3$d</string>
     <string name="allow_permission">Allow permission</string>
     <string name="network_traffic_permission_title">View Network Traffic</string>
     <string name="network_traffic_permission_text">Allowing this lets you view daily usage trends and app data rankings to save smarter.</string>
@@ -65,13 +119,19 @@
     <string name="clean_all">Clean All</string>
     <string name="uninstall_unused_apps">Uninstall unused apps</string>
     <string name="installed_apps">Installed apps</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_installation">Installation</string>
+    <string name="sort_size">Size</string>
     <string name="last_used">Last Used</string>
+    <string name="last_used_value">Last used: %1$s</string>
     <string name="never_used">Never used</string>
     <string name="uninstall">Uninstall</string>
     <string name="select_apps_first">Select at least one app</string>
     <string name="notification_access_unavailable">Notification service is connecting</string>
     <string name="uninstall_count">Uninstall (%1$d)</string>
+    <string name="uninstall_cancelled">Uninstall cancelled</string>
     <string name="apps_found">%1$d apps</string>
+    <string name="apps_found_initial">0 apps</string>
     <string name="picture">Picture</string>
     <string name="screenshot">Screenshot</string>
     <string name="others">Others</string>
@@ -79,6 +139,16 @@
     <string name="clean">Clean</string>
     <string name="clean_selected">Clean (%1$d)</string>
     <string name="large_files">Large Files</string>
+    <string name="all_types">All types</string>
+    <string name="videos">Videos</string>
+    <string name="images">Images</string>
+    <string name="audio">Audio</string>
+    <string name="documents">Documents</string>
+    <string name="one_month">1 month</string>
+    <string name="six_months">6 months</string>
+    <string name="one_year">1 year</string>
+    <string name="all_time">All time</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Scanning picture...</string>
     <string name="scanning_large_files">Scanning Large Files...</string>
     <string name="scanning_video">Scanning video...</string>
@@ -87,28 +157,116 @@
     <string name="no_video_files_found">No video files found</string>
     <string name="no_large_files_found">No Large Files found</string>
     <string name="no_files_select">Please select files to delete</string>
+    <string name="delete">Delete</string>
+    <string name="delete_files_title">Delete selected files?</string>
+    <string name="delete_files_message">Delete %1$d files with a total size of %2$s?</string>
+    <string name="files_deleted_result">Deleted %1$d files, released %2$s, %3$d failed</string>
     <string name="storage_permission_required">Storage permission is required</string>
+    <string name="storage_permission_explanation">Storage access is needed to find and remove the files you select. You can retry or open the app settings.</string>
+    <string name="open_app_settings">Open settings</string>
+    <string name="try_again">Try again</string>
     <string name="files_and_size">%1$d files / %2$s</string>
     <string name="go_back">Back</string>
-    <string name="dup_title">Similar Photos</string>
-    <string name="dup_subtitle">Photos found on this device</string>
-    <string name="dup_keep_best_title">Keep best shots</string>
-    <string name="dup_keep_best_subtitle">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo">Best</string>
-    <string name="dup_cluster_title">Duplicate group %1$d</string>
-    <string name="dup_cluster_count">%1$d photos</string>
-    <string name="dup_none_selected">0 selected</string>
-    <string name="dup_selected_count">%1$d selected</string>
-    <string name="dup_action_note">Tap checkmarks to select</string>
-    <string name="dup_selected_size">%1$s selected</string>
-    <string name="dup_delete">Delete selected</string>
-    <string name="dup_delete_confirm_title">Sure to clean?</string>
-    <string name="dup_delete_confirm_message">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed">Some photos could not be deleted</string>
-    <string name="dup_loading">Scanning similar photos…</string>
-    <string name="dup_scan_failed">Unable to scan photos</string>
-    <string name="dup_empty_title">No similar photos found</string>
-    <string name="dup_empty_desc">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable">No photo viewer is available</string>
+    <string name="running_apps_count">%1$d Apps are running in the background</string>
+    <string name="close">Close</string>
+    <string name="force_stop_title">Close this app?</string>
+    <string name="force_stop_explanation">On the next screen, tap “Force stop” to close the app.</string>
+    <string name="continue_text">Continue</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_running_apps">No background apps are visible</string>
+    <string name="scanning_device">Scanning device…</string>
+    <string name="scanning_devices_do_not_leave">Scanning devices, please do not leave</string>
+    <string name="scan_complete">Scan complete</string>
+    <string name="cpu_model_title">Cpu Model</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Resolution</string>
+    <string name="link_speed">Link Speed</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Device</string>
+    <string name="android_version">Android version</string>
+    <string name="cpu_model">CPU model</string>
+    <string name="memory">Memory</string>
+    <string name="storage">Storage</string>
+    <string name="screen_resolution">Screen resolution</string>
+    <string name="screen_density">Screen density</string>
+    <string name="ip_address">IP Address</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Supported</string>
+    <string name="not_supported">Not supported</string>
+    <string name="unknown">Unknown</string>
+    <string name="charging_status">Charging Status</string>
+    <string name="battery_health">Health</string>
+    <string name="battery_type">Battery Type</string>
+    <string name="battery_capacity">Battery Capacity</string>
+    <string name="temperature">Temperature</string>
+    <string name="voltage">Voltage</string>
+    <string name="electric_current">Electric Current</string>
+    <string name="usable_time">Usable Time</string>
+    <string name="pay_attention_battery_health">Pay attention to battery health..</string>
+    <string name="got_it">Got it</string>
+    <string name="charging">Charging</string>
+    <string name="discharging">Discharging</string>
+    <string name="fully_charged">Fully charged</string>
+    <string name="not_charging">Not charging</string>
+    <string name="battery_health_good">Good</string>
+    <string name="battery_health_overheat">Overheat</string>
+    <string name="battery_health_dead">Dead</string>
+    <string name="battery_health_over_voltage">Over voltage</string>
+    <string name="battery_health_cold">Cold</string>
+    <string name="network_test_ready">Ready to test your network</string>
+    <string name="network_test_connecting">Checking latency…</string>
+    <string name="network_test_downloading">Testing download speed…</string>
+    <string name="network_test_uploading">Testing upload speed…</string>
+    <string name="network_test_complete">Network test complete</string>
+    <string name="network_test_failed">Unable to complete the network test</string>
+    <string name="network_unavailable">Network is unavailable</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Start Test</string>
+    <string name="test_again">Test Again</string>
+    <string name="testing">Testing…</string>
+    <string name="network_test_data_note">A complete test uses approximately 3 MB of data.</string>
+    <string name="network_connection_value">Connection: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Mobile data</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Other</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
 </resources>

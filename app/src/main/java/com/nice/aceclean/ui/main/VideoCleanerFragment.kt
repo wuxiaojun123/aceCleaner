@@ -1,5 +1,6 @@
 package com.nice.aceclean.ui.main
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Build
 import android.provider.MediaStore
@@ -14,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +40,16 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
     private lateinit var rootView: View
     private lateinit var adapter: VideoAdapter
 
-    private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
-        selected.clear()
-        loadVideos()
+    private var pendingDeleteCount = 0
+    private var pendingDeleteBytes = 0L
+    private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            showDeleteResult(pendingDeleteCount, pendingDeleteBytes, 0)
+            selected.clear()
+            loadVideos()
+        }
+        pendingDeleteCount = 0
+        pendingDeleteBytes = 0L
     }
 
     override fun initViews(root: View) {
@@ -100,14 +109,31 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
             Toast.makeText(requireContext(), R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.delete_files_title)
+            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(requireContext(), selected.sumOf { it.sizeBytes })))
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(R.string.delete) { _, _ -> performDelete() }
+            .show()
+    }
+
+    private fun performDelete() {
+        val files = selected.toList()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            pendingDeleteCount = files.size
+            pendingDeleteBytes = files.sumOf { it.sizeBytes }
             val request = MediaStore.createDeleteRequest(requireContext().contentResolver, selected.map { it.uri })
             deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
         } else {
-            selected.forEach { runCatching { requireContext().contentResolver.delete(it.uri, null, null) } }
+            val deleted = files.filter { runCatching { requireContext().contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
+            showDeleteResult(deleted.size, deleted.sumOf { it.sizeBytes }, files.size - deleted.size)
             selected.clear()
             loadVideos()
         }
+    }
+
+    private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
+        Toast.makeText(requireContext(), getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(requireContext(), bytes), failed), Toast.LENGTH_LONG).show()
     }
 
     private inner class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -145,7 +171,7 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
 
             fun bind(header: VideoRow.Header) {
                 month.text = header.month
-                summary.text = getString(R.string.files_and_size, header.files.size, DeviceStats.formatBytes(header.files.sumOf { it.sizeBytes }))
+                summary.text = getString(R.string.files_and_size, header.files.size, DeviceStats.formatBytes(itemView.context, header.files.sumOf { it.sizeBytes }))
                 selectAll.setOnClickListener(null)
                 selectAll.isChecked = header.files.isNotEmpty() && selected.containsAll(header.files)
                 selectAll.setOnClickListener {
@@ -165,7 +191,7 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
                 thumbnail.tag = key
                 thumbnail.setImageResource(R.drawable.icon_file_type_video)
                 thumbnailCache.get(key)?.let(thumbnail::setImageBitmap) ?: loadThumbnail(file, key)
-                size.text = DeviceStats.formatBytes(file.sizeBytes)
+                size.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
                 check.isChecked = file in selected
                 itemView.setOnClickListener {
                     if (file in selected) selected.remove(file) else selected.add(file)

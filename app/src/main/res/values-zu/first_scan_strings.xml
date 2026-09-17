@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Ngokuqhubeka uyavuma</string>
+<string name="app_guide_tips">Sicela uqaphele: Ukuskena kokuqala kungase kuthathe isikhathi eside njengoba kusesha amafayela e-junk futhi kuhlaziya idatha yefoni yakho.</string>
+<string name="guide_complete">Kuphelele</string>
+<string name="guide_density">Ukuminyana KweSkrini</string>
+<string name="guide_device">Idivaysi</string>
+<string name="guide_engine">Kusungulwa injini</string>
+<string name="guide_loading">Iyalayisha…</string>
+<string name="guide_screen">Isixazululo Sesikrini</string>
+<string name="guide_start">Qala ukusebenzisa</string>
+<string name="guide_storage">Isitoreji esisetshenzisiwe</string>
+<string name="guide_system">Inguqulo ye-OS Yesistimu</string>
+<string name="privacy_policy">Inqubomgomo Yobumfihlo</string>
+</resources>

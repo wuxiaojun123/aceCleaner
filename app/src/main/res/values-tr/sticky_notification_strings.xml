@@ -1,0 +1,6 @@
+<resources>
+    <string name="home_large_files">Büyük dosyalar</string>
+    <string name="home_photos">Benzer</string>
+    <string name="home_empty">Boş</string>
+    <string name="home_notifications">Bildirimler</string>
+</resources>

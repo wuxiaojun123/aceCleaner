@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Ao continuar, você concorda com os</string>
+<string name="app_guide_tips">Nota: A varredura inicial pode demorar mais enquanto procura por arquivos inúteis e analisa os dados do seu telefone.</string>
+<string name="guide_complete">Concluído</string>
+<string name="guide_density">Densidade de ecrã</string>
+<string name="guide_device">Dispositivo</string>
+<string name="guide_engine">A inicializar motor</string>
+<string name="guide_loading">A carregar…</string>
+<string name="guide_screen">Resolução de ecrã</string>
+<string name="guide_start">Começar a usar</string>
+<string name="guide_storage">Armazenamento usado</string>
+<string name="guide_system">Versão do SO</string>
+<string name="privacy_policy">Política de Privacidade</string>
+</resources>

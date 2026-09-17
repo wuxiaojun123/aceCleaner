@@ -1,34 +1,33 @@
 package com.nice.aceclean.ui.main
 
-import android.animation.ValueAnimator
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.TextView
-import androidx.core.animation.doOnEnd
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.Lifecycle
 import com.nice.aceclean.R
+import com.nice.aceclean.cleanup.CleanupViewModel
 import com.nice.aceclean.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 
 class CleanScanFragment : BaseFragment(R.layout.fragment_clean_scan) {
 
-    private var scanAnimator: ValueAnimator? = null
+    private val viewModel: CleanupViewModel by activityViewModels()
 
     override fun initViews(root: View) {
         val progressText = root.findViewById<TextView>(R.id.scan_percentage)
-        scanAnimator = ValueAnimator.ofInt(0, 100).apply {
-            duration = SCAN_DURATION_MS
-            interpolator = LinearInterpolator()
-            addUpdateListener { progressText.text = getString(R.string.scan_percentage, it.animatedValue as Int) }
-            doOnEnd { (activity as? CleanUpActivity)?.showCleanResult() }
-            start()
+        progressText.text = getString(R.string.scanned_files_progress, 0)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.scanProgress.collect { progress ->
+                    progressText.text = getString(R.string.scanned_files_progress, progress.scannedFiles)
+                }
+            }
         }
-    }
-
-    override fun onDestroyView() {
-        scanAnimator?.cancel()
-        super.onDestroyView()
-    }
-
-    private companion object {
-        const val SCAN_DURATION_MS = 3_200L
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.scan()
+            (activity as? CleanUpActivity)?.showCleanResult()
+        }
     }
 }

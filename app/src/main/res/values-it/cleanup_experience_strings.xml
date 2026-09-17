@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">%1$d file analizzati</string><string name="clean_scan_summary">%1$d file analizzati · %2$d cartelle controllate</string><string name="scan_restricted_summary">Impossibile accedere a %1$d cartelle</string><string name="scan_incomplete">Limite di scansione raggiunto; i risultati potrebbero essere incompleti</string><string name="items_found">%1$d elementi</string><string name="clear_app_cache">Svuota cache delle app</string>
+</resources>

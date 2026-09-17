@@ -27,7 +27,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Back"
+                android:contentDescription="@string/go_back"
                 android:padding="8dp"
                 android:src="@drawable/ic_back" />
 
@@ -43,16 +43,18 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/cleanup_total_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:gravity="center"
-            android:text="241.9 MB"
+            android:text="@string/zero_bytes"
             android:textColor="#FF333333"
             android:textSize="48sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/cleanup_removable_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -61,7 +63,87 @@
             android:textColor="#FF3C3C3C"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/cleanup_scan_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/scanning"
+            android:textColor="#FF858791"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/cleanup_scan_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/scan_incomplete"
+            android:textColor="#FFB06B3B"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
         <LinearLayout
+            android:id="@+id/cleanup_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_junk"
+                android:textColor="#FF34353B"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cleanup_rescan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/bg_clean_result_button"
+                android:gravity="center"
+                android:text="@string/try_again"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cleanup_system_cache"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/bg_large_filter"
+                android:gravity="center"
+                android:text="@string/clear_app_cache"
+                android:textColor="#FF34353B"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/cleanup_find_large_files"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/bg_large_filter"
+                android:gravity="center"
+                android:text="@string/big_file_cleaner"
+                android:textColor="#FF34353B"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cleanup_cache_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
@@ -78,23 +160,26 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/cleanup_cache_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="46.2 MB"
+                android:text="@string/zero_bytes"
                 android:textColor="#FF9C9C9C"
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/cleanup_cache_check"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/bg_clean_check"
-                android:contentDescription="Selected"
+                android:contentDescription="@string/selected"
                 android:padding="4dp"
                 android:src="@drawable/ic_clean_check" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_temp_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -105,20 +190,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/ad_files"
+                android:text="@string/temporary_files"
                 android:textColor="#FF393939"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/cleanup_temp_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_junk"
                 android:textColor="#FF9C9C9C"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/cleanup_temp_check"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_clean_check"
+                android:contentDescription="@string/selected"
+                android:padding="4dp"
+                android:src="@drawable/ic_clean_check" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_apk_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -135,23 +232,26 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/cleanup_apk_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="195.7 MB"
+                android:text="@string/zero_bytes"
                 android:textColor="#FF9C9C9C"
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/cleanup_apk_check"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/bg_clean_check"
-                android:contentDescription="Selected"
+                android:contentDescription="@string/selected"
                 android:padding="4dp"
                 android:src="@drawable/ic_clean_check" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_empty_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -162,20 +262,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/residual_files"
+                android:text="@string/empty_files"
                 android:textColor="#FF393939"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/cleanup_empty_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_junk"
                 android:textColor="#FF9C9C9C"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/cleanup_empty_check"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_clean_check"
+                android:contentDescription="@string/selected"
+                android:padding="4dp"
+                android:src="@drawable/ic_clean_check" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_more_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -212,7 +324,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:text="@string/remove_size"
+        android:text="@string/clean"
         android:textColor="#FFFFFFFF"
         android:textSize="17sp"
         android:textStyle="bold" />

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Bằng cách tiếp tục bạn đồng ý với</string>
+<string name="app_guide_tips">Xin lưu ý: Lần quét ban đầu có thể mất nhiều thời gian hơn vì nó tìm kiếm tập tin rác và phân tích dữ liệu điện thoại của bạn.</string>
+<string name="guide_complete">Hoàn tất</string>
+<string name="guide_density">Mật độ màn hình</string>
+<string name="guide_device">Thiết bị</string>
+<string name="guide_engine">Đang khởi tạo engine</string>
+<string name="guide_loading">Đang tải…</string>
+<string name="guide_screen">Độ phân giải màn hình</string>
+<string name="guide_start">Bắt đầu sử dụng</string>
+<string name="guide_storage">Bộ nhớ đã sử dụng</string>
+<string name="guide_system">Phiên bản hệ điều hành</string>
+<string name="privacy_policy">Chính sách bảo mật</string>
+</resources>

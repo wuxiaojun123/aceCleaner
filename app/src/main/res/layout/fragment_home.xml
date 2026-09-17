@@ -47,9 +47,10 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Settings"
+                    android:contentDescription="@string/settings"
                     android:padding="8dp"
-                    android:src="@drawable/ic_settings" />
+                    android:src="@drawable/ic_settings"
+                    android:visibility="gone" />
 
                 <ImageButton
                     android:id="@+id/language_button"
@@ -88,18 +89,29 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Switch
+                <com.nice.aceclean.ui.widget.IosSwitchView
                     android:id="@+id/notification_switch"
-                    android:layout_width="42dp"
-                    android:layout_height="36dp"
-                    android:showText="false" />
+                    android:layout_width="51dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/notification_cleaner" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/storage_usage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:text="@string/storage_usage_placeholder"
+                android:textColor="#FF000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="210dp"
                 android:layout_height="210dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_home_gauge_outer"
                 android:elevation="12dp"
                 android:padding="33dp">
@@ -110,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_home_gauge_inner"
                     android:gravity="center"
-                    android:text="48%"
+                    android:text="@string/zero_percentage"
                     android:textColor="#FFFFFFFF"
                     android:textSize="40sp"
                     android:textStyle="bold" />
@@ -156,6 +168,11 @@
 
             <include layout="@layout/item_home_wide_duplicate" />
             <include layout="@layout/item_home_wide_video" />
+
+            <include layout="@layout/item_home_tool_ram" />
+            <include layout="@layout/item_home_tool_device" />
+            <include layout="@layout/item_home_tool_battery" />
+            <include layout="@layout/item_home_tool_network_test" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -2,10 +2,16 @@ package com.nice.aceclean.util
 
 import android.app.AppOpsManager
 import android.app.usage.UsageStatsManager
+import android.app.usage.StorageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.net.TrafficStats
+import android.os.Build
+import android.os.Process
+import android.os.StatFs
+import android.os.storage.StorageManager
+import android.text.format.Formatter
 import java.text.DateFormat
 import java.util.Date
 import java.util.Locale
@@ -15,12 +21,27 @@ data class InstalledAppInfo(
     val packageName: String,
     val applicationInfo: ApplicationInfo,
     val sizeBytes: Long,
+    val installTime: Long,
     val rxBytes: Long,
     val txBytes: Long,
     val lastUsed: Long,
 )
 
+data class StorageSnapshot(
+    val totalBytes: Long,
+    val availableBytes: Long,
+) {
+    val usedBytes: Long get() = (totalBytes - availableBytes).coerceAtLeast(0L)
+    val usedPercent: Int
+        get() = if (totalBytes <= 0L) 0 else ((usedBytes * 100.0) / totalBytes).toInt().coerceIn(0, 100)
+}
+
 object DeviceStats {
+
+    fun storageSnapshot(context: Context): StorageSnapshot {
+        val stats = StatFs(context.filesDir.absolutePath)
+        return StorageSnapshot(stats.totalBytes, stats.availableBytes)
+    }
 
     fun hasUsageAccess(context: Context): Boolean {
         val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
@@ -48,13 +69,15 @@ object DeviceStats {
         return resolves.asSequence()
             .map { it.activityInfo.applicationInfo }
             .filter { it.packageName != context.packageName }
+            .filter { it.flags and ApplicationInfo.FLAG_SYSTEM == 0 }
             .distinctBy { it.packageName }
             .map { app ->
                 InstalledAppInfo(
                     label = packageManager.getApplicationLabel(app).toString(),
                     packageName = app.packageName,
                     applicationInfo = app,
-                    sizeBytes = runCatching { java.io.File(app.sourceDir).length() }.getOrDefault(0L),
+                    sizeBytes = installedSize(context, app),
+                    installTime = packageManager.installTime(app.packageName),
                     rxBytes = TrafficStats.getUidRxBytes(app.uid).coerceAtLeast(0L),
                     txBytes = TrafficStats.getUidTxBytes(app.uid).coerceAtLeast(0L),
                     lastUsed = usageByPackage[app.packageName]?.lastTimeUsed ?: 0L,
@@ -64,18 +87,29 @@ object DeviceStats {
             .toList()
     }
 
-    fun formatBytes(bytes: Long): String {
-        if (bytes <= 0) return "0 B"
-        val units = arrayOf("B", "KB", "MB", "GB")
-        var value = bytes.toDouble()
-        var index = 0
-        while (value >= 1024 && index < units.lastIndex) {
-            value /= 1024
-            index++
-        }
-        return if (value >= 100 || index == 0) "%.0f %s".format(value, units[index])
-        else "%.1f %s".format(value, units[index])
+    private fun installedSize(context: Context, app: ApplicationInfo): Long {
+        val storageStats = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) runCatching {
+            val manager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+            manager.queryStatsForPackage(
+                StorageManager.UUID_DEFAULT,
+                app.packageName,
+                Process.myUserHandle(),
+            ).let { it.appBytes + it.dataBytes + it.cacheBytes }
+        }.getOrNull() else null
+        if (storageStats != null && storageStats > 0L) return storageStats
+
+        return buildList {
+            add(app.sourceDir)
+            app.splitSourceDirs?.let(::addAll)
+        }.sumOf { path -> runCatching { java.io.File(path).length() }.getOrDefault(0L) }
     }
+
+    @Suppress("DEPRECATION")
+    private fun android.content.pm.PackageManager.installTime(packageName: String): Long =
+        runCatching { getPackageInfo(packageName, 0).firstInstallTime }.getOrDefault(0L)
+
+    fun formatBytes(context: Context, bytes: Long): String =
+        Formatter.formatShortFileSize(context, bytes.coerceAtLeast(0L))
 
     fun formatLastUsed(timestamp: Long, neverText: String): String =
         if (timestamp <= 0) neverText else DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(timestamp))

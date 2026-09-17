@@ -1,0 +1,3 @@
+<resources>
+    <string name="scanned_files_progress">สแกนแล้ว %1$d ไฟล์</string><string name="clean_scan_summary">สแกนแล้ว %1$d ไฟล์ · ตรวจสอบ %2$d โฟลเดอร์</string><string name="scan_restricted_summary">ไม่สามารถเข้าถึง %1$d โฟลเดอร์</string><string name="scan_incomplete">ถึงขีดจำกัดการสแกนแล้ว ผลลัพธ์อาจไม่สมบูรณ์</string><string name="items_found">%1$d รายการ</string><string name="clear_app_cache">ล้างแคชแอป</string>
+</resources>

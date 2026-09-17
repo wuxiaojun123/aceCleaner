@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Dengan melanjutkan Anda setuju dengan</string>
+<string name="app_guide_tips">Harap dicatat: Pemindaian awal mungkin membutuhkan waktu lebih lama karena mencari file sampah dan menganalisis data ponsel Anda.</string>
+<string name="guide_complete">Selesai</string>
+<string name="guide_density">Kepadatan Layar</string>
+<string name="guide_device">Perangkat</string>
+<string name="guide_engine">Menginisialisasi mesin</string>
+<string name="guide_loading">Memuat…</string>
+<string name="guide_screen">Resolusi Layar</string>
+<string name="guide_start">Mulai menggunakan</string>
+<string name="guide_storage">Penyimpanan digunakan</string>
+<string name="guide_system">Versi OS sistem</string>
+<string name="privacy_policy">Kebijakan Privasi</string>
+</resources>

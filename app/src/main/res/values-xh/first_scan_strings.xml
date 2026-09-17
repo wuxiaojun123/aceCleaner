@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="agree_to_battery">Ngokuqhubekisa uyavuma</string>
+<string name="app_guide_tips">Nceda Qaphela: Uvavanyo lokuqala lunokuthatha ixesha elide njengoko lufuna iifayile zeenqanawa kwaye luhlalutya idatha yefowuni yakho.</string>
+<string name="guide_complete">Igqityiwe</string>
+<string name="guide_density">Ubunzima beScreen</string>
+<string name="guide_device">Isixhobo</string>
+<string name="guide_engine">Ukuqalisa injini</string>
+<string name="guide_loading">Iyalayisha…</string>
+<string name="guide_screen">Isisombululo seScreen</string>
+<string name="guide_start">Qala ukusebenzisa</string>
+<string name="guide_storage">Indawo yokugcina esetyenzisiweyo</string>
+<string name="guide_system">Uguqulelo lwe-OS yeSystem</string>
+<string name="privacy_policy">Umgaqo nkqubo wabucala</string>
+</resources>
