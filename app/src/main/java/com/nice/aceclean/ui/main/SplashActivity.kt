@@ -1,4 +1,4 @@
-package com.nice.aceclean.ui.splash
+package com.nice.aceclean.ui.main
 
 import android.animation.ValueAnimator
 import android.content.Intent
@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.core.animation.doOnEnd
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseActivity
-import com.nice.aceclean.ui.main.MainActivity
-import com.nice.aceclean.ui.onboarding.DeviceScanActivity
 
 class SplashActivity : BaseActivity(R.layout.activity_splash) {
 

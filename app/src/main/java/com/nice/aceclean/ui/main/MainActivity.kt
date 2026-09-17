@@ -8,7 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
 import com.nice.aceclean.service.StickyNotificationService
-import com.nice.aceclean.ui.LanguageActivity
+import com.nice.aceclean.ui.main.LanguageActivity
 import com.nice.aceclean.ui.base.BaseActivity
 
 class MainActivity : BaseActivity(R.layout.activity_main) {

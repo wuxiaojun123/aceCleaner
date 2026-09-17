@@ -1,4 +1,4 @@
-package com.nice.aceclean.ui.onboarding
+package com.nice.aceclean.ui.main
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseActivity
-import com.nice.aceclean.ui.main.MainActivity
+import com.nice.aceclean.ui.onboarding.DeviceScanStep
+import com.nice.aceclean.ui.onboarding.DeviceScanStepAdapter
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
@@ -95,11 +96,11 @@ class DeviceScanActivity : BaseActivity(R.layout.activity_device_scan) {
         private const val STEP_DELAY_MS = 650L
 
         fun shouldShow(context: Context): Boolean = !context
-            .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .getBoolean(KEY_DEVICE_SCAN_COMPLETE, false)
 
         private fun markComplete(context: Context) {
-            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                 .edit()
                 .putBoolean(KEY_DEVICE_SCAN_COMPLETE, true)
                 .apply()
