@@ -40,6 +40,9 @@
     <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
     <string name="network_speed_placeholder" translatable="false">0 B/s</string>
     <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Battery</string>
+    <string name="notification_clean_up">Clean Up</string>
+    <string name="clean_cache_now">Clean Cache Now</string>
     <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Large Files</string>
     <string name="home_photos">Similar</string>
@@ -116,6 +119,9 @@
     <string name="clean_all">Clean All</string>
     <string name="uninstall_unused_apps">Uninstall unused apps</string>
     <string name="installed_apps">Installed apps</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_installation">Installation</string>
+    <string name="sort_size">Size</string>
     <string name="last_used">Last Used</string>
     <string name="last_used_value">Last used: %1$s</string>
     <string name="never_used">Never used</string>

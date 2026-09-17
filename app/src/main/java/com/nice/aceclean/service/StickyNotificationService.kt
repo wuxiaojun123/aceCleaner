@@ -16,12 +16,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.main.BigFileCleanerActivity
+import com.nice.aceclean.ui.main.BatteryInfoActivity
 import com.nice.aceclean.ui.main.CleanUpActivity
-import com.nice.aceclean.ui.main.DuplicatePhotoCleanerActivity
 import com.nice.aceclean.ui.main.MainActivity
 import com.nice.aceclean.ui.main.NetworkTrafficActivity
-import com.nice.aceclean.ui.main.NotificationCleanerActivity
+import com.nice.aceclean.ui.main.RamStatusActivity
+import com.nice.aceclean.ui.main.ScreenshotCleanerActivity
 import com.nice.aceclean.util.LocaleHelper
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.CoroutineScope
@@ -86,21 +86,21 @@ class StickyNotificationService : Service() {
     private fun buildNotification(bytesPerSecond: Long): Notification {
         val localizedContext = LocaleHelper.wrapContext(this)
         val smallViews = buildRemoteViews(
-            R.layout.layout_notification_sticky_small,
-            localizedContext,
-            bytesPerSecond,
-            showLabels = false,
-        )
-        val bigViews = buildRemoteViews(
             R.layout.layout_notification_sticky,
             localizedContext,
             bytesPerSecond,
-            showLabels = true,
+        )
+        val bigViews = buildRemoteViews(
+            R.layout.layout_notification_sticky_big,
+            localizedContext,
+            bytesPerSecond,
         )
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_sticky_notification)
             .setContentTitle(localizedContext.getString(R.string.app_name))
+            .setColor(ContextCompat.getColor(this, R.color.notification_sticky_background))
+            .setColorized(true)
             .setCustomContentView(smallViews)
             .setContentIntent(activityPendingIntent(MainActivity::class.java, REQUEST_HOME))
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
@@ -110,9 +110,7 @@ class StickyNotificationService : Service() {
             .setOnlyAlertOnce(true)
             .setSilent(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            builder.setCustomBigContentView(bigViews)
-        }
+            .setCustomBigContentView(bigViews)
         return builder.build()
     }
 
@@ -120,41 +118,41 @@ class StickyNotificationService : Service() {
         layoutId: Int,
         localizedContext: Context,
         bytesPerSecond: Long,
-        showLabels: Boolean,
     ) =
         RemoteViews(packageName, layoutId).apply {
-            if (showLabels) {
-                setTextViewText(R.id.tvLabelLargeFiles, localizedContext.getString(R.string.home_large_files))
-                setTextViewText(R.id.tvLabelPhotos, localizedContext.getString(R.string.home_photos))
-                setTextViewText(R.id.tvLabelForlder, localizedContext.getString(R.string.home_empty))
-                setTextViewText(R.id.tvLabelNotify, localizedContext.getString(R.string.home_notifications))
-            }
+            val speed = NetworkSpeedSampler.format(bytesPerSecond)
+                .replace(" ", "\n") + localizedContext.getString(R.string.notification_speed_suffix)
             setTextViewText(
-                R.id.tv_network_speed_text,
-                NetworkSpeedSampler.format(bytesPerSecond),
+                R.id.notification_network_speed,
+                speed,
             )
-            setTextViewText(R.id.tv_network_speed_unit, localizedContext.getString(R.string.notification_speed_suffix))
 
             setOnClickPendingIntent(
-                R.id.btnlargeFiles,
-                activityPendingIntent(BigFileCleanerActivity::class.java, REQUEST_LARGE_FILES),
+                R.id.notification_screenshot,
+                activityPendingIntent(ScreenshotCleanerActivity::class.java, REQUEST_SCREENSHOT),
             )
             setOnClickPendingIntent(
-                R.id.btnPhotos,
-                activityPendingIntent(DuplicatePhotoCleanerActivity::class.java, REQUEST_SIMILAR_PHOTOS),
+                R.id.notification_clean_up,
+                activityPendingIntent(CleanUpActivity::class.java, REQUEST_CLEAN_UP),
             )
             setOnClickPendingIntent(
-                R.id.btnForlder,
-                activityPendingIntent(CleanUpActivity::class.java, REQUEST_EMPTY_FILES),
+                R.id.notification_ram,
+                activityPendingIntent(RamStatusActivity::class.java, REQUEST_RAM),
             )
             setOnClickPendingIntent(
-                R.id.btnNotify,
-                activityPendingIntent(NotificationCleanerActivity::class.java, REQUEST_NOTIFICATIONS),
+                R.id.notification_battery,
+                activityPendingIntent(BatteryInfoActivity::class.java, REQUEST_BATTERY),
             )
             setOnClickPendingIntent(
-                R.id.tv_network_speed,
+                R.id.notification_network_speed,
                 activityPendingIntent(NetworkTrafficActivity::class.java, REQUEST_NETWORK),
             )
+            if (layoutId == R.layout.layout_notification_sticky_big) {
+                setOnClickPendingIntent(
+                    R.id.notification_clean_cache,
+                    activityPendingIntent(CleanUpActivity::class.java, REQUEST_CLEAN_CACHE),
+                )
+            }
         }
 
     private fun activityPendingIntent(target: Class<*>, requestCode: Int): PendingIntent {
@@ -190,11 +188,12 @@ class StickyNotificationService : Service() {
         private const val NOTIFICATION_ID = 1_001
         private const val SPEED_UPDATE_INTERVAL_MS = 5_000L
         private const val REQUEST_HOME = 10
-        private const val REQUEST_LARGE_FILES = 11
-        private const val REQUEST_SIMILAR_PHOTOS = 12
-        private const val REQUEST_EMPTY_FILES = 13
-        private const val REQUEST_NOTIFICATIONS = 14
+        private const val REQUEST_SCREENSHOT = 11
+        private const val REQUEST_CLEAN_UP = 12
+        private const val REQUEST_RAM = 13
+        private const val REQUEST_BATTERY = 14
         private const val REQUEST_NETWORK = 15
+        private const val REQUEST_CLEAN_CACHE = 16
 
         fun start(context: Context) {
             ContextCompat.startForegroundService(

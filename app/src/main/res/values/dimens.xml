@@ -4,6 +4,4 @@
     <dimen name="device_card_vertical_spacing">10dp</dimen>
     <dimen name="device_card_height">111dp</dimen>
     <dimen name="dup_grid_spacing">8dp</dimen>
-    <dimen name="notification_sticky_height">60dp</dimen>
-    <dimen name="notification_sticky_small_height">28dp</dimen>
 </resources>

@@ -21,6 +21,7 @@ data class InstalledAppInfo(
     val packageName: String,
     val applicationInfo: ApplicationInfo,
     val sizeBytes: Long,
+    val installTime: Long,
     val rxBytes: Long,
     val txBytes: Long,
     val lastUsed: Long,
@@ -76,6 +77,7 @@ object DeviceStats {
                     packageName = app.packageName,
                     applicationInfo = app,
                     sizeBytes = installedSize(context, app),
+                    installTime = packageManager.installTime(app.packageName),
                     rxBytes = TrafficStats.getUidRxBytes(app.uid).coerceAtLeast(0L),
                     txBytes = TrafficStats.getUidTxBytes(app.uid).coerceAtLeast(0L),
                     lastUsed = usageByPackage[app.packageName]?.lastTimeUsed ?: 0L,
@@ -101,6 +103,10 @@ object DeviceStats {
             app.splitSourceDirs?.let(::addAll)
         }.sumOf { path -> runCatching { java.io.File(path).length() }.getOrDefault(0L) }
     }
+
+    @Suppress("DEPRECATION")
+    private fun android.content.pm.PackageManager.installTime(packageName: String): Long =
+        runCatching { getPackageInfo(packageName, 0).firstInstallTime }.getOrDefault(0L)
 
     fun formatBytes(context: Context, bytes: Long): String =
         Formatter.formatShortFileSize(context, bytes.coerceAtLeast(0L))
