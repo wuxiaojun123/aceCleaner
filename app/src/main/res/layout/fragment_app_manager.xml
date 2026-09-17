@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginStart="20dp"
@@ -83,7 +83,7 @@
                 android:layout_height="42dp"
                 android:contentDescription="@null"
                 android:src="@drawable/icon_app_manager" />
-        </LinearLayout>
+        </LinearLayout>-->
 
         <TextView
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                 android:background="@drawable/bg_app_sort_unselected"
                 android:clickable="true"
                 android:drawableEnd="@drawable/ic_app_sort_neutral"
-                android:drawablePadding="4dp"
+                android:paddingHorizontal="12dp"
                 android:elevation="2dp"
                 android:focusable="true"
                 android:gravity="center"
@@ -138,7 +138,7 @@
                 android:background="@drawable/bg_app_sort_unselected"
                 android:clickable="true"
                 android:drawableEnd="@drawable/ic_app_sort_neutral"
-                android:drawablePadding="4dp"
+                android:paddingHorizontal="12dp"
                 android:elevation="2dp"
                 android:focusable="true"
                 android:gravity="center"
@@ -155,7 +155,7 @@
                 android:background="@drawable/bg_app_sort_unselected"
                 android:clickable="true"
                 android:drawableEnd="@drawable/ic_app_sort_neutral"
-                android:drawablePadding="4dp"
+                android:paddingHorizontal="12dp"
                 android:elevation="2dp"
                 android:focusable="true"
                 android:gravity="center"
@@ -171,7 +171,7 @@
                 android:background="@drawable/bg_app_sort_unselected"
                 android:clickable="true"
                 android:drawableEnd="@drawable/ic_app_sort_neutral"
-                android:drawablePadding="4dp"
+                android:paddingHorizontal="12dp"
                 android:elevation="2dp"
                 android:focusable="true"
                 android:gravity="center"
