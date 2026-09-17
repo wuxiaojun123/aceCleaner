@@ -63,6 +63,12 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
 
     protected fun <T : View> view(id: Int): T = findViewById(id)
 
+    /** Replaces this activity's screen while preserving the shared system-bar inset handling. */
+    protected fun setActivityContent(@LayoutRes layoutResId: Int) {
+        setContentView(layoutResId)
+        applySystemBarInsets(findViewById(android.R.id.content))
+    }
+
     protected abstract fun initViews()
 
     protected open fun initData() = Unit

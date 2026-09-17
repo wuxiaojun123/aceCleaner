@@ -20,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
@@ -28,7 +27,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) {
+class VideoCleanerActivity : StorageCleanerActivity(
+    StorageCleanerType.VIDEO,
+    R.layout.fragment_screenshot_cleaner,
+) {
 
     private sealed interface VideoRow {
         data class Header(val month: String, val files: List<MediaFileInfo>) : VideoRow
@@ -52,33 +54,33 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
         pendingDeleteBytes = 0L
     }
 
-    override fun initViews(root: View) {
-        rootView = root
-        root.findViewById<TextView>(R.id.picture_title).setText(R.string.video_manage)
-        root.findViewById<View>(R.id.picture_tabs).visibility = View.GONE
-        root.findViewById<View>(R.id.picture_back).setOnClickListener { requireActivity().finish() }
+    override fun initResultViews() {
+        rootView = findViewById(android.R.id.content)
+        rootView.findViewById<TextView>(R.id.picture_title).setText(R.string.video_manage)
+        rootView.findViewById<View>(R.id.picture_tabs).visibility = View.GONE
+        rootView.findViewById<View>(R.id.picture_back).setOnClickListener { finish() }
         adapter = VideoAdapter()
-        val manager = GridLayoutManager(requireContext(), COLUMN_COUNT).apply {
+        val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int =
                     if (adapter.rowAt(position) is VideoRow.Header) COLUMN_COUNT else 1
             }
         }
-        root.findViewById<RecyclerView>(R.id.picture_list).apply {
+        rootView.findViewById<RecyclerView>(R.id.picture_list).apply {
             layoutManager = manager
-            adapter = this@VideoCleanerFragment.adapter
+            adapter = this@VideoCleanerActivity.adapter
         }
-        root.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
+        rootView.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
             if ((it as CheckBox).isChecked) selected.addAll(videos) else selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
+        rootView.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
         loadVideos()
     }
 
     private fun loadVideos() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            videos = withContext(Dispatchers.IO) { MediaStoreRepository.videos(requireContext()) }
+        lifecycleScope.launch {
+            videos = withContext(Dispatchers.IO) { MediaStoreRepository.videos(this@VideoCleanerActivity) }
             selected.clear()
             render()
         }
@@ -106,12 +108,12 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
 
     private fun deleteSelected() {
         if (selected.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.no_files_select, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(this)
             .setTitle(R.string.delete_files_title)
-            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(requireContext(), selected.sumOf { it.sizeBytes })))
+            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes })))
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.delete) { _, _ -> performDelete() }
             .show()
@@ -122,10 +124,10 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             pendingDeleteCount = files.size
             pendingDeleteBytes = files.sumOf { it.sizeBytes }
-            val request = MediaStore.createDeleteRequest(requireContext().contentResolver, selected.map { it.uri })
+            val request = MediaStore.createDeleteRequest(contentResolver, selected.map { it.uri })
             deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
         } else {
-            val deleted = files.filter { runCatching { requireContext().contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
+            val deleted = files.filter { runCatching { contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
             showDeleteResult(deleted.size, deleted.sumOf { it.sizeBytes }, files.size - deleted.size)
             selected.clear()
             loadVideos()
@@ -133,7 +135,7 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
-        Toast.makeText(requireContext(), getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(requireContext(), bytes), failed), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
     }
 
     private inner class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -200,14 +202,14 @@ class VideoCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) 
             }
 
             private fun loadThumbnail(file: MediaFileInfo, key: String) {
-                viewLifecycleOwner.lifecycleScope.launch {
+                lifecycleScope.launch {
                     val bitmap = withContext(Dispatchers.IO) {
                         runCatching {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                requireContext().contentResolver.loadThumbnail(file.uri, Size(240, 240), null)
+                                contentResolver.loadThumbnail(file.uri, Size(240, 240), null)
                             } else {
                                 MediaStore.Video.Thumbnails.getThumbnail(
-                                    requireContext().contentResolver,
+                                    contentResolver,
                                     file.uri.lastPathSegment?.toLongOrNull() ?: return@runCatching null,
                                     MediaStore.Video.Thumbnails.MINI_KIND,
                                     null,

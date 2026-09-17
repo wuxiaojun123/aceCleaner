@@ -10,6 +10,9 @@ class CleanupBusinessTest {
     @Test
     fun `classifier recognizes supported cleanup candidates`() {
         assertEquals(CleanupCategory.APK_FILES, CleanupClassifier.classify("installer.APK", 1024))
+        assertEquals(CleanupCategory.AD_FILES, CleanupClassifier.classify("banner.webp", 1024, "/storage/emulated/0/app/adcache/banner.webp"))
+        assertEquals(CleanupCategory.RESIDUAL_FILES, CleanupClassifier.classify("settings.bak", 24))
+        assertEquals(CleanupCategory.RESIDUAL_FILES, CleanupClassifier.classify("data.bin", 24, "/storage/emulated/0/.trash/data.bin"))
         assertEquals(CleanupCategory.TEMP_FILES, CleanupClassifier.classify("download.tmp", 24))
         assertEquals(CleanupCategory.TEMP_FILES, CleanupClassifier.classify("error.log", 24))
         assertEquals(CleanupCategory.TEMP_FILES, CleanupClassifier.classify("download.crdownload", 24))

@@ -11,27 +11,32 @@ import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.airbnb.lottie.LottieAnimationView
 import com.nice.aceclean.R
 import com.nice.aceclean.permission.StorageAccess
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.util.MediaStoreRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 enum class StorageCleanerType { SCREENSHOT, BIG_FILE, VIDEO }
 
 abstract class StorageCleanerActivity(
     private val cleanerType: StorageCleanerType,
-) : BaseActivity(R.layout.activity_main) {
+    private val resultLayout: Int,
+) : BaseActivity(R.layout.fragment_media_scan) {
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        if (hasAccess()) showScanner() else showPermissionRequired()
+        if (hasAccess()) startScan() else showPermissionRequired()
     }
     private val settingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (hasAccess()) showScanner() else showPermissionRequired()
+        if (hasAccess()) startScan() else showPermissionRequired()
     }
 
     override fun initViews() {
-        if (supportFragmentManager.findFragmentById(R.id.main_container) != null) return
-        if (hasAccess()) showScanner() else requestAccess()
+        if (hasAccess()) startScan() else requestAccess()
     }
 
     private fun hasAccess(): Boolean = when {
@@ -88,26 +93,34 @@ abstract class StorageCleanerActivity(
             .show()
     }
 
-    private fun showScanner() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, MediaScanFragment.newInstance(cleanerType))
-            .commit()
-    }
-
-    fun showResult() {
-        val fragment: Fragment = when (cleanerType) {
-            StorageCleanerType.SCREENSHOT -> ScreenshotCleanerFragment()
-            StorageCleanerType.BIG_FILE -> BigFileCleanerFragment()
-            StorageCleanerType.VIDEO -> VideoCleanerFragment()
+    private fun startScan() {
+        setActivityContent(R.layout.fragment_media_scan)
+        findViewById<LottieAnimationView>(R.id.media_scan_animation).setAnimation(when (cleanerType) {
+            StorageCleanerType.SCREENSHOT -> R.raw.picture_clean_scan_anim
+            StorageCleanerType.BIG_FILE -> R.raw.big_file_scan_anim
+            StorageCleanerType.VIDEO -> R.raw.video_clean_scan_anim
+        })
+        findViewById<android.widget.TextView>(R.id.media_scan_label).setText(when (cleanerType) {
+            StorageCleanerType.SCREENSHOT -> R.string.scanning_picture
+            StorageCleanerType.BIG_FILE -> R.string.scanning_large_files
+            StorageCleanerType.VIDEO -> R.string.scanning_video
+        })
+        val percentage = findViewById<android.widget.TextView>(R.id.media_scan_percentage)
+        percentage.text = getString(R.string.scan_percentage, 0)
+        lifecycleScope.launch {
+            percentage.text = getString(R.string.scan_percentage, 10)
+            withContext(Dispatchers.IO) {
+                when (cleanerType) {
+                    StorageCleanerType.SCREENSHOT -> MediaStoreRepository.pictures(this@StorageCleanerActivity)
+                    StorageCleanerType.BIG_FILE -> MediaStoreRepository.largeFiles(this@StorageCleanerActivity)
+                    StorageCleanerType.VIDEO -> MediaStoreRepository.videos(this@StorageCleanerActivity)
+                }
+            }
+            percentage.text = getString(R.string.scan_percentage, 100)
+            setActivityContent(resultLayout)
+            initResultViews()
         }
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, fragment)
-            .commit()
     }
+
+    protected abstract fun initResultViews()
 }
-
-class ScreenshotCleanerActivity : StorageCleanerActivity(StorageCleanerType.SCREENSHOT)
-
-class BigFileCleanerActivity : StorageCleanerActivity(StorageCleanerType.BIG_FILE)
-
-class VideoCleanerActivity : StorageCleanerActivity(StorageCleanerType.VIDEO)

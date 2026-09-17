@@ -14,7 +14,14 @@ import java.io.File
 import java.util.ArrayDeque
 import java.util.Locale
 
-enum class CleanupCategory { APP_CACHE, TEMP_FILES, APK_FILES, EMPTY_FILES }
+enum class CleanupCategory {
+    APP_CACHE,
+    AD_FILES,
+    TEMP_FILES,
+    APK_FILES,
+    RESIDUAL_FILES,
+    EMPTY_FILES,
+}
 
 data class CleanupCandidate(
     val category: CleanupCategory,
@@ -267,6 +274,10 @@ object CleanupClassifier {
             .orEmpty()
         return when {
             extension == "apk" -> CleanupCategory.APK_FILES
+            directoryNames.any { it in AD_DIRECTORY_NAMES } -> CleanupCategory.AD_FILES
+            normalizedName in AD_FILE_NAMES -> CleanupCategory.AD_FILES
+            extension in RESIDUAL_EXTENSIONS -> CleanupCategory.RESIDUAL_FILES
+            directoryNames.any { it in RESIDUAL_DIRECTORY_NAMES } -> CleanupCategory.RESIDUAL_FILES
             extension in TEMPORARY_EXTENSIONS -> CleanupCategory.TEMP_FILES
             normalizedName in TEMPORARY_FILE_NAMES -> CleanupCategory.TEMP_FILES
             directoryNames.any { it in TEMPORARY_DIRECTORY_NAMES } -> CleanupCategory.TEMP_FILES
@@ -276,11 +287,20 @@ object CleanupClassifier {
     }
 
     private val TEMPORARY_EXTENSIONS = setOf(
-        "tmp", "temp", "log", "cache", "bak", "old", "dmp", "part", "partial", "crdownload",
+        "tmp", "temp", "log", "cache", "part", "partial", "crdownload",
     )
+    private val RESIDUAL_EXTENSIONS = setOf("bak", "old", "dmp")
     private val TEMPORARY_FILE_NAMES = setOf(".ds_store", "thumbs.db", "desktop.ini")
+    private val AD_FILE_NAMES = setOf("ad_cache", "ads_cache", "advert_cache")
+    private val AD_DIRECTORY_NAMES = setOf(
+        "ads", "adcache", "ad_cache", ".adcache", "advertisement", "advertisements",
+        "applovin", "ironsource", "unityads", "vungle", "mbridge",
+    )
+    private val RESIDUAL_DIRECTORY_NAMES = setOf(
+        "residual", "residue", "leftover", "leftovers", "lost.dir", ".trash", ".trashed",
+    )
     private val TEMPORARY_DIRECTORY_NAMES = setOf(
-        "cache", "caches", "temp", "tmp", "logs", ".thumbnails", ".thumbnail", ".trash", ".trashed",
+        "cache", "caches", "temp", "tmp", "logs", ".thumbnails", ".thumbnail",
     )
     private val PROTECTED_EMPTY_FILES = setOf(".nomedia")
 }

@@ -12,26 +12,28 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.service.NotificationCollectorService
-import com.nice.aceclean.ui.base.BaseFragment
 import kotlinx.coroutines.launch
 
-class NotificationCleanerFragment : BaseFragment(R.layout.fragment_notification_cleaner) {
+class NotificationCleanerActivity : PermissionFeatureActivity(
+    FeatureType.NOTIFICATION_CLEANER,
+    R.layout.fragment_notification_cleaner,
+) {
 
     private lateinit var rootView: View
 
-    override fun initViews(root: View) {
-        rootView = root
-        root.findViewById<View>(R.id.notification_back).setOnClickListener { requireActivity().finish() }
-        root.findViewById<View>(R.id.notification_clean_all).setOnClickListener {
+    override fun initFeatureViews() {
+        rootView = findViewById(android.R.id.content)
+        view<View>(R.id.notification_back).setOnClickListener { finish() }
+        view<View>(R.id.notification_clean_all).setOnClickListener {
             if (NotificationCollectorService.clearAll()) {
                 rootView.findViewById<LinearLayout>(R.id.notification_list).removeAllViews()
                 rootView.findViewById<TextView>(R.id.notification_empty).visibility = View.VISIBLE
             } else {
-                Toast.makeText(requireContext(), R.string.notification_access_unavailable, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.notification_access_unavailable, Toast.LENGTH_SHORT).show()
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 NotificationCollectorService.notificationFlow.collect(::renderNotifications)
             }
         }
@@ -43,20 +45,21 @@ class NotificationCleanerFragment : BaseFragment(R.layout.fragment_notification_
     }
 
     private fun renderNotifications(notifications: List<android.service.notification.StatusBarNotification>) {
+        if (!::rootView.isInitialized) return
         val container = rootView.findViewById<LinearLayout>(R.id.notification_list)
         val empty = rootView.findViewById<TextView>(R.id.notification_empty)
         container.removeAllViews()
         empty.visibility = if (notifications.isEmpty()) View.VISIBLE else View.GONE
 
         notifications.forEach { status ->
-            val item = LayoutInflater.from(requireContext()).inflate(R.layout.item_notification, container, false)
+            val item = LayoutInflater.from(this).inflate(R.layout.item_notification, container, false)
             val extras = status.notification.extras
             val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString()
-                ?: runCatching { requireContext().packageManager.getApplicationLabel(requireContext().packageManager.getApplicationInfo(status.packageName, 0)).toString() }.getOrDefault(status.packageName)
+                ?: runCatching { packageManager.getApplicationLabel(packageManager.getApplicationInfo(status.packageName, 0)).toString() }.getOrDefault(status.packageName)
             val body = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString().orEmpty()
             item.findViewById<TextView>(R.id.notification_title).text = title
             item.findViewById<TextView>(R.id.notification_text).text = body
-            runCatching { requireContext().packageManager.getApplicationIcon(status.packageName) }
+            runCatching { packageManager.getApplicationIcon(status.packageName) }
                 .onSuccess { item.findViewById<ImageView>(R.id.notification_app_icon).setImageDrawable(it) }
             item.findViewById<View>(R.id.notification_delete).setOnClickListener {
                 NotificationCollectorService.clear(status.key)

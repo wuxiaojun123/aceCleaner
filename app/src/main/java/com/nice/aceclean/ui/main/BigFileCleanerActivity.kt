@@ -18,7 +18,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
@@ -26,7 +25,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) {
+class BigFileCleanerActivity : StorageCleanerActivity(
+    StorageCleanerType.BIG_FILE,
+    R.layout.fragment_big_file_cleaner,
+) {
 
     private enum class FileType(@StringRes val titleRes: Int) {
         ALL(R.string.all_types), VIDEO(R.string.videos), IMAGE(R.string.images),
@@ -53,20 +55,20 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
         pendingDeleteBytes = 0L
     }
 
-    override fun initViews(root: View) {
-        rootView = root
+    override fun initResultViews() {
+        rootView = findViewById(android.R.id.content)
         adapter = BigFileAdapter()
-        root.findViewById<RecyclerView>(R.id.large_file_list).apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@BigFileCleanerFragment.adapter
+        rootView.findViewById<RecyclerView>(R.id.large_file_list).apply {
+            layoutManager = LinearLayoutManager(this@BigFileCleanerActivity)
+            adapter = this@BigFileCleanerActivity.adapter
         }
-        root.findViewById<View>(R.id.large_back).setOnClickListener { requireActivity().finish() }
-        root.findViewById<View>(R.id.large_type_filter).setOnClickListener {
+        rootView.findViewById<View>(R.id.large_back).setOnClickListener { finish() }
+        rootView.findViewById<View>(R.id.large_type_filter).setOnClickListener {
             fileType = FileType.entries[(fileType.ordinal + 1) % FileType.entries.size]
             selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.large_size_filter).setOnClickListener {
+        rootView.findViewById<View>(R.id.large_size_filter).setOnClickListener {
             minimumBytes = when (minimumBytes) {
                 10L * 1024L * 1024L -> 50L * 1024L * 1024L
                 50L * 1024L * 1024L -> 100L * 1024L * 1024L
@@ -75,18 +77,18 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
             selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.large_time_filter).setOnClickListener {
+        rootView.findViewById<View>(R.id.large_time_filter).setOnClickListener {
             maximumAgeDays = when (maximumAgeDays) { 0 -> 30; 30 -> 180; 180 -> 365; else -> 0 }
             selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.large_clean).setOnClickListener { deleteSelected() }
+        rootView.findViewById<View>(R.id.large_clean).setOnClickListener { deleteSelected() }
         loadFiles()
     }
 
     private fun loadFiles() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            allFiles = withContext(Dispatchers.IO) { MediaStoreRepository.largeFiles(requireContext()) }
+        lifecycleScope.launch {
+            allFiles = withContext(Dispatchers.IO) { MediaStoreRepository.largeFiles(this@BigFileCleanerActivity) }
             selected.clear()
             render()
         }
@@ -109,7 +111,7 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
     private fun render() {
         if (!::rootView.isInitialized) return
         rootView.findViewById<TextView>(R.id.large_type_filter).text = getString(R.string.filter_value, getString(fileType.titleRes))
-        rootView.findViewById<TextView>(R.id.large_size_filter).text = getString(R.string.filter_value, DeviceStats.formatBytes(requireContext(), minimumBytes))
+        rootView.findViewById<TextView>(R.id.large_size_filter).text = getString(R.string.filter_value, DeviceStats.formatBytes(this, minimumBytes))
         val timeLabel = when (maximumAgeDays) {
             30 -> R.string.one_month
             180 -> R.string.six_months
@@ -126,12 +128,12 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
 
     private fun deleteSelected() {
         if (selected.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.no_files_select, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(this)
             .setTitle(R.string.delete_files_title)
-            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(requireContext(), selected.sumOf { it.sizeBytes })))
+            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes })))
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.delete) { _, _ -> performDelete() }
             .show()
@@ -142,10 +144,10 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             pendingDeleteCount = files.size
             pendingDeleteBytes = files.sumOf { it.sizeBytes }
-            val request = MediaStore.createDeleteRequest(requireContext().contentResolver, selected.map { it.uri })
+            val request = MediaStore.createDeleteRequest(contentResolver, selected.map { it.uri })
             deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
         } else {
-            val deleted = files.filter { runCatching { requireContext().contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
+            val deleted = files.filter { runCatching { contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
             showDeleteResult(deleted.size, deleted.sumOf { it.sizeBytes }, files.size - deleted.size)
             selected.clear()
             loadFiles()
@@ -153,7 +155,7 @@ class BigFileCleanerFragment : BaseFragment(R.layout.fragment_big_file_cleaner) 
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
-        Toast.makeText(requireContext(), getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(requireContext(), bytes), failed), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
     }
 
     private fun fileIcon(file: MediaFileInfo): Int {

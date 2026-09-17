@@ -20,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
@@ -28,7 +27,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_cleaner) {
+class ScreenshotCleanerActivity : StorageCleanerActivity(
+    StorageCleanerType.SCREENSHOT,
+    R.layout.fragment_screenshot_cleaner,
+) {
 
     private sealed interface PictureRow {
         data class Header(val month: String, val files: List<MediaFileInfo>) : PictureRow
@@ -54,42 +56,42 @@ class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_clea
         pendingDeleteBytes = 0L
     }
 
-    override fun initViews(root: View) {
-        rootView = root
+    override fun initResultViews() {
+        rootView = findViewById(android.R.id.content)
         adapter = PictureAdapter()
-        val manager = GridLayoutManager(requireContext(), COLUMN_COUNT).apply {
+        val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int =
                     if (adapter.rowAt(position) is PictureRow.Header) COLUMN_COUNT else 1
             }
         }
-        root.findViewById<RecyclerView>(R.id.picture_list).apply {
+        rootView.findViewById<RecyclerView>(R.id.picture_list).apply {
             layoutManager = manager
-            adapter = this@ScreenshotCleanerFragment.adapter
+            adapter = this@ScreenshotCleanerActivity.adapter
         }
-        root.findViewById<View>(R.id.picture_back).setOnClickListener { requireActivity().finish() }
-        root.findViewById<View>(R.id.picture_tab_screenshot).setOnClickListener {
+        rootView.findViewById<View>(R.id.picture_back).setOnClickListener { finish() }
+        rootView.findViewById<View>(R.id.picture_tab_screenshot).setOnClickListener {
             showingScreenshots = true
             selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.picture_tab_others).setOnClickListener {
+        rootView.findViewById<View>(R.id.picture_tab_others).setOnClickListener {
             showingScreenshots = false
             selected.clear()
             render()
         }
-        root.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
+        rootView.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
             val files = visibleFiles()
             if ((it as CheckBox).isChecked) selected.addAll(files) else selected.clear()
             render()
         }
-        root.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
+        rootView.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
         loadPictures()
     }
 
     private fun loadPictures() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val result = withContext(Dispatchers.IO) { MediaStoreRepository.pictures(requireContext()) }
+        lifecycleScope.launch {
+            val result = withContext(Dispatchers.IO) { MediaStoreRepository.pictures(this@ScreenshotCleanerActivity) }
             screenshots = result.first
             others = result.second
             selected.clear()
@@ -123,12 +125,12 @@ class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_clea
 
     private fun deleteSelected() {
         if (selected.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.no_files_select, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(this)
             .setTitle(R.string.delete_files_title)
-            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(requireContext(), selected.sumOf { it.sizeBytes })))
+            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes })))
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.delete) { _, _ -> performDelete() }
             .show()
@@ -139,10 +141,10 @@ class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_clea
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             pendingDeleteCount = files.size
             pendingDeleteBytes = files.sumOf { it.sizeBytes }
-            val request = MediaStore.createDeleteRequest(requireContext().contentResolver, selected.map { it.uri })
+            val request = MediaStore.createDeleteRequest(contentResolver, selected.map { it.uri })
             deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
         } else {
-            val deleted = files.filter { runCatching { requireContext().contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
+            val deleted = files.filter { runCatching { contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
             showDeleteResult(deleted.size, deleted.sumOf { it.sizeBytes }, files.size - deleted.size)
             selected.clear()
             loadPictures()
@@ -150,7 +152,7 @@ class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_clea
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
-        Toast.makeText(requireContext(), getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(requireContext(), bytes), failed), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
     }
 
     private fun visibleFiles() = if (showingScreenshots) screenshots else others
@@ -220,14 +222,14 @@ class ScreenshotCleanerFragment : BaseFragment(R.layout.fragment_screenshot_clea
             }
 
             private fun loadThumbnail(file: MediaFileInfo, key: String) {
-                viewLifecycleOwner.lifecycleScope.launch {
+                lifecycleScope.launch {
                     val bitmap = withContext(Dispatchers.IO) {
                         runCatching {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                requireContext().contentResolver.loadThumbnail(file.uri, Size(240, 240), null)
+                                contentResolver.loadThumbnail(file.uri, Size(240, 240), null)
                             } else {
                                 MediaStore.Images.Thumbnails.getThumbnail(
-                                    requireContext().contentResolver,
+                                    contentResolver,
                                     file.uri.lastPathSegment?.toLongOrNull() ?: return@runCatching null,
                                     MediaStore.Images.Thumbnails.MINI_KIND,
                                     null,

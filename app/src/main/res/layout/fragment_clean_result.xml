@@ -179,6 +179,42 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_ad_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ad_files"
+                android:textColor="#FF393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cleanup_ad_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero_bytes"
+                android:textColor="#FF9C9C9C"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/cleanup_ad_check"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_clean_check"
+                android:contentDescription="@string/selected"
+                android:padding="4dp"
+                android:src="@drawable/ic_clean_check" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/cleanup_temp_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -251,6 +287,42 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cleanup_residual_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/residual_files"
+                android:textColor="#FF393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cleanup_residual_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero_bytes"
+                android:textColor="#FF9C9C9C"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/cleanup_residual_check"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_clean_check"
+                android:contentDescription="@string/selected"
+                android:padding="4dp"
+                android:src="@drawable/ic_clean_check" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/cleanup_empty_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -289,26 +361,32 @@
         <LinearLayout
             android:id="@+id/cleanup_more_row"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_cleanup_more"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="14dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/remove_more"
-                android:textColor="#FF393939"
+                android:textColor="#FF4F5FE7"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_junk"
-                android:textColor="#FF9C9C9C"
-                android:textSize="14sp" />
+                android:text="@string/more_indicator"
+                android:textColor="#FF6B7CFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
