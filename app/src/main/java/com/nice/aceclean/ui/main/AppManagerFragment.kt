@@ -67,7 +67,7 @@ class AppManagerFragment : BaseFragment(R.layout.fragment_app_manager) {
             apps = loadedApps
             selectedPackages.clear()
             updateButton()
-            rootView.findViewById<TextView>(R.id.app_manager_count).text = getString(R.string.apps_found, apps.size)
+//            rootView.findViewById<TextView>(R.id.app_manager_count).text = getString(R.string.apps_found, apps.size)
             renderApps()
         }
     }
