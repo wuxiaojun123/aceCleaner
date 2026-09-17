@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">I-Big File Cleaner</string>
     <string name="duplicate_photo_cleaner">Isicoci sesithombe esiyimpinda</string>
     <string name="video_cleaner">Isicoci sevidiyo</string>
+    <string name="ram_status">Isimo se-RAM</string>
+    <string name="device_scan">Ukuskena kwedivaysi</string>
+    <string name="battery_info">Ulwazi Lebhethri</string>
+    <string name="network_test">Ukuhlolwa Kwenethiwekhi</string>
     <string name="feature_coming_soon">Lesi sici siyeza maduze</string>
     <string name="settings">Izilungiselelo</string>
     <string name="scanning">Iyaskena...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Zama futhi</string>
     <string name="files_and_size">Amafayela we-%1$d / %2$s</string>
     <string name="go_back">Emuva</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Kuskena i-App ngemuva</string>
+    <string name="ok">KULUNGILE</string>
 </resources>

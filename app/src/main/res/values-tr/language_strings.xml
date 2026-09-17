@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Büyük Dosya Temizleyici</string>
     <string name="duplicate_photo_cleaner">Yinelenen Fotoğraf Temizleyici</string>
     <string name="video_cleaner">Video Temizleyici</string>
+    <string name="ram_status">RAM Durumu</string>
+    <string name="device_scan">Cihaz Tara</string>
+    <string name="battery_info">Pil Bilgisi</string>
+    <string name="network_test">Ağ Testi</string>
     <string name="feature_coming_soon">Bu özellik yakında geliyor</string>
     <string name="settings">Ayarlar</string>
     <string name="scanning">Taranıyor...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Tekrar dene</string>
     <string name="files_and_size">%1$d dosyaları / %2$s</string>
     <string name="go_back">Geri</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Arka planda uygulama taranıyor</string>
+    <string name="ok">TAMAM</string>
 </resources>

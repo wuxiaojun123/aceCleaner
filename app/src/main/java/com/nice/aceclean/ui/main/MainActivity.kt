@@ -65,5 +65,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     fun openDuplicatePhotoCleaner() = startActivity(Intent(this, DuplicatePhotoCleanerActivity::class.java))
 
+    fun openRamStatus() = startActivity(Intent(this, RamStatusActivity::class.java))
+
+    fun openDeviceScan() = startActivity(Intent(this, DeviceReportActivity::class.java))
+
+    fun openBatteryInfo() = startActivity(Intent(this, BatteryInfoActivity::class.java))
+
+    fun openNetworkTest() = startActivity(Intent(this, NetworkTestActivity::class.java))
+
     fun openLanguage() = languageLauncher.launch(Intent(this, LanguageActivity::class.java))
 }

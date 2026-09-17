@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Limpador de arquivos grandes</string>
     <string name="duplicate_photo_cleaner">Limpador de fotos duplicadas</string>
     <string name="video_cleaner">Limpador de vídeo</string>
+    <string name="ram_status">Status da RAM</string>
+    <string name="device_scan">Verificação do dispositivo</string>
+    <string name="battery_info">Informações da bateria</string>
+    <string name="network_test">Teste de rede</string>
     <string name="feature_coming_soon">Este recurso estará disponível em breve</string>
     <string name="settings">Configurações</string>
     <string name="scanning">Digitalizando...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Tente novamente</string>
     <string name="files_and_size">Arquivos %1$d / %2$s</string>
     <string name="go_back">Voltar</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Verificando apps em segundo plano</string>
+    <string name="ok">OK</string>
 </resources>

@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Очищувач великих файлів</string>
     <string name="duplicate_photo_cleaner">Очищувач дублікатів фотографій</string>
     <string name="video_cleaner">Очищувач відео</string>
+    <string name="ram_status">Статус ОЗП</string>
+    <string name="device_scan">Сканування пристрою</string>
+    <string name="battery_info">Інформація про батарею</string>
+    <string name="network_test">Тест мережі</string>
     <string name="feature_coming_soon">Ця функція стане доступною незабаром</string>
     <string name="settings">Налаштування</string>
     <string name="scanning">Сканування...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Спробуйте знову</string>
     <string name="files_and_size">Файли %1$d / %2$s</string>
     <string name="go_back">Назад</string>
+    <string name="ram_label">ОЗП</string>
+    <string name="scanning_app_background">Сканування додатків у фоновому режимі</string>
+    <string name="ok">OK</string>
 </resources>

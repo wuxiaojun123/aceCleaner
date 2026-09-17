@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Nettoyeur de gros fichiers</string>
     <string name="duplicate_photo_cleaner">Nettoyeur de photos en double</string>
     <string name="video_cleaner">Nettoyeur vidéo</string>
+    <string name="ram_status">État RAM</string>
+    <string name="device_scan">Scan appareil</string>
+    <string name="battery_info">Info batterie</string>
+    <string name="network_test">Test réseau</string>
     <string name="feature_coming_soon">Cette fonctionnalité arrive bientôt</string>
     <string name="settings">Paramètres</string>
     <string name="scanning">Numérisation...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Réessayez</string>
     <string name="files_and_size">Fichiers %1$d / %2$s</string>
     <string name="go_back">Retour</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Analyse de l’application en arrière-plan</string>
+    <string name="ok">OK</string>
 </resources>

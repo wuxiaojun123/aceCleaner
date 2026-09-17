@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">बड़ी फ़ाइल क्लीनर</string>
     <string name="duplicate_photo_cleaner">डुप्लीकेट फोटो क्लीनर</string>
     <string name="video_cleaner">वीडियो क्लीनर</string>
+    <string name="ram_status">RAM स्थिति</string>
+    <string name="device_scan">डिवाइस स्कैन</string>
+    <string name="battery_info">बैटरी जानकारी</string>
+    <string name="network_test">नेटवर्क टेस्ट</string>
     <string name="feature_coming_soon">यह सुविधा जल्द ही आने वाली है</string>
     <string name="settings">सेटिंग्स</string>
     <string name="scanning">स्कैन किया जा रहा है...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">पुनः प्रयास करें</string>
     <string name="files_and_size">%1$d फ़ाइलें / %2$s</string>
     <string name="go_back">वापस</string>
+    <string name="ram_label">रैम</string>
+    <string name="scanning_app_background">पृष्ठभूमि में ऐप स्कैन हो रहे हैं</string>
+    <string name="ok">ठीक है</string>
 </resources>

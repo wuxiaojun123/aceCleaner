@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">ビッグファイルクリーナー</string>
     <string name="duplicate_photo_cleaner">重複写真クリーナー</string>
     <string name="video_cleaner">ビデオクリーナー</string>
+    <string name="ram_status">RAMステータス</string>
+    <string name="device_scan">デバイススキャン</string>
+    <string name="battery_info">バッテリー情報</string>
+    <string name="network_test">ネットワークテスト</string>
     <string name="feature_coming_soon">この機能は近日公開予定です</string>
     <string name="settings">設定</string>
     <string name="scanning">スキャン中...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">もう一度試してください</string>
     <string name="files_and_size">%1$d ファイル / %2$s</string>
     <string name="go_back">戻る</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">バックグラウンドでアプリをスキャン中</string>
+    <string name="ok">OK</string>
 </resources>

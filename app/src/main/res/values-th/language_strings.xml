@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">โปรแกรมล้างไฟล์ขนาดใหญ่</string>
     <string name="duplicate_photo_cleaner">ทำความสะอาดรูปภาพซ้ำ</string>
     <string name="video_cleaner">โปรแกรมล้างวิดีโอ</string>
+    <string name="ram_status">สถานะ RAM</string>
+    <string name="device_scan">สแกนอุปกรณ์</string>
+    <string name="battery_info">ข้อมูลแบตเตอรี่</string>
+    <string name="network_test">ทดสอบเครือข่าย</string>
     <string name="feature_coming_soon">คุณลักษณะนี้จะมาในเร็ว ๆ นี้</string>
     <string name="settings">การตั้งค่า</string>
     <string name="scanning">กำลังสแกน...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">ลองอีกครั้ง</string>
     <string name="files_and_size">ไฟล์ %1$d / %2$s</string>
     <string name="go_back">กลับ</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">กำลังสแกนแอปในพื้นหลัง</string>
+    <string name="ok">ตกลง</string>
 </resources>

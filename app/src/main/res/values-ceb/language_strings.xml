@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Dako nga File Cleaner</string>
     <string name="duplicate_photo_cleaner">Dobleng Photo Cleaner</string>
     <string name="video_cleaner">Video nga Limpyo</string>
+    <string name="ram_status">Status sa RAM</string>
+    <string name="device_scan">Pag-scan sa Device</string>
+    <string name="battery_info">Impormasyon sa Baterya</string>
+    <string name="network_test">Pagsulay sa Network</string>
     <string name="feature_coming_soon">Kini nga bahin moabut sa dili madugay</string>
     <string name="settings">Mga Setting</string>
     <string name="scanning">Pag-scan...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Sulayi pag-usab</string>
     <string name="files_and_size">Mga file sa %1$d/ %2$s</string>
     <string name="go_back">Balik</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Nag-scan sa App sa background</string>
+    <string name="ok">OK</string>
 </resources>

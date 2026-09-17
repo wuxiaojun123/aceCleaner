@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">대용량 파일 클리너</string>
     <string name="duplicate_photo_cleaner">중복 사진 클리너</string>
     <string name="video_cleaner">비디오 클리너</string>
+    <string name="ram_status">RAM 상태</string>
+    <string name="device_scan">장치 스캔</string>
+    <string name="battery_info">배터리 정보</string>
+    <string name="network_test">네트워크 테스트</string>
     <string name="feature_coming_soon">이 기능은 곧 제공될 예정입니다.</string>
     <string name="settings">설정</string>
     <string name="scanning">스캔 중...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">다시 시도하세요</string>
     <string name="files_and_size">%1$d 파일 / %2$s</string>
     <string name="go_back">뒤로</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">백그라운드에서 앱 스캔 중</string>
+    <string name="ok">확인</string>
 </resources>

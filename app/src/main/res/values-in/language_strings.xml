@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Pembersih File Besar</string>
     <string name="duplicate_photo_cleaner">Pembersih Foto Duplikat</string>
     <string name="video_cleaner">Pembersih Video</string>
+    <string name="ram_status">Status RAM</string>
+    <string name="device_scan">Pindai Perangkat</string>
+    <string name="battery_info">Info Baterai</string>
+    <string name="network_test">Tes Jaringan</string>
     <string name="feature_coming_soon">Fitur ini akan segera hadir</string>
     <string name="settings">Pengaturan</string>
     <string name="scanning">Memindai...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Coba lagi</string>
     <string name="files_and_size">File %1$d / %2$s</string>
     <string name="go_back">Kembali</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Memindai Aplikasi di latar belakang</string>
+    <string name="ok">OK</string>
 </resources>

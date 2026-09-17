@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">منظف ملفات كبير</string>
     <string name="duplicate_photo_cleaner">منظف صور مكرر</string>
     <string name="video_cleaner">منظف الفيديو</string>
+    <string name="ram_status">حالة RAM</string>
+    <string name="device_scan">فحص الجهاز</string>
+    <string name="battery_info">معلومات البطارية</string>
+    <string name="network_test">اختبار الشبكة</string>
     <string name="feature_coming_soon">ستتوفر هذه الميزة قريبًا</string>
     <string name="settings">الإعدادات</string>
     <string name="scanning">جارٍ المسح...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">حاول مرة أخرى</string>
     <string name="files_and_size">ملفات %1$d / %2$s</string>
     <string name="go_back">رجوع</string>
+    <string name="ram_label">ذاكرة الوصول العشوائي</string>
+    <string name="scanning_app_background">جاري مسح التطبيق في الخلفية</string>
+    <string name="ok">موافق</string>
 </resources>

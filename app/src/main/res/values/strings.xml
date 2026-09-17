@@ -25,6 +25,13 @@
     <string name="big_file_cleaner">Big File Cleaner</string>
     <string name="duplicate_photo_cleaner">Duplicate Photo Cleaner</string>
     <string name="video_cleaner">Video Cleaner</string>
+    <string name="ram_status">RAM Status</string>
+    <string name="ram_label">Ram</string>
+    <string name="scanning_app_background">Scanning App in background</string>
+    <string name="ok">OK</string>
+    <string name="device_scan">Device Scan</string>
+    <string name="battery_info">Battery Info</string>
+    <string name="network_test">Network Test</string>
     <string name="feature_coming_soon">This feature is coming soon</string>
     <string name="settings">Settings</string>
     <string name="zero_percentage" translatable="false" formatted="false">0%</string>
@@ -154,6 +161,87 @@
     <string name="try_again">Try again</string>
     <string name="files_and_size">%1$d files / %2$s</string>
     <string name="go_back">Back</string>
+    <string name="running_apps_count">%1$d Apps are running in the background</string>
+    <string name="close">Close</string>
+    <string name="force_stop_title">Close this app?</string>
+    <string name="force_stop_explanation">On the next screen, tap “Force stop” to close the app.</string>
+    <string name="continue_text">Continue</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_running_apps">No background apps are visible</string>
+    <string name="scanning_device">Scanning device…</string>
+    <string name="scanning_devices_do_not_leave">Scanning devices, please do not leave</string>
+    <string name="scan_complete">Scan complete</string>
+    <string name="cpu_model_title">Cpu Model</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Resolution</string>
+    <string name="link_speed">Link Speed</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Device</string>
+    <string name="android_version">Android version</string>
+    <string name="cpu_model">CPU model</string>
+    <string name="memory">Memory</string>
+    <string name="storage">Storage</string>
+    <string name="screen_resolution">Screen resolution</string>
+    <string name="screen_density">Screen density</string>
+    <string name="ip_address">IP Address</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Supported</string>
+    <string name="not_supported">Not supported</string>
+    <string name="unknown">Unknown</string>
+    <string name="charging_status">Charging Status</string>
+    <string name="battery_health">Health</string>
+    <string name="battery_type">Battery Type</string>
+    <string name="battery_capacity">Battery Capacity</string>
+    <string name="temperature">Temperature</string>
+    <string name="voltage">Voltage</string>
+    <string name="electric_current">Electric Current</string>
+    <string name="usable_time">Usable Time</string>
+    <string name="pay_attention_battery_health">Pay attention to battery health..</string>
+    <string name="got_it">Got it</string>
+    <string name="charging">Charging</string>
+    <string name="discharging">Discharging</string>
+    <string name="fully_charged">Fully charged</string>
+    <string name="not_charging">Not charging</string>
+    <string name="battery_health_good">Good</string>
+    <string name="battery_health_overheat">Overheat</string>
+    <string name="battery_health_dead">Dead</string>
+    <string name="battery_health_over_voltage">Over voltage</string>
+    <string name="battery_health_cold">Cold</string>
+    <string name="network_test_ready">Ready to test your network</string>
+    <string name="network_test_connecting">Checking latency…</string>
+    <string name="network_test_downloading">Testing download speed…</string>
+    <string name="network_test_uploading">Testing upload speed…</string>
+    <string name="network_test_complete">Network test complete</string>
+    <string name="network_test_failed">Unable to complete the network test</string>
+    <string name="network_unavailable">Network is unavailable</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Start Test</string>
+    <string name="test_again">Test Again</string>
+    <string name="testing">Testing…</string>
+    <string name="network_test_data_note">A complete test uses approximately 3 MB of data.</string>
+    <string name="network_connection_value">Connection: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Mobile data</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Other</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
     <string name="dup_title" translatable="false">Similar Photos</string>
     <string name="dup_subtitle" translatable="false">Photos found on this device</string>
     <string name="dup_keep_best_title" translatable="false">Keep best shots</string>

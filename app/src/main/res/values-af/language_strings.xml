@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Groot Lêer Skoonmaker</string>
     <string name="duplicate_photo_cleaner">Duplikaat foto skoonmaker</string>
     <string name="video_cleaner">Video Skoonmaker</string>
+    <string name="ram_status">RAM Status</string>
+    <string name="device_scan">Toestel Skandering</string>
+    <string name="battery_info">Battery Inligting</string>
+    <string name="network_test">Netwerk Toets</string>
     <string name="feature_coming_soon">Hierdie karaktertrekke kom spoedig</string>
     <string name="settings">Instellings</string>
     <string name="scanning">Skandeer...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Probeer weer</string>
     <string name="files_and_size">%1$d lêers / %2$s</string>
     <string name="go_back">Terug</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Skandeer App in agtergrond</string>
+    <string name="ok">OK</string>
 </resources>

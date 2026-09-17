@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_ram_result_card"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:paddingStart="9dp"
+    android:paddingTop="13dp"
+    android:paddingEnd="8dp"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/battery_card_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/battery_card_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#FF222127"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/battery_card_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#FF777777"
+        android:textSize="12sp" />
+</LinearLayout>

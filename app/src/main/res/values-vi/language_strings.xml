@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Trình dọn dẹp tệp lớn</string>
     <string name="duplicate_photo_cleaner">Trình dọn dẹp ảnh trùng lặp</string>
     <string name="video_cleaner">Trình dọn dẹp video</string>
+    <string name="ram_status">Trạng thái RAM</string>
+    <string name="device_scan">Quét thiết bị</string>
+    <string name="battery_info">Thông tin pin</string>
+    <string name="network_test">Kiểm tra mạng</string>
     <string name="feature_coming_soon">Tính năng này sắp ra mắt</string>
     <string name="settings">Cài đặt</string>
     <string name="scanning">Đang quét...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Thử lại</string>
     <string name="files_and_size">Các tệp %1$d / %2$s</string>
     <string name="go_back">Quay lại</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Đang quét ứng dụng trong nền</string>
+    <string name="ok">OK</string>
 </resources>

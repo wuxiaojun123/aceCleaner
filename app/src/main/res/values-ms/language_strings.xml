@@ -34,6 +34,10 @@
     <string name="big_file_cleaner">Pembersih Fail Besar</string>
     <string name="duplicate_photo_cleaner">Pembersih Foto Pendua</string>
     <string name="video_cleaner">Pembersih Video</string>
+    <string name="ram_status">Status RAM</string>
+    <string name="device_scan">Pengimbasan Peranti</string>
+    <string name="battery_info">Maklumat Bateri</string>
+    <string name="network_test">Ujian Rangkaian</string>
     <string name="feature_coming_soon">Ciri ini akan datang tidak lama lagi</string>
     <string name="settings">tetapan</string>
     <string name="scanning">Mengimbas...</string>
@@ -114,4 +118,7 @@
     <string name="try_again">Cuba lagi</string>
     <string name="files_and_size">Fail %1$d / %2$s</string>
     <string name="go_back">belakang</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">Mengimbas Apl dalam latar belakang</string>
+    <string name="ok">OK</string>
 </resources>

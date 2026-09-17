@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
@@ -100,6 +102,22 @@
             android:theme="@style/Theme.AceClean" />
         <activity
             android:name=".ui.main.DuplicatePhotoCleanerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:name=".ui.main.RamStatusActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:name=".ui.main.DeviceReportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:name=".ui.main.BatteryInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:name=".ui.main.NetworkTestActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean" />
         <activity

@@ -48,6 +48,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         root.findViewById<View>(R.id.duplicate_photo_cleaner_card).setOnClickListener {
             (activity as? MainActivity)?.openDuplicatePhotoCleaner()
         }
+        root.findViewById<View>(R.id.ram_status_card).setOnClickListener {
+            (activity as? MainActivity)?.openRamStatus()
+        }
+        root.findViewById<View>(R.id.device_scan_card).setOnClickListener {
+            (activity as? MainActivity)?.openDeviceScan()
+        }
+        root.findViewById<View>(R.id.battery_info_card).setOnClickListener {
+            (activity as? MainActivity)?.openBatteryInfo()
+        }
+        root.findViewById<View>(R.id.network_test_card).setOnClickListener {
+            (activity as? MainActivity)?.openNetworkTest()
+        }
 
         root.findViewById<View>(R.id.language_button).setOnClickListener {
             (activity as? MainActivity)?.openLanguage()
