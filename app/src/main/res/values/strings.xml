@@ -106,6 +106,7 @@
     <string name="network_traffic_permission_text">Allowing this lets you view daily usage trends and app data rankings to save smarter.</string>
     <string name="app_manager_permission_title">Grant app usage data access to check</string>
     <string name="app_manager_permission_text">Allowing this lets you view daily usage trends and app data rankings to save smarter.</string>
+    <string name="usage_access_select_app">Find “%1$s” in the list and turn on access</string>
     <string name="notification_permission_title">Grant Notification Access</string>
     <string name="notification_permission_text">Enable access to unlock full features.</string>
     <string name="this_month">This Month</string>
@@ -144,7 +145,17 @@
     <string name="images">Images</string>
     <string name="audio">Audio</string>
     <string name="documents">Documents</string>
+    <string name="archives">Archives</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">Others</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">1 week</string>
     <string name="one_month">1 month</string>
+    <string name="three_months">3 months</string>
     <string name="six_months">6 months</string>
     <string name="one_year">1 year</string>
     <string name="all_time">All time</string>

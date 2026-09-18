@@ -5,9 +5,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.nice.aceclean.R
-import com.nice.aceclean.permission.PermissionAutoNavigator
+import com.nice.aceclean.permission.NotificationListenerPermissionHelper
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
+import com.nice.aceclean.permission.UsageAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
 
 enum class FeatureType { NETWORK_TRAFFIC, NOTIFICATION_CLEANER, APP_MANAGER }
@@ -17,7 +18,7 @@ abstract class PermissionFeatureActivity(
     @param:LayoutRes private val featureLayout: Int,
 ) : BaseActivity(R.layout.fragment_permission_gate) {
 
-    private var permissionNavigator: PermissionAutoNavigator? = null
+    private var permissionHelper: AutoCloseable? = null
     private var featureShown = false
 
     final override fun initViews() {
@@ -31,21 +32,26 @@ abstract class PermissionFeatureActivity(
         view<TextView>(R.id.permission_title).setText(config.title)
         view<TextView>(R.id.permission_description).setText(config.description)
         view<View>(R.id.permission_back).setOnClickListener { finish() }
-        view<View>(R.id.permission_allow).setOnClickListener {
-            startActivity(SpecialPermissionAccess.settingsIntent(this, featureType.specialPermission))
+        val requestPermission: () -> Unit = when (featureType.specialPermission) {
+            SpecialPermission.NOTIFICATION_LISTENER -> {
+                NotificationListenerPermissionHelper(this, ::showFeature).also { permissionHelper = it }
+                    .let { helper -> { helper.request() } }
+            }
+            SpecialPermission.USAGE_ACCESS -> {
+                UsageAccessPermissionHelper(this, ::showFeature).also { permissionHelper = it }
+                    .let { helper -> { helper.request() } }
+            }
         }
-        permissionNavigator = PermissionAutoNavigator(
-            lifecycleOwner = this,
-            isGranted = { SpecialPermissionAccess.isGranted(this, featureType.specialPermission) },
-            onGranted = ::showFeature,
-        )
+        view<View>(R.id.permission_allow).setOnClickListener {
+            requestPermission()
+        }
     }
 
     private fun showFeature() {
         if (featureShown) return
         featureShown = true
-        permissionNavigator?.close()
-        permissionNavigator = null
+        permissionHelper?.close()
+        permissionHelper = null
         setActivityContent(featureLayout)
         initFeatureViews()
     }
@@ -53,8 +59,8 @@ abstract class PermissionFeatureActivity(
     protected abstract fun initFeatureViews()
 
     override fun onDestroy() {
-        permissionNavigator?.close()
-        permissionNavigator = null
+        permissionHelper?.close()
+        permissionHelper = null
         super.onDestroy()
     }
 

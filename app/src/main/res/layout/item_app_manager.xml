@@ -10,11 +10,54 @@
     android:orientation="horizontal"
     android:paddingStart="14dp"
     android:paddingEnd="10dp">
-    <ImageView android:id="@+id/app_manager_icon" android:layout_width="44dp" android:layout_height="44dp" android:contentDescription="@null" />
-    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical">
-        <TextView android:id="@+id/app_manager_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:textColor="#FF34353B" android:textSize="15sp" android:textStyle="bold" />
-        <TextView android:id="@+id/app_manager_meta" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:ellipsize="end" android:maxLines="1" android:textColor="#FF92939A" android:textSize="11sp" />
+
+    <ImageView
+        android:id="@+id/app_manager_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@null" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/app_manager_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#FF34353B"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/app_manager_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#FF92939A"
+            android:textSize="11sp" />
     </LinearLayout>
-    <TextView android:id="@+id/app_manager_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:textColor="#FF727480" android:textSize="12sp" />
-    <CheckBox android:id="@+id/app_manager_check" android:layout_width="40dp" android:layout_height="40dp" android:buttonTint="#FF6675FF" android:clickable="false" android:focusable="false" />
+
+    <TextView
+        android:id="@+id/app_manager_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="#FF727480"
+        android:textSize="12sp" />
+
+    <CheckBox
+        android:id="@+id/app_manager_check"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:buttonTint="#FF6675FF"
+        android:clickable="false"
+        android:focusable="false" />
 </LinearLayout>

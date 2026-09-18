@@ -1,6 +1,5 @@
 package com.nice.aceclean.ui.main
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.os.storage.StorageManager
@@ -9,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
@@ -18,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.cleanup.CleanupCategory
 import com.nice.aceclean.cleanup.CleanupViewModel
-import com.nice.aceclean.permission.StorageAccess
+import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
 import kotlinx.coroutines.Job
@@ -30,25 +28,18 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
     private var scanJob: Job? = null
     private var progressJob: Job? = null
 
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        if (StorageAccess.hasBroadAccess(this)) startScan() else showPermissionRequired()
-    }
-    private val settingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (StorageAccess.hasBroadAccess(this)) startScan() else showPermissionRequired()
-    }
+    private val storagePermission = AllFilesAccessPermissionHelper(
+        activity = this,
+        onGranted = ::startScan,
+        onDenied = ::showPermissionRequired,
+    )
 
     override fun initViews() {
-        if (StorageAccess.hasBroadAccess(this)) startScan() else requestStorageAccess()
+        if (storagePermission.isGranted()) startScan() else storagePermission.request()
     }
 
     private fun requestStorageAccess() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                settingsLauncher.launch(StorageAccess.broadAccessSettingsIntent(this))
-            } catch (_: ActivityNotFoundException) {
-                settingsLauncher.launch(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
-            }
-        } else permissionLauncher.launch(StorageAccess.legacyPermissions())
+        storagePermission.request()
     }
 
     private fun showPermissionRequired() {
@@ -56,7 +47,7 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
             .setTitle(R.string.storage_permission_required)
             .setMessage(R.string.storage_permission_explanation)
             .setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
-            .setNeutralButton(R.string.open_app_settings) { _, _ -> settingsLauncher.launch(StorageAccess.appSettingsIntent(this)) }
+            .setNeutralButton(R.string.open_app_settings) { _, _ -> storagePermission.openAppSettings() }
             .setPositiveButton(R.string.try_again) { _, _ -> requestStorageAccess() }
             .show()
     }
@@ -98,7 +89,7 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
         findViewById<View>(R.id.cleanup_rescan).setOnClickListener { startScan() }
         findViewById<View>(R.id.cleanup_find_large_files).setOnClickListener { openBigFileCleaner() }
         findViewById<View>(R.id.cleanup_system_cache).apply {
-            visibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) View.VISIBLE else View.GONE
+            visibility = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) View.VISIBLE else View.GONE
             setOnClickListener { openSystemCacheCleaner() }
         }
         render()
@@ -194,4 +185,9 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
         CategoryViews(CleanupCategory.RESIDUAL_FILES, R.id.cleanup_residual_row, R.id.cleanup_residual_check, R.id.cleanup_residual_size),
         CategoryViews(CleanupCategory.EMPTY_FILES, R.id.cleanup_empty_row, R.id.cleanup_empty_check, R.id.cleanup_empty_size),
     )
+
+    override fun onDestroy() {
+        storagePermission.close()
+        super.onDestroy()
+    }
 }

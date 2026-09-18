@@ -11,7 +11,7 @@
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="center" android:gravity="center" android:text="@string/large_files" android:textColor="#FF202126" android:textSize="18sp" android:textStyle="bold" />
         </FrameLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginStart="19dp" android:layout_marginTop="10dp" android:layout_marginEnd="19dp" android:background="@drawable/bg_large_filter" android:orientation="horizontal">
+        <LinearLayout android:id="@+id/large_filter_bar" android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginStart="19dp" android:layout_marginTop="10dp" android:layout_marginEnd="19dp" android:background="@drawable/bg_large_filter" android:orientation="horizontal">
             <TextView android:id="@+id/large_type_filter" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="@string/all_types" android:textColor="#FF3A3B40" android:textSize="14sp" />
             <TextView android:id="@+id/large_size_filter" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="@string/zero_bytes" android:textColor="#FF3A3B40" android:textSize="14sp" />
             <TextView android:id="@+id/large_time_filter" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="@string/all_time" android:textColor="#FF3A3B40" android:textSize="14sp" />

@@ -1,9 +1,7 @@
 package com.nice.aceclean.ui.main
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -13,14 +11,14 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.MediaReadPermissionHelper
+import com.nice.aceclean.permission.MediaReadType
 import com.nice.aceclean.similarphoto.SimilarPhotoCluster
 import com.nice.aceclean.similarphoto.SimilarPhotoItem
 import com.nice.aceclean.similarphoto.SimilarPhotoRow
@@ -36,11 +34,14 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
     private var syncingSwitch = false
     private var pendingDeleteItems = emptyList<SimilarPhotoItem>()
 
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        if (hasPhotoAccess()) loadPhotos() else showPermissionEmptyState()
-    }
+    private val photoPermission = MediaReadPermissionHelper(
+        activity = this,
+        type = MediaReadType.IMAGES,
+        onGranted = ::loadPhotos,
+        onDenied = ::showPermissionEmptyState,
+    )
 
-    private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+    private val deleteLauncher = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) onPhotosDeleted(pendingDeleteItems)
         pendingDeleteItems = emptyList()
     }
@@ -77,25 +78,10 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
     }
 
     private fun requestPhotoAccess() {
-        val permissions = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> arrayOf(
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
-            )
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
-            else -> arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-        permissionLauncher.launch(permissions)
+        photoPermission.request()
     }
 
-    private fun hasPhotoAccess(): Boolean = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE ->
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED) == PackageManager.PERMISSION_GRANTED
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ->
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
-        else -> ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-    }
+    private fun hasPhotoAccess(): Boolean = photoPermission.isGranted()
 
     private fun loadPhotos() {
         showLoading(true)
@@ -218,6 +204,11 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
             outRect.right = (column + 1) * spacing / COLUMN_COUNT
             outRect.top = spacing
         }
+    }
+
+    override fun onDestroy() {
+        photoPermission.close()
+        super.onDestroy()
     }
 
     private companion object { const val COLUMN_COUNT = 3 }
