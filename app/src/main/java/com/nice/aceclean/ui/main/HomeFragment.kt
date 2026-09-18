@@ -5,10 +5,11 @@ import android.net.Uri
 import android.provider.Settings
 import android.view.View
 import android.widget.TextView
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.nice.aceclean.permission.SpecialPermission
+import com.nice.aceclean.permission.SpecialPermissionAccess
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.ui.widget.IosSwitchView
@@ -93,9 +94,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             DeviceStats.formatBytes(requireContext(), storage.usedBytes),
             DeviceStats.formatBytes(requireContext(), storage.totalBytes),
         )
+        val notificationPermissionGranted = SpecialPermissionAccess.isGranted(
+            requireContext(),
+            SpecialPermission.NOTIFICATION_LISTENER,
+        )
+        rootView.findViewById<View>(R.id.notification_card).visibility = if (notificationPermissionGranted) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
         syncingNotificationSwitch = true
         rootView.findViewById<IosSwitchView>(R.id.notification_switch).isChecked =
-            NotificationManagerCompat.getEnabledListenerPackages(requireContext()).contains(requireContext().packageName)
+            notificationPermissionGranted
         syncingNotificationSwitch = false
     }
 
