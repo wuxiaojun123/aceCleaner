@@ -1,6 +1,7 @@
 package com.nice.aceclean.ui.main
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
@@ -11,8 +12,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,14 +24,17 @@ import com.nice.aceclean.similarphoto.SimilarPhotoRow
 import com.nice.aceclean.similarphoto.SimilarPhotoScanner
 import com.nice.aceclean.similarphoto.SimilarPhotosAdapter
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
+import com.nice.aceclean.ui.widget.IosSwitchView
 import kotlinx.coroutines.launch
 
 class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_photo_cleaner) {
     private lateinit var adapter: SimilarPhotosAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var keepBestSwitch: SwitchCompat
+    private lateinit var keepBestSwitch: IosSwitchView
     private var syncingSwitch = false
     private var pendingDeleteItems = emptyList<SimilarPhotoItem>()
+    private var deleteConfirmationDialog: Dialog? = null
 
     private val photoPermission = MediaReadPermissionHelper(
         activity = this,
@@ -131,12 +133,19 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
     private fun confirmDelete() {
         val selected = adapter.selectedItems()
         if (selected.isEmpty()) return
-        AlertDialog.Builder(this)
-            .setTitle(R.string.dup_delete_confirm_title)
-            .setMessage(getString(R.string.dup_delete_confirm_message, selected.size, Formatter.formatFileSize(this, selected.sumOf { it.sizeBytes })))
-            .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.dup_delete) { _, _ -> delete(selected) }
-            .show()
+        if (deleteConfirmationDialog?.isShowing == true) return
+        deleteConfirmationDialog = IosDeleteConfirmDialog.show(
+            activity = this,
+            title = getString(R.string.dup_delete_confirm_title),
+            message = getString(
+                R.string.dup_delete_confirm_message,
+                selected.size,
+                Formatter.formatFileSize(this, selected.sumOf { it.sizeBytes }),
+            ),
+            confirmText = getString(R.string.dup_delete),
+            onConfirm = { delete(selected) },
+            onDismiss = { deleteConfirmationDialog = null },
+        )
     }
 
     private fun delete(items: List<SimilarPhotoItem>) {
@@ -207,6 +216,8 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
     }
 
     override fun onDestroy() {
+        deleteConfirmationDialog?.dismiss()
+        deleteConfirmationDialog = null
         photoPermission.close()
         super.onDestroy()
     }

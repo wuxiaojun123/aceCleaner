@@ -1,6 +1,7 @@
 package com.nice.aceclean.ui.main
 
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Bitmap
 import android.os.Build
 import android.provider.MediaStore
@@ -15,11 +16,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
@@ -41,6 +42,7 @@ class VideoCleanerActivity : StorageCleanerActivity(
     private var videos = emptyList<MediaFileInfo>()
     private lateinit var rootView: View
     private lateinit var adapter: VideoAdapter
+    private var deleteConfirmationDialog: Dialog? = null
 
     private var pendingDeleteCount = 0
     private var pendingDeleteBytes = 0L
@@ -111,12 +113,18 @@ class VideoCleanerActivity : StorageCleanerActivity(
             Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        AlertDialog.Builder(this)
-            .setTitle(R.string.delete_files_title)
-            .setMessage(getString(R.string.delete_files_message, selected.size, DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes })))
-            .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.delete) { _, _ -> performDelete() }
-            .show()
+        if (deleteConfirmationDialog?.isShowing == true) return
+        deleteConfirmationDialog = IosDeleteConfirmDialog.show(
+            activity = this,
+            title = getString(R.string.delete_files_title),
+            message = getString(
+                R.string.delete_files_message,
+                selected.size,
+                DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes }),
+            ),
+            onConfirm = ::performDelete,
+            onDismiss = { deleteConfirmationDialog = null },
+        )
     }
 
     private fun performDelete() {
@@ -136,6 +144,12 @@ class VideoCleanerActivity : StorageCleanerActivity(
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
         Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDestroy() {
+        deleteConfirmationDialog?.dismiss()
+        deleteConfirmationDialog = null
+        super.onDestroy()
     }
 
     private inner class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

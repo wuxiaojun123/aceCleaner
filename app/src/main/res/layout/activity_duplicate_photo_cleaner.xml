@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -115,15 +114,13 @@
                         android:textSize="11.5sp" />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.SwitchCompat
+                <com.nice.aceclean.ui.widget.IosSwitchView
                     android:id="@+id/duplicate_keep_best_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="51dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="8dp"
                     android:checked="true"
-                    android:contentDescription="@string/dup_keep_best_title"
-                    app:thumbTint="@color/dup_switch_thumb"
-                    app:trackTint="@color/dup_switch_track" />
+                    android:contentDescription="@string/dup_keep_best_title" />
             </LinearLayout>
         </LinearLayout>
 
