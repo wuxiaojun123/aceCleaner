@@ -13,6 +13,7 @@ import android.os.StatFs
 import android.os.storage.StorageManager
 import android.text.format.Formatter
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
@@ -22,6 +23,7 @@ data class InstalledAppInfo(
     val applicationInfo: ApplicationInfo,
     val sizeBytes: Long,
     val installTime: Long,
+    val installedOn: String,
     val rxBytes: Long,
     val txBytes: Long,
     val lastUsed: Long,
@@ -65,6 +67,7 @@ object DeviceStats {
         } else {
             emptyMap()
         }
+        val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.US)
 
         return resolves.asSequence()
             .map { it.activityInfo.applicationInfo }
@@ -72,12 +75,16 @@ object DeviceStats {
             .filter { it.flags and ApplicationInfo.FLAG_SYSTEM == 0 }
             .distinctBy { it.packageName }
             .map { app ->
+                val firstInstallTime = packageManager.installTime(app.packageName)
+
                 InstalledAppInfo(
                     label = packageManager.getApplicationLabel(app).toString(),
                     packageName = app.packageName,
                     applicationInfo = app,
                     sizeBytes = installedSize(context, app),
-                    installTime = packageManager.installTime(app.packageName),
+                    installTime = firstInstallTime,
+                    installedOn = firstInstallTime.takeIf { it > 0f }
+                        ?.let { dateFormat.format(Date(it)) } ?: "",
                     rxBytes = TrafficStats.getUidRxBytes(app.uid).coerceAtLeast(0L),
                     txBytes = TrafficStats.getUidTxBytes(app.uid).coerceAtLeast(0L),
                     lastUsed = usageByPackage[app.packageName]?.lastTimeUsed ?: 0L,

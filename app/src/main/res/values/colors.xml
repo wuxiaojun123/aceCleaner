@@ -20,4 +20,9 @@
     <color name="ios_switch_track_on">#FF34C759</color>
     <color name="ios_switch_thumb">#FFFFFFFF</color>
     <color name="ios_switch_thumb_shadow">#33000000</color>
+
+    <color name="color_FF34353B">#FF34353B</color>
+    <color name="color_FF92939A">#FF92939A</color>
+    <color name="color_FF727480">#FF727480</color>
+
 </resources>

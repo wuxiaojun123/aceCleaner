@@ -280,4 +280,10 @@
     <string name="dup_empty_title" translatable="false">No similar photos found</string>
     <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
     <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">Installed: %1$s</string>
+    <string name="app_manager_last_used">Last Used: %1$s</string>
+    <string name="app_manager_last_used_today">Today</string>
+    <string name="app_manager_last_used_unknown">unknown</string>
+
 </resources>

@@ -1,24 +1,31 @@
 package com.nice.aceclean.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.icu.util.Calendar
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemAppManagerBinding
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.InstalledAppInfo
+import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class AppManagerActivity : PermissionFeatureActivity(
@@ -26,12 +33,15 @@ class AppManagerActivity : PermissionFeatureActivity(
     R.layout.fragment_app_manager,
 ) {
 
-    private val selectedPackages = linkedSetOf<String>()
     private val uninstallQueue = ArrayDeque<String>()
     private lateinit var rootView: View
     private var apps: List<InstalledAppInfo> = emptyList()
     private var sortMode = SortMode.NAME
     private var sortOrder = SortOrder.ASCENDING
+
+    private val appAdapter = ManagedAppAdapter(::onSelectionChanged)
+
+    private fun onSelectionChanged(selectedApps: List<InstalledAppInfo>) = updateButton(selectedApps.size)
 
     private val uninstallLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode != Activity.RESULT_OK) {
@@ -48,13 +58,19 @@ class AppManagerActivity : PermissionFeatureActivity(
     override fun initFeatureViews() {
         rootView = findViewById(android.R.id.content)
         view<View>(R.id.app_manager_back).setOnClickListener { finish() }
+        view<RecyclerView>(R.id.app_manager_list).apply {
+            layoutManager = LinearLayoutManager(this@AppManagerActivity)
+            adapter = appAdapter
+            setHasFixedSize(true)
+        }
         bindSortControls(rootView)
         view<View>(R.id.app_manager_uninstall).setOnClickListener {
-            if (selectedPackages.isEmpty()) {
+            val selectedApps = appAdapter.selectedApps()
+            if (selectedApps.isEmpty()) {
                 Toast.makeText(this, R.string.select_apps_first, Toast.LENGTH_SHORT).show()
             } else {
                 uninstallQueue.clear()
-                uninstallQueue.addAll(selectedPackages)
+                uninstallQueue.addAll(selectedApps.map(InstalledAppInfo::packageName))
                 uninstallNext()
             }
         }
@@ -67,9 +83,8 @@ class AppManagerActivity : PermissionFeatureActivity(
             val loadedApps = withContext(Dispatchers.IO) { DeviceStats.launchableApps(this@AppManagerActivity) }
             if (isFinishing || isDestroyed) return@launch
             apps = loadedApps
-            selectedPackages.clear()
-            updateButton()
-//            rootView.findViewById<TextView>(R.id.app_manager_count).text = getString(R.string.apps_found, apps.size)
+            appAdapter.clearSelection()
+            updateButton(0)
             renderApps()
         }
     }
@@ -97,28 +112,7 @@ class AppManagerActivity : PermissionFeatureActivity(
     private fun renderApps() {
         if (!::rootView.isInitialized) return
         updateSortControls()
-        val container = rootView.findViewById<LinearLayout>(R.id.app_manager_list)
-        container.removeAllViews()
-        sortedApps().forEach { app ->
-            val item = LayoutInflater.from(this).inflate(R.layout.item_app_manager, container, false)
-            item.findViewById<ImageView>(R.id.app_manager_icon).setImageDrawable(packageManager.getApplicationIcon(app.applicationInfo))
-            item.findViewById<TextView>(R.id.app_manager_name).text = app.label
-            item.findViewById<TextView>(R.id.app_manager_meta).text = getString(
-                R.string.last_used_value,
-                DeviceStats.formatLastUsed(app.lastUsed, getString(R.string.never_used)),
-            )
-            item.findViewById<TextView>(R.id.app_manager_size).text = DeviceStats.formatBytes(this, app.sizeBytes)
-            val check = item.findViewById<CheckBox>(R.id.app_manager_check)
-            check.isChecked = app.packageName in selectedPackages
-            updateItemSelection(item, check.isChecked)
-            check.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) selectedPackages.add(app.packageName) else selectedPackages.remove(app.packageName)
-                updateItemSelection(item, isChecked)
-                updateButton()
-            }
-            item.setOnClickListener { check.toggle() }
-            container.addView(item)
-        }
+        appAdapter.submitList(sortedApps())
     }
 
     private fun sortedApps(): List<InstalledAppInfo> = when (sortMode) {
@@ -185,16 +179,12 @@ class AppManagerActivity : PermissionFeatureActivity(
         }
     }
 
-    private fun updateItemSelection(item: View, selected: Boolean) {
-        item.setBackgroundResource(if (selected) R.drawable.bg_app_manager_item_selected else R.drawable.bg_home_card)
-    }
-
-    private fun updateButton() {
+    private fun updateButton(selectedCount: Int = appAdapter.selectedApps().size) {
         if (!::rootView.isInitialized) return
-        rootView.findViewById<TextView>(R.id.app_manager_uninstall).text = if (selectedPackages.isEmpty()) {
+        rootView.findViewById<TextView>(R.id.app_manager_uninstall).text = if (selectedCount == 0) {
             getString(R.string.uninstall)
         } else {
-            getString(R.string.uninstall_count, selectedPackages.size)
+            getString(R.string.uninstall_count, selectedCount)
         }
     }
 
@@ -226,3 +216,83 @@ class AppManagerActivity : PermissionFeatureActivity(
         fun toggle(): SortOrder = if (this == ASCENDING) DESCENDING else ASCENDING
     }
 }
+
+private class ManagedAppAdapter(
+    private val onSelectionChanged: (List<InstalledAppInfo>) -> Unit,
+) : RecyclerView.Adapter<ManagedAppAdapter.ManagedAppViewHolder>() {
+
+    private var apps: List<InstalledAppInfo> = emptyList()
+    private val selectedPackages = linkedSetOf<String>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(newApps: List<InstalledAppInfo>) {
+        apps = newApps
+        selectedPackages.retainAll(newApps.mapTo(hashSetOf()) { it.applicationInfo.packageName})
+        notifyDataSetChanged()
+    }
+
+    fun selectedApps(): List<InstalledAppInfo> {
+        return apps.filter { it.applicationInfo.packageName in selectedPackages }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearSelection() {
+        if (selectedPackages.isEmpty()) return
+        selectedPackages.clear()
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount() = apps.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ManagedAppViewHolder(
+        ItemAppManagerBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+    )
+
+    override fun onBindViewHolder(holder: ManagedAppViewHolder, position: Int) {
+        holder.bind(apps[position])
+    }
+
+    inner class ManagedAppViewHolder(
+        private val binding: ItemAppManagerBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(app: InstalledAppInfo) = with(binding) {
+            val context = root.context
+            appNameText.text = app.label
+            appSizeText.text = NetworkSpeedSampler.format(app.sizeBytes)
+            installDateText.text = context.getString(R.string.app_manager_installed, app.installedOn)
+            lastUsedText.text = context.getString(
+                R.string.app_manager_last_used,
+                formatLastUsed(context, app.lastUsed),
+            )
+            appManagerIcon.setImageDrawable(
+                runCatching { app.applicationInfo.loadIcon(context.packageManager) }.getOrNull(),
+            )
+
+            val selected = app.packageName in selectedPackages
+            appManagerCheck.isChecked = selected
+            appItemRoot.setBackgroundResource(
+                if (selected) R.drawable.bg_app_manager_item_selected else R.drawable.bg_home_card,
+            )
+            appItemRoot.setOnClickListener {
+                if (!selectedPackages.add(app.packageName)) selectedPackages.remove(app.packageName)
+                bindingAdapterPosition
+                    .takeIf { it != RecyclerView.NO_POSITION }
+                    ?.let(::notifyItemChanged)
+                onSelectionChanged(selectedApps())
+            }
+        }
+    }
+
+    private fun formatLastUsed(context: Context, time: Long): String {
+        if (time <= 0L) return ""
+        val startOfToday = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.timeInMillis
+        if (time >= startOfToday) return context.getString(R.string.app_manager_last_used_today)
+        return SimpleDateFormat("yyyy/MM/dd", Locale.US).format(Date(time))
+    }
+}
+
