@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="90dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/bg_home_card"
     android:clickable="true"
     android:focusable="true"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="14dp"
-    android:paddingEnd="10dp"
+    android:paddingStart="12dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="10dp"
     android:id="@+id/appItemRoot"
     >
 
@@ -17,14 +19,14 @@
         android:id="@+id/app_manager_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_weight="1"
-        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <LinearLayout
@@ -42,21 +44,37 @@
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="1"
                 android:textColor="@color/color_FF34353B"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="AceCleaner"
+                />
 
             <TextView
                 android:id="@+id/appSizeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:textColor="@color/color_FF727480"
-                android:textSize="12sp" />
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FF0088FF"
+                android:textSize="12sp"
+                tools:text="80M"
+                />
+
+            <CheckBox
+                android:id="@+id/app_manager_check"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:buttonTint="#FF0088FF"
+                android:clickable="false"
+                android:focusable="false" />
+
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -74,8 +92,8 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/color_FF92939A"
-                android:textSize="13sp" />
+                android:textColor="#FF888888"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,16 +117,12 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/color_FF92939A"
-                android:textSize="13sp" />
+                android:textColor="#FF888888"
+                android:textSize="12sp" />
+
         </LinearLayout>
+
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/app_manager_check"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:buttonTint="#FF6675FF"
-        android:clickable="false"
-        android:focusable="false" />
+
 </LinearLayout>

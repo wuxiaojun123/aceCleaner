@@ -284,7 +284,7 @@ private class ManagedAppAdapter(
     }
 
     private fun formatLastUsed(context: Context, time: Long): String {
-        if (time <= 0L) return ""
+        if (time <= 0L) return context.getString(R.string.app_manager_last_used_unknown)
         val startOfToday = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 0)
             set(Calendar.MINUTE, 0)
