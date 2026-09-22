@@ -59,8 +59,23 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".ui.main.QuickCleanTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_sticky_notification"
+            android:label="@string/quick_clean_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:name=".ui.main.DeleteSuccessActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean" />
         <activity

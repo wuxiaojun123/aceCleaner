@@ -166,7 +166,13 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
-        Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
+        DeleteSuccessActivity.show(
+            context = this,
+            removedCount = deleted,
+            freedBytes = bytes,
+            featureIcon = R.drawable.icon_notify_screenshot,
+            source = DeleteSuccessActivity.SOURCE_SCREENSHOT,
+        )
     }
 
     private fun visibleFiles() = if (showingScreenshots) screenshots else others

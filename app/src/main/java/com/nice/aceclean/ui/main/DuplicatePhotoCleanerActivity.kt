@@ -168,7 +168,13 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
 
     private fun onPhotosDeleted(items: List<SimilarPhotoItem>) {
         if (items.isEmpty()) return
-        Toast.makeText(this, getString(R.string.dup_deleted, items.size), Toast.LENGTH_SHORT).show()
+        DeleteSuccessActivity.show(
+            context = this,
+            removedCount = items.size,
+            freedBytes = items.sumOf { it.sizeBytes },
+            featureIcon = R.drawable.icon_duplicate_photo_cleaner,
+            source = DeleteSuccessActivity.SOURCE_DUPLICATE,
+        )
         SimilarPhotoScanner.invalidateCache()
         loadPhotos()
     }

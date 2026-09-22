@@ -30,7 +30,7 @@ object NetworkSpeedTest {
         return samples.sorted()[samples.size / 2]
     }
 
-    fun measureDownloadMbps(): Double {
+    fun measureDownloadMbps(onProgress: (Double) -> Unit = {}): Double {
         var received = 0L
         val started = SystemClock.elapsedRealtimeNanos()
         openConnection("$TEST_HOST/__down?bytes=$DOWNLOAD_BYTES&cache=${System.nanoTime()}").useConnection { connection ->
@@ -40,13 +40,14 @@ object NetworkSpeedTest {
                     val count = input.read(buffer)
                     if (count < 0) break
                     received += count
+                    onProgress(megabitsPerSecond(received, SystemClock.elapsedRealtimeNanos() - started))
                 }
             }
         }
         return megabitsPerSecond(received, SystemClock.elapsedRealtimeNanos() - started)
     }
 
-    fun measureUploadMbps(): Double {
+    fun measureUploadMbps(onProgress: (Double) -> Unit = {}): Double {
         val connection = openConnection("$TEST_HOST/__up").apply {
             requestMethod = "POST"
             doOutput = true
@@ -60,8 +61,10 @@ object NetworkSpeedTest {
                 var remaining = UPLOAD_BYTES
                 while (remaining > 0) {
                     val count = minOf(remaining, chunk.size)
-                    output.write(chunk, 0, count)
-                    remaining -= count
+                output.write(chunk, 0, count)
+                remaining -= count
+                val transferred = UPLOAD_BYTES - remaining
+                onProgress(megabitsPerSecond(transferred.toLong(), SystemClock.elapsedRealtimeNanos() - started))
                 }
                 output.flush()
             }

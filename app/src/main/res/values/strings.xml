@@ -18,8 +18,14 @@
     <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Never Miss a Key Tip</string>
     <string name="clean_up">CLEAN UP</string>
+    <string name="quick_clean_tile_label">Quick Clean</string>
+    <string name="quick_clean_tile_prompt_title">Add Quick Clean to Quick Settings?</string>
+    <string name="quick_clean_tile_prompt_message">Add a shortcut to your notification shade for one-tap access to Clean Up.</string>
+    <string name="add">Add</string>
+    <string name="not_now">Not now</string>
     <string name="network_traffic">Network Traffic</string>
     <string name="notification_cleaner">Notification\nCleaner</string>
+    <string name="notification_cleaner_single">Notification Cleaner</string>
     <string name="app_manager">APP Manager</string>
     <string name="screenshot_cleaner">Screenshot Cleaner</string>
     <string name="big_file_cleaner">Big File Cleaner</string>
@@ -93,6 +99,19 @@
     <string name="no_junk">Your device is clean</string>
     <string name="remove_size">Remove 118.8 MB</string>
     <string name="clean_complete_message">118.8 MB removed</string>
+    <string name="clean_success_page_title">Clean Result</string>
+    <string name="clean_success_title">Cleaned successfully</string>
+    <string name="clean_success_message">Your device is now cleaner and lighter.</string>
+    <string name="clean_success_freed">Space freed</string>
+    <string name="clean_success_files">%1$d files removed</string>
+    <string name="clean_success_more_tools">Keep cleaning</string>
+    <string name="clean_success_experience">You’re ready for a new and exciting experience!</string>
+    <string name="clean_success_notification_hint">Keep using the Notification Cleaner for further optimization.</string>
+    <string name="try_now">Try Now</string>
+    <string name="clean_success_big_file_hint">Find large files taking up space</string>
+    <string name="clean_success_screenshot_hint">Clear screenshots you no longer need</string>
+    <string name="clean_success_duplicate_hint">Free space from similar photos</string>
+    <string name="done">Done</string>
     <string name="percentage_value" translatable="false">%1$d%%</string>
     <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
     <string name="network_speed_value" translatable="false">%1$s/s</string>

@@ -1,6 +1,5 @@
 package com.nice.aceclean.ui.main
 
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import com.nice.aceclean.R
@@ -8,6 +7,7 @@ import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
 import com.nice.aceclean.permission.MediaReadPermissionHelper
 import com.nice.aceclean.permission.MediaReadType
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.MediaStoreRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,13 +51,19 @@ abstract class StorageCleanerActivity(
     }
 
     private fun showPermissionRequired() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.storage_permission_required)
-            .setMessage(R.string.storage_permission_explanation)
-            .setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
-            .setNeutralButton(R.string.open_app_settings) { _, _ -> openPermissionSettings() }
-            .setPositiveButton(R.string.try_again) { _, _ -> requestAccess() }
-            .show()
+        IosActionSheetDialog.show(
+            activity = this,
+            title = getString(R.string.storage_permission_required),
+            message = getString(R.string.storage_permission_explanation),
+            actions = listOf(
+                IosActionSheetDialog.Action(getString(R.string.try_again), onClick = ::requestAccess),
+                IosActionSheetDialog.Action(
+                    getString(R.string.open_app_settings),
+                    onClick = ::openPermissionSettings,
+                ),
+            ),
+            onCancel = ::finish,
+        )
     }
 
     private fun startScan() {

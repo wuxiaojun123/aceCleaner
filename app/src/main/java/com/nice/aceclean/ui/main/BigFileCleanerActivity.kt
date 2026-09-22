@@ -356,7 +356,13 @@ class BigFileCleanerActivity : StorageCleanerActivity(
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {
-        Toast.makeText(this, getString(R.string.files_deleted_result, deleted, DeviceStats.formatBytes(this, bytes), failed), Toast.LENGTH_LONG).show()
+        DeleteSuccessActivity.show(
+            context = this,
+            removedCount = deleted,
+            freedBytes = bytes,
+            featureIcon = R.drawable.icon_large_files_finish,
+            source = DeleteSuccessActivity.SOURCE_BIG_FILE,
+        )
     }
 
     private fun fileIcon(file: MediaFileInfo): Int {

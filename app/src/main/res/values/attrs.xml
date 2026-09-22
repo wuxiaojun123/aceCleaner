@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colors and sizing are deliberately exposed so product themes can restyle the gauge in XML. -->
+    <declare-styleable name="SpeedTestGaugeView">
+        <attr name="gaugeProgressColor" format="color" />
+        <attr name="gaugeTrackColor" format="color" />
+        <attr name="gaugeStrokeWidth" format="dimension" />
+        <attr name="gaugeStartAngle" format="float" />
+    </declare-styleable>
+</resources>

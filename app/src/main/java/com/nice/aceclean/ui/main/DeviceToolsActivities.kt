@@ -14,16 +14,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.widget.CheckmarkAnimationView
+import com.nice.aceclean.ui.widget.SpeedTestGaugeView
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.BatterySnapshot
@@ -33,6 +34,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 
 abstract class DeviceToolActivity(
@@ -103,19 +105,19 @@ class RamStatusActivity : DeviceToolActivity(R.layout.activity_ram_status, R.str
             )
             row.findViewById<TextView>(R.id.running_app_name).text = app.label
             row.findViewById<android.view.View>(R.id.running_app_close).setOnClickListener {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.force_stop_title)
-                    .setMessage(R.string.force_stop_explanation)
-                    .setNegativeButton(R.string.cancel, null)
-                    .setPositiveButton(R.string.continue_text) { _, _ ->
+                IosActionSheetDialog.show(
+                    activity = this,
+                    title = getString(R.string.force_stop_title),
+                    message = getString(R.string.force_stop_explanation),
+                    actions = listOf(IosActionSheetDialog.Action(getString(R.string.continue_text)) {
                         startActivity(
                             Intent(
                                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                                 Uri.parse("package:${app.packageName}"),
                             ),
                         )
-                    }
-                    .show()
+                    }),
+                )
             }
             (row.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin =
                 resources.getDimensionPixelSize(R.dimen.ram_app_row_spacing)
@@ -378,10 +380,10 @@ class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R
 class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R.string.network_test) {
 
     private var testJob: Job? = null
+    private var liveSpeedJob: Job? = null
+    @Volatile private var latestLiveSpeedMbps: Double? = null
 
     override fun initToolViews() {
-        view<TextView>(R.id.network_type).text =
-            getString(R.string.network_connection_value, connectionType())
         view<android.view.View>(R.id.network_test_button).setOnClickListener { startTest() }
     }
 
@@ -391,6 +393,7 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
 
     override fun onDestroy() {
         testJob?.cancel()
+        liveSpeedJob?.cancel()
         super.onDestroy()
     }
 
@@ -401,32 +404,39 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
             return
         }
         resetResults()
+        startLiveSpeedUpdates()
         testJob = lifecycleScope.launch {
             val button = view<TextView>(R.id.network_test_button)
             val status = view<TextView>(R.id.network_test_status)
-            val progress = view<ProgressBar>(R.id.network_test_progress)
+            val progress = view<SpeedTestGaugeView>(R.id.network_test_progress)
             button.isEnabled = false
             button.setText(R.string.testing)
             runCatching {
                 status.setText(R.string.network_test_connecting)
-                progress.progress = 12
+                progress.animateTo(12)
                 val ping = withContext(Dispatchers.IO) { NetworkSpeedTest.measurePing() }
                 view<TextView>(R.id.network_ping).text = getString(R.string.ping_value, ping)
 
                 status.setText(R.string.network_test_downloading)
-                progress.progress = 38
-                val download = withContext(Dispatchers.IO) { NetworkSpeedTest.measureDownloadMbps() }
+                progress.animateTo(38)
+                val download = withContext(Dispatchers.IO) {
+                    NetworkSpeedTest.measureDownloadMbps(::recordLiveSpeed)
+                }
                 view<TextView>(R.id.network_download).text = getString(R.string.speed_value, download)
 
                 status.setText(R.string.network_test_uploading)
-                progress.progress = 72
-                val upload = withContext(Dispatchers.IO) { NetworkSpeedTest.measureUploadMbps() }
+                progress.animateTo(72)
+                val upload = withContext(Dispatchers.IO) {
+                    NetworkSpeedTest.measureUploadMbps(::recordLiveSpeed)
+                }
                 view<TextView>(R.id.network_upload).text = getString(R.string.speed_value, upload)
 
-                progress.progress = 100
                 status.setText(R.string.network_test_complete)
+                liveSpeedJob?.cancel()
+                progress.animateTo(100, ::showSuccessAnimation)
             }.onFailure {
-                progress.progress = 0
+                liveSpeedJob?.cancel()
+                progress.animateTo(0)
                 status.setText(R.string.network_test_failed)
             }
             button.isEnabled = true
@@ -435,12 +445,39 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
     }
 
     private fun resetResults() {
+        view<View>(R.id.network_live_speed_group).visibility = View.VISIBLE
+        view<CheckmarkAnimationView>(R.id.network_test_success).visibility = View.GONE
+        view<TextView>(R.id.network_live_speed).text = "0.0"
+        latestLiveSpeedMbps = null
         view<TextView>(R.id.network_ping).setText(R.string.ping_placeholder)
         view<TextView>(R.id.network_download).setText(R.string.speed_placeholder)
         view<TextView>(R.id.network_upload).setText(R.string.speed_placeholder)
-        view<ProgressBar>(R.id.network_test_progress).progress = 0
-        view<TextView>(R.id.network_type).text =
-            getString(R.string.network_connection_value, connectionType())
+        view<SpeedTestGaugeView>(R.id.network_test_progress).progress = 0
+    }
+
+    private fun recordLiveSpeed(speedMbps: Double) {
+        latestLiveSpeedMbps = speedMbps
+    }
+
+    private fun startLiveSpeedUpdates() {
+        liveSpeedJob?.cancel()
+        liveSpeedJob = lifecycleScope.launch {
+            while (isActive) {
+                delay(LIVE_SPEED_REFRESH_MILLIS)
+                latestLiveSpeedMbps?.let { speed ->
+                    view<TextView>(R.id.network_live_speed).text =
+                        String.format(java.util.Locale.US, "%.1f", speed)
+                }
+            }
+        }
+    }
+
+    private fun showSuccessAnimation() {
+        view<View>(R.id.network_live_speed_group).visibility = View.GONE
+        view<CheckmarkAnimationView>(R.id.network_test_success).apply {
+            visibility = View.VISIBLE
+            play()
+        }
     }
 
     private fun hasNetwork(): Boolean {
@@ -449,17 +486,7 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    private fun connectionType(): String {
-        val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = manager.getNetworkCapabilities(manager.activeNetwork)
-            ?: return getString(R.string.unknown)
-        return getString(
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> R.string.connection_wifi
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> R.string.connection_mobile
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> R.string.connection_ethernet
-                else -> R.string.connection_other
-            },
-        )
+    private companion object {
+        const val LIVE_SPEED_REFRESH_MILLIS = 1_000L
     }
 }

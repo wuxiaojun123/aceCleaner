@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,6 +17,7 @@ import com.nice.aceclean.cleanup.CleanupCategory
 import com.nice.aceclean.cleanup.CleanupViewModel
 import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceStats
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -43,13 +43,19 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
     }
 
     private fun showPermissionRequired() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.storage_permission_required)
-            .setMessage(R.string.storage_permission_explanation)
-            .setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
-            .setNeutralButton(R.string.open_app_settings) { _, _ -> storagePermission.openAppSettings() }
-            .setPositiveButton(R.string.try_again) { _, _ -> requestStorageAccess() }
-            .show()
+        IosActionSheetDialog.show(
+            activity = this,
+            title = getString(R.string.storage_permission_required),
+            message = getString(R.string.storage_permission_explanation),
+            actions = listOf(
+                IosActionSheetDialog.Action(getString(R.string.try_again), onClick = ::requestStorageAccess),
+                IosActionSheetDialog.Action(
+                    getString(R.string.open_app_settings),
+                    onClick = storagePermission::openAppSettings,
+                ),
+            ),
+            onCancel = ::finish,
+        )
     }
 
     private fun startScan() {
@@ -147,23 +153,27 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
             Toast.makeText(this, R.string.no_junk, Toast.LENGTH_SHORT).show()
             return
         }
-        AlertDialog.Builder(this)
-            .setTitle(R.string.clean_confirm_title)
-            .setMessage(getString(R.string.clean_confirm_message, candidates.size, DeviceStats.formatBytes(this, candidates.sumOf { it.sizeBytes })))
-            .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.clean) { _, _ -> deleteSelected() }
-            .show()
+        IosActionSheetDialog.show(
+            activity = this,
+            title = getString(R.string.clean_confirm_title),
+            message = getString(
+                R.string.clean_confirm_message,
+                candidates.size,
+                DeviceStats.formatBytes(this, candidates.sumOf { it.sizeBytes }),
+            ),
+            actions = listOf(IosActionSheetDialog.Action(getString(R.string.clean), onClick = ::deleteSelected)),
+        )
     }
 
     private fun deleteSelected() {
         lifecycleScope.launch {
             val result = viewModel.delete(selected)
-            Toast.makeText(
-                this@CleanUpActivity,
-                getString(R.string.clean_result_message, result.deletedCount, DeviceStats.formatBytes(this@CleanUpActivity, result.releasedBytes), result.failedCount),
-                Toast.LENGTH_LONG,
-            ).show()
-            render()
+            DeleteSuccessActivity.show(
+                context = this@CleanUpActivity,
+                removedCount = result.deletedCount,
+                freedBytes = result.releasedBytes,
+            )
+            if (result.deletedCount == 0) render()
         }
     }
 
