@@ -13,6 +13,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.view.animation.PathInterpolator
 import android.widget.Checkable
 import android.widget.Switch
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
 import kotlin.math.min
@@ -31,7 +32,7 @@ class IosSwitchView @JvmOverloads constructor(
     }
     private val trackBounds = RectF()
     private val offColor = ContextCompat.getColor(context, R.color.ios_switch_track_off)
-    private val onColor = ContextCompat.getColor(context, R.color.ios_switch_track_on)
+    private var onColor = ContextCompat.getColor(context, R.color.ios_switch_track_on)
     private val colorEvaluator = ArgbEvaluator()
     private var checked = false
     private var thumbProgress = 0f
@@ -60,6 +61,11 @@ class IosSwitchView @JvmOverloads constructor(
 
     fun setOnCheckedChangeListener(listener: ((IosSwitchView, Boolean) -> Unit)?) {
         checkedChangeListener = listener
+    }
+
+    fun setTrackOnColor(@ColorInt color: Int) {
+        onColor = color
+        invalidate()
     }
 
     override fun performClick(): Boolean {

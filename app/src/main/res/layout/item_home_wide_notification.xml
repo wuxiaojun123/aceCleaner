@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/duplicate_photo_cleaner_card"
+    android:id="@+id/notification_cleaner_card"
     android:layout_width="match_parent"
     android:layout_height="68dp"
     android:layout_marginTop="14dp"
@@ -16,14 +16,14 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:contentDescription="@null"
-        android:src="@drawable/icon_duplicate_photo_cleaner_blue" />
+        android:src="@drawable/icon_notification" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:text="@string/duplicate_photo_cleaner"
+        android:text="@string/notification_cleaner"
         android:textColor="#FF353535"
         android:textSize="14sp"
         android:textStyle="bold" />

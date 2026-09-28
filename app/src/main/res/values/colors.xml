@@ -25,4 +25,20 @@
     <color name="color_FF92939A">#FF92939A</color>
     <color name="color_FF727480">#FF727480</color>
 
+    <color name="notification_manager_screen_top">#FFFDF8</color>
+    <color name="notification_manager_screen_bottom">#F2F6FA</color>
+    <color name="notification_manager_surface">#FFFFFFFF</color>
+    <color name="notification_manager_line">#E3EAF0</color>
+    <color name="notification_manager_muted">#6E7D89</color>
+    <color name="notification_manager_faint">#A3AFB9</color>
+    <color name="notification_manager_amber">#4F6FEA</color>
+    <color name="notification_manager_amber_light">#7790FF</color>
+    <color name="notification_manager_halo">#4D7790FF</color>
+    <color name="notification_manager_row">#F3F7FA</color>
+    <color name="notification_manager_icon_bg">#4F6FEA</color>
+    <color name="notification_manager_privacy_start">#E2F7F3</color>
+    <color name="notification_manager_privacy_end">#EEF9F6</color>
+    <color name="notification_manager_privacy_border">#D6EFE9</color>
+    <color name="notification_manager_teal">#4F6FEA</color>
+
 </resources>

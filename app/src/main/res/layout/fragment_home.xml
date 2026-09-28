@@ -153,7 +153,7 @@
 
                 <include layout="@layout/item_home_primary_network" />
 
-                <include layout="@layout/item_home_primary_notification" />
+                <include layout="@layout/item_home_primary_duplicate" />
 
                 <include layout="@layout/item_home_primary_app_manager" />
             </LinearLayout>
@@ -169,7 +169,7 @@
                 <include layout="@layout/item_home_secondary_large_file" />
             </LinearLayout>
 
-            <include layout="@layout/item_home_wide_duplicate" />
+            <include layout="@layout/item_home_wide_notification" />
 
             <include layout="@layout/item_home_wide_video" />
 

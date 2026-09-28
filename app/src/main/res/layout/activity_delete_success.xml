@@ -97,84 +97,159 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:id="@+id/delete_success_notification"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_success_tool_row"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="13dp"
-            android:paddingEnd="11dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/notification_cleaner_single"
-            android:textColor="#FF343434"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:paddingEnd="11dp">
 
-        <TextView
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/notification_cleaner_single"
+                android:textColor="#FF343434"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_success_tool_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/delete_success_apps"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_success_tool_row"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="13dp"
-            android:paddingEnd="11dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/app_manager"
-            android:textColor="#FF343434"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:paddingEnd="11dp">
 
-        <TextView
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/app_manager"
+                android:textColor="#FF343434"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_success_tool_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/delete_success_network"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_success_tool_row"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="13dp"
-            android:paddingEnd="11dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/network_traffic"
-            android:textColor="#FF343434"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:paddingEnd="11dp">
 
-        <TextView
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/network_traffic"
+                android:textColor="#FF343434"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_success_tool_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/delete_success_cleanup"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_success_tool_row"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="13dp"
-            android:paddingEnd="11dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/clean_up"
-            android:textColor="#FF343434"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:paddingEnd="11dp">
 
-        <TextView
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/clean_up"
+                android:textColor="#FF343434"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_success_tool_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/delete_success_screenshot"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_success_tool_row"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="13dp"
-            android:paddingEnd="11dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/screenshot_cleaner"
-            android:textColor="#FF343434"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:paddingEnd="11dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/screenshot_cleaner"
+                android:textColor="#FF343434"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_success_tool_arrow" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
