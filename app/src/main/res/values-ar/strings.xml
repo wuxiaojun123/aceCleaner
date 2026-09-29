@@ -1,115 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">جارٍ التحميل...%1$d%%</string>
-    <string name="agree_to_battery">بالاستمرار أنت توافق على</string>
-    <string name="app_guide_tips">يرجى الملاحظة: قد تستغرق المسحة الأولية وقتًا أطول أثناء البحث عن الملفات غير الضرورية وتحليل بيانات هاتفك.</string>
+    <string name="agree_to_battery">بالمتابعة، فإنك توافق على</string>
+    <string name="app_guide_tips">"يرجى ملاحظة: قد يستغرق الفحص الأول وقتًا أطول لأنه يبحث عن الملفات غير الضرورية ويحلل بيانات هاتفك."</string>
     <string name="guide_complete">اكتمل</string>
     <string name="guide_density">كثافة الشاشة</string>
     <string name="guide_device">الجهاز</string>
-    <string name="guide_engine">جاري تهيئة المحرك</string>
-    <string name="guide_loading">جاري التحميل…</string>
+    <string name="guide_engine">جارٍ تهيئة المحرك</string>
+    <string name="guide_loading">جارٍ التحميل…</string>
     <string name="guide_screen">دقة الشاشة</string>
     <string name="guide_start">بدء الاستخدام</string>
-    <string name="guide_storage">تخزين مستخدم</string>
-    <string name="guide_system">إصدار النظام</string>
+    <string name="guide_storage">مساحة التخزين المستخدمة</string>
+    <string name="guide_system">إصدار نظام التشغيل</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
-    <string name="never_miss_key_tip">لا تفوت أي نصيحة رئيسية</string>
-    <string name="clean_up">التنظيف</string>
-    <string name="network_traffic">حركة مرور الشبكة</string>
-    <string name="notification_cleaner">منظف الإشعارات</string>
-    <string name="app_manager">مدير التطبيق</string>
-    <string name="screenshot_cleaner">منظف لقطة الشاشة</string>
-    <string name="big_file_cleaner">منظف ملفات كبير</string>
-    <string name="duplicate_photo_cleaner">منظف صور مكرر</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">لا تفوّت نصيحة مهمة</string>
+    <string name="clean_up">تنظيف</string>
+    <string name="quick_clean_tile_label">تنظيف سريع</string>
+    <string name="quick_clean_tile_prompt_title">إضافة التنظيف السريع إلى الإعدادات السريعة؟</string>
+    <string name="quick_clean_tile_prompt_message">أضف اختصارًا إلى لوحة الإشعارات للوصول إلى التنظيف بنقرة واحدة.</string>
+    <string name="add">إضافة</string>
+    <string name="not_now">ليس الآن</string>
+    <string name="network_traffic">استخدام الشبكة</string>
+    <string name="notification_cleaner">منظف\nالإشعارات</string>
+    <string name="notification_cleaner_single">منظف الإشعارات</string>
+    <string name="app_manager">مدير التطبيقات</string>
+    <string name="screenshot_cleaner">منظف لقطات الشاشة</string>
+    <string name="big_file_cleaner">منظف الملفات الكبيرة</string>
+    <string name="duplicate_photo_cleaner">منظف الصور المتشابهة</string>
     <string name="video_cleaner">منظف الفيديو</string>
     <string name="ram_status">حالة RAM</string>
-    <string name="ram_label">ذاكرة الوصول العشوائي</string>
-    <string name="scanning_app_background">جاري مسح التطبيق في الخلفية</string>
+    <string name="ram_label">RAM</string>
+    <string name="scanning_app_background">جارٍ فحص التطبيقات في الخلفية</string>
     <string name="ok">موافق</string>
     <string name="device_scan">فحص الجهاز</string>
     <string name="battery_info">معلومات البطارية</string>
     <string name="network_test">اختبار الشبكة</string>
-    <string name="feature_coming_soon">ستتوفر هذه الميزة قريبًا</string>
+    <string name="feature_coming_soon">هذه الميزة قادمة قريبًا</string>
     <string name="settings">الإعدادات</string>
-    <string name="home_large_files">الملفات الكبيرة</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">البطارية</string>
+    <string name="notification_clean_up">تنظيف</string>
+    <string name="clean_cache_now">مسح ذاكرة التخزين المؤقت الآن</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
+    <string name="home_large_files">ملفات كبيرة</string>
     <string name="home_photos">متشابهة</string>
     <string name="home_empty">فارغة</string>
     <string name="home_notifications">الإشعارات</string>
-    <string name="language_entry_content_description">اللغة</string>
-    <string name="language_title">اللغة</string>
-    <string name="language_english">الإنجليزية</string>
-    <string name="language_japanese">اليابانية</string>
-    <string name="language_hindi">الهندية</string>
-    <string name="language_korean">الكورية</string>
-    <string name="language_spanish">الإسبانية</string>
-    <string name="language_portuguese">البرتغالية</string>
-    <string name="language_german">الألمانية</string>
-    <string name="language_french">الفرنسية</string>
-    <string name="language_turkish">التركية</string>
-    <string name="language_italian">الإيطالية</string>
-    <string name="language_afrikaans">الأفريكانية</string>
-    <string name="language_xhosa">الخوسا</string>
-    <string name="language_zulu">الزولو</string>
-    <string name="language_russian">الروسية</string>
-    <string name="language_ukrainian">الأوكرانية</string>
-    <string name="language_vietnamese">الفيتنامية</string>
-    <string name="language_indonesian">الإندونيسية</string>
-    <string name="language_malay">الملايوية</string>
-    <string name="language_thai">التايلاندية</string>
-    <string name="language_filipino">الفلبينية</string>
-    <string name="language_tagalog">التاغالوغية</string>
-    <string name="language_cebuano">السيبوانية</string>
-    <string name="scanning">جارٍ المسح...</string>
-    <string name="scanned_files_progress">تم فحص %1$d ملف</string>
-    <string name="clean_scan_summary">تم فحص %1$d ملف · تم فحص %2$d مجلد</string>
-    <string name="scan_restricted_summary">تعذر الوصول إلى %1$d مجلد</string>
-    <string name="scan_incomplete">تم بلوغ حد الفحص؛ قد تكون النتائج غير مكتملة</string>
-    <string name="items_found">%1$d عنصر</string>
-    <string name="clear_app_cache">مسح ذاكرة التخزين المؤقت للتطبيقات</string>
+    <string name="more_indicator" translatable="false">›››</string>
+    <string name="language_entry_content_description">Language</string>
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_german">Deutsch</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_afrikaans">Afrikaans</string>
+    <string name="language_xhosa">IsiXhosa</string>
+    <string name="language_zulu">isiZulu</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    <string name="language_malay">Bahasa Melayu</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_filipino">Pilipino</string>
+    <string name="language_tagalog">Tagalog</string>
+    <string name="language_cebuano">Pinulongan sa Cebu</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
+    <string name="scanning">جارٍ الفحص...</string>
+    <string name="scanned_files_progress">الملفات المفحوصة: %1$d</string>
+    <string name="clean_scan_summary">الملفات المفحوصة: %1$d · المجلدات التي تم فحصها: %2$d</string>
+    <string name="scan_restricted_summary">المجلدات غير المتاحة: %1$d</string>
+    <string name="scan_incomplete">تم الوصول إلى حد الفحص؛ قد تكون النتائج غير مكتملة</string>
+    <string name="items_found">العناصر: %1$d</string>
+    <string name="clear_app_cache">مسح ذاكرة التخزين المؤقت للتطبيق</string>
     <string name="one_click_clean">تنظيف بنقرة واحدة</string>
     <string name="removable">قابل للإزالة</string>
     <string name="cache">ذاكرة التخزين المؤقت</string>
     <string name="ad_files">ملفات الإعلانات</string>
-    <string name="temporary_files">الملفات المؤقتة</string>
-    <string name="obsolete_apk_files">ملفات APK القديمة</string>
-    <string name="residual_files">الملفات المتبقية</string>
-    <string name="empty_files">الملفات الفارغة</string>
+    <string name="temporary_files">ملفات مؤقتة</string>
+    <string name="obsolete_apk_files">ملفات APK قديمة</string>
+    <string name="residual_files">ملفات متبقية</string>
+    <string name="empty_files">ملفات فارغة</string>
     <string name="remove_more">إزالة المزيد</string>
-    <string name="no_junk">لا توجد خردة</string>
-    <string name="remove_size">إزالة 118.8 ميجابايت</string>
-    <string name="clean_complete_message">تمت إزالة 118.8 ميجابايت</string>
+    <string name="no_junk">جهازك نظيف</string>
+    <string name="remove_size">إزالة 118.8 MB</string>
+    <string name="clean_complete_message">تمت إزالة 118.8 MB</string>
+    <string name="clean_success_page_title">نتيجة التنظيف</string>
+    <string name="clean_success_title">تم التنظيف بنجاح</string>
+    <string name="clean_success_message">أصبح جهازك الآن أنظف وأخف.</string>
+    <string name="clean_success_freed">تم تحرير مساحة</string>
+    <string name="clean_success_files">تمت إزالة %1$d ملف</string>
+    <string name="clean_success_more_tools">متابعة التنظيف</string>
+    <string name="clean_success_experience">أنت جاهز لتجربة جديدة وممتعة!</string>
+    <string name="clean_success_notification_hint">استمر في استخدام منظف الإشعارات لمزيد من التحسين.</string>
+    <string name="try_now">جرّب الآن</string>
+    <string name="clean_success_big_file_hint">اعثر على الملفات الكبيرة التي تشغل مساحة</string>
+    <string name="clean_success_screenshot_hint">احذف لقطات الشاشة التي لم تعد بحاجة إليها</string>
+    <string name="clean_success_duplicate_hint">حرر مساحة من الصور المتشابهة</string>
+    <string name="done">تم</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">محدد</string>
     <string name="remove_selected_size">إزالة %1$s</string>
-    <string name="clean_confirm_title">هل تريد تنظيف الملفات المحددة ؟</string>
-    <string name="clean_confirm_message">هل تريد حذف ملفات %1$d وإصدار ما يصل إلى %2$s ؟</string>
-    <string name="clean_result_message">تم حذف ملفات %1$d، تم إصدار %2$s، فشل %3$d</string>
+    <string name="clean_confirm_title">تنظيف الملفات المحددة؟</string>
+    <string name="clean_confirm_message">المحدد: %1$d · المساحة التي سيتم تحريرها: %2$s. الحذف الآن؟</string>
+    <string name="clean_result_message">تم الحذف: %1$d · تم تحرير: %2$s · فشل: %3$d</string>
     <string name="allow_permission">السماح بالإذن</string>
-    <string name="network_traffic_permission_title">عرض حركة مرور الشبكة</string>
-    <string name="network_traffic_permission_text">يتيح لك السماح بذلك عرض اتجاهات الاستخدام اليومي وتصنيفات بيانات التطبيق لتوفير أكثر ذكاءً.</string>
-    <string name="app_manager_permission_title">منح الوصول إلى بيانات استخدام التطبيق للتحقق</string>
-    <string name="app_manager_permission_text">يتيح لك السماح بذلك عرض اتجاهات الاستخدام اليومي وتصنيفات بيانات التطبيق لتوفير أكثر ذكاءً.</string>
-    <string name="notification_permission_title">الوصول إلى إشعار المنحة</string>
-    <string name="notification_permission_text">قم بتمكين الوصول لفتح الميزات الكاملة.</string>
+    <string name="network_traffic_permission_title">عرض استخدام الشبكة</string>
+    <string name="network_traffic_permission_text">يتيح لك هذا عرض اتجاهات الاستخدام اليومية وتصنيفات بيانات التطبيقات لإدارة الاستهلاك بذكاء.</string>
+    <string name="app_manager_permission_title">منح الوصول إلى بيانات استخدام التطبيقات للفحص</string>
+    <string name="app_manager_permission_text">يتيح لك هذا عرض اتجاهات الاستخدام اليومية وتصنيفات بيانات التطبيقات لإدارة الاستهلاك بذكاء.</string>
+    <string name="usage_access_select_app">ابحث عن “%1$s” في القائمة وفعّل الوصول</string>
+    <string name="notification_permission_title">منح الوصول إلى الإشعارات</string>
+    <string name="notification_permission_text">فعّل الوصول لاستخدام جميع الميزات.</string>
     <string name="this_month">هذا الشهر</string>
     <string name="mobile_data">بيانات الجوال</string>
-    <string name="wifi">واي فاي</string>
+    <string name="wifi">WIFI</string>
     <string name="download_speed">سرعة التنزيل</string>
-    <string name="upload_speed">سرعة التحميل</string>
-    <string name="app_data_ranking">ترتيب بيانات التطبيق</string>
+    <string name="upload_speed">سرعة الرفع</string>
+    <string name="app_data_ranking">ترتيب استخدام بيانات التطبيقات</string>
     <string name="no_usage_data">لا توجد بيانات استخدام</string>
     <string name="notification_empty">سيتم حظر الإشعارات وإدراجها هنا</string>
     <string name="clean_all">تنظيف الكل</string>
     <string name="uninstall_unused_apps">إلغاء تثبيت التطبيقات غير المستخدمة</string>
     <string name="installed_apps">التطبيقات المثبتة</string>
+    <string name="sort_name">الاسم</string>
+    <string name="sort_installation">التثبيت</string>
+    <string name="sort_size">الحجم</string>
     <string name="last_used">آخر استخدام</string>
     <string name="last_used_value">آخر استخدام: %1$s</string>
-    <string name="never_used">لم يتم استخدامه مطلقًا</string>
+    <string name="never_used">لم يُستخدم مطلقًا</string>
     <string name="uninstall">إلغاء التثبيت</string>
-    <string name="select_apps_first">اختر تطبيقًا واحدًا على الأقل</string>
-    <string name="notification_access_unavailable">خدمة الإشعارات متصلة</string>
+    <string name="select_apps_first">حدد تطبيقًا واحدًا على الأقل</string>
+    <string name="notification_access_unavailable">جارٍ الاتصال بخدمة الإشعارات</string>
+    <string name="notif_title">الإشعارات</string>
+    <string name="notif_subtitle">نظّم الفوضى وقلّل المشتتات</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">حافظ على ترتيب إشعاراتك</string>
+    <string name="notif_hero_subtitle">اعرف مصدر الإشعارات واجمعها حسب التطبيق</string>
+    <string name="notif_intercept_title">حظر الإشعارات</string>
+    <string name="notif_intercept_desc">عند التشغيل، يتم اعتراض إشعارات التطبيقات الأخرى فورًا. ستظل التطبيقات التي تسمح بها أدناه تعرض الإشعارات.</string>
+    <string name="notif_allowed_apps_title">التطبيقات المسموح بها</string>
+    <string name="notif_allowed_apps_desc">اختر التطبيقات التي لا يزال بإمكانها إرسال إشعارات</string>
+    <string name="notif_allowed_apps_subtitle">يمكن لهذه التطبيقات الاستمرار في إرسال الإشعارات أثناء تشغيل الحظر</string>
+    <string name="notif_allowed_apps_search">البحث عن التطبيقات</string>
+    <string name="notif_allowed_apps_selected">تم السماح لـ %1$d تطبيق</string>
+    <string name="notif_allowed_apps_empty">لم يتم العثور على تطبيقات</string>
+    <string name="notif_blocked_list_title">الإشعارات المحظورة اليوم</string>
+    <string name="notif_blocked_list_empty">لا توجد إشعارات محظورة اليوم</string>
+    <string name="notif_clear_blocked">مسح جميع الإشعارات المحظورة</string>
+    <string name="notif_benefits_title">ما الذي ستحصل عليه</string>
+    <string name="notif_benefit_1">اعرف التطبيقات التي ترسل لك أكبر عدد من الإشعارات</string>
+    <string name="notif_benefit_2">تجميع الإشعارات تلقائيًا حسب التطبيق</string>
+    <string name="notif_benefit_3">امسح الإشعارات منخفضة القيمة بنقرة واحدة</string>
+    <string name="notif_top_apps_title">أكثر التطبيقات اليوم</string>
+    <string name="notif_no_data">لا توجد بيانات إشعارات بعد</string>
+    <string name="notif_count_fmt">%1$d إشعار</string>
+    <string name="notif_privacy_title">الخصوصية</string>
+    <string name="notif_privacy_1">تتم معالجة الإشعارات على الجهاز</string>
+    <string name="notif_privacy_2">لا يتم رفع بيانات الإشعارات</string>
+    <string name="notif_privacy_3">تبقى تفاصيل الإشعارات المحظورة على هذا الجهاز خلال اليوم الحالي</string>
+    <string name="notif_cleaning_title">جارٍ تنظيف الإشعارات…</string>
+    <string name="notif_cleaning_subtitle">يرجى الانتظار أثناء إزالة الإشعارات المحظورة</string>
+    <string name="notif_clear_success_title">تم بنجاح!</string>
+    <string name="notif_clear_success_subtitle">تم مسح الإشعارات المحظورة</string>
     <string name="uninstall_count">إلغاء التثبيت (%1$d)</string>
-    <string name="uninstall_cancelled">تم إلغاء إلغاء إلغاء التثبيت</string>
-    <string name="apps_found">تطبيقات %1$d</string>
+    <string name="uninstall_cancelled">تم إلغاء إلغاء التثبيت</string>
+    <string name="apps_found">%1$d تطبيق</string>
     <string name="apps_found_initial">0 تطبيق</string>
     <string name="picture">صورة</string>
     <string name="screenshot">لقطة شاشة</string>
@@ -118,31 +190,150 @@
     <string name="clean">تنظيف</string>
     <string name="clean_selected">تنظيف (%1$d)</string>
     <string name="large_files">ملفات كبيرة</string>
-    <string name="all_types">جميع الأنواع</string>
-    <string name="videos">الفيديوهات</string>
-    <string name="images">الصور</string>
-    <string name="audio">الصوت</string>
-    <string name="documents">المستندات</string>
+    <string name="all_types">كل الأنواع</string>
+    <string name="videos">مقاطع فيديو</string>
+    <string name="images">صور</string>
+    <string name="audio">صوت</string>
+    <string name="documents">مستندات</string>
+    <string name="archives">أرشيفات</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">أخرى</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">أسبوع واحد</string>
     <string name="one_month">شهر واحد</string>
+    <string name="three_months">3 أشهر</string>
     <string name="six_months">6 أشهر</string>
     <string name="one_year">سنة واحدة</string>
     <string name="all_time">كل الوقت</string>
-    <string name="scanning_picture">جارٍ مسح الصورة ضوئيًا...</string>
-    <string name="scanning_large_files">جارٍ مسح الملفات الكبيرة ضوئيًا...</string>
-    <string name="scanning_video">جارٍ مسح الفيديو ضوئيًا...</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">جارٍ فحص الصور...</string>
+    <string name="scanning_large_files">جارٍ فحص الملفات الكبيرة...</string>
+    <string name="scanning_video">جارٍ فحص الفيديو...</string>
     <string name="video_manage">إدارة الفيديو</string>
     <string name="no_picture_files_found">لم يتم العثور على ملفات صور</string>
     <string name="no_video_files_found">لم يتم العثور على ملفات فيديو</string>
     <string name="no_large_files_found">لم يتم العثور على ملفات كبيرة</string>
     <string name="no_files_select">يرجى تحديد الملفات المراد حذفها</string>
     <string name="delete">حذف</string>
-    <string name="delete_files_title">هل تريد حذف الملفات المحددة ؟</string>
-    <string name="delete_files_message">حذف ملفات %1$d بحجم إجمالي %2$s ؟</string>
-    <string name="files_deleted_result">تم حذف ملفات %1$d، تم إصدار %2$s، فشل %3$d</string>
+    <string name="delete_files_title">حذف الملفات المحددة؟</string>
+    <string name="delete_files_message">حذف %1$d ملف بحجم إجمالي %2$s؟</string>
+    <string name="files_deleted_result">تم حذف %1$d ملف، وتحرير %2$s، وفشل %3$d</string>
     <string name="storage_permission_required">إذن التخزين مطلوب</string>
-    <string name="storage_permission_explanation">هناك حاجة إلى الوصول إلى التخزين للعثور على الملفات التي تحددها وإزالتها. يمكنك إعادة المحاولة أو فتح إعدادات التطبيق.</string>
+    <string name="storage_permission_explanation">يلزم الوصول إلى التخزين للعثور على الملفات التي تحددها وإزالتها. يمكنك إعادة المحاولة أو فتح إعدادات التطبيق.</string>
     <string name="open_app_settings">فتح الإعدادات</string>
     <string name="try_again">حاول مرة أخرى</string>
-    <string name="files_and_size">ملفات %1$d / %2$s</string>
+    <string name="files_and_size">%1$d ملف / %2$s</string>
     <string name="go_back">رجوع</string>
+    <string name="running_apps_count">%1$d تطبيق يعمل في الخلفية</string>
+    <string name="close">إغلاق</string>
+    <string name="force_stop_title">إغلاق هذا التطبيق؟</string>
+    <string name="force_stop_explanation">في الشاشة التالية، اضغط على “فرض الإيقاف” لإغلاق التطبيق.</string>
+    <string name="continue_text">متابعة</string>
+    <string name="cancel">إلغاء</string>
+    <string name="no_running_apps">لا توجد تطبيقات خلفية ظاهرة</string>
+    <string name="scanning_device">جارٍ فحص الجهاز…</string>
+    <string name="scanning_devices_do_not_leave">جارٍ فحص الجهاز، يرجى عدم المغادرة</string>
+    <string name="scan_complete">اكتمل الفحص</string>
+    <string name="cpu_model_title">طراز CPU</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">الدقة</string>
+    <string name="link_speed">سرعة الاتصال</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">الجهاز</string>
+    <string name="android_version">إصدار Android</string>
+    <string name="cpu_model">طراز CPU</string>
+    <string name="memory">الذاكرة</string>
+    <string name="storage">التخزين</string>
+    <string name="screen_resolution">دقة الشاشة</string>
+    <string name="screen_density">كثافة الشاشة</string>
+    <string name="ip_address">عنوان IP</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">مدعوم</string>
+    <string name="not_supported">غير مدعوم</string>
+    <string name="unknown">غير معروف</string>
+    <string name="charging_status">حالة الشحن</string>
+    <string name="battery_health">صحة البطارية</string>
+    <string name="battery_type">نوع البطارية</string>
+    <string name="battery_capacity">سعة البطارية</string>
+    <string name="temperature">درجة الحرارة</string>
+    <string name="voltage">الجهد</string>
+    <string name="electric_current">التيار الكهربائي</string>
+    <string name="usable_time">وقت الاستخدام</string>
+    <string name="pay_attention_battery_health">انتبه إلى صحة البطارية..</string>
+    <string name="got_it">فهمت</string>
+    <string name="charging">جارٍ الشحن</string>
+    <string name="discharging">جارٍ التفريغ</string>
+    <string name="fully_charged">مشحونة بالكامل</string>
+    <string name="not_charging">لا يتم الشحن</string>
+    <string name="battery_health_good">جيدة</string>
+    <string name="battery_health_overheat">ارتفاع الحرارة</string>
+    <string name="battery_health_dead">تالفة</string>
+    <string name="battery_health_over_voltage">جهد زائد</string>
+    <string name="battery_health_cold">باردة</string>
+    <string name="network_test_ready">جاهز لاختبار شبكتك</string>
+    <string name="network_test_connecting">جارٍ التحقق من زمن الاستجابة…</string>
+    <string name="network_test_downloading">جارٍ اختبار سرعة التنزيل…</string>
+    <string name="network_test_uploading">جارٍ اختبار سرعة الرفع…</string>
+    <string name="network_test_complete">اكتمل اختبار الشبكة</string>
+    <string name="network_test_failed">تعذر إكمال اختبار الشبكة</string>
+    <string name="network_unavailable">الشبكة غير متاحة</string>
+    <string name="ping">زمن الاستجابة</string>
+    <string name="start_test">بدء الاختبار</string>
+    <string name="test_again">إعادة الاختبار</string>
+    <string name="testing">جارٍ الاختبار…</string>
+    <string name="network_test_data_note">يستخدم الاختبار الكامل حوالي 3 MB من البيانات.</string>
+    <string name="network_connection_value">الاتصال: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">بيانات الجوال</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">أخرى</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">تم التثبيت: %1$s</string>
+    <string name="app_manager_last_used">آخر استخدام: %1$s</string>
+    <string name="app_manager_last_used_today">اليوم</string>
+    <string name="app_manager_last_used_unknown">غير معروف</string>
+
 </resources>

@@ -152,7 +152,8 @@ class LanguageActivity : BaseActivity(R.layout.activity_language) {
     }
 
     private fun List<LanguageItem>.withSelectedFirst(selectedLocale: Locale): List<LanguageItem> {
-        val selectedIndex = indexOfFirst { it.locale.toLanguageTag() == selectedLocale.toLanguageTag() }
+        val selectedIndex =
+            indexOfFirst { it.locale.toLanguageTag() == selectedLocale.toLanguageTag() }
         if (selectedIndex <= 0) return this
         return listOf(this[selectedIndex]) + filterIndexed { index, _ -> index != selectedIndex }
     }

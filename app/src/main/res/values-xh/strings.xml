@@ -1,148 +1,339 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="loading">Iyalayisha...%1$d%%</string>
-    <string name="agree_to_battery">Ngokuqhubekisa uyavuma</string>
-    <string name="app_guide_tips">Nceda Qaphela: Uvavanyo lokuqala lunokuthatha ixesha elide njengoko lufuna iifayile zeenqanawa kwaye luhlalutya idatha yefowuni yakho.</string>
-    <string name="guide_complete">Igqityiwe</string>
-    <string name="guide_density">Ubunzima beScreen</string>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
+    <string name="loading">Kuyalayishwa...%1$d%%</string>
+    <string name="agree_to_battery">Ngokuqhubeka uyavuma ku</string>
+    <string name="app_guide_tips">"Nceda uqaphele: Iskena sokuqala singathatha ixesha elide kuba sikhangela iifayile ezingafunekiyo kwaye sihlalutya idatha yefowuni yakho."</string>
+    <string name="guide_complete">Kugqityiwe</string>
+    <string name="guide_density">Ubuninzi besikrini</string>
     <string name="guide_device">Isixhobo</string>
-    <string name="guide_engine">Ukuqalisa injini</string>
-    <string name="guide_loading">Iyalayisha…</string>
-    <string name="guide_screen">Isisombululo seScreen</string>
-    <string name="guide_start">Qala ukusebenzisa</string>
+    <string name="guide_engine">Kuqalwa injini</string>
+    <string name="guide_loading">Kuyalayishwa…</string>
+    <string name="guide_screen">Isisombululo sesikrini</string>
+    <string name="guide_start">Qalisa ukusebenzisa</string>
     <string name="guide_storage">Indawo yokugcina esetyenzisiweyo</string>
-    <string name="guide_system">Uguqulelo lwe-OS yeSystem</string>
-    <string name="privacy_policy">Umgaqo nkqubo wabucala</string>
-    <string name="never_miss_key_tip">Ungaze Uphoswe Ingcebiso Engundoqo</string>
+    <string name="guide_system">Inguqulelo ye-OS yesistim</string>
+    <string name="privacy_policy">Umgaqo-nkqubo wabucala</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">Ungaze uphoswe licebiso elibalulekileyo</string>
     <string name="clean_up">COCA</string>
-    <string name="network_traffic">ITrafikhi yeNethiwekhi</string>
-    <string name="notification_cleaner">Isicoci sesaziso</string>
-    <string name="app_manager">Umphathi we-APP</string>
-    <string name="screenshot_cleaner">Isicoci se-Screenshot</string>
-    <string name="big_file_cleaner">Isicoci seFayile esikhulu</string>
-    <string name="duplicate_photo_cleaner">Phinda kabini isicoci seefoto</string>
-    <string name="video_cleaner">Isicoci seVidiyo</string>
-    <string name="ram_status">Imeko ye-RAM</string>
+    <string name="quick_clean_tile_label">Ukucoca ngokukhawuleza</string>
+    <string name="quick_clean_tile_prompt_title">Yongeza Ukucoca ngokukhawuleza kwiisetingi ezikhawulezayo?</string>
+    <string name="quick_clean_tile_prompt_message">Yongeza indlela emfutshane kwipaneli yezaziso ukuze ufikelele ekucoceni ngokucofa kube kanye.</string>
+    <string name="add">Yongeza</string>
+    <string name="not_now">Hayi ngoku</string>
+    <string name="network_traffic">Ukuhamba kwedatha yenethiwekhi</string>
+    <string name="notification_cleaner">Isicoci\nsezaziso</string>
+    <string name="notification_cleaner_single">Isicoci sezaziso</string>
+    <string name="app_manager">Umphathi wee-app</string>
+    <string name="screenshot_cleaner">Isicoci seefoto zesikrini</string>
+    <string name="big_file_cleaner">Isicoci seefayile ezinkulu</string>
+    <string name="duplicate_photo_cleaner">Isicoci seefoto ezifanayo</string>
+    <string name="video_cleaner">Isicoci sevidiyo</string>
+    <string name="ram_status">Isimo se-RAM</string>
     <string name="ram_label">RAM</string>
-    <string name="scanning_app_background">Uvavanyo lwe-App kwimeko yangasemva</string>
-    <string name="ok">KULUNGILE</string>
-    <string name="device_scan">Uvavanyo lweQhoboshelo</string>
-    <string name="battery_info">Inkcazelo yeBhetri</string>
-    <string name="network_test">Uvavanyo lweNethiwekhi</string>
-    <string name="feature_coming_soon">Olu phawu luyeza kungekudala</string>
+    <string name="scanning_app_background">Kuskenwa ii-app ngasemva</string>
+    <string name="ok">Kulungile</string>
+    <string name="device_scan">Iskena sesixhobo</string>
+    <string name="battery_info">Ulwazi lwebhetri</string>
+    <string name="network_test">Uvavanyo lwenethiwekhi</string>
+    <string name="feature_coming_soon">Eli nqaku liza kufumaneka kungekudala</string>
     <string name="settings">Iisetingi</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Ibhetri</string>
+    <string name="notification_clean_up">Coca</string>
+    <string name="clean_cache_now">Coca i-cache ngoku</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Iifayile ezinkulu</string>
     <string name="home_photos">Ezifanayo</string>
     <string name="home_empty">Ezingenanto</string>
     <string name="home_notifications">Izaziso</string>
-    <string name="language_entry_content_description">Ulwimi</string>
-    <string name="language_title">Ulwimi</string>
-    <string name="language_english">IsiNgesi</string>
-    <string name="language_japanese">IsiJapan</string>
-    <string name="language_hindi">IsiHindi</string>
-    <string name="language_korean">IsiKorea</string>
-    <string name="language_spanish">IsiSpanish</string>
-    <string name="language_portuguese">IsiPhuthukezi</string>
-    <string name="language_german">IsiJamani</string>
-    <string name="language_french">IsiFrentshi</string>
-    <string name="language_turkish">IsiTurkey</string>
-    <string name="language_italian">IsiTaliyane</string>
-    <string name="language_afrikaans">IsiAfrikansi</string>
+    <string name="more_indicator" translatable="false">›››</string>
+    <string name="language_entry_content_description">Language</string>
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_german">Deutsch</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
-    <string name="language_zulu">IsiZulu</string>
-    <string name="language_russian">IsiRashiya</string>
-    <string name="language_ukrainian">IsiUkraine</string>
-    <string name="language_vietnamese">IsiVietnam</string>
-    <string name="language_indonesian">IsiIndonesia</string>
-    <string name="language_malay">IsiMalay</string>
-    <string name="language_thai">IsiThai</string>
-    <string name="language_filipino">IsiFilipino</string>
-    <string name="language_tagalog">IsiTagalog</string>
-    <string name="language_cebuano">IsiCebuano</string>
-    <string name="scanning">Iskena...</string>
-    <string name="scanned_files_progress">Kuskenwe iifayile ezi-%1$d</string>
-    <string name="clean_scan_summary">Kuskenwe iifayile ezi-%1$d · kujongwe iifolda ezi-%2$d</string>
-    <string name="scan_restricted_summary">Akufikelelwanga kwiifolda ezi-%1$d</string>
-    <string name="scan_incomplete">Umda wokuskena ufikelelwe; iziphumo zisenokungapheleli</string>
-    <string name="items_found">Izinto ezi-%1$d</string>
-    <string name="clear_app_cache">Coca i-cache yee-app</string>
-    <string name="one_click_clean">Cofa-kanye Coca</string>
-    <string name="removable">Iyasuswa</string>
+    <string name="language_zulu">isiZulu</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    <string name="language_malay">Bahasa Melayu</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_filipino">Pilipino</string>
+    <string name="language_tagalog">Tagalog</string>
+    <string name="language_cebuano">Pinulongan sa Cebu</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
+    <string name="scanning">Kuyaskenwa...</string>
+    <string name="scanned_files_progress">Iifayile eziskeniweyo: %1$d</string>
+    <string name="clean_scan_summary">Iifayile eziskeniweyo: %1$d · Iifolda ezihloliweyo: %2$d</string>
+    <string name="scan_restricted_summary">Iifolda ezingafumanekiyo: %1$d</string>
+    <string name="scan_incomplete">Kufikelelwe kumda weskena; iziphumo zisenokungagqibeki</string>
+    <string name="items_found">Izinto: %1$d</string>
+    <string name="clear_app_cache">Coca i-cache ye-app</string>
+    <string name="one_click_clean">Ukucoca ngokucofa kube kanye</string>
+    <string name="removable">Inokususwa</string>
     <string name="cache">Cache</string>
-    <string name="ad_files">Iifayile zentengiso</string>
+    <string name="ad_files">Iifayile zeentengiso</string>
     <string name="temporary_files">Iifayile zethutyana</string>
     <string name="obsolete_apk_files">Iifayile ze-APK eziphelelwe lixesha</string>
     <string name="residual_files">Iifayile ezishiyekileyo</string>
     <string name="empty_files">Iifayile ezingenanto</string>
     <string name="remove_more">Susa ngakumbi</string>
-    <string name="no_junk">Akukho junk</string>
+    <string name="no_junk">Isixhobo sakho sicocekile</string>
     <string name="remove_size">Susa 118.8 MB</string>
-    <string name="clean_complete_message">118.8 MB isusiwe</string>
-    <string name="selected">Ikhethiwe</string>
-    <string name="remove_selected_size">Susa i-%1$s</string>
+    <string name="clean_complete_message">Kususwe 118.8 MB</string>
+    <string name="clean_success_page_title">Iziphumo zokucoca</string>
+    <string name="clean_success_title">Kucocwe ngempumelelo</string>
+    <string name="clean_success_message">Isixhobo sakho ngoku sicocekile kwaye sikhaphukhaphu.</string>
+    <string name="clean_success_freed">Indawo ekhululiweyo</string>
+    <string name="clean_success_files">Kususwe iifayile eziyi-%1$d</string>
+    <string name="clean_success_more_tools">Qhubeka nokucoca</string>
+    <string name="clean_success_experience">Ukulungele amava amatsha namnandi!</string>
+    <string name="clean_success_notification_hint">Qhubeka usebenzisa Isicoci sezaziso ukuze uphucule ngakumbi.</string>
+    <string name="try_now">Zama ngoku</string>
+    <string name="clean_success_big_file_hint">Fumana iifayile ezinkulu ezithatha indawo</string>
+    <string name="clean_success_screenshot_hint">Coca iifoto zesikrini ongasazifuniyo</string>
+    <string name="clean_success_duplicate_hint">Khulula indawo kwiifoto ezifanayo</string>
+    <string name="done">Kugqityiwe</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
+    <string name="selected">Kukhethiwe</string>
+    <string name="remove_selected_size">Susa %1$s</string>
     <string name="clean_confirm_title">Coca iifayile ezikhethiweyo?</string>
-    <string name="clean_confirm_message">Cima iifayile ze-%1$d kwaye ukhulule ukuya kuthi ga kwi-%2$s?</string>
-    <string name="clean_result_message">Iifayile ze-%1$d ezicinyiweyo, zikhutshwe %2$s, %3$d aziphumelelanga</string>
+    <string name="clean_confirm_message">Kukhethiwe: %1$d · Indawo eza kukhululwa: %2$s. Cima ngoku?</string>
+    <string name="clean_result_message">Kucinyiwe: %1$d · Kukhululiwe: %2$s · Kusilele: %3$d</string>
     <string name="allow_permission">Vumela imvume</string>
-    <string name="network_traffic_permission_title">Jonga iTrafikhi yeNethiwekhi</string>
-    <string name="network_traffic_permission_text">Ukuvumela oku kukuvumela ukuba ujonge iindlela zokusetyenziswa kwemihla ngemihla kunye nomgangatho wedatha ye-app ukugcina ubukrelekrele.</string>
-    <string name="app_manager_permission_title">Nika usetyenziso lwedatha yokufikelela kwidatha ukujonga</string>
-    <string name="app_manager_permission_text">Ukuvumela oku kukuvumela ukuba ujonge iindlela zokusetyenziswa kwemihla ngemihla kunye nomgangatho wedatha ye-app ukugcina ubukrelekrele.</string>
-    <string name="notification_permission_title">UFikelelo lweSaziso seSibonelelo</string>
-    <string name="notification_permission_text">Vumela ukufikelela ukuze uvule iimpawu ezipheleleyo.</string>
+    <string name="network_traffic_permission_title">Jonga ukuhamba kwedatha yenethiwekhi</string>
+    <string name="network_traffic_permission_text">Ukuvumela oku kukwenza ubone iindlela zokusetyenziswa kwemihla ngemihla kunye noluhlu lwedatha yee-app ukuze wonge ngobulumko ngakumbi.</string>
+    <string name="app_manager_permission_title">Nika ukufikelela kwidatha yokusetyenziswa kwe-app ukuze kuhlolwe</string>
+    <string name="app_manager_permission_text">Ukuvumela oku kukwenza ubone iindlela zokusetyenziswa kwemihla ngemihla kunye noluhlu lwedatha yee-app ukuze wonge ngobulumko ngakumbi.</string>
+    <string name="usage_access_select_app">Fumana “%1$s” kuluhlu uze uvule ukufikelela</string>
+    <string name="notification_permission_title">Nika ukufikelela kwizaziso</string>
+    <string name="notification_permission_text">Vula ukufikelela ukuze usebenzise zonke iimpawu.</string>
     <string name="this_month">Le Nyanga</string>
     <string name="mobile_data">Idatha yeselula</string>
-    <string name="wifi">I-WIFI</string>
-    <string name="download_speed">Khuphela isantya</string>
-    <string name="upload_speed">Layisha isantya</string>
-    <string name="app_data_ranking">Uluhlu lwedatha ye-App</string>
+    <string name="wifi">WIFI</string>
+    <string name="download_speed">Isantya sokukhuphela</string>
+    <string name="upload_speed">Isantya sokulayisha</string>
+    <string name="app_data_ranking">Uluhlu lwedatha yee-app</string>
     <string name="no_usage_data">Akukho datha yokusetyenziswa</string>
-    <string name="notification_empty">Izaziso ziya kuvalwa kwaye zidweliswe apha</string>
-    <string name="clean_all">Coca Konke</string>
-    <string name="uninstall_unused_apps">Khupha usetyenziso olungasetyenziswanga</string>
-    <string name="installed_apps">Usetyenziso olufakiweyo</string>
-    <string name="last_used">IGqibele Ukusetyenziswa</string>
+    <string name="notification_empty">Izaziso ziya kuvalwa zize zidweliswe apha</string>
+    <string name="clean_all">Coca konke</string>
+    <string name="uninstall_unused_apps">Khupha ii-app ezingasetyenziswayo</string>
+    <string name="installed_apps">Ii-app ezifakiweyo</string>
+    <string name="sort_name">Igama</string>
+    <string name="sort_installation">Ufakelo</string>
+    <string name="sort_size">Ubungakanani</string>
+    <string name="last_used">Igqityelwe ukusetyenziswa</string>
     <string name="last_used_value">Igqityelwe ukusetyenziswa: %1$s</string>
-    <string name="never_used">Zange isetyenziswe</string>
-    <string name="uninstall">Khipha</string>
+    <string name="never_used">Ayikaze isetyenziswe</string>
+    <string name="uninstall">Khupha</string>
     <string name="select_apps_first">Khetha ubuncinane i-app enye</string>
-    <string name="notification_access_unavailable">Inkonzo yesaziso iyaxhuma</string>
-    <string name="uninstall_count">Khipha (%1$d)</string>
-    <string name="uninstall_cancelled">Ukukhutshwa kurhoxisiwe</string>
-    <string name="apps_found">Iinkqubo ze-%1$d</string>
-    <string name="apps_found_initial">0 usetyenziso</string>
+    <string name="notification_access_unavailable">Inkonzo yezaziso iyadibanisa</string>
+    <string name="notif_title">Izaziso</string>
+    <string name="notif_subtitle">Lawula ingxolo uze unciphise ukuphazamiseka</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">Gcina izaziso zakho zilungelelanisiwe</string>
+    <string name="notif_hero_subtitle">Bona apho izaziso zivela khona uze uzidibanise ngokwe-app</string>
+    <string name="notif_intercept_title">Vala izaziso</string>
+    <string name="notif_intercept_desc">Xa kuvuliwe, izaziso ezivela kwezinye ii-app ziyabanjwa ngoko nangoko. Ii-app ozivumelayo ngezantsi ziya kuqhubeka zibonisa izaziso.</string>
+    <string name="notif_allowed_apps_title">Ii-app ezivumelekileyo</string>
+    <string name="notif_allowed_apps_desc">Khetha ii-app ezisenokukwazisa</string>
+    <string name="notif_allowed_apps_subtitle">Ezi app zisengathumela izaziso ngelixa ukuvala kuvuliwe</string>
+    <string name="notif_allowed_apps_search">Khangela ii-app</string>
+    <string name="notif_allowed_apps_selected">Kuvunyelwe ii-app eziyi-%1$d</string>
+    <string name="notif_allowed_apps_empty">Akukho app ifunyenweyo</string>
+    <string name="notif_blocked_list_title">Izaziso ezivaliweyo namhlanje</string>
+    <string name="notif_blocked_list_empty">Akukho zaziso zivaliweyo namhlanje</string>
+    <string name="notif_clear_blocked">Coca zonke izaziso ezivaliweyo</string>
+    <string name="notif_benefits_title">Oza kukufumana</string>
+    <string name="notif_benefit_1">Bona ukuba zeziphi ii-app ezikwazisa kakhulu</string>
+    <string name="notif_benefit_2">Dibanisa izaziso ngokuzenzekelayo ngokwe-app</string>
+    <string name="notif_benefit_3">Coca izaziso ezingabalulekanga ngokucofa kube kanye</string>
+    <string name="notif_top_apps_title">Ii-app eziphezulu namhlanje</string>
+    <string name="notif_no_data">Akukho datha yezaziso okwangoku</string>
+    <string name="notif_count_fmt">Izaziso eziyi-%1$d</string>
+    <string name="notif_privacy_title">Ubumfihlo</string>
+    <string name="notif_privacy_1">Izaziso zilungiswa kwisixhobo</string>
+    <string name="notif_privacy_2">Akukho datha yezaziso ilayishwayo</string>
+    <string name="notif_privacy_3">Iinkcukacha zezaziso ezivaliweyo zihlala kwesi sixhobo ngolu suku kuphela</string>
+    <string name="notif_cleaning_title">Kucocwa izaziso…</string>
+    <string name="notif_cleaning_subtitle">Nceda ulinde ngelixa kususwa izaziso ezivaliweyo</string>
+    <string name="notif_clear_success_title">Impumelelo!</string>
+    <string name="notif_clear_success_subtitle">Izaziso ezivaliweyo zicociwe</string>
+    <string name="uninstall_count">Khupha (%1$d)</string>
+    <string name="uninstall_cancelled">Ukukhupha kurhoxisiwe</string>
+    <string name="apps_found">Ii-app eziyi-%1$d</string>
+    <string name="apps_found_initial">0 ii-app</string>
     <string name="picture">Umfanekiso</string>
-    <string name="screenshot">Umfanekiso wekhusi</string>
-    <string name="others">Abanye</string>
-    <string name="all">Konke</string>
+    <string name="screenshot">Ifoto yesikrini</string>
+    <string name="others">Ezinye</string>
+    <string name="all">Zonke</string>
     <string name="clean">Coca</string>
     <string name="clean_selected">Coca (%1$d)</string>
     <string name="large_files">Iifayile ezinkulu</string>
     <string name="all_types">Zonke iintlobo</string>
     <string name="videos">Iividiyo</string>
     <string name="images">Imifanekiso</string>
-    <string name="audio">Umsindo</string>
+    <string name="audio">Isandi</string>
     <string name="documents">Amaxwebhu</string>
-    <string name="one_month">Inyanga eyi-1</string>
+    <string name="archives">Oovimba</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">Ezinye</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">Iveki e-1</string>
+    <string name="one_month">Inyanga e-1</string>
+    <string name="three_months">Iinyanga ezi-3</string>
     <string name="six_months">Iinyanga ezi-6</string>
-    <string name="one_year">1 unyaka</string>
-    <string name="all_time">Ngalo lonke ixesha</string>
-    <string name="scanning_picture">Iskena umfanekiso...</string>
-    <string name="scanning_large_files">Iskena iiFayile ezinkulu...</string>
-    <string name="scanning_video">Iskena ividiyo...</string>
-    <string name="video_manage">Ulawulo lweVidiyo</string>
-    <string name="no_picture_files_found">Akukho zifayile zemifanekiso zifunyenweyo</string>
-    <string name="no_video_files_found">Akukho zifayile zevidiyo zifunyenweyo</string>
-    <string name="no_large_files_found">Akukho ziFayile ziKhulu zifunyenweyo</string>
+    <string name="one_year">Unyaka o-1</string>
+    <string name="all_time">Lonke ixesha</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">Kuskenwa imifanekiso...</string>
+    <string name="scanning_large_files">Kuskenwa iifayile ezinkulu...</string>
+    <string name="scanning_video">Kuskenwa ividiyo...</string>
+    <string name="video_manage">Lawula ividiyo</string>
+    <string name="no_picture_files_found">Akukho fayile yomfanekiso ifunyenweyo</string>
+    <string name="no_video_files_found">Akukho fayile yevidiyo ifunyenweyo</string>
+    <string name="no_large_files_found">Akukho fayile inkulu ifunyenweyo</string>
     <string name="no_files_select">Nceda ukhethe iifayile oza kuzicima</string>
     <string name="delete">Cima</string>
     <string name="delete_files_title">Cima iifayile ezikhethiweyo?</string>
-    <string name="delete_files_message">Cima iifayile ze-%1$d ezinobungakanani obupheleleyo be-%2$s?</string>
-    <string name="files_deleted_result">Iifayile ze-%1$d ezicinyiweyo, zikhutshwe %2$s, %3$d aziphumelelanga</string>
-    <string name="storage_permission_required">Imvume yokugcina iyafuneka</string>
-    <string name="storage_permission_explanation">Ufikelelo kugcino luyafuneka ukufumana kunye nokususa iifayile ozikhethileyo. Ungaphinda uzame okanye uvule useto lwe-app.</string>
-    <string name="open_app_settings">Vula useto</string>
+    <string name="delete_files_message">Cima iifayile eziyi-%1$d ezinobungakanani obupheleleyo obuyi-%2$s?</string>
+    <string name="files_deleted_result">Kucinywe iifayile eziyi-%1$d, kukhululwe %2$s, kusilele %3$d</string>
+    <string name="storage_permission_required">Imvume yendawo yokugcina iyafuneka</string>
+    <string name="storage_permission_explanation">Ukufikelela kwindawo yokugcina kuyafuneka ukuze kufunyanwe kwaye kususwe iifayile ozikhethayo. Ungazama kwakhona okanye uvule iisetingi ze-app.</string>
+    <string name="open_app_settings">Vula iisetingi</string>
     <string name="try_again">Zama kwakhona</string>
-    <string name="files_and_size">%1$d iifayile / %2$s</string>
-    <string name="go_back">Emva</string>
+    <string name="files_and_size">Iifayile eziyi-%1$d / %2$s</string>
+    <string name="go_back">Buyela</string>
+    <string name="running_apps_count">Ii-app eziyi-%1$d zisebenza ngasemva</string>
+    <string name="close">Vala</string>
+    <string name="force_stop_title">Vala le app?</string>
+    <string name="force_stop_explanation">Kwisikrini esilandelayo, cofa “Force stop” ukuze uvale i-app.</string>
+    <string name="continue_text">Qhubeka</string>
+    <string name="cancel">Rhoxisa</string>
+    <string name="no_running_apps">Akukho app yangasemva ebonakalayo</string>
+    <string name="scanning_device">Kuskenwa isixhobo…</string>
+    <string name="scanning_devices_do_not_leave">Kuskenwa isixhobo, nceda ungaphumi</string>
+    <string name="scan_complete">Iskena sigqityiwe</string>
+    <string name="cpu_model_title">Imodeli ye-CPU</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Isisombululo</string>
+    <string name="link_speed">Isantya sonxibelelwano</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Isixhobo</string>
+    <string name="android_version">Inguqulelo ye-Android</string>
+    <string name="cpu_model">Imodeli ye-CPU</string>
+    <string name="memory">Imemori</string>
+    <string name="storage">Indawo yokugcina</string>
+    <string name="screen_resolution">Isisombululo sesikrini</string>
+    <string name="screen_density">Ubuninzi besikrini</string>
+    <string name="ip_address">Idilesi ye-IP</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Iyaxhaswa</string>
+    <string name="not_supported">Ayixhaswa</string>
+    <string name="unknown">Ayaziwa</string>
+    <string name="charging_status">Isimo sokutshaja</string>
+    <string name="battery_health">Impilo</string>
+    <string name="battery_type">Uhlobo lwebhetri</string>
+    <string name="battery_capacity">Umthamo webhetri</string>
+    <string name="temperature">Iqondo lobushushu</string>
+    <string name="voltage">Ivoltheji</string>
+    <string name="electric_current">Umbane wangoku</string>
+    <string name="usable_time">Ixesha elinokusetyenziswa</string>
+    <string name="pay_attention_battery_health">Nika ingqalelo kwimpilo yebhetri..</string>
+    <string name="got_it">Ndiqondile</string>
+    <string name="charging">Iyashaja</string>
+    <string name="discharging">Iyakhupha amandla</string>
+    <string name="fully_charged">Ishajwe ngokupheleleyo</string>
+    <string name="not_charging">Ayishaji</string>
+    <string name="battery_health_good">Ilungile</string>
+    <string name="battery_health_overheat">Ishushu kakhulu</string>
+    <string name="battery_health_dead">Ifa</string>
+    <string name="battery_health_over_voltage">Ivoltheji ephezulu kakhulu</string>
+    <string name="battery_health_cold">Iyabanda</string>
+    <string name="network_test_ready">Ilungele ukuvavanya inethiwekhi yakho</string>
+    <string name="network_test_connecting">Kujongwa ixesha lokulibaziseka…</string>
+    <string name="network_test_downloading">Kuvavanywa isantya sokukhuphela…</string>
+    <string name="network_test_uploading">Kuvavanywa isantya sokulayisha…</string>
+    <string name="network_test_complete">Uvavanyo lwenethiwekhi lugqityiwe</string>
+    <string name="network_test_failed">Ayikwazanga ukugqiba uvavanyo lwenethiwekhi</string>
+    <string name="network_unavailable">Inethiwekhi ayifumaneki</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Qalisa uvavanyo</string>
+    <string name="test_again">Vavanya kwakhona</string>
+    <string name="testing">Kuyavavanywa…</string>
+    <string name="network_test_data_note">Uvavanyo olupheleleyo lusebenzisa malunga ne-3 MB yedatha.</string>
+    <string name="network_connection_value">Uqhagamshelo: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Idatha yeselula</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Enye</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">Ifakiwe: %1$s</string>
+    <string name="app_manager_last_used">Igqityelwe ukusetyenziswa: %1$s</string>
+    <string name="app_manager_last_used_today">Namhlanje</string>
+    <string name="app_manager_last_used_unknown">ayaziwa</string>
+
 </resources>

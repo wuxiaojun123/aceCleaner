@@ -1,93 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Yükleniyor...%1$d%%</string>
-    <string name="agree_to_battery">Devam ederek kabul ediyorsunuz</string>
-    <string name="app_guide_tips">Lütfen dikkat: Ön belleği temizleme ve telefon verilerinizi analiz etme işlemi nedeniyle ilk tarama daha uzun sürebilir.</string>
+    <string name="agree_to_battery">Devam ederek şunları kabul etmiş olursunuz:</string>
+    <string name="app_guide_tips">"Lütfen dikkat: İlk tarama, gereksiz dosyaları aradığı ve telefonunuzdaki verileri analiz ettiği için daha uzun sürebilir."</string>
     <string name="guide_complete">Tamamlandı</string>
     <string name="guide_density">Ekran Yoğunluğu</string>
     <string name="guide_device">Cihaz</string>
-    <string name="guide_engine">Motor Başlatılıyor</string>
+    <string name="guide_engine">Motor başlatılıyor</string>
     <string name="guide_loading">Yükleniyor…</string>
     <string name="guide_screen">Ekran Çözünürlüğü</string>
-    <string name="guide_start">Kullanmaya Başla</string>
-    <string name="guide_storage">Kullanılan Depolama</string>
-    <string name="guide_system">Sistem Sürümü</string>
+    <string name="guide_start">Kullanmaya başla</string>
+    <string name="guide_storage">Kullanılan depolama</string>
+    <string name="guide_system">Sistem OS sürümü</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
-    <string name="never_miss_key_tip">Hiçbir Önemli İpucunu Kaçırmayın</string>
-    <string name="clean_up">TEMİZLEME</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">Önemli Bir İpucunu Kaçırmayın</string>
+    <string name="clean_up">TEMİZLE</string>
+    <string name="quick_clean_tile_label">Hızlı Temizleme</string>
+    <string name="quick_clean_tile_prompt_title">Hızlı Temizleme Hızlı Ayarlar\'a eklensin mi?</string>
+    <string name="quick_clean_tile_prompt_message">Tek dokunuşla Temizleme\'ye erişmek için bildirim panelinize bir kısayol ekleyin.</string>
+    <string name="add">Ekle</string>
+    <string name="not_now">Şimdi değil</string>
     <string name="network_traffic">Ağ Trafiği</string>
-    <string name="notification_cleaner">Bildirim Temizleyici</string>
+    <string name="notification_cleaner">Bildirim\nTemizleyici</string>
+    <string name="notification_cleaner_single">Bildirim Temizleyici</string>
     <string name="app_manager">Uygulama Yöneticisi</string>
     <string name="screenshot_cleaner">Ekran Görüntüsü Temizleyici</string>
     <string name="big_file_cleaner">Büyük Dosya Temizleyici</string>
-    <string name="duplicate_photo_cleaner">Yinelenen Fotoğraf Temizleyici</string>
+    <string name="duplicate_photo_cleaner">Benzer Fotoğraf Temizleyici</string>
     <string name="video_cleaner">Video Temizleyici</string>
     <string name="ram_status">RAM Durumu</string>
     <string name="ram_label">RAM</string>
-    <string name="scanning_app_background">Arka planda uygulama taranıyor</string>
-    <string name="ok">TAMAM</string>
-    <string name="device_scan">Cihaz Tara</string>
+    <string name="scanning_app_background">Arka plandaki uygulamalar taranıyor</string>
+    <string name="ok">Tamam</string>
+    <string name="device_scan">Cihaz Taraması</string>
     <string name="battery_info">Pil Bilgisi</string>
     <string name="network_test">Ağ Testi</string>
-    <string name="feature_coming_soon">Bu özellik yakında geliyor</string>
+    <string name="feature_coming_soon">Bu özellik yakında kullanıma sunulacak</string>
     <string name="settings">Ayarlar</string>
-    <string name="home_large_files">Büyük dosyalar</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Pil</string>
+    <string name="notification_clean_up">Temizle</string>
+    <string name="clean_cache_now">Önbelleği Şimdi Temizle</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
+    <string name="home_large_files">Büyük Dosyalar</string>
     <string name="home_photos">Benzer</string>
-    <string name="home_empty">Boş</string>
+    <string name="home_empty">Boşlar</string>
     <string name="home_notifications">Bildirimler</string>
-    <string name="language_entry_content_description">Dil</string>
-    <string name="language_title">Dil</string>
-    <string name="language_english">İngilizce</string>
-    <string name="language_japanese">Japonca</string>
-    <string name="language_hindi">Hintçe</string>
-    <string name="language_korean">Korece</string>
-    <string name="language_spanish">İspanyolca</string>
-    <string name="language_portuguese">Portekizce</string>
-    <string name="language_german">Almanca</string>
-    <string name="language_french">Fransızca</string>
-    <string name="language_turkish">Türkçe</string>
-    <string name="language_italian">İtalyanca</string>
-    <string name="language_afrikaans">Afrikaanca</string>
-    <string name="language_xhosa">Xhosa</string>
-    <string name="language_zulu">Zulu</string>
-    <string name="language_russian">Rusça</string>
-    <string name="language_ukrainian">Ukraynaca</string>
-    <string name="language_vietnamese">Vietnamca</string>
-    <string name="language_indonesian">Endonezce</string>
-    <string name="language_malay">Malayca</string>
-    <string name="language_thai">Tayca</string>
-    <string name="language_filipino">Filipince</string>
-    <string name="language_tagalog">Tagalogca</string>
-    <string name="language_cebuano">Cebuano</string>
+    <string name="more_indicator" translatable="false">›››</string>
+    <string name="language_entry_content_description">Language</string>
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_german">Deutsch</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_afrikaans">Afrikaans</string>
+    <string name="language_xhosa">IsiXhosa</string>
+    <string name="language_zulu">isiZulu</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    <string name="language_malay">Bahasa Melayu</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_filipino">Pilipino</string>
+    <string name="language_tagalog">Tagalog</string>
+    <string name="language_cebuano">Pinulongan sa Cebu</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Taranıyor...</string>
-    <string name="scanned_files_progress">%1$d dosya tarandı</string>
-    <string name="clean_scan_summary">%1$d dosya tarandı · %2$d klasör kontrol edildi</string>
-    <string name="scan_restricted_summary">%1$d klasöre erişilemedi</string>
+    <string name="scanned_files_progress">Taranan dosyalar: %1$d</string>
+    <string name="clean_scan_summary">Taranan dosyalar: %1$d · Kontrol edilen klasörler: %2$d</string>
+    <string name="scan_restricted_summary">Erişilemeyen klasörler: %1$d</string>
     <string name="scan_incomplete">Tarama sınırına ulaşıldı; sonuçlar eksik olabilir</string>
-    <string name="items_found">%1$d öğe</string>
+    <string name="items_found">Öğeler: %1$d</string>
     <string name="clear_app_cache">Uygulama önbelleğini temizle</string>
-    <string name="one_click_clean">Tek Tıklamayla Temizleme</string>
-    <string name="removable">Çıkarılabilir</string>
+    <string name="one_click_clean">Tek Dokunuşla Temizleme</string>
+    <string name="removable">Kaldırılabilir</string>
     <string name="cache">Önbellek</string>
     <string name="ad_files">Reklam dosyaları</string>
     <string name="temporary_files">Geçici dosyalar</string>
     <string name="obsolete_apk_files">Eski APK dosyaları</string>
-    <string name="residual_files">Artık dosyalar</string>
+    <string name="residual_files">Kalıntı dosyalar</string>
     <string name="empty_files">Boş dosyalar</string>
-    <string name="remove_more">Daha fazlasını kaldır</string>
-    <string name="no_junk">Önemsiz yok</string>
-    <string name="remove_size">118,8 MB\'ı kaldır</string>
-    <string name="clean_complete_message">118,8 MB kaldırıldı</string>
+    <string name="remove_more">Daha fazla kaldır</string>
+    <string name="no_junk">Cihazınız temiz</string>
+    <string name="remove_size">118.8 MB kaldır</string>
+    <string name="clean_complete_message">118.8 MB kaldırıldı</string>
+    <string name="clean_success_page_title">Temizleme Sonucu</string>
+    <string name="clean_success_title">Başarıyla temizlendi</string>
+    <string name="clean_success_message">Cihazınız artık daha temiz ve hafif.</string>
+    <string name="clean_success_freed">Boşaltılan alan</string>
+    <string name="clean_success_files">%1$d dosya kaldırıldı</string>
+    <string name="clean_success_more_tools">Temizlemeye devam et</string>
+    <string name="clean_success_experience">Yeni ve heyecan verici bir deneyime hazırsınız!</string>
+    <string name="clean_success_notification_hint">Daha fazla optimizasyon için Bildirim Temizleyici\'yi kullanmaya devam edin.</string>
+    <string name="try_now">Şimdi Dene</string>
+    <string name="clean_success_big_file_hint">Yer kaplayan büyük dosyaları bulun</string>
+    <string name="clean_success_screenshot_hint">Artık ihtiyacınız olmayan ekran görüntülerini temizleyin</string>
+    <string name="clean_success_duplicate_hint">Benzer fotoğrafları temizleyerek yer açın</string>
+    <string name="done">Bitti</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Seçildi</string>
-    <string name="remove_selected_size">%1$s\'i kaldırın</string>
-    <string name="clean_confirm_title">Seçilen dosyalar temizlensin mi?</string>
-    <string name="clean_confirm_message">%1$d dosyaları silinip %2$s\'e kadar yayınlansın mı?</string>
-    <string name="clean_result_message">%1$d dosyaları silindi, %2$s yayınlandı, %3$d başarısız oldu</string>
-    <string name="allow_permission">İzne izin ver</string>
+    <string name="remove_selected_size">%1$s kaldır</string>
+    <string name="clean_confirm_title">Seçili dosyalar temizlensin mi?</string>
+    <string name="clean_confirm_message">Seçili: %1$d · Boşaltılacak alan: %2$s. Şimdi silinsin mi?</string>
+    <string name="clean_result_message">Silindi: %1$d · Boşaltıldı: %2$s · Başarısız: %3$d</string>
+    <string name="allow_permission">İzin ver</string>
     <string name="network_traffic_permission_title">Ağ Trafiğini Görüntüle</string>
-    <string name="network_traffic_permission_text">Buna izin vermek, daha akıllıca tasarruf etmek için günlük kullanım eğilimlerini ve uygulama veri sıralamalarını görüntülemenize olanak tanır.</string>
-    <string name="app_manager_permission_title">Kontrol etmek için uygulama kullanım verilerine erişim izni verin</string>
-    <string name="app_manager_permission_text">Buna izin vermek, daha akıllıca tasarruf etmek için günlük kullanım eğilimlerini ve uygulama veri sıralamalarını görüntülemenize olanak tanır.</string>
+    <string name="network_traffic_permission_text">Buna izin vermek, daha akıllı tasarruf için günlük kullanım eğilimlerini ve uygulama veri sıralamalarını görmenizi sağlar.</string>
+    <string name="app_manager_permission_title">Kontrol etmek için uygulama kullanım verilerine erişim ver</string>
+    <string name="app_manager_permission_text">Buna izin vermek, daha akıllı tasarruf için günlük kullanım eğilimlerini ve uygulama veri sıralamalarını görmenizi sağlar.</string>
+    <string name="usage_access_select_app">Listede “%1$s” uygulamasını bulun ve erişimi açın</string>
     <string name="notification_permission_title">Bildirim Erişimi Ver</string>
     <string name="notification_permission_text">Tüm özelliklerin kilidini açmak için erişimi etkinleştirin.</string>
     <string name="this_month">Bu Ay</string>
@@ -95,54 +133,207 @@
     <string name="wifi">WIFI</string>
     <string name="download_speed">İndirme Hızı</string>
     <string name="upload_speed">Yükleme Hızı</string>
-    <string name="app_data_ranking">Uygulama verileri sıralaması</string>
+    <string name="app_data_ranking">Uygulama veri sıralaması</string>
     <string name="no_usage_data">Kullanım verisi yok</string>
     <string name="notification_empty">Bildirimler engellenecek ve burada listelenecek</string>
-    <string name="clean_all">Hepsini Temizle</string>
-    <string name="uninstall_unused_apps">Kullanılmayan uygulamaları kaldırın</string>
+    <string name="clean_all">Tümünü Temizle</string>
+    <string name="uninstall_unused_apps">Kullanılmayan uygulamaları kaldır</string>
     <string name="installed_apps">Yüklü uygulamalar</string>
-    <string name="last_used">Son Kullanılan</string>
-    <string name="last_used_value">Son kullanılan: %1$s</string>
+    <string name="sort_name">Ad</string>
+    <string name="sort_installation">Yükleme</string>
+    <string name="sort_size">Boyut</string>
+    <string name="last_used">Son Kullanım</string>
+    <string name="last_used_value">Son kullanım: %1$s</string>
     <string name="never_used">Hiç kullanılmadı</string>
     <string name="uninstall">Kaldır</string>
     <string name="select_apps_first">En az bir uygulama seçin</string>
-    <string name="notification_access_unavailable">Bildirim hizmeti bağlanıyor</string>
-    <string name="uninstall_count">Kaldırma (%1$d)</string>
-    <string name="uninstall_cancelled">Kaldırma işlemi iptal edildi</string>
-    <string name="apps_found">%1$d uygulamaları</string>
+    <string name="notification_access_unavailable">Bildirim hizmetine bağlanılıyor</string>
+    <string name="notif_title">Bildirimler</string>
+    <string name="notif_subtitle">Dağınıklığı yönetin ve dikkat dağıtıcıları azaltın</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">Bildirimlerinizi düzenli tutun</string>
+    <string name="notif_hero_subtitle">Bildirimlerin nereden geldiğini görün ve uygulamaya göre gruplayın</string>
+    <string name="notif_intercept_title">Bildirimleri engelle</string>
+    <string name="notif_intercept_desc">Açık olduğunda, diğer uygulamalardan gelen bildirimler anında engellenir. Aşağıda izin verdiğiniz uygulamalar gösterilmeye devam eder.</string>
+    <string name="notif_allowed_apps_title">İzin verilen uygulamalar</string>
+    <string name="notif_allowed_apps_desc">Size bildirim göndermeye devam edebilecek uygulamaları seçin</string>
+    <string name="notif_allowed_apps_subtitle">Engelleme açıkken bu uygulamalar bildirim göndermeye devam edebilir</string>
+    <string name="notif_allowed_apps_search">Uygulamalarda ara</string>
+    <string name="notif_allowed_apps_selected">%1$d uygulamaya izin verildi</string>
+    <string name="notif_allowed_apps_empty">Uygulama bulunamadı</string>
+    <string name="notif_blocked_list_title">Bugün engellenen bildirimler</string>
+    <string name="notif_blocked_list_empty">Bugün engellenen bildirim yok</string>
+    <string name="notif_clear_blocked">Engellenen tüm bildirimleri temizle</string>
+    <string name="notif_benefits_title">Neler elde edeceksiniz</string>
+    <string name="notif_benefit_1">Hangi uygulamaların size en çok bildirim gönderdiğini görün</string>
+    <string name="notif_benefit_2">Bildirimleri uygulamaya göre otomatik grupla</string>
+    <string name="notif_benefit_3">Düşük değerli bildirimleri tek dokunuşla temizleyin</string>
+    <string name="notif_top_apps_title">Bugünün en iyi uygulamaları</string>
+    <string name="notif_no_data">Henüz bildirim verisi yok</string>
+    <string name="notif_count_fmt">%1$d bildirim</string>
+    <string name="notif_privacy_title">Gizlilik</string>
+    <string name="notif_privacy_1">Bildirimler cihazda işlenir</string>
+    <string name="notif_privacy_2">Hiçbir bildirim verisi yüklenmez</string>
+    <string name="notif_privacy_3">Engellenen bildirim ayrıntıları, geçerli gün boyunca bu cihazda kalır</string>
+    <string name="notif_cleaning_title">Bildirimler temizleniyor…</string>
+    <string name="notif_cleaning_subtitle">Engellenen bildirimler kaldırılırken lütfen bekleyin</string>
+    <string name="notif_clear_success_title">Başarılı!</string>
+    <string name="notif_clear_success_subtitle">Engellenen bildirimler temizlendi</string>
+    <string name="uninstall_count">Kaldır (%1$d)</string>
+    <string name="uninstall_cancelled">Kaldırma iptal edildi</string>
+    <string name="apps_found">%1$d uygulama</string>
     <string name="apps_found_initial">0 uygulama</string>
     <string name="picture">Resim</string>
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="others">Diğerleri</string>
-    <string name="all">Hepsi</string>
-    <string name="clean">Temiz</string>
-    <string name="clean_selected">Temiz (%1$d)</string>
+    <string name="all">Tümü</string>
+    <string name="clean">Temizle</string>
+    <string name="clean_selected">Temizle (%1$d)</string>
     <string name="large_files">Büyük Dosyalar</string>
     <string name="all_types">Tüm türler</string>
     <string name="videos">Videolar</string>
     <string name="images">Görseller</string>
     <string name="audio">Ses</string>
     <string name="documents">Belgeler</string>
+    <string name="archives">Arşivler</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">Diğerleri</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">1 hafta</string>
     <string name="one_month">1 ay</string>
+    <string name="three_months">3 ay</string>
     <string name="six_months">6 ay</string>
     <string name="one_year">1 yıl</string>
     <string name="all_time">Tüm zamanlar</string>
-    <string name="scanning_picture">Resim taranıyor...</string>
-    <string name="scanning_large_files">Büyük Dosyalar Taranıyor...</string>
-    <string name="scanning_video">Video taranıyor...</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">Resimler taranıyor...</string>
+    <string name="scanning_large_files">Büyük Dosyalar taranıyor...</string>
+    <string name="scanning_video">Videolar taranıyor...</string>
     <string name="video_manage">Video Yönetimi</string>
     <string name="no_picture_files_found">Resim dosyası bulunamadı</string>
-    <string name="no_video_files_found">Hiçbir video dosyası bulunamadı</string>
+    <string name="no_video_files_found">Video dosyası bulunamadı</string>
     <string name="no_large_files_found">Büyük Dosya bulunamadı</string>
     <string name="no_files_select">Lütfen silinecek dosyaları seçin</string>
     <string name="delete">Sil</string>
-    <string name="delete_files_title">Seçilen dosyalar silinsin mi?</string>
-    <string name="delete_files_message">Toplam boyutu %2$s olan %1$d dosyaları silinsin mi?</string>
-    <string name="files_deleted_result">%1$d dosyaları silindi, %2$s yayınlandı, %3$d başarısız oldu</string>
+    <string name="delete_files_title">Seçili dosyalar silinsin mi?</string>
+    <string name="delete_files_message">Toplam boyutu %2$s olan %1$d dosya silinsin mi?</string>
+    <string name="files_deleted_result">%1$d dosya silindi, %2$s boşaltıldı, %3$d başarısız</string>
     <string name="storage_permission_required">Depolama izni gerekli</string>
-    <string name="storage_permission_explanation">Seçtiğiniz dosyaları bulmak ve kaldırmak için depolama erişimi gereklidir. Uygulama ayarlarını yeniden deneyebilir veya açabilirsiniz.</string>
+    <string name="storage_permission_explanation">Seçtiğiniz dosyaları bulup kaldırmak için depolama erişimi gerekir. Tekrar deneyebilir veya uygulama ayarlarını açabilirsiniz.</string>
     <string name="open_app_settings">Ayarları aç</string>
     <string name="try_again">Tekrar dene</string>
-    <string name="files_and_size">%1$d dosyaları / %2$s</string>
+    <string name="files_and_size">%1$d dosya / %2$s</string>
     <string name="go_back">Geri</string>
+    <string name="running_apps_count">%1$d uygulama arka planda çalışıyor</string>
+    <string name="close">Kapat</string>
+    <string name="force_stop_title">Bu uygulama kapatılsın mı?</string>
+    <string name="force_stop_explanation">Sonraki ekranda uygulamayı kapatmak için “Zorla durdur”a dokunun.</string>
+    <string name="continue_text">Devam et</string>
+    <string name="cancel">İptal</string>
+    <string name="no_running_apps">Görünür arka plan uygulaması yok</string>
+    <string name="scanning_device">Cihaz taranıyor…</string>
+    <string name="scanning_devices_do_not_leave">Cihaz taranıyor, lütfen ayrılmayın</string>
+    <string name="scan_complete">Tarama tamamlandı</string>
+    <string name="cpu_model_title">CPU Modeli</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Çözünürlük</string>
+    <string name="link_speed">Bağlantı Hızı</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Cihaz</string>
+    <string name="android_version">Android sürümü</string>
+    <string name="cpu_model">CPU modeli</string>
+    <string name="memory">Bellek</string>
+    <string name="storage">Depolama</string>
+    <string name="screen_resolution">Ekran çözünürlüğü</string>
+    <string name="screen_density">Ekran yoğunluğu</string>
+    <string name="ip_address">IP Adresi</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Destekleniyor</string>
+    <string name="not_supported">Desteklenmiyor</string>
+    <string name="unknown">Bilinmiyor</string>
+    <string name="charging_status">Şarj Durumu</string>
+    <string name="battery_health">Durum</string>
+    <string name="battery_type">Pil Türü</string>
+    <string name="battery_capacity">Pil Kapasitesi</string>
+    <string name="temperature">Sıcaklık</string>
+    <string name="voltage">Voltaj</string>
+    <string name="electric_current">Elektrik Akımı</string>
+    <string name="usable_time">Kullanılabilir Süre</string>
+    <string name="pay_attention_battery_health">Pil sağlığına dikkat edin..</string>
+    <string name="got_it">Anladım</string>
+    <string name="charging">Şarj oluyor</string>
+    <string name="discharging">Deşarj oluyor</string>
+    <string name="fully_charged">Tam şarj</string>
+    <string name="not_charging">Şarj olmuyor</string>
+    <string name="battery_health_good">İyi</string>
+    <string name="battery_health_overheat">Aşırı ısınma</string>
+    <string name="battery_health_dead">Bozuk</string>
+    <string name="battery_health_over_voltage">Aşırı voltaj</string>
+    <string name="battery_health_cold">Soğuk</string>
+    <string name="network_test_ready">Ağınızı test etmeye hazır</string>
+    <string name="network_test_connecting">Gecikme kontrol ediliyor…</string>
+    <string name="network_test_downloading">İndirme hızı test ediliyor…</string>
+    <string name="network_test_uploading">Yükleme hızı test ediliyor…</string>
+    <string name="network_test_complete">Ağ testi tamamlandı</string>
+    <string name="network_test_failed">Ağ testi tamamlanamadı</string>
+    <string name="network_unavailable">Ağ kullanılamıyor</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Testi Başlat</string>
+    <string name="test_again">Tekrar Test Et</string>
+    <string name="testing">Test ediliyor…</string>
+    <string name="network_test_data_note">Tam bir test yaklaşık 3 MB veri kullanır.</string>
+    <string name="network_connection_value">Bağlantı: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Mobil veri</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Diğer</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">Yüklendi: %1$s</string>
+    <string name="app_manager_last_used">Son Kullanım: %1$s</string>
+    <string name="app_manager_last_used_today">Bugün</string>
+    <string name="app_manager_last_used_unknown">bilinmiyor</string>
+
 </resources>

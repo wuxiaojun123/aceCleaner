@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">로드 중...%1$d%%</string>
-    <string name="agree_to_battery">계속 진행하면 다음에 동의하는 것으로 간주됩니다</string>
-    <string name="app_guide_tips">초기 스캔은 정크 파일 검색 및 휴대폰 데이터 분석으로 인해 더 오래 걸릴 수 있습니다.</string>
+    <string name="agree_to_battery">계속하면 다음에 동의하는 것입니다</string>
+    <string name="app_guide_tips">"참고: 첫 스캔은 정크 파일을 찾고 휴대전화 데이터를 분석하므로 더 오래 걸릴 수 있습니다."</string>
     <string name="guide_complete">완료</string>
     <string name="guide_density">화면 밀도</string>
     <string name="guide_device">기기</string>
@@ -10,139 +10,330 @@
     <string name="guide_loading">로드 중…</string>
     <string name="guide_screen">화면 해상도</string>
     <string name="guide_start">사용 시작</string>
-    <string name="guide_storage">사용된 저장공간</string>
+    <string name="guide_storage">사용 중인 저장공간</string>
     <string name="guide_system">시스템 OS 버전</string>
-    <string name="privacy_policy">개인정보 보호정책</string>
-    <string name="never_miss_key_tip">핵심 팁을 절대 놓치지 마세요</string>
-    <string name="clean_up">청소</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">중요한 팁을 놓치지 마세요</string>
+    <string name="clean_up">정리</string>
+    <string name="quick_clean_tile_label">빠른 정리</string>
+    <string name="quick_clean_tile_prompt_title">빠른 설정에 빠른 정리를 추가할까요?</string>
+    <string name="quick_clean_tile_prompt_message">알림 창에 바로가기를 추가해 한 번의 탭으로 정리하세요.</string>
+    <string name="add">추가</string>
+    <string name="not_now">나중에</string>
     <string name="network_traffic">네트워크 트래픽</string>
-    <string name="notification_cleaner">알림 클리너</string>
+    <string name="notification_cleaner">알림\n클리너</string>
+    <string name="notification_cleaner_single">알림 클리너</string>
     <string name="app_manager">앱 관리자</string>
     <string name="screenshot_cleaner">스크린샷 클리너</string>
     <string name="big_file_cleaner">대용량 파일 클리너</string>
-    <string name="duplicate_photo_cleaner">중복 사진 클리너</string>
-    <string name="video_cleaner">비디오 클리너</string>
+    <string name="duplicate_photo_cleaner">유사 사진 클리너</string>
+    <string name="video_cleaner">동영상 클리너</string>
     <string name="ram_status">RAM 상태</string>
     <string name="ram_label">RAM</string>
-    <string name="scanning_app_background">백그라운드에서 앱 스캔 중</string>
+    <string name="scanning_app_background">백그라운드 앱 스캔 중</string>
     <string name="ok">확인</string>
-    <string name="device_scan">장치 스캔</string>
+    <string name="device_scan">기기 스캔</string>
     <string name="battery_info">배터리 정보</string>
     <string name="network_test">네트워크 테스트</string>
-    <string name="feature_coming_soon">이 기능은 곧 제공될 예정입니다.</string>
+    <string name="feature_coming_soon">이 기능은 곧 제공됩니다</string>
     <string name="settings">설정</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">배터리</string>
+    <string name="notification_clean_up">정리</string>
+    <string name="clean_cache_now">지금 캐시 정리</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">대용량 파일</string>
     <string name="home_photos">유사</string>
-    <string name="home_empty">비어 있음</string>
+    <string name="home_empty">빈 항목</string>
     <string name="home_notifications">알림</string>
-    <string name="language_entry_content_description">언어</string>
-    <string name="language_title">언어</string>
-    <string name="language_english">영어</string>
-    <string name="language_japanese">일본어</string>
-    <string name="language_hindi">힌디어</string>
-    <string name="language_korean">한국어</string>
-    <string name="language_spanish">스페인어</string>
-    <string name="language_portuguese">포르투갈어</string>
-    <string name="language_german">독일어</string>
-    <string name="language_french">프랑스어</string>
-    <string name="language_turkish">터키어</string>
-    <string name="language_italian">이탈리아어</string>
-    <string name="language_afrikaans">아프리칸스어</string>
-    <string name="language_xhosa">코사어</string>
-    <string name="language_zulu">줄루어</string>
-    <string name="language_russian">러시아어</string>
-    <string name="language_ukrainian">우크라이나어</string>
-    <string name="language_vietnamese">베트남어</string>
-    <string name="language_indonesian">인도네시아어</string>
-    <string name="language_malay">말레이어</string>
-    <string name="language_thai">태국어</string>
-    <string name="language_filipino">필리핀어</string>
-    <string name="language_tagalog">타갈로그어</string>
-    <string name="language_cebuano">세부아노어</string>
+    <string name="more_indicator" translatable="false">›››</string>
+    <string name="language_entry_content_description">Language</string>
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_german">Deutsch</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_afrikaans">Afrikaans</string>
+    <string name="language_xhosa">IsiXhosa</string>
+    <string name="language_zulu">isiZulu</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    <string name="language_malay">Bahasa Melayu</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_filipino">Pilipino</string>
+    <string name="language_tagalog">Tagalog</string>
+    <string name="language_cebuano">Pinulongan sa Cebu</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">스캔 중...</string>
-    <string name="scanned_files_progress">파일 %1$d개 검사됨</string>
-    <string name="clean_scan_summary">파일 %1$d개 검사 · 폴더 %2$d개 확인</string>
-    <string name="scan_restricted_summary">폴더 %1$d개에 접근할 수 없음</string>
-    <string name="scan_incomplete">검사 한도에 도달하여 결과가 불완전할 수 있습니다</string>
-    <string name="items_found">항목 %1$d개</string>
+    <string name="scanned_files_progress">스캔한 파일: %1$d</string>
+    <string name="clean_scan_summary">스캔한 파일: %1$d · 확인한 폴더: %2$d</string>
+    <string name="scan_restricted_summary">접근할 수 없는 폴더: %1$d</string>
+    <string name="scan_incomplete">스캔 한도에 도달했습니다. 결과가 완전하지 않을 수 있습니다</string>
+    <string name="items_found">항목: %1$d</string>
     <string name="clear_app_cache">앱 캐시 지우기</string>
-    <string name="one_click_clean">원클릭 청소</string>
-    <string name="removable">이동식</string>
+    <string name="one_click_clean">원터치 정리</string>
+    <string name="removable">삭제 가능</string>
     <string name="cache">캐시</string>
     <string name="ad_files">광고 파일</string>
     <string name="temporary_files">임시 파일</string>
     <string name="obsolete_apk_files">오래된 APK 파일</string>
     <string name="residual_files">잔여 파일</string>
     <string name="empty_files">빈 파일</string>
-    <string name="remove_more">더 제거</string>
-    <string name="no_junk">정크 없음</string>
-    <string name="remove_size">118.8MB 제거</string>
-    <string name="clean_complete_message">118.8MB가 제거됨</string>
+    <string name="remove_more">더 삭제</string>
+    <string name="no_junk">기기가 깨끗합니다</string>
+    <string name="remove_size">118.8 MB 삭제</string>
+    <string name="clean_complete_message">118.8 MB 삭제됨</string>
+    <string name="clean_success_page_title">정리 결과</string>
+    <string name="clean_success_title">정리 완료</string>
+    <string name="clean_success_message">기기가 더 깨끗하고 가벼워졌습니다.</string>
+    <string name="clean_success_freed">확보한 공간</string>
+    <string name="clean_success_files">%1$d개 파일 삭제</string>
+    <string name="clean_success_more_tools">계속 정리</string>
+    <string name="clean_success_experience">새롭고 즐거운 경험을 시작할 준비가 되었습니다!</string>
+    <string name="clean_success_notification_hint">추가 최적화를 위해 알림 클리너를 계속 사용하세요.</string>
+    <string name="try_now">지금 사용</string>
+    <string name="clean_success_big_file_hint">공간을 차지하는 대용량 파일 찾기</string>
+    <string name="clean_success_screenshot_hint">더 이상 필요 없는 스크린샷 삭제</string>
+    <string name="clean_success_duplicate_hint">유사 사진을 정리해 공간 확보</string>
+    <string name="done">완료</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">선택됨</string>
-    <string name="remove_selected_size">%1$s 제거</string>
-    <string name="clean_confirm_title">선택한 파일을 정리하시겠습니까?</string>
-    <string name="clean_confirm_message">%1$d 파일을 삭제하고 %2$s까지 출시하시겠습니까?</string>
-    <string name="clean_result_message">%1$d 파일 삭제, %2$s 출시, %3$d 실패</string>
+    <string name="remove_selected_size">%1$s 삭제</string>
+    <string name="clean_confirm_title">선택한 파일을 정리할까요?</string>
+    <string name="clean_confirm_message">선택됨: %1$d · 확보할 공간: %2$s. 지금 삭제할까요?</string>
+    <string name="clean_result_message">삭제: %1$d · 확보: %2$s · 실패: %3$d</string>
     <string name="allow_permission">권한 허용</string>
     <string name="network_traffic_permission_title">네트워크 트래픽 보기</string>
-    <string name="network_traffic_permission_text">이를 허용하면 일일 사용 동향과 앱 데이터 순위를 확인하고 더욱 스마트하게 저장할 수 있습니다.</string>
-    <string name="app_manager_permission_title">확인을 위해 앱 사용 데이터 액세스 권한을 부여하세요.</string>
-    <string name="app_manager_permission_text">이를 허용하면 일일 사용 동향과 앱 데이터 순위를 확인하고 더욱 스마트하게 저장할 수 있습니다.</string>
-    <string name="notification_permission_title">알림 액세스 권한 부여</string>
-    <string name="notification_permission_text">전체 기능을 잠금 해제하려면 액세스를 활성화하세요.</string>
+    <string name="network_traffic_permission_text">허용하면 일일 사용 추세와 앱 데이터 사용 순위를 확인해 더 효율적으로 절약할 수 있습니다.</string>
+    <string name="app_manager_permission_title">확인을 위해 앱 사용 데이터 접근 허용</string>
+    <string name="app_manager_permission_text">허용하면 일일 사용 추세와 앱 데이터 사용 순위를 확인해 더 효율적으로 절약할 수 있습니다.</string>
+    <string name="usage_access_select_app">목록에서 “%1$s”을 찾아 접근을 켜세요</string>
+    <string name="notification_permission_title">알림 접근 권한 허용</string>
+    <string name="notification_permission_text">접근을 활성화해 모든 기능을 사용하세요.</string>
     <string name="this_month">이번 달</string>
     <string name="mobile_data">모바일 데이터</string>
-    <string name="wifi">와이파이</string>
+    <string name="wifi">WIFI</string>
     <string name="download_speed">다운로드 속도</string>
     <string name="upload_speed">업로드 속도</string>
-    <string name="app_data_ranking">앱 데이터 순위</string>
-    <string name="no_usage_data">사용량 데이터 없음</string>
-    <string name="notification_empty">알림이 차단되고 여기에 나열됩니다.</string>
+    <string name="app_data_ranking">앱 데이터 사용 순위</string>
+    <string name="no_usage_data">사용 데이터 없음</string>
+    <string name="notification_empty">차단된 알림이 여기에 표시됩니다</string>
     <string name="clean_all">모두 정리</string>
     <string name="uninstall_unused_apps">사용하지 않는 앱 제거</string>
     <string name="installed_apps">설치된 앱</string>
-    <string name="last_used">마지막으로 사용됨</string>
+    <string name="sort_name">이름</string>
+    <string name="sort_installation">설치</string>
+    <string name="sort_size">크기</string>
+    <string name="last_used">마지막 사용</string>
     <string name="last_used_value">마지막 사용: %1$s</string>
-    <string name="never_used">한번도 사용하지 않음</string>
+    <string name="never_used">사용한 적 없음</string>
     <string name="uninstall">제거</string>
-    <string name="select_apps_first">앱을 하나 이상 선택하세요.</string>
+    <string name="select_apps_first">앱을 하나 이상 선택하세요</string>
     <string name="notification_access_unavailable">알림 서비스 연결 중</string>
-    <string name="uninstall_count">제거(%1$d)</string>
-    <string name="uninstall_cancelled">제거가 취소되었습니다.</string>
-    <string name="apps_found">%1$d 앱</string>
+    <string name="notif_title">알림</string>
+    <string name="notif_subtitle">알림을 정리하고 방해 요소 줄이기</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">알림을 깔끔하게 관리</string>
+    <string name="notif_hero_subtitle">알림 출처를 확인하고 앱별로 그룹화하세요</string>
+    <string name="notif_intercept_title">알림 차단</string>
+    <string name="notif_intercept_desc">켜면 다른 앱의 알림이 즉시 차단됩니다. 아래에서 허용한 앱의 알림은 계속 표시됩니다.</string>
+    <string name="notif_allowed_apps_title">허용된 앱</string>
+    <string name="notif_allowed_apps_desc">계속 알림을 보낼 수 있는 앱 선택</string>
+    <string name="notif_allowed_apps_subtitle">차단이 켜져 있어도 이 앱들은 알림을 보낼 수 있습니다</string>
+    <string name="notif_allowed_apps_search">앱 검색</string>
+    <string name="notif_allowed_apps_selected">%1$d개 앱 허용</string>
+    <string name="notif_allowed_apps_empty">앱을 찾을 수 없음</string>
+    <string name="notif_blocked_list_title">오늘 차단된 알림</string>
+    <string name="notif_blocked_list_empty">오늘 차단된 알림 없음</string>
+    <string name="notif_clear_blocked">차단된 알림 모두 지우기</string>
+    <string name="notif_benefits_title">제공 기능</string>
+    <string name="notif_benefit_1">어떤 앱이 가장 많이 알림을 보내는지 확인</string>
+    <string name="notif_benefit_2">알림을 앱별로 자동 그룹화</string>
+    <string name="notif_benefit_3">불필요한 알림을 한 번에 정리</string>
+    <string name="notif_top_apps_title">오늘의 상위 앱</string>
+    <string name="notif_no_data">아직 알림 데이터가 없습니다</string>
+    <string name="notif_count_fmt">알림 %1$d개</string>
+    <string name="notif_privacy_title">개인정보 보호</string>
+    <string name="notif_privacy_1">알림은 기기에서 처리됩니다</string>
+    <string name="notif_privacy_2">알림 데이터는 업로드되지 않습니다</string>
+    <string name="notif_privacy_3">차단된 알림 세부정보는 당일 동안 이 기기에만 저장됩니다</string>
+    <string name="notif_cleaning_title">알림 정리 중…</string>
+    <string name="notif_cleaning_subtitle">차단된 알림을 삭제하는 동안 잠시 기다려 주세요</string>
+    <string name="notif_clear_success_title">성공!</string>
+    <string name="notif_clear_success_subtitle">차단된 알림을 지웠습니다</string>
+    <string name="uninstall_count">제거 (%1$d)</string>
+    <string name="uninstall_cancelled">제거 취소됨</string>
+    <string name="apps_found">앱 %1$d개</string>
     <string name="apps_found_initial">앱 0개</string>
-    <string name="picture">그림</string>
+    <string name="picture">사진</string>
     <string name="screenshot">스크린샷</string>
     <string name="others">기타</string>
-    <string name="all">모두</string>
-    <string name="clean">깨끗하다</string>
-    <string name="clean_selected">청소(%1$d)</string>
+    <string name="all">전체</string>
+    <string name="clean">정리</string>
+    <string name="clean_selected">정리 (%1$d)</string>
     <string name="large_files">대용량 파일</string>
     <string name="all_types">모든 유형</string>
-    <string name="videos">비디오</string>
+    <string name="videos">동영상</string>
     <string name="images">이미지</string>
     <string name="audio">오디오</string>
     <string name="documents">문서</string>
+    <string name="archives">압축 파일</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">기타</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">1주</string>
     <string name="one_month">1개월</string>
+    <string name="three_months">3개월</string>
     <string name="six_months">6개월</string>
     <string name="one_year">1년</string>
-    <string name="all_time">모든 시간</string>
-    <string name="scanning_picture">사진을 스캔하는 중...</string>
-    <string name="scanning_large_files">대용량 파일을 스캔하는 중...</string>
+    <string name="all_time">전체 기간</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">사진 스캔 중...</string>
+    <string name="scanning_large_files">대용량 파일 스캔 중...</string>
     <string name="scanning_video">동영상 스캔 중...</string>
-    <string name="video_manage">비디오 관리</string>
-    <string name="no_picture_files_found">사진 파일을 찾을 수 없습니다.</string>
-    <string name="no_video_files_found">비디오 파일을 찾을 수 없습니다</string>
-    <string name="no_large_files_found">대용량 파일을 찾을 수 없습니다.</string>
-    <string name="no_files_select">삭제할 파일을 선택하세요.</string>
+    <string name="video_manage">동영상 관리</string>
+    <string name="no_picture_files_found">사진 파일을 찾을 수 없음</string>
+    <string name="no_video_files_found">동영상 파일을 찾을 수 없음</string>
+    <string name="no_large_files_found">대용량 파일을 찾을 수 없음</string>
+    <string name="no_files_select">삭제할 파일을 선택하세요</string>
     <string name="delete">삭제</string>
-    <string name="delete_files_title">선택한 파일을 삭제하시겠습니까?</string>
-    <string name="delete_files_message">총 크기가 %2$s인 %1$d 파일을 삭제하시겠습니까?</string>
-    <string name="files_deleted_result">%1$d 파일 삭제, %2$s 출시, %3$d 실패</string>
-    <string name="storage_permission_required">저장 권한이 필요합니다</string>
-    <string name="storage_permission_explanation">선택한 파일을 찾아 제거하려면 저장소 액세스가 필요합니다. 다시 시도하거나 앱 설정을 열 수 있습니다.</string>
+    <string name="delete_files_title">선택한 파일을 삭제할까요?</string>
+    <string name="delete_files_message">총 %2$s인 파일 %1$d개를 삭제할까요?</string>
+    <string name="files_deleted_result">파일 %1$d개 삭제, %2$s 확보, %3$d개 실패</string>
+    <string name="storage_permission_required">저장공간 권한이 필요합니다</string>
+    <string name="storage_permission_explanation">선택한 파일을 찾고 삭제하려면 저장공간 접근 권한이 필요합니다. 다시 시도하거나 앱 설정을 열 수 있습니다.</string>
     <string name="open_app_settings">설정 열기</string>
-    <string name="try_again">다시 시도하세요</string>
-    <string name="files_and_size">%1$d 파일 / %2$s</string>
+    <string name="try_again">다시 시도</string>
+    <string name="files_and_size">파일 %1$d개 / %2$s</string>
     <string name="go_back">뒤로</string>
+    <string name="running_apps_count">앱 %1$d개가 백그라운드에서 실행 중</string>
+    <string name="close">닫기</string>
+    <string name="force_stop_title">이 앱을 닫을까요?</string>
+    <string name="force_stop_explanation">다음 화면에서 “강제 종료”를 눌러 앱을 닫으세요.</string>
+    <string name="continue_text">계속</string>
+    <string name="cancel">취소</string>
+    <string name="no_running_apps">표시되는 백그라운드 앱이 없습니다</string>
+    <string name="scanning_device">기기 스캔 중…</string>
+    <string name="scanning_devices_do_not_leave">기기를 스캔 중입니다. 화면을 벗어나지 마세요</string>
+    <string name="scan_complete">스캔 완료</string>
+    <string name="cpu_model_title">CPU 모델</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">해상도</string>
+    <string name="link_speed">링크 속도</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">기기</string>
+    <string name="android_version">Android 버전</string>
+    <string name="cpu_model">CPU 모델</string>
+    <string name="memory">메모리</string>
+    <string name="storage">저장공간</string>
+    <string name="screen_resolution">화면 해상도</string>
+    <string name="screen_density">화면 밀도</string>
+    <string name="ip_address">IP 주소</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">지원됨</string>
+    <string name="not_supported">지원되지 않음</string>
+    <string name="unknown">알 수 없음</string>
+    <string name="charging_status">충전 상태</string>
+    <string name="battery_health">배터리 상태</string>
+    <string name="battery_type">배터리 유형</string>
+    <string name="battery_capacity">배터리 용량</string>
+    <string name="temperature">온도</string>
+    <string name="voltage">전압</string>
+    <string name="electric_current">전류</string>
+    <string name="usable_time">사용 가능 시간</string>
+    <string name="pay_attention_battery_health">배터리 상태에 주의하세요..</string>
+    <string name="got_it">확인</string>
+    <string name="charging">충전 중</string>
+    <string name="discharging">방전 중</string>
+    <string name="fully_charged">완전 충전</string>
+    <string name="not_charging">충전 중 아님</string>
+    <string name="battery_health_good">양호</string>
+    <string name="battery_health_overheat">과열</string>
+    <string name="battery_health_dead">수명 종료</string>
+    <string name="battery_health_over_voltage">과전압</string>
+    <string name="battery_health_cold">저온</string>
+    <string name="network_test_ready">네트워크 테스트 준비 완료</string>
+    <string name="network_test_connecting">지연 시간 확인 중…</string>
+    <string name="network_test_downloading">다운로드 속도 테스트 중…</string>
+    <string name="network_test_uploading">업로드 속도 테스트 중…</string>
+    <string name="network_test_complete">네트워크 테스트 완료</string>
+    <string name="network_test_failed">네트워크 테스트를 완료할 수 없습니다</string>
+    <string name="network_unavailable">네트워크를 사용할 수 없습니다</string>
+    <string name="ping">핑</string>
+    <string name="start_test">테스트 시작</string>
+    <string name="test_again">다시 테스트</string>
+    <string name="testing">테스트 중…</string>
+    <string name="network_test_data_note">전체 테스트에는 약 3 MB의 데이터가 사용됩니다.</string>
+    <string name="network_connection_value">연결: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">모바일 데이터</string>
+    <string name="connection_ethernet">이더넷</string>
+    <string name="connection_other">기타</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">설치됨: %1$s</string>
+    <string name="app_manager_last_used">마지막 사용: %1$s</string>
+    <string name="app_manager_last_used_today">오늘</string>
+    <string name="app_manager_last_used_unknown">알 수 없음</string>
+
 </resources>

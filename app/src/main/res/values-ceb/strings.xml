@@ -1,148 +1,339 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Nag-load...%1$d%%</string>
-    <string name="agree_to_battery">Sa pagpadayon ikaw mosunod sa</string>
-    <string name="app_guide_tips">Palihug hinumdomi: Ang unang scan mahimong molungtad og mas dugay samtang nangita og junk files ug nagsusi sa data sa imong telepono.</string>
-    <string name="guide_complete">Complete</string>
-    <string name="guide_density">Screen Density</string>
+    <string name="agree_to_battery">Pinaagi sa pagpadayon, miuyon ka sa</string>
+    <string name="app_guide_tips">"Palihug timan-i: Ang unang pag-scan mahimong mas dugay kay mangita kini og junk files ug analisahon ang datos sa imong telepono.\n"</string>
+    <string name="guide_complete">Nahuman</string>
+    <string name="guide_density">Densidad sa screen</string>
     <string name="guide_device">Device</string>
-    <string name="guide_engine">Initializing engine</string>
-    <string name="guide_loading">Loading…</string>
-    <string name="guide_screen">Screen Resolution</string>
+    <string name="guide_engine">Ginaandam ang engine</string>
+    <string name="guide_loading">Nag-load…</string>
+    <string name="guide_screen">Resolusyon sa screen</string>
     <string name="guide_start">Sugdi paggamit</string>
-    <string name="guide_storage">Storage used</string>
-    <string name="guide_system">System OS version</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="never_miss_key_tip">Ayaw gayud mingawon sa usa ka yawe nga Tip</string>
-    <string name="clean_up">Limpyo UP</string>
+    <string name="guide_storage">Gigamit nga storage</string>
+    <string name="guide_system">Bersyon sa OS</string>
+    <string name="privacy_policy">Patakaran sa Pagkapribado</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">Ayaw Palabya ang Importante nga Tip</string>
+    <string name="clean_up">LIMPYUHA</string>
+    <string name="quick_clean_tile_label">Dali nga Limpyo</string>
+    <string name="quick_clean_tile_prompt_title">Idugang ang Dali nga Limpyo sa Quick Settings?</string>
+    <string name="quick_clean_tile_prompt_message">Idugang ang shortcut sa notification shade aron usa ka tap ra padulong sa Limpyo.</string>
+    <string name="add">Idugang</string>
+    <string name="not_now">Dili karon</string>
     <string name="network_traffic">Trapiko sa Network</string>
-    <string name="notification_cleaner">Limpyo nga Notification</string>
-    <string name="app_manager">Tagdumala sa APP</string>
-    <string name="screenshot_cleaner">Screenshot nga Mas Limpyo</string>
-    <string name="big_file_cleaner">Dako nga File Cleaner</string>
-    <string name="duplicate_photo_cleaner">Dobleng Photo Cleaner</string>
-    <string name="video_cleaner">Video nga Limpyo</string>
-    <string name="ram_status">Status sa RAM</string>
+    <string name="notification_cleaner">Tiglimpyo sa\nNotipikasyon</string>
+    <string name="notification_cleaner_single">Tiglimpyo sa Notipikasyon</string>
+    <string name="app_manager">APP Manager</string>
+    <string name="screenshot_cleaner">Tiglimpyo sa Screenshot</string>
+    <string name="big_file_cleaner">Tiglimpyo sa Dagkong File</string>
+    <string name="duplicate_photo_cleaner">Tiglimpyo sa Duplicate nga Litrato</string>
+    <string name="video_cleaner">Tiglimpyo sa Video</string>
+    <string name="ram_status">Kahimtang sa RAM</string>
     <string name="ram_label">RAM</string>
-    <string name="scanning_app_background">Nag-scan sa App sa background</string>
+    <string name="scanning_app_background">Gina-scan ang app sa background</string>
     <string name="ok">OK</string>
     <string name="device_scan">Pag-scan sa Device</string>
     <string name="battery_info">Impormasyon sa Baterya</string>
     <string name="network_test">Pagsulay sa Network</string>
-    <string name="feature_coming_soon">Kini nga bahin moabut sa dili madugay</string>
+    <string name="feature_coming_soon">Moabot ra sa dili madugay kini nga feature</string>
     <string name="settings">Mga Setting</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Baterya</string>
+    <string name="notification_clean_up">Limpyo</string>
+    <string name="clean_cache_now">Limpyohi ang Cache Karon</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Dagkong File</string>
     <string name="home_photos">Susama</string>
-    <string name="home_empty">Walay sulod</string>
+    <string name="home_empty">Walay Sulod</string>
     <string name="home_notifications">Mga Notipikasyon</string>
+    <string name="more_indicator" translatable="false">›››</string>
     <string name="language_entry_content_description">Pinulongan</string>
     <string name="language_title">Pinulongan</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">日本語</string>
-    <string name="language_hindi">हिंदी</string>
-    <string name="language_korean">한국어</string>
-    <string name="language_spanish">Español</string>
-    <string name="language_portuguese">Portugués</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Francais</string>
-    <string name="language_turkish">Türkee</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">Русский</string>
-    <string name="language_ukrainian">Украінська</string>
-    <string name="language_vietnamese">Tiếng Việt</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">ภาษาไทย</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scanning">Pag-scan...</string>
-    <string name="scanned_files_progress">%1$d ka file ang na-scan</string>
-    <string name="clean_scan_summary">%1$d ka file ang na-scan · %2$d ka folder ang gisusi</string>
-    <string name="scan_restricted_summary">Dili ma-access ang %1$d ka folder</string>
-    <string name="scan_incomplete">Naabot ang limitasyon sa scan; mahimong dili kompleto ang resulta</string>
-    <string name="items_found">%1$d ka item</string>
-    <string name="clear_app_cache">Hawani ang cache sa app</string>
-    <string name="one_click_clean">Usa ka Pag-klik nga Limpyo</string>
-    <string name="removable">Matangtang</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
+    <string name="scanning">Nag-scan...</string>
+    <string name="scanned_files_progress">Na-scan nga mga file: %1$d</string>
+    <string name="clean_scan_summary">Na-scan nga file: %1$d · Nasusi nga folder: %2$d</string>
+    <string name="scan_restricted_summary">Dili ma-access nga folder: %1$d</string>
+    <string name="scan_incomplete">Naabot ang limit sa scan; mahimong dili kompleto ang resulta</string>
+    <string name="items_found">Mga item: %1$d</string>
+    <string name="clear_app_cache">Limpyohi ang app cache</string>
+    <string name="one_click_clean">Usa-ka-tap nga Limpyo</string>
+    <string name="removable">Mahimong tangtangon</string>
     <string name="cache">Cache</string>
     <string name="ad_files">Mga file sa ad</string>
-    <string name="temporary_files">Temporaryong mga file</string>
-    <string name="obsolete_apk_files">Mga karaan nga file sa APK</string>
-    <string name="residual_files">Mga nahabilin nga file</string>
-    <string name="empty_files">Walay sulod nga mga file</string>
-    <string name="remove_more">Kuhaa ang dugang pa</string>
-    <string name="no_junk">Wala junk</string>
-    <string name="remove_size">Hapus 118,8 MB</string>
-    <string name="clean_complete_message">118,8 MB dihapus</string>
-    <string name="selected">Gipili</string>
-    <string name="remove_selected_size">Hapus %1$s</string>
-    <string name="clean_confirm_title">Limpyo nga gipili nga mga file?</string>
-    <string name="clean_confirm_message">I-delete ang mga file sa %1$d ug buhian hangtod sa %2$s?</string>
-    <string name="clean_result_message">Gitangtang ang mga file nga %1$d, gipagawas ang %2$s, %3$d napakyas</string>
-    <string name="allow_permission">Tugoti ang pagtugot</string>
-    <string name="network_traffic_permission_title">Pagtan-aw sa Trapiko sa Network</string>
-    <string name="network_traffic_permission_text">Gitugotan ka niini nga makita ang adlaw-adlaw nga uso sa paggamit ug ranggo sa datos sa app aron makatipig nga labi ka maalamon.</string>
-    <string name="app_manager_permission_title">Ihatag ang pag-access sa datos sa paggamit sa app aron masusi</string>
-    <string name="app_manager_permission_text">Gitugotan ka niini nga makita ang adlaw-adlaw nga uso sa paggamit ug ranggo sa datos sa app aron makatipig nga labi ka maalamon.</string>
-    <string name="notification_permission_title">Ihatag ang Pag-access sa Notification</string>
-    <string name="notification_permission_text">Tugoti ang pag-access aron maablihan ang tibuuk nga mga dagway.</string>
-    <string name="this_month">Bulan Kini</string>
-    <string name="mobile_data">Data sa mobile</string>
+    <string name="temporary_files">Temporary files</string>
+    <string name="obsolete_apk_files">Karaan nga APK files</string>
+    <string name="residual_files">Nahibilin nga files</string>
+    <string name="empty_files">Walay sulod nga files</string>
+    <string name="remove_more">Tangtanga pa</string>
+    <string name="no_junk">Limpyo na ang imong device</string>
+    <string name="remove_size">Tangtanga ang 118.8 MB</string>
+    <string name="clean_complete_message">118.8 MB natangtang</string>
+    <string name="clean_success_page_title">Resulta sa Paglimpyo</string>
+    <string name="clean_success_title">Malampusong nalimpyo</string>
+    <string name="clean_success_message">Mas limpyo ug gaan na karon ang imong device.</string>
+    <string name="clean_success_freed">Napahigawas nga espasyo</string>
+    <string name="clean_success_files">%1$d ka file natangtang</string>
+    <string name="clean_success_more_tools">Padayon sa paglimpyo</string>
+    <string name="clean_success_experience">Andam ka na alang sa bag-o ug makapahinam nga kasinatian!</string>
+    <string name="clean_success_notification_hint">Padayon sa paggamit sa Tiglimpyo sa Notipikasyon para sa dugang nga pag-optimize.</string>
+    <string name="try_now">Sulayi Karon</string>
+    <string name="clean_success_big_file_hint">Pangitaa ang dagkong file nga nagkuha og espasyo</string>
+    <string name="clean_success_screenshot_hint">Tangtanga ang screenshots nga dili na nimo kinahanglan</string>
+    <string name="clean_success_duplicate_hint">Pagpahigawas og espasyo gikan sa susamang mga litrato</string>
+    <string name="done">Human</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
+    <string name="selected">Napili</string>
+    <string name="remove_selected_size">Tangtanga ang %1$s</string>
+    <string name="clean_confirm_title">Limpyohan ang napiling mga file?</string>
+    <string name="clean_confirm_message">Napili: %1$d · Espasyo nga mapahigawas: %2$s. Tangtangon karon?</string>
+    <string name="clean_result_message">Natangtang: %1$d · Napahigawas: %2$s · Napakyas: %3$d</string>
+    <string name="allow_permission">Tugoti ang permiso</string>
+    <string name="network_traffic_permission_title">Tan-awa ang Trapiko sa Network</string>
+    <string name="network_traffic_permission_text">Makatugot kini nimo sa pagtan-aw sa adlaw-adlaw nga usage trend ug ranggo sa data sa app aron mas maayong makatigom.</string>
+    <string name="app_manager_permission_title">Hatagi og access sa usage data sa app</string>
+    <string name="app_manager_permission_text">Makatugot kini nimo sa pagtan-aw sa adlaw-adlaw nga usage trend ug ranggo sa data sa app aron mas maayong makatigom.</string>
+    <string name="usage_access_select_app">Pangitaa ang “%1$s” sa listahan ug i-on ang access</string>
+    <string name="notification_permission_title">Hatagi og Access sa Notipikasyon</string>
+    <string name="notification_permission_text">I-enable ang access aron ma-unlock ang tanang feature.</string>
+    <string name="this_month">Karong Bulana</string>
+    <string name="mobile_data">Mobile data</string>
     <string name="wifi">WIFI</string>
-    <string name="download_speed">I-download ang Bilis</string>
-    <string name="upload_speed">I-upload ang Bilis</string>
-    <string name="app_data_ranking">Ranggo sa datos sa app</string>
-    <string name="no_usage_data">Wala \'y datos sa paggamit</string>
-    <string name="notification_empty">Ang mga pahibalo ma-block ug malista dinhi</string>
-    <string name="clean_all">Limpyo ang Tanan</string>
-    <string name="uninstall_unused_apps">Uninstall wala magamit nga mga app</string>
-    <string name="installed_apps">Mga na-install na app</string>
-    <string name="last_used">Katapusan nga Gigamit</string>
-    <string name="last_used_value">Katapusan nga gigamit: %1$s</string>
-    <string name="never_used">Never Used</string>
-    <string name="uninstall">Uninstall</string>
-    <string name="select_apps_first">Pagpili labing menos usa ka app</string>
-    <string name="notification_access_unavailable">Ang serbisyo sa pahibalo nagkonektar</string>
-    <string name="uninstall_count">Uninstall (%1$d)</string>
-    <string name="uninstall_cancelled">Nakansela ang pag-uninstall</string>
-    <string name="apps_found">Mga aplikasyon sa %1$d</string>
-    <string name="apps_found_initial">0 mga app</string>
-    <string name="picture">Hulagway</string>
+    <string name="download_speed">Katulin sa Download</string>
+    <string name="upload_speed">Katulin sa Upload</string>
+    <string name="app_data_ranking">Ranggo sa data sa app</string>
+    <string name="no_usage_data">Walay usage data</string>
+    <string name="notification_empty">Ang mga notipikasyon i-block ug ilista dinhi</string>
+    <string name="clean_all">Limpyohi Tanan</string>
+    <string name="uninstall_unused_apps">I-uninstall ang wala gamita nga apps</string>
+    <string name="installed_apps">Na-install nga apps</string>
+    <string name="sort_name">Ngalan</string>
+    <string name="sort_installation">Pag-install</string>
+    <string name="sort_size">Gidak-on</string>
+    <string name="last_used">Katapusang Gigamit</string>
+    <string name="last_used_value">Katapusang gigamit: %1$s</string>
+    <string name="never_used">Wala pa magamit</string>
+    <string name="uninstall">I-uninstall</string>
+    <string name="select_apps_first">Pagpili og labing menos usa ka app</string>
+    <string name="notification_access_unavailable">Nagkonektar ang notification service</string>
+    <string name="notif_title">Mga Notipikasyon</string>
+    <string name="notif_subtitle">Dumalaa ang kalat ug pakunhura ang distraksyon</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">Hupti nga hapsay ang imong mga notipikasyon</string>
+    <string name="notif_hero_subtitle">Tan-awa asa gikan ang mga notipikasyon ug igrupo sila pinaagi sa app</string>
+    <string name="notif_intercept_title">I-block ang mga notipikasyon</string>
+    <string name="notif_intercept_desc">Kung naka-on, dayon nga i-intercept ang mga notipikasyon gikan sa ubang app. Ang mga app nga imong gitugotan sa ubos magpakita gihapon.</string>
+    <string name="notif_allowed_apps_title">Gitugot nga apps</string>
+    <string name="notif_allowed_apps_desc">Pilia ang apps nga pwede gihapong magpadala og notipikasyon</string>
+    <string name="notif_allowed_apps_subtitle">Kini nga apps makapadala gihapon og notipikasyon samtang naka-on ang blocking</string>
+    <string name="notif_allowed_apps_search">Pangitaa ang apps</string>
+    <string name="notif_allowed_apps_selected">%1$d ka app gitugotan</string>
+    <string name="notif_allowed_apps_empty">Walay nakit-an nga apps</string>
+    <string name="notif_blocked_list_title">Gi-block nga notipikasyon karon</string>
+    <string name="notif_blocked_list_empty">Walay gi-block nga notipikasyon karon</string>
+    <string name="notif_clear_blocked">Tangtanga tanan gi-block nga notipikasyon</string>
+    <string name="notif_benefits_title">Unsay imong makuha</string>
+    <string name="notif_benefit_1">Tan-awa kung unsang apps ang pinakadaghan og notipikasyon</string>
+    <string name="notif_benefit_2">Awtomatikong igrupo ang notipikasyon pinaagi sa app</string>
+    <string name="notif_benefit_3">Tangtanga ang dili importante nga notipikasyon sa usa ka tap</string>
+    <string name="notif_top_apps_title">Top apps karon</string>
+    <string name="notif_no_data">Wala pay datos sa notipikasyon</string>
+    <string name="notif_count_fmt">%1$d ka notipikasyon</string>
+    <string name="notif_privacy_title">Pagkapribado</string>
+    <string name="notif_privacy_1">Ang mga notipikasyon giproseso sa device</string>
+    <string name="notif_privacy_2">Walay datos sa notipikasyon nga i-upload</string>
+    <string name="notif_privacy_3">Ang detalye sa gi-block nga notipikasyon magpabilin sa device karong adlawa</string>
+    <string name="notif_cleaning_title">Ginalimpyohan ang mga notipikasyon…</string>
+    <string name="notif_cleaning_subtitle">Palihug hulat samtang gitangtang ang gi-block nga mga notipikasyon</string>
+    <string name="notif_clear_success_title">Malampuson!</string>
+    <string name="notif_clear_success_subtitle">Natangtang na ang gi-block nga mga notipikasyon</string>
+    <string name="uninstall_count">I-uninstall (%1$d)</string>
+    <string name="uninstall_cancelled">Gikansela ang pag-uninstall</string>
+    <string name="apps_found">%1$d ka apps</string>
+    <string name="apps_found_initial">0 apps</string>
+    <string name="picture">Litrato</string>
     <string name="screenshot">Screenshot</string>
-    <string name="others">Ang uban pa</string>
+    <string name="others">Uban</string>
     <string name="all">Tanan</string>
     <string name="clean">Limpyo</string>
-    <string name="clean_selected">Limpyo (%1$d)</string>
-    <string name="large_files">Dako nga mga File</string>
-    <string name="all_types">Ang tanan nga mga matang</string>
+    <string name="clean_selected">Limpyohi (%1$d)</string>
+    <string name="large_files">Dagkong File</string>
+    <string name="all_types">Tanang tipo</string>
     <string name="videos">Mga Video</string>
-    <string name="images">Mga Imahe</string>
+    <string name="images">Mga Litrato</string>
     <string name="audio">Audio</string>
     <string name="documents">Mga Dokumento</string>
-    <string name="one_month">1 bulan</string>
-    <string name="six_months">6 bulan</string>
+    <string name="archives">Mga Archive</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">Uban</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">1 ka semana</string>
+    <string name="one_month">1 ka bulan</string>
+    <string name="three_months">3 ka bulan</string>
+    <string name="six_months">6 ka bulan</string>
     <string name="one_year">1 ka tuig</string>
-    <string name="all_time">Sa tanang panahon</string>
-    <string name="scanning_picture">Pag-scan sa litrato...</string>
-    <string name="scanning_large_files">Pag-scan sa Dako nga mga File...</string>
-    <string name="scanning_video">Pag-scan sa video...</string>
+    <string name="all_time">Tanang panahon</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">Gina-scan ang litrato...</string>
+    <string name="scanning_large_files">Gina-scan ang Dagkong File...</string>
+    <string name="scanning_video">Gina-scan ang video...</string>
     <string name="video_manage">Pagdumala sa Video</string>
-    <string name="no_picture_files_found">Wala nakit-an nga mga file sa litrato</string>
-    <string name="no_video_files_found">Wala nakit-an nga mga file sa video</string>
-    <string name="no_large_files_found">Wala \'y nakit-an nga dagko nga mga file</string>
-    <string name="no_files_select">Palihug pilia ang mga file nga tangtangon</string>
-    <string name="delete">I-delete</string>
-    <string name="delete_files_title">I-delete ang pinili nga mga file?</string>
-    <string name="delete_files_message">I-delete ang mga file sa %1$d nga adunay kinatibuk-ang gidak-on sa %2$s?</string>
-    <string name="files_deleted_result">Gitangtang ang mga file nga %1$d, gipagawas ang %2$s, %3$d napakyas</string>
-    <string name="storage_permission_required">Gikinahanglan ang pagtugot sa pagtipig</string>
-    <string name="storage_permission_explanation">Gikinahanglan ang pag-access sa pagtipig aron makit-an ug tangtangon ang mga file nga imong gipili. Mahimo nimong sulayan pag-usab o ablihan ang mga setting sa app.</string>
-    <string name="open_app_settings">Ablihi ang mga setting</string>
+    <string name="no_picture_files_found">Walay nakit-an nga file sa litrato</string>
+    <string name="no_video_files_found">Walay nakit-an nga video files</string>
+    <string name="no_large_files_found">Walay nakit-an nga dagkong file</string>
+    <string name="no_files_select">Palihug pagpili og files nga tangtangon</string>
+    <string name="delete">Tangtanga</string>
+    <string name="delete_files_title">Tangtangon ang napiling mga file?</string>
+    <string name="delete_files_message">Tangtangon ang %1$d ka file nga adunay kinatibuk-ang gidak-on nga %2$s?</string>
+    <string name="files_deleted_result">%1$d ka file natangtang, %2$s napahigawas, %3$d napakyas</string>
+    <string name="storage_permission_required">Gikinahanglan ang storage permission</string>
+    <string name="storage_permission_explanation">Gikinahanglan ang access sa storage aron makit-an ug matangtang ang files nga imong pilion. Mahimo nimong sulayan pag-usab o ablihan ang app settings.</string>
+    <string name="open_app_settings">Ablihi ang settings</string>
     <string name="try_again">Sulayi pag-usab</string>
-    <string name="files_and_size">Mga file sa %1$d/ %2$s</string>
+    <string name="files_and_size">%1$d ka file / %2$s</string>
     <string name="go_back">Balik</string>
+    <string name="running_apps_count">%1$d ka apps nagdagan sa background</string>
+    <string name="close">Isira</string>
+    <string name="force_stop_title">Isira kini nga app?</string>
+    <string name="force_stop_explanation">Sa sunod nga screen, i-tap ang “Force stop” aron isira ang app.</string>
+    <string name="continue_text">Padayon</string>
+    <string name="cancel">Kanselahon</string>
+    <string name="no_running_apps">Walay makita nga apps sa background</string>
+    <string name="scanning_device">Gina-scan ang device…</string>
+    <string name="scanning_devices_do_not_leave">Gina-scan ang device, palihug ayaw sa paggawas</string>
+    <string name="scan_complete">Nahuman ang scan</string>
+    <string name="cpu_model_title">Modelo sa CPU</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Resolusyon</string>
+    <string name="link_speed">Katulin sa Link</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Device</string>
+    <string name="android_version">Bersyon sa Android</string>
+    <string name="cpu_model">Modelo sa CPU</string>
+    <string name="memory">Memorya</string>
+    <string name="storage">Storage</string>
+    <string name="screen_resolution">Resolusyon sa screen</string>
+    <string name="screen_density">Densidad sa screen</string>
+    <string name="ip_address">IP Address</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Gisuportahan</string>
+    <string name="not_supported">Dili suportado</string>
+    <string name="unknown">Wala mailhi</string>
+    <string name="charging_status">Kahimtang sa Pag-charge</string>
+    <string name="battery_health">Kahimsog</string>
+    <string name="battery_type">Tipo sa Baterya</string>
+    <string name="battery_capacity">Kapasidad sa Baterya</string>
+    <string name="temperature">Temperatura</string>
+    <string name="voltage">Boltahe</string>
+    <string name="electric_current">Kuryente</string>
+    <string name="usable_time">Magamit nga Oras</string>
+    <string name="pay_attention_battery_health">Bantayi ang kahimsog sa baterya..</string>
+    <string name="got_it">Nasabtan</string>
+    <string name="charging">Nag-charge</string>
+    <string name="discharging">Nag-discharge</string>
+    <string name="fully_charged">Puno na ang charge</string>
+    <string name="not_charging">Wala nag-charge</string>
+    <string name="battery_health_good">Maayo</string>
+    <string name="battery_health_overheat">Sobra kainit</string>
+    <string name="battery_health_dead">Patay</string>
+    <string name="battery_health_over_voltage">Sobra boltahe</string>
+    <string name="battery_health_cold">Bugnaw</string>
+    <string name="network_test_ready">Andam sa pagsulay sa imong network</string>
+    <string name="network_test_connecting">Gisusi ang latency…</string>
+    <string name="network_test_downloading">Ginasulay ang katulin sa download…</string>
+    <string name="network_test_uploading">Ginasulay ang katulin sa upload…</string>
+    <string name="network_test_complete">Nahuman ang network test</string>
+    <string name="network_test_failed">Dili mahuman ang network test</string>
+    <string name="network_unavailable">Dili magamit ang network</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Sugdi ang Test</string>
+    <string name="test_again">Sulayi Pag-usab</string>
+    <string name="testing">Ginasulay…</string>
+    <string name="network_test_data_note">Ang kompleto nga test mogamit og mga 3 MB nga data.</string>
+    <string name="network_connection_value">Koneksyon: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Mobile data</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Uban</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">Na-install: %1$s</string>
+    <string name="app_manager_last_used">Katapusang gigamit: %1$s</string>
+    <string name="app_manager_last_used_today">Karon</string>
+    <string name="app_manager_last_used_unknown">wala mailhi</string>
+
 </resources>

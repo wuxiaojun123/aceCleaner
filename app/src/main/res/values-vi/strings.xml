@@ -1,148 +1,339 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Đang tải...%1$d%%</string>
-    <string name="agree_to_battery">Bằng cách tiếp tục bạn đồng ý với</string>
-    <string name="app_guide_tips">Xin lưu ý: Lần quét ban đầu có thể mất nhiều thời gian hơn vì nó tìm kiếm tập tin rác và phân tích dữ liệu điện thoại của bạn.</string>
+    <string name="agree_to_battery">Bằng việc tiếp tục, bạn đồng ý với</string>
+    <string name="app_guide_tips">"Lưu ý: Lần quét đầu tiên có thể mất nhiều thời gian hơn vì ứng dụng tìm tệp rác và phân tích dữ liệu trên điện thoại của bạn."</string>
     <string name="guide_complete">Hoàn tất</string>
     <string name="guide_density">Mật độ màn hình</string>
     <string name="guide_device">Thiết bị</string>
-    <string name="guide_engine">Đang khởi tạo engine</string>
+    <string name="guide_engine">Đang khởi tạo công cụ</string>
     <string name="guide_loading">Đang tải…</string>
     <string name="guide_screen">Độ phân giải màn hình</string>
     <string name="guide_start">Bắt đầu sử dụng</string>
-    <string name="guide_storage">Bộ nhớ đã sử dụng</string>
+    <string name="guide_storage">Bộ nhớ đã dùng</string>
     <string name="guide_system">Phiên bản hệ điều hành</string>
-    <string name="privacy_policy">Chính sách bảo mật</string>
-    <string name="never_miss_key_tip">Không bao giờ bỏ lỡ một mẹo quan trọng</string>
-    <string name="clean_up">DỌN LÊN</string>
+    <string name="privacy_policy">Chính sách quyền riêng tư</string>
+    <string name="guide_android_version" translatable="false">Android %1$s</string>
+    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
+    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
+    <string name="never_miss_key_tip">Đừng bỏ lỡ mẹo quan trọng</string>
+    <string name="clean_up">DỌN DẸP</string>
+    <string name="quick_clean_tile_label">Dọn nhanh</string>
+    <string name="quick_clean_tile_prompt_title">Thêm Dọn nhanh vào Cài đặt nhanh?</string>
+    <string name="quick_clean_tile_prompt_message">Thêm lối tắt vào bảng thông báo để truy cập Dọn dẹp chỉ bằng một lần chạm.</string>
+    <string name="add">Thêm</string>
+    <string name="not_now">Không phải bây giờ</string>
     <string name="network_traffic">Lưu lượng mạng</string>
-    <string name="notification_cleaner">Trình dọn dẹp thông báo</string>
+    <string name="notification_cleaner">Trình dọn\nthông báo</string>
+    <string name="notification_cleaner_single">Trình dọn thông báo</string>
     <string name="app_manager">Trình quản lý ứng dụng</string>
-    <string name="screenshot_cleaner">Trình dọn dẹp ảnh chụp màn hình</string>
-    <string name="big_file_cleaner">Trình dọn dẹp tệp lớn</string>
-    <string name="duplicate_photo_cleaner">Trình dọn dẹp ảnh trùng lặp</string>
-    <string name="video_cleaner">Trình dọn dẹp video</string>
+    <string name="screenshot_cleaner">Trình dọn ảnh chụp màn hình</string>
+    <string name="big_file_cleaner">Trình dọn tệp lớn</string>
+    <string name="duplicate_photo_cleaner">Trình dọn ảnh tương tự</string>
+    <string name="video_cleaner">Trình dọn video</string>
     <string name="ram_status">Trạng thái RAM</string>
     <string name="ram_label">RAM</string>
-    <string name="scanning_app_background">Đang quét ứng dụng trong nền</string>
+    <string name="scanning_app_background">Đang quét ứng dụng chạy nền</string>
     <string name="ok">OK</string>
     <string name="device_scan">Quét thiết bị</string>
     <string name="battery_info">Thông tin pin</string>
     <string name="network_test">Kiểm tra mạng</string>
     <string name="feature_coming_soon">Tính năng này sắp ra mắt</string>
     <string name="settings">Cài đặt</string>
+    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
+    <string name="zero_bytes" translatable="false">0 B</string>
+    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
+    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
+    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
+    <string name="notification_speed_suffix" translatable="false">/s</string>
+    <string name="notification_battery">Pin</string>
+    <string name="notification_clean_up">Dọn dẹp</string>
+    <string name="clean_cache_now">Dọn bộ nhớ đệm ngay</string>
+    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Tệp lớn</string>
     <string name="home_photos">Tương tự</string>
-    <string name="home_empty">Trống</string>
+    <string name="home_empty">Tệp trống</string>
     <string name="home_notifications">Thông báo</string>
-    <string name="language_entry_content_description">Ngôn ngữ</string>
-    <string name="language_title">Ngôn ngữ</string>
-    <string name="language_english">Tiếng Anh</string>
-    <string name="language_japanese">Tiếng Nhật</string>
-    <string name="language_hindi">Tiếng Hindi</string>
-    <string name="language_korean">Tiếng Hàn</string>
-    <string name="language_spanish">Tiếng Tây Ban Nha</string>
-    <string name="language_portuguese">Tiếng Bồ Đào Nha</string>
-    <string name="language_german">Tiếng Đức</string>
-    <string name="language_french">Tiếng Pháp</string>
-    <string name="language_turkish">Tiếng Thổ Nhĩ Kỳ</string>
-    <string name="language_italian">Tiếng Ý</string>
-    <string name="language_afrikaans">Tiếng Afrikaans</string>
-    <string name="language_xhosa">Tiếng Xhosa</string>
-    <string name="language_zulu">Tiếng Zulu</string>
-    <string name="language_russian">Tiếng Nga</string>
-    <string name="language_ukrainian">Tiếng Ukraina</string>
-    <string name="language_vietnamese">Tiếng Việt</string>
-    <string name="language_indonesian">Tiếng Indonesia</string>
-    <string name="language_malay">Tiếng Mã Lai</string>
-    <string name="language_thai">Tiếng Thái</string>
-    <string name="language_filipino">Tiếng Filipino</string>
-    <string name="language_tagalog">Tiếng Tagalog</string>
-    <string name="language_cebuano">Tiếng Cebuano</string>
+    <string name="more_indicator" translatable="false">›››</string>
+    <string name="language_entry_content_description">Language</string>
+    <string name="language_title">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
+    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
+    <string name="language_korean">&#54620;&#44397;&#50612;</string>
+    <string name="language_spanish">Espa&#241;ol</string>
+    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_german">Deutsch</string>
+    <string name="language_french">Fran&#231;ais</string>
+    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_afrikaans">Afrikaans</string>
+    <string name="language_xhosa">IsiXhosa</string>
+    <string name="language_zulu">isiZulu</string>
+    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
+    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
+    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    <string name="language_malay">Bahasa Melayu</string>
+    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_filipino">Pilipino</string>
+    <string name="language_tagalog">Tagalog</string>
+    <string name="language_cebuano">Pinulongan sa Cebu</string>
+    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Đang quét...</string>
-    <string name="scanned_files_progress">Đã quét %1$d tệp</string>
-    <string name="clean_scan_summary">Đã quét %1$d tệp · kiểm tra %2$d thư mục</string>
-    <string name="scan_restricted_summary">Không thể truy cập %1$d thư mục</string>
+    <string name="scanned_files_progress">Tệp đã quét: %1$d</string>
+    <string name="clean_scan_summary">Tệp đã quét: %1$d · Thư mục đã kiểm tra: %2$d</string>
+    <string name="scan_restricted_summary">Thư mục không khả dụng: %1$d</string>
     <string name="scan_incomplete">Đã đạt giới hạn quét; kết quả có thể chưa đầy đủ</string>
-    <string name="items_found">%1$d mục</string>
+    <string name="items_found">Mục: %1$d</string>
     <string name="clear_app_cache">Xóa bộ nhớ đệm ứng dụng</string>
-    <string name="one_click_clean">Làm sạch bằng một cú nhấp chuột</string>
-    <string name="removable">Có thể tháo rời</string>
+    <string name="one_click_clean">Dọn dẹp một chạm</string>
+    <string name="removable">Có thể xóa</string>
     <string name="cache">Bộ nhớ đệm</string>
     <string name="ad_files">Tệp quảng cáo</string>
     <string name="temporary_files">Tệp tạm thời</string>
-    <string name="obsolete_apk_files">Tệp APK lỗi thời</string>
-    <string name="residual_files">Các tập tin còn lại</string>
+    <string name="obsolete_apk_files">Tệp APK cũ</string>
+    <string name="residual_files">Tệp còn sót</string>
     <string name="empty_files">Tệp trống</string>
     <string name="remove_more">Xóa thêm</string>
-    <string name="no_junk">Không có rác</string>
-    <string name="remove_size">Xóa 118,8 MB</string>
-    <string name="clean_complete_message">Đã xóa 118,8 MB</string>
+    <string name="no_junk">Thiết bị của bạn đã sạch</string>
+    <string name="remove_size">Xóa 118.8 MB</string>
+    <string name="clean_complete_message">Đã xóa 118.8 MB</string>
+    <string name="clean_success_page_title">Kết quả dọn dẹp</string>
+    <string name="clean_success_title">Dọn dẹp thành công</string>
+    <string name="clean_success_message">Thiết bị của bạn giờ sạch hơn và nhẹ hơn.</string>
+    <string name="clean_success_freed">Dung lượng đã giải phóng</string>
+    <string name="clean_success_files">Đã xóa %1$d tệp</string>
+    <string name="clean_success_more_tools">Tiếp tục dọn dẹp</string>
+    <string name="clean_success_experience">Bạn đã sẵn sàng cho một trải nghiệm mới đầy hứng khởi!</string>
+    <string name="clean_success_notification_hint">Tiếp tục dùng Trình dọn thông báo để tối ưu thêm.</string>
+    <string name="try_now">Thử ngay</string>
+    <string name="clean_success_big_file_hint">Tìm các tệp lớn đang chiếm dung lượng</string>
+    <string name="clean_success_screenshot_hint">Xóa ảnh chụp màn hình bạn không còn cần</string>
+    <string name="clean_success_duplicate_hint">Giải phóng dung lượng từ các ảnh tương tự</string>
+    <string name="done">Xong</string>
+    <string name="percentage_value" translatable="false">%1$d%%</string>
+    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
+    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Đã chọn</string>
     <string name="remove_selected_size">Xóa %1$s</string>
-    <string name="clean_confirm_title">Làm sạch các tập tin đã chọn?</string>
-    <string name="clean_confirm_message">Xóa các tệp %1$d và phát hành lên %2$s?</string>
-    <string name="clean_result_message">Đã xóa tệp %1$d, phát hành %2$s, %3$d không thành công</string>
+    <string name="clean_confirm_title">Dọn các tệp đã chọn?</string>
+    <string name="clean_confirm_message">Đã chọn: %1$d · Dung lượng sẽ giải phóng: %2$s. Xóa ngay?</string>
+    <string name="clean_result_message">Đã xóa: %1$d · Đã giải phóng: %2$s · Thất bại: %3$d</string>
     <string name="allow_permission">Cho phép quyền</string>
     <string name="network_traffic_permission_title">Xem lưu lượng mạng</string>
-    <string name="network_traffic_permission_text">Việc cho phép điều này cho phép bạn xem xu hướng sử dụng hàng ngày và thứ hạng dữ liệu ứng dụng để tiết kiệm thông minh hơn.</string>
+    <string name="network_traffic_permission_text">Cho phép quyền này giúp bạn xem xu hướng sử dụng hằng ngày và xếp hạng dữ liệu ứng dụng để tiết kiệm thông minh hơn.</string>
     <string name="app_manager_permission_title">Cấp quyền truy cập dữ liệu sử dụng ứng dụng để kiểm tra</string>
-    <string name="app_manager_permission_text">Việc cho phép điều này cho phép bạn xem xu hướng sử dụng hàng ngày và thứ hạng dữ liệu ứng dụng để tiết kiệm thông minh hơn.</string>
+    <string name="app_manager_permission_text">Cho phép quyền này giúp bạn xem xu hướng sử dụng hằng ngày và xếp hạng dữ liệu ứng dụng để tiết kiệm thông minh hơn.</string>
+    <string name="usage_access_select_app">Tìm “%1$s” trong danh sách và bật quyền truy cập</string>
     <string name="notification_permission_title">Cấp quyền truy cập thông báo</string>
-    <string name="notification_permission_text">Cho phép truy cập để mở khóa đầy đủ các tính năng.</string>
+    <string name="notification_permission_text">Bật quyền truy cập để sử dụng đầy đủ tính năng.</string>
     <string name="this_month">Tháng này</string>
     <string name="mobile_data">Dữ liệu di động</string>
-    <string name="wifi">Wi-Fi</string>
+    <string name="wifi">WIFI</string>
     <string name="download_speed">Tốc độ tải xuống</string>
     <string name="upload_speed">Tốc độ tải lên</string>
     <string name="app_data_ranking">Xếp hạng dữ liệu ứng dụng</string>
     <string name="no_usage_data">Không có dữ liệu sử dụng</string>
-    <string name="notification_empty">Thông báo sẽ bị chặn và liệt kê ở đây</string>
-    <string name="clean_all">Làm sạch tất cả</string>
-    <string name="uninstall_unused_apps">Gỡ cài đặt các ứng dụng không sử dụng</string>
-    <string name="installed_apps">Ứng dụng đã cài đặt</string>
-    <string name="last_used">Được sử dụng lần cuối</string>
-    <string name="last_used_value">Lần sử dụng cuối cùng: %1$s</string>
-    <string name="never_used">Chưa bao giờ sử dụng</string>
+    <string name="notification_empty">Thông báo sẽ bị chặn và hiển thị tại đây</string>
+    <string name="clean_all">Dọn tất cả</string>
+    <string name="uninstall_unused_apps">Gỡ cài đặt ứng dụng không dùng</string>
+    <string name="installed_apps">Ứng dụng đã cài</string>
+    <string name="sort_name">Tên</string>
+    <string name="sort_installation">Cài đặt</string>
+    <string name="sort_size">Kích thước</string>
+    <string name="last_used">Lần dùng gần nhất</string>
+    <string name="last_used_value">Lần dùng gần nhất: %1$s</string>
+    <string name="never_used">Chưa từng dùng</string>
     <string name="uninstall">Gỡ cài đặt</string>
     <string name="select_apps_first">Chọn ít nhất một ứng dụng</string>
     <string name="notification_access_unavailable">Dịch vụ thông báo đang kết nối</string>
+    <string name="notif_title">Thông báo</string>
+    <string name="notif_subtitle">Quản lý sự lộn xộn và giảm xao nhãng</string>
+    <string name="notif_badge" translatable="false">99+</string>
+    <string name="notif_hero_title">Giữ thông báo luôn gọn gàng</string>
+    <string name="notif_hero_subtitle">Xem thông báo đến từ đâu và nhóm theo ứng dụng</string>
+    <string name="notif_intercept_title">Chặn thông báo</string>
+    <string name="notif_intercept_desc">Khi bật, thông báo từ các ứng dụng khác sẽ bị chặn ngay lập tức. Các ứng dụng bạn cho phép bên dưới vẫn sẽ hiển thị.</string>
+    <string name="notif_allowed_apps_title">Ứng dụng được phép</string>
+    <string name="notif_allowed_apps_desc">Chọn ứng dụng vẫn được phép gửi thông báo</string>
+    <string name="notif_allowed_apps_subtitle">Các ứng dụng này vẫn có thể gửi thông báo khi chế độ chặn đang bật</string>
+    <string name="notif_allowed_apps_search">Tìm ứng dụng</string>
+    <string name="notif_allowed_apps_selected">Đã cho phép %1$d ứng dụng</string>
+    <string name="notif_allowed_apps_empty">Không tìm thấy ứng dụng</string>
+    <string name="notif_blocked_list_title">Thông báo bị chặn hôm nay</string>
+    <string name="notif_blocked_list_empty">Không có thông báo bị chặn hôm nay</string>
+    <string name="notif_clear_blocked">Xóa tất cả thông báo bị chặn</string>
+    <string name="notif_benefits_title">Bạn sẽ nhận được gì</string>
+    <string name="notif_benefit_1">Xem ứng dụng nào gửi thông báo cho bạn nhiều nhất</string>
+    <string name="notif_benefit_2">Tự động nhóm thông báo theo ứng dụng</string>
+    <string name="notif_benefit_3">Dọn thông báo ít giá trị chỉ bằng một lần chạm</string>
+    <string name="notif_top_apps_title">Ứng dụng hàng đầu hôm nay</string>
+    <string name="notif_no_data">Chưa có dữ liệu thông báo</string>
+    <string name="notif_count_fmt">%1$d thông báo</string>
+    <string name="notif_privacy_title">Quyền riêng tư</string>
+    <string name="notif_privacy_1">Thông báo được xử lý trên thiết bị</string>
+    <string name="notif_privacy_2">Không có dữ liệu thông báo nào được tải lên</string>
+    <string name="notif_privacy_3">Chi tiết thông báo bị chặn chỉ được lưu trên thiết bị này trong ngày hiện tại</string>
+    <string name="notif_cleaning_title">Đang dọn thông báo…</string>
+    <string name="notif_cleaning_subtitle">Vui lòng chờ trong khi các thông báo bị chặn được xóa</string>
+    <string name="notif_clear_success_title">Thành công!</string>
+    <string name="notif_clear_success_subtitle">Đã xóa các thông báo bị chặn</string>
     <string name="uninstall_count">Gỡ cài đặt (%1$d)</string>
     <string name="uninstall_cancelled">Đã hủy gỡ cài đặt</string>
-    <string name="apps_found">Ứng dụng %1$d</string>
+    <string name="apps_found">%1$d ứng dụng</string>
     <string name="apps_found_initial">0 ứng dụng</string>
     <string name="picture">Hình ảnh</string>
     <string name="screenshot">Ảnh chụp màn hình</string>
     <string name="others">Khác</string>
     <string name="all">Tất cả</string>
-    <string name="clean">Sạch sẽ</string>
-    <string name="clean_selected">Sạch sẽ (%1$d)</string>
+    <string name="clean">Dọn dẹp</string>
+    <string name="clean_selected">Dọn dẹp (%1$d)</string>
     <string name="large_files">Tệp lớn</string>
-    <string name="all_types">Tất cả các loại</string>
+    <string name="all_types">Tất cả loại</string>
     <string name="videos">Video</string>
     <string name="images">Hình ảnh</string>
     <string name="audio">Âm thanh</string>
     <string name="documents">Tài liệu</string>
+    <string name="archives">Tệp nén</string>
+    <string name="apk_files">APK</string>
+    <string name="other_files">Khác</string>
+    <string name="size_10_mb">10MB</string>
+    <string name="size_50_mb">50MB</string>
+    <string name="size_100_mb">100MB</string>
+    <string name="size_500_mb">500MB</string>
+    <string name="size_1_gb">1GB</string>
+    <string name="one_week">1 tuần</string>
     <string name="one_month">1 tháng</string>
+    <string name="three_months">3 tháng</string>
     <string name="six_months">6 tháng</string>
     <string name="one_year">1 năm</string>
-    <string name="all_time">Mọi lúc</string>
-    <string name="scanning_picture">Đang quét ảnh...</string>
-    <string name="scanning_large_files">Đang quét các tệp lớn...</string>
+    <string name="all_time">Mọi thời gian</string>
+    <string name="filter_value" translatable="false">%1$s  ▾</string>
+    <string name="scanning_picture">Đang quét hình ảnh...</string>
+    <string name="scanning_large_files">Đang quét tệp lớn...</string>
     <string name="scanning_video">Đang quét video...</string>
     <string name="video_manage">Quản lý video</string>
-    <string name="no_picture_files_found">Không tìm thấy tập tin hình ảnh</string>
-    <string name="no_video_files_found">Không tìm thấy tập tin video nào</string>
+    <string name="no_picture_files_found">Không tìm thấy tệp hình ảnh</string>
+    <string name="no_video_files_found">Không tìm thấy tệp video</string>
     <string name="no_large_files_found">Không tìm thấy tệp lớn</string>
-    <string name="no_files_select">Vui lòng chọn tập tin để xóa</string>
+    <string name="no_files_select">Vui lòng chọn tệp để xóa</string>
     <string name="delete">Xóa</string>
-    <string name="delete_files_title">Xóa các tập tin đã chọn?</string>
-    <string name="delete_files_message">Xóa các tệp %1$d có tổng kích thước %2$s?</string>
-    <string name="files_deleted_result">Đã xóa tệp %1$d, phát hành %2$s, %3$d không thành công</string>
-    <string name="storage_permission_required">Cần có quyền lưu trữ</string>
-    <string name="storage_permission_explanation">Cần có quyền truy cập vào bộ nhớ để tìm và xóa các tệp bạn chọn. Bạn có thể thử lại hoặc mở cài đặt ứng dụng.</string>
+    <string name="delete_files_title">Xóa các tệp đã chọn?</string>
+    <string name="delete_files_message">Xóa %1$d tệp có tổng dung lượng %2$s?</string>
+    <string name="files_deleted_result">Đã xóa %1$d tệp, giải phóng %2$s, %3$d thất bại</string>
+    <string name="storage_permission_required">Cần quyền truy cập bộ nhớ</string>
+    <string name="storage_permission_explanation">Cần quyền truy cập bộ nhớ để tìm và xóa các tệp bạn chọn. Bạn có thể thử lại hoặc mở cài đặt ứng dụng.</string>
     <string name="open_app_settings">Mở cài đặt</string>
     <string name="try_again">Thử lại</string>
-    <string name="files_and_size">Các tệp %1$d / %2$s</string>
+    <string name="files_and_size">%1$d tệp / %2$s</string>
     <string name="go_back">Quay lại</string>
+    <string name="running_apps_count">%1$d ứng dụng đang chạy nền</string>
+    <string name="close">Đóng</string>
+    <string name="force_stop_title">Đóng ứng dụng này?</string>
+    <string name="force_stop_explanation">Ở màn hình tiếp theo, nhấn “Buộc dừng” để đóng ứng dụng.</string>
+    <string name="continue_text">Tiếp tục</string>
+    <string name="cancel">Hủy</string>
+    <string name="no_running_apps">Không có ứng dụng chạy nền nào hiển thị</string>
+    <string name="scanning_device">Đang quét thiết bị…</string>
+    <string name="scanning_devices_do_not_leave">Đang quét thiết bị, vui lòng không rời đi</string>
+    <string name="scan_complete">Quét hoàn tất</string>
+    <string name="cpu_model_title">Mẫu CPU</string>
+    <string name="ram">RAM</string>
+    <string name="resolution">Độ phân giải</string>
+    <string name="link_speed">Tốc độ liên kết</string>
+    <string name="android_version_value">Android %1$s</string>
+    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="link_speed_value">%1$dMbps</string>
+    <string name="device_model">Thiết bị</string>
+    <string name="android_version">Phiên bản Android</string>
+    <string name="cpu_model">Mẫu CPU</string>
+    <string name="memory">Bộ nhớ</string>
+    <string name="storage">Lưu trữ</string>
+    <string name="screen_resolution">Độ phân giải màn hình</string>
+    <string name="screen_density">Mật độ màn hình</string>
+    <string name="ip_address">Địa chỉ IP</string>
+    <string name="opengl_es">OpenGL ES</string>
+    <string name="vulkan">Vulkan</string>
+    <string name="supported">Được hỗ trợ</string>
+    <string name="not_supported">Không được hỗ trợ</string>
+    <string name="unknown">Không xác định</string>
+    <string name="charging_status">Trạng thái sạc</string>
+    <string name="battery_health">Tình trạng</string>
+    <string name="battery_type">Loại pin</string>
+    <string name="battery_capacity">Dung lượng pin</string>
+    <string name="temperature">Nhiệt độ</string>
+    <string name="voltage">Điện áp</string>
+    <string name="electric_current">Dòng điện</string>
+    <string name="usable_time">Thời gian sử dụng</string>
+    <string name="pay_attention_battery_health">Hãy chú ý đến tình trạng pin..</string>
+    <string name="got_it">Đã hiểu</string>
+    <string name="charging">Đang sạc</string>
+    <string name="discharging">Đang xả</string>
+    <string name="fully_charged">Đã sạc đầy</string>
+    <string name="not_charging">Không sạc</string>
+    <string name="battery_health_good">Tốt</string>
+    <string name="battery_health_overheat">Quá nóng</string>
+    <string name="battery_health_dead">Hỏng</string>
+    <string name="battery_health_over_voltage">Quá áp</string>
+    <string name="battery_health_cold">Lạnh</string>
+    <string name="network_test_ready">Sẵn sàng kiểm tra mạng của bạn</string>
+    <string name="network_test_connecting">Đang kiểm tra độ trễ…</string>
+    <string name="network_test_downloading">Đang kiểm tra tốc độ tải xuống…</string>
+    <string name="network_test_uploading">Đang kiểm tra tốc độ tải lên…</string>
+    <string name="network_test_complete">Kiểm tra mạng hoàn tất</string>
+    <string name="network_test_failed">Không thể hoàn tất kiểm tra mạng</string>
+    <string name="network_unavailable">Mạng không khả dụng</string>
+    <string name="ping">Ping</string>
+    <string name="start_test">Bắt đầu kiểm tra</string>
+    <string name="test_again">Kiểm tra lại</string>
+    <string name="testing">Đang kiểm tra…</string>
+    <string name="network_test_data_note">Một lần kiểm tra đầy đủ sử dụng khoảng 3 MB dữ liệu.</string>
+    <string name="network_connection_value">Kết nối: %1$s</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_mobile">Dữ liệu di động</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Khác</string>
+    <string name="ping_value" translatable="false">%1$d ms</string>
+    <string name="ping_placeholder" translatable="false">-- ms</string>
+    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
+    <string name="speed_placeholder" translatable="false">-- Mbps</string>
+    <string name="temperature_value" translatable="false">%1$.1f °C</string>
+    <string name="voltage_value" translatable="false">%1$.2f V</string>
+    <string name="current_value" translatable="false">%1$d mA</string>
+    <string name="capacity_value" translatable="false">%1$d mAh</string>
+    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
+    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
+    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
+    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
+    <string name="density_value" translatable="false">%1$d dpi</string>
+    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
+    <string name="version_value" translatable="false">V%1$s</string>
+    <string name="dup_title" translatable="false">Similar Photos</string>
+    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
+    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
+    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
+    <string name="dup_best_photo" translatable="false">Best</string>
+    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
+    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
+    <string name="dup_none_selected" translatable="false">0 selected</string>
+    <string name="dup_selected_count" translatable="false">%1$d selected</string>
+    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
+    <string name="dup_selected_size" translatable="false">%1$s selected</string>
+    <string name="dup_delete" translatable="false">Delete selected</string>
+    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
+    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
+    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
+    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
+    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
+    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
+    <string name="dup_empty_title" translatable="false">No similar photos found</string>
+    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
+    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
+
+    <string name="app_manager_installed">Đã cài: %1$s</string>
+    <string name="app_manager_last_used">Lần dùng gần nhất: %1$s</string>
+    <string name="app_manager_last_used_today">Hôm nay</string>
+    <string name="app_manager_last_used_unknown">không xác định</string>
+
 </resources>
