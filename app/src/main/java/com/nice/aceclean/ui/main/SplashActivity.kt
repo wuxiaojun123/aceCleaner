@@ -1,11 +1,16 @@
 package com.nice.aceclean.ui.main
 
+import android.Manifest
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
 import com.nice.aceclean.ui.base.BaseActivity
 
@@ -16,6 +21,12 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView
     private var splashAnimator: ValueAnimator? = null
+    private var navigationStarted = false
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) {
+        openNextScreen()
+    }
 
     override fun initViews() {
         progressBar = view(R.id.splash_progress)
@@ -32,19 +43,37 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
                 loadingText.text = getString(R.string.loading, progress)
             }
             doOnEnd {
-                val target = if (DeviceScanActivity.shouldShow(this@SplashActivity)) {
-                    DeviceScanActivity::class.java
-                } else {
-                    MainActivity::class.java
-                }
-                startActivity(Intent(this@SplashActivity, target))
-                finish()
+                if (!isFinishing && !isDestroyed) requestNotificationPermissionIfNeeded()
             }
             start()
         }
     }
 
+    private fun requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            openNextScreen()
+        }
+    }
+
+    private fun openNextScreen() {
+        if (navigationStarted || isFinishing || isDestroyed) return
+        navigationStarted = true
+        val target = if (DeviceScanActivity.shouldShow(this)) {
+            DeviceScanActivity::class.java
+        } else {
+            MainActivity::class.java
+        }
+        startActivity(Intent(this, target))
+        finish()
+    }
+
     override fun onDestroy() {
+        splashAnimator?.removeAllListeners()
         splashAnimator?.cancel()
         super.onDestroy()
     }
