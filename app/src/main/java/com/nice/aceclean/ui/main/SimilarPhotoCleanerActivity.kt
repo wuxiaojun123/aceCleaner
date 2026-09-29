@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,7 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
         view<View>(R.id.duplicate_back).setOnClickListener { finish() }
         keepBestSwitch = view(R.id.duplicate_keep_best_switch)
         keepBestSwitch.isChecked = true
+        keepBestSwitch.setTrackOnColor(ContextCompat.getColor(this, R.color.color_FF42B8FF))
 
         adapter = SimilarPhotosAdapter(
             lifecycleScope,
