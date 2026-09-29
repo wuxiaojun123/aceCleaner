@@ -1,7 +1,9 @@
 package com.nice.aceclean.ui.base
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.SystemBarStyle
@@ -29,8 +31,8 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
             navigationBarStyle = SystemBarStyle.light(navigationBarColor, navigationBarColor),
         )
         super.onCreate(savedInstanceState)
-        window.decorView.setBackgroundColor(statusBarColor)
         setContentView(layoutResId)
+        syncStatusBarBackground(layoutResId)
         applySystemBarInsets(findViewById(android.R.id.content))
         initViews()
         initData()
@@ -66,7 +68,28 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
     /** Replaces this activity's screen while preserving the shared system-bar inset handling. */
     protected fun setActivityContent(@LayoutRes layoutResId: Int) {
         setContentView(layoutResId)
+        syncStatusBarBackground(layoutResId)
         applySystemBarInsets(findViewById(android.R.id.content))
+    }
+
+    private fun syncStatusBarBackground(@LayoutRes layoutResId: Int) {
+        val root = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+        val fallbackColor = ContextCompat.getColor(this, statusBarColorRes)
+        val color = when (layoutResId) {
+            R.layout.activity_allowed_apps,
+            R.layout.activity_notification_cleaning,
+            R.layout.fragment_notification_cleaner ->
+                ContextCompat.getColor(this, R.color.notification_manager_screen_top)
+            else -> (root?.background as? ColorDrawable)?.color ?: fallbackColor
+        }
+        // The content is inset below the status bar, so the decor draws this exposed area.
+        window.decorView.setBackgroundColor(color)
+
+        // On older Android versions the system paints the status bar itself.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            @Suppress("DEPRECATION")
+            window.statusBarColor = color
+        }
     }
 
     protected abstract fun initViews()

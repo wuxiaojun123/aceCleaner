@@ -71,31 +71,11 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <FrameLayout
+        <include
+            layout="@layout/layout_feature_header"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <ImageButton
-                android:id="@+id/feature_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="6dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/go_back"
-                android:padding="16dp"
-                android:src="@drawable/ram_icon_back" />
-
-            <TextView
-                android:id="@+id/feature_title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#FF1C1B22"
-                android:textSize="21sp"
-                android:textStyle="bold" />
-        </FrameLayout>
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp" />
 
         <ImageView
             android:layout_width="80dp"
@@ -151,24 +131,17 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ram_app_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="168dp"
             android:layout_marginBottom="60dp"
             android:clipToPadding="false"
-            android:fillViewport="false"
             android:overScrollMode="never"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:id="@+id/ram_app_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+            android:scrollbars="none" />
 
         <TextView
             android:id="@+id/ram_ok_button"
