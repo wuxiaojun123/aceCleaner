@@ -2,12 +2,17 @@ package com.nice.aceclean.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.NetworkUsageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,9 +22,14 @@ class NetworkTrafficActivity : PermissionFeatureActivity(
     FeatureType.NETWORK_TRAFFIC,
     R.layout.fragment_network_traffic,
 ) {
+    private val appAdapter = NetworkAppAdapter()
 
     override fun initFeatureViews() {
         view<View>(R.id.network_back).setOnClickListener { finish() }
+        view<RecyclerView>(R.id.network_app_list).apply {
+            layoutManager = LinearLayoutManager(this@NetworkTrafficActivity)
+            adapter = appAdapter
+        }
         loadTraffic()
     }
 
@@ -41,27 +51,10 @@ class NetworkTrafficActivity : PermissionFeatureActivity(
             view<TextView>(R.id.network_mobile).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.mobileBytes)
             view<TextView>(R.id.network_wifi).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.wifiBytes)
             renderDailyBars(usage.dailyBytes)
-
-            val container = view<LinearLayout>(R.id.network_app_list)
-            container.removeAllViews()
-            if (apps.isEmpty()) {
-                TextView(this@NetworkTrafficActivity).apply {
-                    setText(R.string.no_usage_data)
-                    textSize = 14f
-                    setTextColor(0xFF92939A.toInt())
-                    gravity = android.view.Gravity.CENTER
-                    setPadding(0, 32, 0, 32)
-                    container.addView(this)
-                }
-                return@launch
-            }
-            apps.forEach { app ->
-                val item = LayoutInflater.from(this@NetworkTrafficActivity).inflate(R.layout.item_network_app, container, false)
-                item.findViewById<ImageView>(R.id.network_app_icon).setImageDrawable(packageManager.getApplicationIcon(app.applicationInfo))
-                item.findViewById<TextView>(R.id.network_app_name).text = app.label
-                item.findViewById<TextView>(R.id.network_app_package).text = app.packageName
-                item.findViewById<TextView>(R.id.network_app_usage).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, app.rxBytes + app.txBytes)
-                container.addView(item)
+            view<View>(R.id.network_app_empty).visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
+            view<RecyclerView>(R.id.network_app_list).visibility = if (apps.isEmpty()) View.GONE else View.VISIBLE
+            appAdapter.submitList(apps) {
+                view<View>(R.id.network_content).visibility = View.VISIBLE
             }
         }
     }
@@ -81,6 +74,41 @@ class NetworkTrafficActivity : PermissionFeatureActivity(
                 height = if (value <= 0L) minimumHeight else
                     (minimumHeight + (maximumHeight - minimumHeight) * value / maximum).toInt()
             }
+        }
+    }
+}
+
+private class NetworkAppAdapter : ListAdapter<InstalledAppInfo, NetworkAppAdapter.ViewHolder>(DIFF_CALLBACK) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val item = LayoutInflater.from(parent.context).inflate(R.layout.item_network_app, parent, false)
+        return ViewHolder(item)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val icon: ImageView = itemView.findViewById(R.id.network_app_icon)
+        private val name: TextView = itemView.findViewById(R.id.network_app_name)
+        private val packageName: TextView = itemView.findViewById(R.id.network_app_package)
+        private val usage: TextView = itemView.findViewById(R.id.network_app_usage)
+
+        fun bind(app: InstalledAppInfo) {
+            icon.setImageDrawable(itemView.context.packageManager.getApplicationIcon(app.applicationInfo))
+            name.text = app.label
+            packageName.text = app.packageName
+            usage.text = DeviceStats.formatBytes(itemView.context, app.rxBytes + app.txBytes)
+        }
+    }
+
+    private companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<InstalledAppInfo>() {
+            override fun areItemsTheSame(oldItem: InstalledAppInfo, newItem: InstalledAppInfo) =
+                oldItem.packageName == newItem.packageName
+
+            override fun areContentsTheSame(oldItem: InstalledAppInfo, newItem: InstalledAppInfo) =
+                oldItem == newItem
         }
     }
 }
