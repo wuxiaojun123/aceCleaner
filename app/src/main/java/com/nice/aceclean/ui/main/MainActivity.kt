@@ -8,7 +8,6 @@ import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import com.nice.aceclean.R
 import com.nice.aceclean.service.StickyNotificationService
-import com.nice.aceclean.ui.main.LanguageActivity
 import com.nice.aceclean.ui.base.BaseActivity
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
@@ -80,7 +79,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     fun openVideoCleaner() = startActivity(Intent(this, VideoCleanerActivity::class.java))
 
-    fun openDuplicatePhotoCleaner() = startActivity(Intent(this, DuplicatePhotoCleanerActivity::class.java))
+    fun openDuplicatePhotoCleaner() = startActivity(Intent(this, SimilarPhotoCleanerActivity::class.java))
 
     fun openRamStatus() = startActivity(Intent(this, RamStatusActivity::class.java))
 

@@ -125,7 +125,7 @@
             android:exported="false"
             android:theme="@style/Theme.AceClean" />
         <activity
-            android:name=".ui.main.DuplicatePhotoCleanerActivity"
+            android:name=".ui.main.SimilarPhotoCleanerActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean" />
         <activity

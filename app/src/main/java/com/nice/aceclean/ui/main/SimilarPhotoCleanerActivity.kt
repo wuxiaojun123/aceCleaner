@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Rect
-import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.text.format.Formatter
@@ -28,7 +27,7 @@ import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.ui.widget.IosSwitchView
 import kotlinx.coroutines.launch
 
-class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_photo_cleaner) {
+class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_photo_cleaner) {
     private lateinit var adapter: SimilarPhotosAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var keepBestSwitch: IosSwitchView
@@ -66,7 +65,7 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
         }
         view<RecyclerView>(R.id.duplicate_photo_list).apply {
             layoutManager = gridLayoutManager
-            adapter = this@DuplicatePhotoCleanerActivity.adapter
+            adapter = this@SimilarPhotoCleanerActivity.adapter
             addItemDecoration(GridSpacingDecoration(resources.getDimensionPixelSize(R.dimen.dup_grid_spacing)))
         }
         keepBestSwitch.setOnCheckedChangeListener { _, enabled ->
@@ -88,8 +87,8 @@ class DuplicatePhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_p
     private fun loadPhotos() {
         showLoading(true)
         lifecycleScope.launch {
-            val clusters = runCatching { SimilarPhotoScanner.scan(this@DuplicatePhotoCleanerActivity) }
-                .onFailure { Toast.makeText(this@DuplicatePhotoCleanerActivity, R.string.dup_scan_failed, Toast.LENGTH_SHORT).show() }
+            val clusters = runCatching { SimilarPhotoScanner.scan(this@SimilarPhotoCleanerActivity) }
+                .onFailure { Toast.makeText(this@SimilarPhotoCleanerActivity, R.string.dup_scan_failed, Toast.LENGTH_SHORT).show() }
                 .getOrDefault(emptyList())
             val rows = buildRows(clusters)
             adapter.submit(rows)

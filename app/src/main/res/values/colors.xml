@@ -41,4 +41,6 @@
     <color name="notification_manager_privacy_border">#D6EFE9</color>
     <color name="notification_manager_teal">#4F6FEA</color>
 
+    <color name="color_FF42B8FF">#FF42B8FF</color>
+
 </resources>
