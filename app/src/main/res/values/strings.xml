@@ -111,6 +111,10 @@
     <string name="clean_success_big_file_hint">Find large files taking up space</string>
     <string name="clean_success_screenshot_hint">Clear screenshots you no longer need</string>
     <string name="clean_success_duplicate_hint">Free space from similar photos</string>
+    <string name="string_delete_success_space_freed">%1$s freed</string>
+    <string name="string_delete_success_continue_with">Keep using %1$s for further optimization.</string>
+    <string name="string_delete_success_more_tools">More cleaning tools</string>
+    <string name="string_delete_success_video_hint">Review videos taking up space</string>
     <string name="done">Done</string>
     <string name="percentage_value" translatable="false">%1$d%%</string>
     <string name="download_speed_value" translatable="false">%1$s/s ↓</string>

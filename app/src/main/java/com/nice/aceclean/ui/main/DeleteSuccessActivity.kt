@@ -2,39 +2,75 @@ package com.nice.aceclean.ui.main
 
 import android.content.Context
 import android.content.Intent
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.ActivityDeleteSuccessBinding
+import com.nice.aceclean.databinding.ItemDeleteSuccessFeatureBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
 
 /** Shared completion screen displayed after files have actually been removed. */
-class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>({ ActivityDeleteSuccessBinding.inflate(it) }, R.layout.activity_delete_success) {
+class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
+    { ActivityDeleteSuccessBinding.inflate(it) },
+    R.layout.activity_delete_success,
+) {
 
     override fun initViews() {
-        val removedCount = intent.getIntExtra(EXTRA_REMOVED_COUNT, 0)
-        val freedBytes = intent.getLongExtra(EXTRA_FREED_BYTES, 0L)
-        val featureIcon = intent.getIntExtra(EXTRA_FEATURE_ICON, R.drawable.ic_competitor_success)
-        val source = intent.getStringExtra(EXTRA_SOURCE).orEmpty()
+        val current = Feature.fromSource(intent.getStringExtra(EXTRA_SOURCE))
+        val recommended = current.recommended
+        val removedCount = intent.getIntExtra(EXTRA_REMOVED_COUNT, 0).coerceAtLeast(0)
+        val freedBytes = intent.getLongExtra(EXTRA_FREED_BYTES, 0L).coerceAtLeast(0L)
 
-        binding.deleteSuccessTitle.text = featureTitle(source)
-        binding.deleteSuccessFeatureIcon.setImageResource(featureIcon)
-        binding.deleteSuccessTryNow.setOnClickListener {
-            startActivity(Intent(this, NotificationCleanerActivity::class.java))
-            finish()
+        binding.deleteSuccessTitle.setText(current.titleRes)
+        binding.deleteSuccessResultMessage.text = getString(R.string.clean_success_files, removedCount).let { result ->
+            if (freedBytes > 0L) {
+                result + "\n" + getString(
+                    R.string.string_delete_success_space_freed,
+                    DeviceStats.formatBytes(this, freedBytes),
+                )
+            } else {
+                result
+            }
         }
-        bindTool(R.id.delete_success_notification, NotificationCleanerActivity::class.java)
-        bindTool(R.id.delete_success_apps, AppManagerActivity::class.java)
-        bindTool(R.id.delete_success_network, NetworkTrafficActivity::class.java)
-        bindTool(R.id.delete_success_cleanup, CleanUpActivity::class.java)
-        bindTool(R.id.delete_success_screenshot, ScreenshotCleanerActivity::class.java)
+        binding.deleteSuccessNextIcon.setImageResource(recommended.topIconRes)
+        val recommendedName = getString(recommended.titleRes)
+        val prompt = getString(R.string.string_delete_success_continue_with, recommendedName)
+        binding.deleteSuccessRecommendedPrompt.text = SpannableString(prompt).apply {
+            val start = prompt.indexOf(recommendedName)
+            if (start >= 0) {
+                setSpan(
+                    ForegroundColorSpan(getColor(R.color.color_FF42B8FF)),
+                    start,
+                    start + recommendedName.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                )
+            }
+        }
+
+        binding.deleteSuccessOtherFeatures.layoutManager = LinearLayoutManager(this)
+        binding.deleteSuccessOtherFeatures.adapter = FeatureAdapter(
+            Feature.entries.filterNot { it == current },
+            ::openFeature,
+        )
         binding.deleteSuccessBack.setOnClickListener { returnToHome() }
+        binding.deleteSuccessTryNow.setOnClickListener { openFeature(recommended) }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() = returnToHome()
         })
+    }
+
+    private fun openFeature(feature: Feature) {
+        startActivity(Intent(this, feature.destination))
+        finish()
     }
 
     private fun returnToHome() {
@@ -46,27 +82,74 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>({ Activ
         finish()
     }
 
-    private fun bindTool(cardId: Int, activityClass: Class<out BaseActivity<*>>) {
-        val card = when (cardId) {
-            R.id.delete_success_notification -> binding.deleteSuccessNotification
-            R.id.delete_success_apps -> binding.deleteSuccessApps
-            R.id.delete_success_network -> binding.deleteSuccessNetwork
-            R.id.delete_success_cleanup -> binding.deleteSuccessCleanup
-            R.id.delete_success_screenshot -> binding.deleteSuccessScreenshot
-            else -> error("Unknown tool card: $cardId")
-        }
-        card.setOnClickListener {
-            startActivity(Intent(this, activityClass))
-            finish()
+    private enum class Feature(
+        val source: String,
+        @param:StringRes val titleRes: Int,
+        @param:StringRes val descriptionRes: Int,
+        @param:DrawableRes val iconRes: Int,
+        @param:DrawableRes val topIconRes: Int,
+        val destination: Class<out BaseActivity<*>>,
+    ) {
+        CLEAN_UP(
+            SOURCE_CLEAN_UP, R.string.clean_up, R.string.clean_success_message,
+            R.drawable.hkep_ic_one_click_finish, R.drawable.hkep_ic_one_click_finish_top,
+            CleanUpActivity::class.java,
+        ),
+        SCREENSHOT(
+            SOURCE_SCREENSHOT, R.string.screenshot_cleaner, R.string.clean_success_screenshot_hint,
+            R.drawable.hkep_ic_picture_finish, R.drawable.hkep_ic_picture_finish_top,
+            ScreenshotCleanerActivity::class.java,
+        ),
+        BIG_FILE(
+            SOURCE_BIG_FILE, R.string.big_file_cleaner, R.string.clean_success_big_file_hint,
+            R.drawable.hkep_ic_large_files_finish, R.drawable.hkep_ic_large_files_finish_top,
+            BigFileCleanerActivity::class.java,
+        ),
+        VIDEO(
+            SOURCE_VIDEO, R.string.video_cleaner, R.string.string_delete_success_video_hint,
+            R.drawable.icon_video_cleaner, R.drawable.icon_video_cleaner,
+            VideoCleanerActivity::class.java,
+        ),
+        DUPLICATE(
+            SOURCE_DUPLICATE, R.string.duplicate_photo_cleaner, R.string.clean_success_duplicate_hint,
+            R.drawable.hkep_icon_duplicate_photo_cleaner_finish,
+            R.drawable.hkep_icon_duplicate_photo_cleaner_finish_top,
+            SimilarPhotoCleanerActivity::class.java,
+        );
+
+        val recommended: Feature
+            get() = when (this) {
+                CLEAN_UP -> SCREENSHOT
+                SCREENSHOT -> DUPLICATE
+                BIG_FILE -> VIDEO
+                VIDEO -> SCREENSHOT
+                DUPLICATE -> BIG_FILE
+            }
+
+        companion object {
+            fun fromSource(source: String?): Feature = entries.firstOrNull { it.source == source } ?: CLEAN_UP
         }
     }
 
-    private fun featureTitle(source: String) = when (source) {
-        SOURCE_SCREENSHOT -> getString(R.string.screenshot_cleaner)
-        SOURCE_BIG_FILE -> getString(R.string.big_file_cleaner)
-        SOURCE_VIDEO -> getString(R.string.video_cleaner)
-        SOURCE_DUPLICATE -> getString(R.string.duplicate_photo_cleaner)
-        else -> getString(R.string.clean_up)
+    private class FeatureAdapter(
+        private val features: List<Feature>,
+        private val onClick: (Feature) -> Unit,
+    ) : RecyclerView.Adapter<FeatureAdapter.Holder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
+            Holder(ItemDeleteSuccessFeatureBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
+        override fun onBindViewHolder(holder: Holder, position: Int) {
+            val feature = features[position]
+            holder.binding.featureIcon.setImageResource(feature.iconRes)
+            holder.binding.featureTitle.setText(feature.titleRes)
+            holder.binding.featureDescription.setText(feature.descriptionRes)
+            holder.binding.root.setOnClickListener { onClick(feature) }
+        }
+
+        override fun getItemCount(): Int = features.size
+
+        class Holder(val binding: ItemDeleteSuccessFeatureBinding) : RecyclerView.ViewHolder(binding.root)
     }
 
     companion object {

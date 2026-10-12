@@ -1,10 +1,8 @@
 package com.nice.aceclean.ui.main
 
 import android.content.Intent
-import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.ActivityLanguageBinding
 import com.nice.aceclean.language.LanguageAdapter
@@ -134,7 +132,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>({ ActivityLanguag
     )
 
     override fun initViews() {
-        binding.backButton.setOnClickListener { finish() }
+        binding.featureHeader.featureTitle.setText(R.string.language_title)
+        binding.featureHeader.featureBack.setOnClickListener { finish() }
         setupLanguageList()
     }
 
