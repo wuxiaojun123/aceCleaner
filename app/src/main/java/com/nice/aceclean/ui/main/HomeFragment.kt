@@ -4,75 +4,74 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.FragmentHomeBinding
 import com.nice.aceclean.ui.base.BaseFragment
-import com.nice.aceclean.ui.widget.IosSwitchView
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, attach ->
+    FragmentHomeBinding.inflate(inflater, container, attach)
+}) {
 
-    private lateinit var rootView: View
     private var syncingNotificationSwitch = false
 
-    override fun initViews(root: View) {
-        rootView = root
-        root.findViewById<View>(R.id.clean_up_button).setOnClickListener {
+    override fun initViews() {
+        binding.cleanUpButton.setOnClickListener {
             (activity as? MainActivity)?.openCleanUp()
         }
-        root.findViewById<View>(R.id.network_traffic_card).setOnClickListener {
+        binding.homePrimaryNetwork.root.setOnClickListener {
             (activity as? MainActivity)?.openNetworkTraffic()
         }
-        root.findViewById<View>(R.id.notification_cleaner_card).setOnClickListener {
+        binding.homeWideNotification.root.setOnClickListener {
             (activity as? MainActivity)?.openNotificationCleaner()
         }
-        root.findViewById<View>(R.id.app_manager_card).setOnClickListener {
+        binding.homePrimaryAppManager.root.setOnClickListener {
             (activity as? MainActivity)?.openAppManager()
         }
-        root.findViewById<View>(R.id.screenshot_cleaner_card).setOnClickListener {
+        binding.homeSecondaryScreenshot.root.setOnClickListener {
             (activity as? MainActivity)?.openScreenshotCleaner()
         }
-        root.findViewById<View>(R.id.big_file_cleaner_card).setOnClickListener {
+        binding.homeSecondaryLargeFile.root.setOnClickListener {
             (activity as? MainActivity)?.openBigFileCleaner()
         }
-        root.findViewById<View>(R.id.video_cleaner_card).setOnClickListener {
+        binding.homeWideVideo.root.setOnClickListener {
             (activity as? MainActivity)?.openVideoCleaner()
         }
-        root.findViewById<View>(R.id.duplicate_photo_cleaner_card).setOnClickListener {
+        binding.homePrimaryDuplicate.root.setOnClickListener {
             (activity as? MainActivity)?.openDuplicatePhotoCleaner()
         }
-        root.findViewById<View>(R.id.ram_status_card).setOnClickListener {
+        binding.homeToolRam.root.setOnClickListener {
             (activity as? MainActivity)?.openRamStatus()
         }
-        root.findViewById<View>(R.id.device_scan_card).setOnClickListener {
+        binding.homeToolDevice.root.setOnClickListener {
             (activity as? MainActivity)?.openDeviceScan()
         }
-        root.findViewById<View>(R.id.battery_info_card).setOnClickListener {
+        binding.homeToolBattery.root.setOnClickListener {
             (activity as? MainActivity)?.openBatteryInfo()
         }
-        root.findViewById<View>(R.id.network_test_card).setOnClickListener {
+        binding.homeToolNetworkTest.root.setOnClickListener {
             (activity as? MainActivity)?.openNetworkTest()
         }
 
-        root.findViewById<View>(R.id.language_button).setOnClickListener {
+        binding.languageButton.setOnClickListener {
             (activity as? MainActivity)?.openLanguage()
         }
 
-        root.findViewById<View>(R.id.settings_button).setOnClickListener {
+        binding.settingsButton.setOnClickListener {
             startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${requireContext().packageName}")))
         }
-        root.findViewById<View>(R.id.notification_card).setOnClickListener {
+        binding.notificationCard.setOnClickListener {
             (activity as? MainActivity)?.openNotificationCleaner()
         }
-        root.findViewById<IosSwitchView>(R.id.notification_switch).setOnCheckedChangeListener { _, _ ->
+        binding.notificationSwitch.setOnCheckedChangeListener { _, _ ->
             if (!syncingNotificationSwitch) (activity as? MainActivity)?.openNotificationCleaner()
         }
 
@@ -82,14 +81,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
-        if (::rootView.isInitialized) renderDeviceState()
+        if (hasViewBinding) renderDeviceState()
     }
 
     private fun renderDeviceState() {
         val storage = DeviceStats.storageSnapshot(requireContext())
-        rootView.findViewById<TextView>(R.id.storage_percentage).text =
+        binding.storagePercentage.text =
             getString(R.string.percentage_value, storage.usedPercent)
-        rootView.findViewById<TextView>(R.id.storage_usage).text = getString(
+        binding.storageUsage.text = getString(
             R.string.storage_usage_value,
             DeviceStats.formatBytes(requireContext(), storage.usedBytes),
             DeviceStats.formatBytes(requireContext(), storage.totalBytes),
@@ -98,13 +97,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             requireContext(),
             SpecialPermission.NOTIFICATION_LISTENER,
         )
-        rootView.findViewById<View>(R.id.notification_card).visibility = if (notificationPermissionGranted) {
+        binding.notificationCard.visibility = if (notificationPermissionGranted) {
             View.GONE
         } else {
             View.VISIBLE
         }
         syncingNotificationSwitch = true
-        rootView.findViewById<IosSwitchView>(R.id.notification_switch).isChecked =
+        binding.notificationSwitch.isChecked =
             notificationPermissionGranted
         syncingNotificationSwitch = false
     }
@@ -116,7 +115,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 while (true) {
                     delay(NETWORK_SAMPLE_INTERVAL_MS)
                     val bytesPerSecond = speedSampler.sampleBytesPerSecond()
-                    rootView.findViewById<TextView>(R.id.home_network_speed).text =
+                    binding.homePrimaryNetwork.homeNetworkSpeed.text =
                         getString(R.string.network_speed_value, NetworkSpeedSampler.format(bytesPerSecond))
                 }
             }

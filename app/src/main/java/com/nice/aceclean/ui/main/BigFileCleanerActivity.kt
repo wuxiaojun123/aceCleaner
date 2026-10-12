@@ -30,6 +30,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemBigFileBinding
+import com.nice.aceclean.databinding.ItemBigFileFilterOptionBinding
+import com.nice.aceclean.databinding.PopupBigFileFilterBinding
+import com.nice.aceclean.databinding.FragmentBigFileCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
@@ -39,8 +43,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class BigFileCleanerActivity : StorageCleanerActivity(
+class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBinding>(
     StorageCleanerType.BIG_FILE,
+    { FragmentBigFileCleanerBinding.inflate(it) },
     R.layout.fragment_big_file_cleaner,
 ) {
 
@@ -60,7 +65,6 @@ class BigFileCleanerActivity : StorageCleanerActivity(
     private var minimumBytes = 10L * 1024L * 1024L
     private var maximumAgeDays = 0
     private var filterPopup: PopupWindow? = null
-    private lateinit var rootView: View
     private lateinit var adapter: BigFileAdapter
     private var deleteConfirmationDialog: Dialog? = null
 
@@ -84,17 +88,16 @@ class BigFileCleanerActivity : StorageCleanerActivity(
     }
 
     override fun initResultViews() {
-        rootView = findViewById(android.R.id.content)
         adapter = BigFileAdapter()
-        rootView.findViewById<RecyclerView>(R.id.large_file_list).apply {
+        resultBinding.largeFileList.apply {
             layoutManager = LinearLayoutManager(this@BigFileCleanerActivity)
             adapter = this@BigFileCleanerActivity.adapter
         }
-        rootView.findViewById<View>(R.id.large_back).setOnClickListener { finish() }
-        rootView.findViewById<View>(R.id.large_type_filter).setOnClickListener { showFilterDropdown(FilterKind.TYPE) }
-        rootView.findViewById<View>(R.id.large_size_filter).setOnClickListener { showFilterDropdown(FilterKind.SIZE) }
-        rootView.findViewById<View>(R.id.large_time_filter).setOnClickListener { showFilterDropdown(FilterKind.TIME) }
-        rootView.findViewById<View>(R.id.large_clean).setOnClickListener { deleteSelected() }
+        resultBinding.largeBack.setOnClickListener { finish() }
+        resultBinding.largeTypeFilter.setOnClickListener { showFilterDropdown(FilterKind.TYPE) }
+        resultBinding.largeSizeFilter.setOnClickListener { showFilterDropdown(FilterKind.SIZE) }
+        resultBinding.largeTimeFilter.setOnClickListener { showFilterDropdown(FilterKind.TIME) }
+        resultBinding.largeClean.setOnClickListener { deleteSelected() }
         loadFiles()
     }
 
@@ -124,14 +127,14 @@ class BigFileCleanerActivity : StorageCleanerActivity(
     }
 
     private fun render() {
-        if (!::rootView.isInitialized) return
-        rootView.findViewById<TextView>(R.id.large_type_filter).text = getString(R.string.filter_value, getString(fileType.titleRes))
+        if (!isResultShown) return
+        resultBinding.largeTypeFilter.text = getString(R.string.filter_value, getString(fileType.titleRes))
         val sizeLabel = sizeOptions.firstOrNull { it.bytes == minimumBytes }?.labelRes ?: R.string.size_10_mb
-        rootView.findViewById<TextView>(R.id.large_size_filter).text = getString(R.string.filter_value, getString(sizeLabel))
+        resultBinding.largeSizeFilter.text = getString(R.string.filter_value, getString(sizeLabel))
         val timeLabel = timeOptions.firstOrNull { it.days == maximumAgeDays }?.labelRes ?: R.string.all_time
-        rootView.findViewById<TextView>(R.id.large_time_filter).text = getString(R.string.filter_value, getString(timeLabel))
+        resultBinding.largeTimeFilter.text = getString(R.string.filter_value, getString(timeLabel))
         val files = filteredFiles()
-        val empty = rootView.findViewById<TextView>(R.id.large_empty)
+        val empty = resultBinding.largeEmpty
         empty.visibility = if (files.isEmpty()) View.VISIBLE else View.GONE
         adapter.submit(files)
         updateCleanButton()
@@ -139,15 +142,15 @@ class BigFileCleanerActivity : StorageCleanerActivity(
 
     private fun showFilterDropdown(initialKind: FilterKind) {
         filterPopup?.dismiss()
-        val content = layoutInflater.inflate(R.layout.popup_big_file_filter, null)
-        val host = content.findViewById<View>(R.id.filter_popup_host)
-        val panel = content.findViewById<View>(R.id.filter_popup_panel)
-        val container = content.findViewById<LinearLayout>(R.id.filter_option_container)
-        val popupType = content.findViewById<TextView>(R.id.popup_type_filter)
-        val popupSize = content.findViewById<TextView>(R.id.popup_size_filter)
-        val popupTime = content.findViewById<TextView>(R.id.popup_time_filter)
+        val popupBinding = PopupBigFileFilterBinding.inflate(layoutInflater)
+        val host = popupBinding.filterPopupHost
+        val panel = popupBinding.filterPopupPanel
+        val container = popupBinding.filterOptionContainer
+        val popupType = popupBinding.popupTypeFilter
+        val popupSize = popupBinding.popupSizeFilter
+        val popupTime = popupBinding.popupTimeFilter
         val popup = PopupWindow(
-            content,
+            popupBinding.root,
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT,
             true,
@@ -183,14 +186,14 @@ class BigFileCleanerActivity : StorageCleanerActivity(
                 FilterKind.TIME -> timeOptions.map { it.labelRes to (it.days == maximumAgeDays) }
             }
             options.forEachIndexed { index, (labelRes, isSelected) ->
-                val row = layoutInflater.inflate(R.layout.item_big_file_filter_option, container, false)
-                row.findViewById<TextView>(R.id.filter_option_label).apply {
+                val row = ItemBigFileFilterOptionBinding.inflate(layoutInflater, container, false)
+                row.filterOptionLabel.apply {
                     setText(labelRes)
                     setTextColor(filterHeaderColor(isSelected))
                     setTypeface(typeface, if (isSelected) Typeface.BOLD else Typeface.NORMAL)
                 }
-                row.findViewById<ImageView>(R.id.filter_option_check).visibility = if (isSelected) View.VISIBLE else View.INVISIBLE
-                row.setOnClickListener {
+                row.filterOptionCheck.visibility = if (isSelected) View.VISIBLE else View.INVISIBLE
+                row.root.setOnClickListener {
                     if (!isSelected) {
                         when (kind) {
                             FilterKind.TYPE -> fileType = FileType.entries[index]
@@ -202,7 +205,7 @@ class BigFileCleanerActivity : StorageCleanerActivity(
                     }
                     popup.dismiss()
                 }
-                container.addView(row)
+                container.addView(row.root)
             }
         }
 
@@ -212,7 +215,7 @@ class BigFileCleanerActivity : StorageCleanerActivity(
         host.setOnClickListener { popup.dismiss() }
         popup.setOnDismissListener { if (filterPopup === popup) filterPopup = null }
 
-        val anchor = rootView.findViewById<View>(R.id.large_filter_bar)
+        val anchor = resultBinding.largeFilterBar
         anchor.post {
             if (isFinishing || isDestroyed) return@post
             renderOptions(initialKind)
@@ -223,7 +226,7 @@ class BigFileCleanerActivity : StorageCleanerActivity(
                 leftMargin = horizontalMargin
             }
             panel.elevation = dp(8).toFloat()
-            popup.showAtLocation(rootView, Gravity.TOP or Gravity.START, 0, 0)
+            popup.showAtLocation(resultBinding.root, Gravity.TOP or Gravity.START, 0, 0)
             dimBehind(popup)
             host.post {
                 if (!popup.isShowing) return@post
@@ -389,18 +392,18 @@ class BigFileCleanerActivity : StorageCleanerActivity(
         override fun getItemCount() = files.size
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BigFileHolder = BigFileHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_big_file, parent, false),
+            ItemBigFileBinding.inflate(LayoutInflater.from(parent.context), parent, false),
         )
 
         override fun onBindViewHolder(holder: BigFileHolder, position: Int) = holder.bind(files[position])
     }
 
-    private inner class BigFileHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class BigFileHolder(private val binding: ItemBigFileBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(file: MediaFileInfo) {
-            itemView.findViewById<TextView>(R.id.large_file_name).text = file.name
-            itemView.findViewById<TextView>(R.id.large_file_size).text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
-            itemView.findViewById<ImageView>(R.id.large_file_icon).setImageResource(fileIcon(file))
-            itemView.findViewById<CheckBox>(R.id.large_file_check).isChecked = file in selected
+            binding.largeFileName.text = file.name
+            binding.largeFileSize.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
+            binding.largeFileIcon.setImageResource(fileIcon(file))
+            binding.largeFileCheck.isChecked = file in selected
             itemView.setOnClickListener {
                 if (!selected.add(file)) selected.remove(file)
                 bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }?.let(adapter::notifyItemChanged)
@@ -410,7 +413,7 @@ class BigFileCleanerActivity : StorageCleanerActivity(
     }
 
     private fun updateCleanButton() {
-        rootView.findViewById<TextView>(R.id.large_clean).text = if (selected.isEmpty()) {
+        resultBinding.largeClean.text = if (selected.isEmpty()) {
             getString(R.string.clean)
         } else {
             getString(R.string.clean_selected, selected.size)

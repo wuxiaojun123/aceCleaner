@@ -13,6 +13,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.FragmentCleanScanBinding
+import com.nice.aceclean.databinding.FragmentCleanResultBinding
 import com.nice.aceclean.cleanup.CleanupCategory
 import com.nice.aceclean.cleanup.CleanupViewModel
 import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
@@ -22,7 +24,8 @@ import com.nice.aceclean.util.DeviceStats
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
+class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanScanBinding.inflate(it) }, R.layout.fragment_clean_scan) {
+    private lateinit var resultBinding: FragmentCleanResultBinding
     private val viewModel: CleanupViewModel by viewModels()
     private val selected = CleanupCategory.entries.toMutableSet()
     private var scanJob: Job? = null
@@ -61,8 +64,8 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
     private fun startScan() {
         scanJob?.cancel()
         progressJob?.cancel()
-        setActivityContent(R.layout.fragment_clean_scan)
-        val progressText = findViewById<TextView>(R.id.scan_percentage)
+        val scanBinding = setActivityContent(FragmentCleanScanBinding.inflate(layoutInflater), R.layout.fragment_clean_scan)
+        val progressText = scanBinding.scanPercentage
         progressText.text = getString(R.string.scanned_files_progress, 0)
         progressJob = lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -80,21 +83,16 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
     }
 
     private fun showCleanResult() {
-        setActivityContent(R.layout.fragment_clean_result)
+        resultBinding = setActivityContent(FragmentCleanResultBinding.inflate(layoutInflater), R.layout.fragment_clean_result)
         selected.clear()
         selected.addAll(CleanupCategory.entries)
-        findViewById<View>(R.id.clean_result_back).setOnClickListener { finish() }
-        bindCategory(R.id.cleanup_cache_row, R.id.cleanup_cache_size, R.id.cleanup_cache_check, CleanupCategory.APP_CACHE)
-        bindCategory(R.id.cleanup_ad_row, R.id.cleanup_ad_size, R.id.cleanup_ad_check, CleanupCategory.AD_FILES)
-        bindCategory(R.id.cleanup_temp_row, R.id.cleanup_temp_size, R.id.cleanup_temp_check, CleanupCategory.TEMP_FILES)
-        bindCategory(R.id.cleanup_apk_row, R.id.cleanup_apk_size, R.id.cleanup_apk_check, CleanupCategory.APK_FILES)
-        bindCategory(R.id.cleanup_residual_row, R.id.cleanup_residual_size, R.id.cleanup_residual_check, CleanupCategory.RESIDUAL_FILES)
-        bindCategory(R.id.cleanup_empty_row, R.id.cleanup_empty_size, R.id.cleanup_empty_check, CleanupCategory.EMPTY_FILES)
-        findViewById<View>(R.id.cleanup_more_row).setOnClickListener { openBigFileCleaner() }
-        findViewById<View>(R.id.remove_button).setOnClickListener { confirmDelete() }
-        findViewById<View>(R.id.cleanup_rescan).setOnClickListener { startScan() }
-        findViewById<View>(R.id.cleanup_find_large_files).setOnClickListener { openBigFileCleaner() }
-        findViewById<View>(R.id.cleanup_system_cache).apply {
+        resultBinding.cleanResultBack.setOnClickListener { finish() }
+        categoryViews().forEach { (category, row, check, size) -> bindCategory(row, size, check, category) }
+        resultBinding.cleanupMoreRow.setOnClickListener { openBigFileCleaner() }
+        resultBinding.removeButton.setOnClickListener { confirmDelete() }
+        resultBinding.cleanupRescan.setOnClickListener { startScan() }
+        resultBinding.cleanupFindLargeFiles.setOnClickListener { openBigFileCleaner() }
+        resultBinding.cleanupSystemCache.apply {
             visibility = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) View.VISIBLE else View.GONE
             setOnClickListener { openSystemCacheCleaner() }
         }
@@ -103,46 +101,46 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
 
     private fun openBigFileCleaner() = startActivity(Intent(this, BigFileCleanerActivity::class.java))
 
-    private fun bindCategory(rowId: Int, sizeId: Int, checkId: Int, category: CleanupCategory) {
-        findViewById<View>(rowId).setOnClickListener {
+    private fun bindCategory(row: View, size: TextView, check: ImageView, category: CleanupCategory) {
+        row.setOnClickListener {
             if (!selected.add(category)) selected.remove(category)
             render()
         }
-        findViewById<TextView>(sizeId).text = DeviceStats.formatBytes(this, viewModel.scanResult?.size(category) ?: 0L)
-        findViewById<ImageView>(checkId).isSelected = category in selected
+        size.text = DeviceStats.formatBytes(this, viewModel.scanResult?.size(category) ?: 0L)
+        check.isSelected = category in selected
     }
 
     private fun render() {
         val result = viewModel.scanResult ?: return
         val isEmpty = result.candidates.isEmpty()
-        findViewById<TextView>(R.id.cleanup_total_size).apply {
+        resultBinding.cleanupTotalSize.apply {
             visibility = if (isEmpty) View.GONE else View.VISIBLE
             text = if (result.totalBytes == 0L && result.candidates.isNotEmpty()) {
                 getString(R.string.items_found, result.candidates.size)
             } else DeviceStats.formatBytes(this@CleanUpActivity, result.totalBytes)
         }
-        findViewById<View>(R.id.cleanup_removable_label).visibility = if (isEmpty) View.GONE else View.VISIBLE
-        findViewById<View>(R.id.cleanup_empty_state).visibility = if (isEmpty) View.VISIBLE else View.GONE
-        findViewById<View>(R.id.remove_button).visibility = if (isEmpty) View.GONE else View.VISIBLE
-        findViewById<TextView>(R.id.cleanup_scan_details).text = getString(
+        resultBinding.cleanupRemovableLabel.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        resultBinding.cleanupEmptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        resultBinding.removeButton.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        resultBinding.cleanupScanDetails.text = getString(
             R.string.clean_scan_summary, result.stats.scannedFiles, result.stats.scannedDirectories,
         )
-        findViewById<TextView>(R.id.cleanup_scan_warning).apply {
+        resultBinding.cleanupScanWarning.apply {
             visibility = if (result.stats.limitReached || result.stats.inaccessibleDirectories > 0) View.VISIBLE else View.GONE
             text = if (result.stats.limitReached) getString(R.string.scan_incomplete)
             else getString(R.string.scan_restricted_summary, result.stats.inaccessibleDirectories)
         }
-        categoryViews.forEach { (category, rowId, checkId, sizeId) ->
-            findViewById<View>(rowId).visibility = if (isEmpty) View.GONE else View.VISIBLE
-            findViewById<View>(checkId).alpha = if (category in selected) 1f else 0.25f
+        categoryViews().forEach { (category, row, check, size) ->
+            row.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            check.alpha = if (category in selected) 1f else 0.25f
             val candidates = result.candidates(category)
-            findViewById<TextView>(sizeId).text = if (candidates.isNotEmpty() && result.size(category) == 0L) {
+            size.text = if (candidates.isNotEmpty() && result.size(category) == 0L) {
                 getString(R.string.items_found, candidates.size)
             } else DeviceStats.formatBytes(this, result.size(category))
         }
-        findViewById<View>(R.id.cleanup_more_row).visibility = if (isEmpty) View.GONE else View.VISIBLE
+        resultBinding.cleanupMoreRow.visibility = if (isEmpty) View.GONE else View.VISIBLE
         val selectedBytes = result.candidates.filter { it.category in selected }.sumOf { it.sizeBytes }
-        findViewById<TextView>(R.id.remove_button).text = getString(
+        resultBinding.removeButton.text = getString(
             R.string.remove_selected_size, DeviceStats.formatBytes(this, selectedBytes),
         )
     }
@@ -185,15 +183,15 @@ class CleanUpActivity : BaseActivity(R.layout.fragment_clean_scan) {
             .onFailure { startActivity(Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS)) }
     }
 
-    private data class CategoryViews(val category: CleanupCategory, val rowId: Int, val checkId: Int, val sizeId: Int)
+    private data class CategoryViews(val category: CleanupCategory, val row: View, val check: ImageView, val size: TextView)
 
-    private val categoryViews = listOf(
-        CategoryViews(CleanupCategory.APP_CACHE, R.id.cleanup_cache_row, R.id.cleanup_cache_check, R.id.cleanup_cache_size),
-        CategoryViews(CleanupCategory.AD_FILES, R.id.cleanup_ad_row, R.id.cleanup_ad_check, R.id.cleanup_ad_size),
-        CategoryViews(CleanupCategory.TEMP_FILES, R.id.cleanup_temp_row, R.id.cleanup_temp_check, R.id.cleanup_temp_size),
-        CategoryViews(CleanupCategory.APK_FILES, R.id.cleanup_apk_row, R.id.cleanup_apk_check, R.id.cleanup_apk_size),
-        CategoryViews(CleanupCategory.RESIDUAL_FILES, R.id.cleanup_residual_row, R.id.cleanup_residual_check, R.id.cleanup_residual_size),
-        CategoryViews(CleanupCategory.EMPTY_FILES, R.id.cleanup_empty_row, R.id.cleanup_empty_check, R.id.cleanup_empty_size),
+    private fun categoryViews() = listOf(
+        CategoryViews(CleanupCategory.APP_CACHE, resultBinding.cleanupCacheRow, resultBinding.cleanupCacheCheck, resultBinding.cleanupCacheSize),
+        CategoryViews(CleanupCategory.AD_FILES, resultBinding.cleanupAdRow, resultBinding.cleanupAdCheck, resultBinding.cleanupAdSize),
+        CategoryViews(CleanupCategory.TEMP_FILES, resultBinding.cleanupTempRow, resultBinding.cleanupTempCheck, resultBinding.cleanupTempSize),
+        CategoryViews(CleanupCategory.APK_FILES, resultBinding.cleanupApkRow, resultBinding.cleanupApkCheck, resultBinding.cleanupApkSize),
+        CategoryViews(CleanupCategory.RESIDUAL_FILES, resultBinding.cleanupResidualRow, resultBinding.cleanupResidualCheck, resultBinding.cleanupResidualSize),
+        CategoryViews(CleanupCategory.EMPTY_FILES, resultBinding.cleanupEmptyRow, resultBinding.cleanupEmptyCheck, resultBinding.cleanupEmptySize),
     )
 
     override fun onDestroy() {

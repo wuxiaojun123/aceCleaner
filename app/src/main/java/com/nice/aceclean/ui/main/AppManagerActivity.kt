@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.FragmentAppManagerBinding
 import com.nice.aceclean.databinding.ItemAppManagerBinding
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.InstalledAppInfo
@@ -28,13 +29,13 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AppManagerActivity : PermissionFeatureActivity(
+class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     FeatureType.APP_MANAGER,
+    { FragmentAppManagerBinding.inflate(it) },
     R.layout.fragment_app_manager,
 ) {
 
     private val uninstallQueue = ArrayDeque<String>()
-    private lateinit var rootView: View
     private var apps: List<InstalledAppInfo> = emptyList()
     private var sortMode = SortMode.NAME
     private var sortOrder = SortOrder.ASCENDING
@@ -56,15 +57,14 @@ class AppManagerActivity : PermissionFeatureActivity(
     }
 
     override fun initFeatureViews() {
-        rootView = findViewById(android.R.id.content)
-        view<View>(R.id.app_manager_back).setOnClickListener { finish() }
-        view<RecyclerView>(R.id.app_manager_list).apply {
+        featureBinding.appManagerBack.setOnClickListener { finish() }
+        featureBinding.appManagerList.apply {
             layoutManager = LinearLayoutManager(this@AppManagerActivity)
             adapter = appAdapter
             setHasFixedSize(true)
         }
-        bindSortControls(rootView)
-        view<View>(R.id.app_manager_uninstall).setOnClickListener {
+        bindSortControls()
+        featureBinding.appManagerUninstall.setOnClickListener {
             val selectedApps = appAdapter.selectedApps()
             if (selectedApps.isEmpty()) {
                 Toast.makeText(this, R.string.select_apps_first, Toast.LENGTH_SHORT).show()
@@ -78,7 +78,7 @@ class AppManagerActivity : PermissionFeatureActivity(
     }
 
     private fun loadApps() {
-        if (!::rootView.isInitialized) return
+        if (!isFeatureShown) return
         lifecycleScope.launch {
             val loadedApps = withContext(Dispatchers.IO) { DeviceStats.launchableApps(this@AppManagerActivity) }
             if (isFinishing || isDestroyed) return@launch
@@ -89,14 +89,22 @@ class AppManagerActivity : PermissionFeatureActivity(
         }
     }
 
-    private fun bindSortControls(root: View) {
+    private fun sortControl(id: Int): TextView = when (id) {
+        R.id.app_manager_sort_name -> featureBinding.appManagerSortName
+        R.id.app_manager_sort_installation -> featureBinding.appManagerSortInstallation
+        R.id.app_manager_sort_size -> featureBinding.appManagerSortSize
+        R.id.app_manager_sort_last_used -> featureBinding.appManagerSortLastUsed
+        else -> error("Unknown sort control: $id")
+    }
+
+    private fun bindSortControls() {
         mapOf(
             R.id.app_manager_sort_name to SortMode.NAME,
             R.id.app_manager_sort_installation to SortMode.INSTALLATION,
             R.id.app_manager_sort_size to SortMode.SIZE,
             R.id.app_manager_sort_last_used to SortMode.LAST_USED,
         ).forEach { (viewId, mode) ->
-            root.findViewById<View>(viewId).setOnClickListener {
+            sortControl(viewId).setOnClickListener {
                 if (sortMode == mode) {
                     sortOrder = sortOrder.toggle()
                 } else {
@@ -110,7 +118,7 @@ class AppManagerActivity : PermissionFeatureActivity(
     }
 
     private fun renderApps() {
-        if (!::rootView.isInitialized) return
+        if (!isFeatureShown) return
         updateSortControls()
         appAdapter.submitList(sortedApps())
     }
@@ -159,7 +167,7 @@ class AppManagerActivity : PermissionFeatureActivity(
         )
         controls.forEach { (viewId, mode) ->
             val selected = mode == sortMode
-            rootView.findViewById<TextView>(viewId).apply {
+            sortControl(viewId).apply {
                 setBackgroundResource(if (selected) R.drawable.bg_app_sort_selected else R.drawable.bg_app_sort_unselected)
                 setTextColor(if (selected) 0xFFFFFFFF.toInt() else 0xFF747681.toInt())
                 setTypeface(null, if (selected) Typeface.BOLD else Typeface.NORMAL)
@@ -180,8 +188,8 @@ class AppManagerActivity : PermissionFeatureActivity(
     }
 
     private fun updateButton(selectedCount: Int = appAdapter.selectedApps().size) {
-        if (!::rootView.isInitialized) return
-        rootView.findViewById<TextView>(R.id.app_manager_uninstall).text = if (selectedCount == 0) {
+        if (!isFeatureShown) return
+        featureBinding.appManagerUninstall.text = if (selectedCount == 0) {
             getString(R.string.uninstall)
         } else {
             getString(R.string.uninstall_count, selectedCount)

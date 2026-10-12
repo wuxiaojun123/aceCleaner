@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityAllowedAppsBinding
 import com.nice.aceclean.notification.AllowedApp
 import com.nice.aceclean.notification.AllowedAppsAdapter
 import com.nice.aceclean.notification.NotificationInterceptStore
@@ -21,7 +22,7 @@ import kotlinx.coroutines.withContext
 import java.text.Collator
 import java.util.Locale
 
-class AllowedAppsActivity : BaseActivity(R.layout.activity_allowed_apps) {
+class AllowedAppsActivity : BaseActivity<ActivityAllowedAppsBinding>({ ActivityAllowedAppsBinding.inflate(it) }, R.layout.activity_allowed_apps) {
     private var allApps: List<AllowedApp> = emptyList()
     private lateinit var searchInput: EditText
     private lateinit var appsRecyclerView: RecyclerView
@@ -36,11 +37,11 @@ class AllowedAppsActivity : BaseActivity(R.layout.activity_allowed_apps) {
     )
 
     override fun initViews() {
-        view<android.view.View>(R.id.allowed_apps_back).setOnClickListener { finish() }
-        searchInput = view(R.id.allowed_apps_search)
-        appsRecyclerView = view(R.id.allowed_apps_list)
-        loadingIndicator = view(R.id.allowed_apps_loading)
-        emptyView = view(R.id.allowed_apps_empty)
+        binding.allowedAppsBack.setOnClickListener { finish() }
+        searchInput = binding.allowedAppsSearch
+        appsRecyclerView = binding.allowedAppsList
+        loadingIndicator = binding.allowedAppsLoading
+        emptyView = binding.allowedAppsEmpty
         appsRecyclerView.layoutManager = LinearLayoutManager(this)
         appsRecyclerView.adapter = adapter
         searchInput.setOnClickListener { showSearchKeyboard() }
@@ -92,7 +93,7 @@ class AllowedAppsActivity : BaseActivity(R.layout.activity_allowed_apps) {
     }
 
     private fun updateSelectedCount() {
-        view<TextView>(R.id.allowed_apps_selected_count).text = getString(
+        binding.allowedAppsSelectedCount.text = getString(
             R.string.notif_allowed_apps_selected,
             NotificationInterceptStore.whitelist(this).size,
         )

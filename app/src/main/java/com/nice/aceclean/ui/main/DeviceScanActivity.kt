@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityDeviceScanBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.onboarding.DeviceScanStep
 import com.nice.aceclean.ui.onboarding.DeviceScanStepAdapter
@@ -19,7 +20,7 @@ import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DeviceScanActivity : BaseActivity(R.layout.activity_device_scan) {
+class DeviceScanActivity : BaseActivity<ActivityDeviceScanBinding>({ ActivityDeviceScanBinding.inflate(it) }, R.layout.activity_device_scan) {
 
     override val statusBarColorRes: Int = R.color.white
 
@@ -28,8 +29,8 @@ class DeviceScanActivity : BaseActivity(R.layout.activity_device_scan) {
     private lateinit var adapter: DeviceScanStepAdapter
 
     override fun initViews() {
-        stepsView = view(R.id.guide_steps)
-        startButton = view(R.id.guide_start)
+        stepsView = binding.guideSteps
+        startButton = binding.guideStart
 
         adapter = DeviceScanStepAdapter(initialSteps().toMutableList())
         stepsView.layoutManager = LinearLayoutManager(this)

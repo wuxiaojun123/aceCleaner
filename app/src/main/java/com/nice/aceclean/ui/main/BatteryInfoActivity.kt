@@ -13,12 +13,14 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityBatteryInfoBinding
+import com.nice.aceclean.databinding.ItemBatteryInfoCardBinding
 import com.nice.aceclean.util.BatterySnapshot
 import com.nice.aceclean.util.DeviceToolsRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R.string.battery_info) {
+class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ ActivityBatteryInfoBinding.inflate(it) }, R.layout.activity_battery_info, R.string.battery_info) {
 
     private var receiverRegistered = false
     private var scanComplete = false
@@ -31,14 +33,16 @@ class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R
         }
     }
 
+    override val featureHeader get() = binding.featureHeader
+
     override fun initToolViews() {
-        view<View>(R.id.battery_got_it_button).setOnClickListener { finish() }
+        binding.batteryGotItButton.setOnClickListener { finish() }
     }
 
     override fun initData() {
         lifecycleScope.launch {
             for (progress in 1..100) {
-                view<TextView>(R.id.battery_scan_percent).text =
+                binding.batteryScanPercent.text =
                     getString(R.string.percentage_value, progress)
                 delay(BATTERY_SCAN_STEP_MILLIS)
             }
@@ -48,10 +52,10 @@ class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R
             )?.let { DeviceToolsRepository.batterySnapshot(this@BatteryInfoActivity, it) }
             scanComplete = true
             battery?.let(::renderBattery)
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.battery_scan_background).cancelAnimation()
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.battery_scan_animation).cancelAnimation()
-            view<View>(R.id.battery_scan_container).visibility = View.GONE
-            view<View>(R.id.battery_result_container).visibility = View.VISIBLE
+            binding.batteryScanBackground.cancelAnimation()
+            binding.batteryScanAnimation.cancelAnimation()
+            binding.batteryScanContainer.visibility = View.GONE
+            binding.batteryResultContainer.visibility = View.VISIBLE
         }
     }
 
@@ -78,10 +82,10 @@ class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R
 
     private fun renderBattery(battery: BatterySnapshot) {
         val state = batteryState(battery.status)
-        view<TextView>(R.id.battery_capacity_value).text = battery.estimatedCapacityMah
+        binding.batteryCapacityValue.text = battery.estimatedCapacityMah
             ?.let { getString(R.string.capacity_value_spaced, it) }
             ?: getString(R.string.unknown)
-        view<TextView>(R.id.battery_usable_time_value).text = battery.usableTimeMillis
+        binding.batteryUsableTimeValue.text = battery.usableTimeMillis
             ?.let(::formatDuration)
             ?: getString(R.string.unknown)
         setBatteryCard(
@@ -129,10 +133,18 @@ class BatteryInfoActivity : DeviceToolActivity(R.layout.activity_battery_info, R
         value: String,
         @StringRes labelRes: Int,
     ) {
-        val card = view<View>(cardId)
-        card.findViewById<ImageView>(R.id.battery_card_icon).setImageResource(iconRes)
-        card.findViewById<TextView>(R.id.battery_card_value).text = value
-        card.findViewById<TextView>(R.id.battery_card_label).setText(labelRes)
+        val card: ItemBatteryInfoCardBinding = when (cardId) {
+            R.id.battery_health_card -> binding.batteryHealthCard
+            R.id.battery_type_card -> binding.batteryTypeCard
+            R.id.battery_status_card -> binding.batteryStatusCard
+            R.id.battery_temperature_card -> binding.batteryTemperatureCard
+            R.id.battery_voltage_card -> binding.batteryVoltageCard
+            R.id.battery_current_card -> binding.batteryCurrentCard
+            else -> error("Unknown battery card: $cardId")
+        }
+        card.batteryCardIcon.setImageResource(iconRes)
+        card.batteryCardValue.text = value
+        card.batteryCardLabel.setText(labelRes)
     }
 
     private fun batteryState(status: Int): String = getString(

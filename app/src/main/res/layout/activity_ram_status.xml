@@ -72,6 +72,7 @@
         android:visibility="gone">
 
         <include
+            android:id="@+id/feature_header"
             layout="@layout/layout_feature_header"
             android:layout_width="match_parent"
             android:layout_height="52dp"

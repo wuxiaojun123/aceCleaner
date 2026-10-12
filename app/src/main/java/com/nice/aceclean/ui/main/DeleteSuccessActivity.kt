@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityDeleteSuccessBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
 
 /** Shared completion screen displayed after files have actually been removed. */
-class DeleteSuccessActivity : BaseActivity(R.layout.activity_delete_success) {
+class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>({ ActivityDeleteSuccessBinding.inflate(it) }, R.layout.activity_delete_success) {
 
     override fun initViews() {
         val removedCount = intent.getIntExtra(EXTRA_REMOVED_COUNT, 0)
@@ -19,9 +20,9 @@ class DeleteSuccessActivity : BaseActivity(R.layout.activity_delete_success) {
         val featureIcon = intent.getIntExtra(EXTRA_FEATURE_ICON, R.drawable.ic_competitor_success)
         val source = intent.getStringExtra(EXTRA_SOURCE).orEmpty()
 
-        findViewById<TextView>(R.id.delete_success_title).text = featureTitle(source)
-        findViewById<ImageView>(R.id.delete_success_feature_icon).setImageResource(featureIcon)
-        findViewById<View>(R.id.delete_success_try_now).setOnClickListener {
+        binding.deleteSuccessTitle.text = featureTitle(source)
+        binding.deleteSuccessFeatureIcon.setImageResource(featureIcon)
+        binding.deleteSuccessTryNow.setOnClickListener {
             startActivity(Intent(this, NotificationCleanerActivity::class.java))
             finish()
         }
@@ -30,7 +31,7 @@ class DeleteSuccessActivity : BaseActivity(R.layout.activity_delete_success) {
         bindTool(R.id.delete_success_network, NetworkTrafficActivity::class.java)
         bindTool(R.id.delete_success_cleanup, CleanUpActivity::class.java)
         bindTool(R.id.delete_success_screenshot, ScreenshotCleanerActivity::class.java)
-        findViewById<View>(R.id.delete_success_back).setOnClickListener { returnToHome() }
+        binding.deleteSuccessBack.setOnClickListener { returnToHome() }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() = returnToHome()
         })
@@ -45,8 +46,16 @@ class DeleteSuccessActivity : BaseActivity(R.layout.activity_delete_success) {
         finish()
     }
 
-    private fun bindTool(cardId: Int, activityClass: Class<out BaseActivity>) {
-        findViewById<View>(cardId).setOnClickListener {
+    private fun bindTool(cardId: Int, activityClass: Class<out BaseActivity<*>>) {
+        val card = when (cardId) {
+            R.id.delete_success_notification -> binding.deleteSuccessNotification
+            R.id.delete_success_apps -> binding.deleteSuccessApps
+            R.id.delete_success_network -> binding.deleteSuccessNetwork
+            R.id.delete_success_cleanup -> binding.deleteSuccessCleanup
+            R.id.delete_success_screenshot -> binding.deleteSuccessScreenshot
+            else -> error("Unknown tool card: $cardId")
+        }
+        card.setOnClickListener {
             startActivity(Intent(this, activityClass))
             finish()
         }

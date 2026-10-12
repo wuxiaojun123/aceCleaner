@@ -4,20 +4,27 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Build
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.nice.aceclean.R
 import com.nice.aceclean.util.LocaleHelper
 
-abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : AppCompatActivity() {
+abstract class BaseActivity<B : ViewBinding>(
+    private val inflateBinding: (LayoutInflater) -> B,
+    @param:LayoutRes private val layoutResId: Int,
+) : AppCompatActivity() {
+
+    protected lateinit var binding: B
+        private set
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.wrapContext(newBase))
@@ -31,9 +38,8 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
             navigationBarStyle = SystemBarStyle.light(navigationBarColor, navigationBarColor),
         )
         super.onCreate(savedInstanceState)
-        setContentView(layoutResId)
-        syncStatusBarBackground(layoutResId)
-        applySystemBarInsets(findViewById(android.R.id.content))
+        binding = inflateBinding(layoutInflater)
+        setActivityContent(binding, layoutResId)
         initViews()
         initData()
     }
@@ -44,14 +50,13 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
     @get:ColorRes
     protected open val navigationBarColorRes: Int = R.color.white
 
-    private fun applySystemBarInsets(content: View) {
-        val layoutRoot = (content as? ViewGroup)?.getChildAt(0)
-        if (layoutRoot?.fitsSystemWindows == true) return
-        val initialLeft = content.paddingLeft
-        val initialTop = content.paddingTop
-        val initialRight = content.paddingRight
-        val initialBottom = content.paddingBottom
-        ViewCompat.setOnApplyWindowInsetsListener(content) { view, windowInsets ->
+    private fun applySystemBarInsets(root: View) {
+        if (root.fitsSystemWindows) return
+        val initialLeft = root.paddingLeft
+        val initialTop = root.paddingTop
+        val initialRight = root.paddingRight
+        val initialBottom = root.paddingBottom
+        ViewCompat.setOnApplyWindowInsetsListener(root) { view, windowInsets ->
             val bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 initialLeft + bars.left,
@@ -63,17 +68,15 @@ abstract class BaseActivity(@param:LayoutRes private val layoutResId: Int) : App
         }
     }
 
-    protected fun <T : View> view(id: Int): T = findViewById(id)
-
     /** Replaces this activity's screen while preserving the shared system-bar inset handling. */
-    protected fun setActivityContent(@LayoutRes layoutResId: Int) {
-        setContentView(layoutResId)
-        syncStatusBarBackground(layoutResId)
-        applySystemBarInsets(findViewById(android.R.id.content))
+    protected fun <T : ViewBinding> setActivityContent(contentBinding: T, @LayoutRes layoutResId: Int): T {
+        setContentView(contentBinding.root)
+        syncStatusBarBackground(contentBinding.root, layoutResId)
+        applySystemBarInsets(contentBinding.root)
+        return contentBinding
     }
 
-    private fun syncStatusBarBackground(@LayoutRes layoutResId: Int) {
-        val root = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+    private fun syncStatusBarBackground(root: View, @LayoutRes layoutResId: Int) {
         val fallbackColor = ContextCompat.getColor(this, statusBarColorRes)
         val color = when (layoutResId) {
             R.layout.activity_allowed_apps,

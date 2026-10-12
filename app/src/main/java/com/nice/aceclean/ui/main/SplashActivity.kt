@@ -12,9 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivitySplashBinding
 import com.nice.aceclean.ui.base.BaseActivity
 
-class SplashActivity : BaseActivity(R.layout.activity_splash) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>({ ActivitySplashBinding.inflate(it) }, R.layout.activity_splash) {
 
     override val statusBarColorRes: Int = R.color.white
 
@@ -29,8 +30,8 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
     }
 
     override fun initViews() {
-        progressBar = view(R.id.splash_progress)
-        loadingText = view(R.id.splash_loading)
+        progressBar = binding.splashProgress
+        loadingText = binding.splashLoading
     }
 
     override fun initData() {

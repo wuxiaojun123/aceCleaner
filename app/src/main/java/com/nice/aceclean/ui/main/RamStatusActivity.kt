@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemRunningAppBinding
+import com.nice.aceclean.databinding.ActivityRamStatusBinding
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.RunningAppInfo
@@ -23,12 +25,14 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class RamStatusActivity : DeviceToolActivity(R.layout.activity_ram_status, R.string.ram_status) {
+class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ ActivityRamStatusBinding.inflate(it) }, R.layout.activity_ram_status, R.string.ram_status) {
     private val runningAppsAdapter = RunningAppsAdapter(::openAppSettings)
 
+    override val featureHeader get() = binding.featureHeader
+
     override fun initToolViews() {
-        view<View>(R.id.ram_ok_button).setOnClickListener { finish() }
-        view<RecyclerView>(R.id.ram_app_list).apply {
+        binding.ramOkButton.setOnClickListener { finish() }
+        binding.ramAppList.apply {
             layoutManager = LinearLayoutManager(this@RamStatusActivity)
             adapter = runningAppsAdapter
             val spacing = resources.getDimensionPixelSize(R.dimen.ram_app_row_spacing)
@@ -51,28 +55,28 @@ class RamStatusActivity : DeviceToolActivity(R.layout.activity_ram_status, R.str
                 DeviceToolsRepository.runningApps(this@RamStatusActivity)
             }
             for (progress in 1..100) {
-                view<TextView>(R.id.ram_scan_percent).text =
+                binding.ramScanPercent.text =
                     getString(R.string.percentage_value, progress)
                 delay(SCAN_STEP_MILLIS)
             }
             val apps = appsDeferred.await()
             renderMemory()
             renderRunningApps(apps)
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.ram_scan_ring).cancelAnimation()
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.ram_scan_animation).cancelAnimation()
-            view<View>(R.id.ram_scan_container).visibility = View.GONE
-            view<View>(R.id.ram_result_container).visibility = View.VISIBLE
+            binding.ramScanRing.cancelAnimation()
+            binding.ramScanAnimation.cancelAnimation()
+            binding.ramScanContainer.visibility = View.GONE
+            binding.ramResultContainer.visibility = View.VISIBLE
         }
     }
 
     private fun renderMemory() {
         val memory = DeviceToolsRepository.memorySnapshot(this)
         val availablePercent = (100 - memory.usedPercent).coerceIn(0, 100)
-        view<TextView>(R.id.ram_percent).text = getString(R.string.percentage_value, availablePercent)
+        binding.ramPercent.text = getString(R.string.percentage_value, availablePercent)
     }
 
     private fun renderRunningApps(apps: List<RunningAppInfo>) {
-        view<TextView>(R.id.ram_running_summary).text = if (apps.isEmpty()) {
+        binding.ramRunningSummary.text = if (apps.isEmpty()) {
             getString(R.string.no_running_apps)
         } else {
             getString(R.string.running_apps_count, apps.size)
@@ -106,18 +110,18 @@ private class RunningAppsAdapter(
 ) : ListAdapter<RunningAppInfo, RunningAppsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_running_app, parent, false)
-        return ViewHolder(view)
+        val binding = ItemRunningAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), onCloseClick)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val icon: ImageView = itemView.findViewById(R.id.running_app_icon)
-        private val name: TextView = itemView.findViewById(R.id.running_app_name)
-        private val close: View = itemView.findViewById(R.id.running_app_close)
+    class ViewHolder(binding: ItemRunningAppBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val icon: ImageView = binding.runningAppIcon
+        private val name: TextView = binding.runningAppName
+        private val close: View = binding.runningAppClose
 
         fun bind(app: RunningAppInfo, onCloseClick: (RunningAppInfo) -> Unit) {
             icon.setImageDrawable(itemView.context.packageManager.getApplicationIcon(app.applicationInfo))

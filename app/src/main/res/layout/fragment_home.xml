@@ -151,11 +151,11 @@
                 android:layout_marginTop="28dp"
                 android:orientation="horizontal">
 
-                <include layout="@layout/item_home_primary_network" />
+                <include android:id="@+id/home_primary_network" layout="@layout/item_home_primary_network" />
 
-                <include layout="@layout/item_home_primary_duplicate" />
+                <include android:id="@+id/home_primary_duplicate" layout="@layout/item_home_primary_duplicate" />
 
-                <include layout="@layout/item_home_primary_app_manager" />
+                <include android:id="@+id/home_primary_app_manager" layout="@layout/item_home_primary_app_manager" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,22 +164,22 @@
                 android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
-                <include layout="@layout/item_home_secondary_screenshot" />
+                <include android:id="@+id/home_secondary_screenshot" layout="@layout/item_home_secondary_screenshot" />
 
-                <include layout="@layout/item_home_secondary_large_file" />
+                <include android:id="@+id/home_secondary_large_file" layout="@layout/item_home_secondary_large_file" />
             </LinearLayout>
 
-            <include layout="@layout/item_home_wide_notification" />
+            <include android:id="@+id/home_wide_notification" layout="@layout/item_home_wide_notification" />
 
-            <include layout="@layout/item_home_wide_video" />
+            <include android:id="@+id/home_wide_video" layout="@layout/item_home_wide_video" />
 
-            <include layout="@layout/item_home_tool_ram" />
+            <include android:id="@+id/home_tool_ram" layout="@layout/item_home_tool_ram" />
 
-            <include layout="@layout/item_home_tool_device" />
+            <include android:id="@+id/home_tool_device" layout="@layout/item_home_tool_device" />
 
-            <include layout="@layout/item_home_tool_battery" />
+            <include android:id="@+id/home_tool_battery" layout="@layout/item_home_tool_battery" />
 
-            <include layout="@layout/item_home_tool_network_test" />
+            <include android:id="@+id/home_tool_network_test" layout="@layout/item_home_tool_network_test" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityNetworkTestBinding
 import com.nice.aceclean.ui.widget.CheckmarkAnimationView
 import com.nice.aceclean.ui.widget.SpeedTestGaugeView
 import com.nice.aceclean.util.NetworkSpeedTest
@@ -17,18 +18,20 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R.string.network_test) {
+class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ ActivityNetworkTestBinding.inflate(it) }, R.layout.activity_network_test, R.string.network_test) {
 
     private var testJob: Job? = null
     private var liveSpeedJob: Job? = null
     @Volatile private var latestLiveSpeedMbps: Double? = null
 
+    override val featureHeader get() = binding.featureHeader
+
     override fun initToolViews() {
-        view<android.view.View>(R.id.network_test_button).setOnClickListener { startTest() }
+        binding.networkTestButton.setOnClickListener { startTest() }
     }
 
     override fun initData() {
-        view<android.view.View>(R.id.network_test_button).post { startTest() }
+        binding.networkTestButton.post { startTest() }
     }
 
     override fun onDestroy() {
@@ -40,36 +43,36 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
     private fun startTest() {
         if (testJob?.isActive == true) return
         if (!hasNetwork()) {
-            view<TextView>(R.id.network_test_status).setText(R.string.network_unavailable)
+            binding.networkTestStatus.setText(R.string.network_unavailable)
             return
         }
         resetResults()
         startLiveSpeedUpdates()
         testJob = lifecycleScope.launch {
-            val button = view<TextView>(R.id.network_test_button)
-            val status = view<TextView>(R.id.network_test_status)
-            val progress = view<SpeedTestGaugeView>(R.id.network_test_progress)
+            val button = binding.networkTestButton
+            val status = binding.networkTestStatus
+            val progress = binding.networkTestProgress
             button.isEnabled = false
             button.setText(R.string.testing)
             runCatching {
                 status.setText(R.string.network_test_connecting)
                 progress.animateTo(12)
                 val ping = withContext(Dispatchers.IO) { NetworkSpeedTest.measurePing() }
-                view<TextView>(R.id.network_ping).text = getString(R.string.ping_value, ping)
+                binding.networkPing.text = getString(R.string.ping_value, ping)
 
                 status.setText(R.string.network_test_downloading)
                 progress.animateTo(38)
                 val download = withContext(Dispatchers.IO) {
                     NetworkSpeedTest.measureDownloadMbps(::recordLiveSpeed)
                 }
-                view<TextView>(R.id.network_download).text = getString(R.string.speed_value, download)
+                binding.networkDownload.text = getString(R.string.speed_value, download)
 
                 status.setText(R.string.network_test_uploading)
                 progress.animateTo(72)
                 val upload = withContext(Dispatchers.IO) {
                     NetworkSpeedTest.measureUploadMbps(::recordLiveSpeed)
                 }
-                view<TextView>(R.id.network_upload).text = getString(R.string.speed_value, upload)
+                binding.networkUpload.text = getString(R.string.speed_value, upload)
 
                 status.setText(R.string.network_test_complete)
                 liveSpeedJob?.cancel()
@@ -85,14 +88,14 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
     }
 
     private fun resetResults() {
-        view<View>(R.id.network_live_speed_group).visibility = View.VISIBLE
-        view<CheckmarkAnimationView>(R.id.network_test_success).visibility = View.GONE
-        view<TextView>(R.id.network_live_speed).text = "0.0"
+        binding.networkLiveSpeedGroup.visibility = View.VISIBLE
+        binding.networkTestSuccess.visibility = View.GONE
+        binding.networkLiveSpeed.text = "0.0"
         latestLiveSpeedMbps = null
-        view<TextView>(R.id.network_ping).setText(R.string.ping_placeholder)
-        view<TextView>(R.id.network_download).setText(R.string.speed_placeholder)
-        view<TextView>(R.id.network_upload).setText(R.string.speed_placeholder)
-        view<SpeedTestGaugeView>(R.id.network_test_progress).progress = 0
+        binding.networkPing.setText(R.string.ping_placeholder)
+        binding.networkDownload.setText(R.string.speed_placeholder)
+        binding.networkUpload.setText(R.string.speed_placeholder)
+        binding.networkTestProgress.progress = 0
     }
 
     private fun recordLiveSpeed(speedMbps: Double) {
@@ -105,7 +108,7 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
             while (isActive) {
                 delay(LIVE_SPEED_REFRESH_MILLIS)
                 latestLiveSpeedMbps?.let { speed ->
-                    view<TextView>(R.id.network_live_speed).text =
+                    binding.networkLiveSpeed.text =
                         String.format(java.util.Locale.US, "%.1f", speed)
                 }
             }
@@ -113,8 +116,8 @@ class NetworkTestActivity : DeviceToolActivity(R.layout.activity_network_test, R
     }
 
     private fun showSuccessAnimation() {
-        view<View>(R.id.network_live_speed_group).visibility = View.GONE
-        view<CheckmarkAnimationView>(R.id.network_test_success).apply {
+        binding.networkLiveSpeedGroup.visibility = View.GONE
+        binding.networkTestSuccess.apply {
             visibility = View.VISIBLE
             play()
         }

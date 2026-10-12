@@ -20,6 +20,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemScreenshotBinding
+import com.nice.aceclean.databinding.ItemScreenshotGroupHeaderBinding
+import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
@@ -28,8 +31,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VideoCleanerActivity : StorageCleanerActivity(
+class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBinding>(
     StorageCleanerType.VIDEO,
+    { FragmentScreenshotCleanerBinding.inflate(it) },
     R.layout.fragment_screenshot_cleaner,
 ) {
 
@@ -40,7 +44,6 @@ class VideoCleanerActivity : StorageCleanerActivity(
 
     private val selected = linkedSetOf<MediaFileInfo>()
     private var videos = emptyList<MediaFileInfo>()
-    private lateinit var rootView: View
     private lateinit var adapter: VideoAdapter
     private var deleteConfirmationDialog: Dialog? = null
 
@@ -57,10 +60,9 @@ class VideoCleanerActivity : StorageCleanerActivity(
     }
 
     override fun initResultViews() {
-        rootView = findViewById(android.R.id.content)
-        rootView.findViewById<TextView>(R.id.picture_title).setText(R.string.video_manage)
-        rootView.findViewById<View>(R.id.picture_tabs).visibility = View.GONE
-        rootView.findViewById<View>(R.id.picture_back).setOnClickListener { finish() }
+        resultBinding.pictureTitle.setText(R.string.video_manage)
+        resultBinding.pictureTabs.visibility = View.GONE
+        resultBinding.pictureBack.setOnClickListener { finish() }
         adapter = VideoAdapter()
         val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -68,15 +70,15 @@ class VideoCleanerActivity : StorageCleanerActivity(
                     if (adapter.rowAt(position) is VideoRow.Header) COLUMN_COUNT else 1
             }
         }
-        rootView.findViewById<RecyclerView>(R.id.picture_list).apply {
+        resultBinding.pictureList.apply {
             layoutManager = manager
             adapter = this@VideoCleanerActivity.adapter
         }
-        rootView.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
+        resultBinding.pictureSelectAll.setOnClickListener {
             if ((it as CheckBox).isChecked) selected.addAll(videos) else selected.clear()
             render()
         }
-        rootView.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
+        resultBinding.pictureClean.setOnClickListener { deleteSelected() }
         loadVideos()
     }
 
@@ -89,9 +91,9 @@ class VideoCleanerActivity : StorageCleanerActivity(
     }
 
     private fun render() {
-        if (!::rootView.isInitialized) return
-        rootView.findViewById<CheckBox>(R.id.picture_select_all).isChecked = videos.isNotEmpty() && selected.containsAll(videos)
-        rootView.findViewById<TextView>(R.id.picture_empty).apply {
+        if (!isResultShown) return
+        resultBinding.pictureSelectAll.isChecked = videos.isNotEmpty() && selected.containsAll(videos)
+        resultBinding.pictureEmpty.apply {
             setText(R.string.no_video_files_found)
             visibility = if (videos.isEmpty()) View.VISIBLE else View.GONE
         }
@@ -101,7 +103,7 @@ class VideoCleanerActivity : StorageCleanerActivity(
                 files.forEach { add(VideoRow.Video(it)) }
             }
         })
-        rootView.findViewById<TextView>(R.id.picture_clean).text = if (selected.isEmpty()) {
+        resultBinding.pictureClean.text = if (selected.isEmpty()) {
             getString(R.string.clean)
         } else {
             getString(R.string.clean_selected, selected.size)
@@ -174,9 +176,12 @@ class VideoCleanerActivity : StorageCleanerActivity(
         override fun getItemViewType(position: Int) = if (rows[position] is VideoRow.Header) TYPE_HEADER else TYPE_VIDEO
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val layout = if (viewType == TYPE_HEADER) R.layout.item_screenshot_group_header else R.layout.item_screenshot
-            val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-            return if (viewType == TYPE_HEADER) HeaderHolder(view) else VideoHolder(view)
+            val inflater = LayoutInflater.from(parent.context)
+            return if (viewType == TYPE_HEADER) {
+                HeaderHolder(ItemScreenshotGroupHeaderBinding.inflate(inflater, parent, false))
+            } else {
+                VideoHolder(ItemScreenshotBinding.inflate(inflater, parent, false))
+            }
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -186,10 +191,10 @@ class VideoCleanerActivity : StorageCleanerActivity(
             }
         }
 
-        private inner class HeaderHolder(view: View) : RecyclerView.ViewHolder(view) {
-            private val month = view.findViewById<TextView>(R.id.picture_group_month)
-            private val summary = view.findViewById<TextView>(R.id.picture_group_summary)
-            private val selectAll = view.findViewById<CheckBox>(R.id.picture_group_all)
+        private inner class HeaderHolder(binding: ItemScreenshotGroupHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+            private val month = binding.pictureGroupMonth
+            private val summary = binding.pictureGroupSummary
+            private val selectAll = binding.pictureGroupAll
 
             fun bind(header: VideoRow.Header) {
                 month.text = header.month
@@ -203,10 +208,10 @@ class VideoCleanerActivity : StorageCleanerActivity(
             }
         }
 
-        private inner class VideoHolder(view: View) : RecyclerView.ViewHolder(view) {
-            private val thumbnail = view.findViewById<ImageView>(R.id.picture_thumbnail)
-            private val size = view.findViewById<TextView>(R.id.picture_size)
-            private val check = view.findViewById<CheckBox>(R.id.picture_check)
+        private inner class VideoHolder(binding: ItemScreenshotBinding) : RecyclerView.ViewHolder(binding.root) {
+            private val thumbnail = binding.pictureThumbnail
+            private val size = binding.pictureSize
+            private val check = binding.pictureCheck
 
             fun bind(file: MediaFileInfo) {
                 val key = file.uri.toString()

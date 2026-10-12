@@ -1,10 +1,11 @@
 package com.nice.aceclean.ui.main
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
+import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.FragmentPermissionGateBinding
 import com.nice.aceclean.permission.NotificationListenerPermissionHelper
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
@@ -13,10 +14,15 @@ import com.nice.aceclean.ui.base.BaseActivity
 
 enum class FeatureType { NETWORK_TRAFFIC, NOTIFICATION_CLEANER, APP_MANAGER }
 
-abstract class PermissionFeatureActivity(
+abstract class PermissionFeatureActivity<F : ViewBinding>(
     private val featureType: FeatureType,
+    private val inflateFeature: (LayoutInflater) -> F,
     @param:LayoutRes private val featureLayout: Int,
-) : BaseActivity(R.layout.fragment_permission_gate) {
+) : BaseActivity<FragmentPermissionGateBinding>({ FragmentPermissionGateBinding.inflate(it) }, R.layout.fragment_permission_gate) {
+
+    protected lateinit var featureBinding: F
+        private set
+    protected val isFeatureShown get() = featureShown
 
     private var permissionHelper: AutoCloseable? = null
     private var featureShown = false
@@ -27,11 +33,11 @@ abstract class PermissionFeatureActivity(
             return
         }
         val config = featureType.config
-        view<TextView>(R.id.permission_toolbar_title).setText(config.toolbarTitle)
-        view<ImageView>(R.id.permission_image).setImageResource(config.image)
-        view<TextView>(R.id.permission_title).setText(config.title)
-        view<TextView>(R.id.permission_description).setText(config.description)
-        view<View>(R.id.permission_back).setOnClickListener { finish() }
+        binding.permissionToolbarTitle.setText(config.toolbarTitle)
+        binding.permissionImage.setImageResource(config.image)
+        binding.permissionTitle.setText(config.title)
+        binding.permissionDescription.setText(config.description)
+        binding.permissionBack.setOnClickListener { finish() }
         val requestPermission: () -> Unit = when (featureType.specialPermission) {
             SpecialPermission.NOTIFICATION_LISTENER -> {
                 NotificationListenerPermissionHelper(this, ::showFeature).also { permissionHelper = it }
@@ -42,7 +48,7 @@ abstract class PermissionFeatureActivity(
                     .let { helper -> { helper.request() } }
             }
         }
-        view<View>(R.id.permission_allow).setOnClickListener {
+        binding.permissionAllow.setOnClickListener {
             requestPermission()
         }
     }
@@ -52,7 +58,7 @@ abstract class PermissionFeatureActivity(
         featureShown = true
         permissionHelper?.close()
         permissionHelper = null
-        setActivityContent(featureLayout)
+        featureBinding = setActivityContent(inflateFeature(layoutInflater), featureLayout)
         initFeatureViews()
     }
 

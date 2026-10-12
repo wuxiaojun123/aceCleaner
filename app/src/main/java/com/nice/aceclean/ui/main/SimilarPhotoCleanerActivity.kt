@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityDuplicatePhotoCleanerBinding
 import com.nice.aceclean.permission.MediaReadPermissionHelper
 import com.nice.aceclean.permission.MediaReadType
 import com.nice.aceclean.similarphoto.SimilarPhotoCluster
@@ -28,7 +29,7 @@ import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.ui.widget.IosSwitchView
 import kotlinx.coroutines.launch
 
-class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_photo_cleaner) {
+class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBinding>({ ActivityDuplicatePhotoCleanerBinding.inflate(it) }, R.layout.activity_duplicate_photo_cleaner) {
     private lateinit var adapter: SimilarPhotosAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var keepBestSwitch: IosSwitchView
@@ -49,8 +50,8 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
     }
 
     override fun initViews() {
-        view<View>(R.id.duplicate_back).setOnClickListener { finish() }
-        keepBestSwitch = view(R.id.duplicate_keep_best_switch)
+        binding.duplicateBack.setOnClickListener { finish() }
+        keepBestSwitch = binding.duplicateKeepBestSwitch
         keepBestSwitch.isChecked = true
         keepBestSwitch.setTrackOnColor(ContextCompat.getColor(this, R.color.color_FF42B8FF))
 
@@ -65,7 +66,7 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
                     if (adapter.getItemViewType(position) == SimilarPhotosAdapter.TYPE_HEADER) COLUMN_COUNT else 1
             }
         }
-        view<RecyclerView>(R.id.duplicate_photo_list).apply {
+        binding.duplicatePhotoList.apply {
             layoutManager = gridLayoutManager
             adapter = this@SimilarPhotoCleanerActivity.adapter
             addItemDecoration(GridSpacingDecoration(resources.getDimensionPixelSize(R.dimen.dup_grid_spacing)))
@@ -73,7 +74,7 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
         keepBestSwitch.setOnCheckedChangeListener { _, enabled ->
             if (!syncingSwitch) adapter.setKeepBestSelection(enabled)
         }
-        view<View>(R.id.duplicate_delete).setOnClickListener { confirmDelete() }
+        binding.duplicateDelete.setOnClickListener { confirmDelete() }
     }
 
     override fun initData() {
@@ -113,13 +114,13 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
 
     private fun updateSelection(selected: List<SimilarPhotoItem>) {
         val count = selected.size
-        view<TextView>(R.id.duplicate_selected_count).text = getString(R.string.dup_selected_count, count)
-        view<TextView>(R.id.duplicate_selected_size).text = if (count == 0) {
+        binding.duplicateSelectedCount.text = getString(R.string.dup_selected_count, count)
+        binding.duplicateSelectedSize.text = if (count == 0) {
             getString(R.string.dup_action_note)
         } else {
             getString(R.string.dup_selected_size, Formatter.formatFileSize(this, selected.sumOf { it.sizeBytes }))
         }
-        view<View>(R.id.duplicate_delete).apply {
+        binding.duplicateDelete.apply {
             isEnabled = count > 0
             alpha = if (count > 0) 1f else 0.6f
         }
@@ -190,12 +191,12 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
     }
 
     private fun showLoading(show: Boolean) {
-        view<View>(R.id.duplicate_loading).visibility = if (show) View.VISIBLE else View.GONE
+        binding.duplicateLoading.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     private fun showEmpty(show: Boolean) {
-        view<View>(R.id.duplicate_empty).visibility = if (show) View.VISIBLE else View.GONE
-        view<View>(R.id.duplicate_photo_list).visibility = if (show) View.GONE else View.VISIBLE
+        binding.duplicateEmpty.visibility = if (show) View.VISIBLE else View.GONE
+        binding.duplicatePhotoList.visibility = if (show) View.GONE else View.VISIBLE
     }
 
     private fun showPermissionEmptyState() {
@@ -203,7 +204,7 @@ class SimilarPhotoCleanerActivity : BaseActivity(R.layout.activity_duplicate_pho
         showEmpty(true)
         keepBestSwitch.isEnabled = false
         keepBestSwitch.alpha = 0.5f
-        view<TextView>(R.id.duplicate_empty_description).setText(R.string.storage_permission_required)
+        binding.duplicateEmptyDescription.setText(R.string.storage_permission_required)
     }
 
     private inner class GridSpacingDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {

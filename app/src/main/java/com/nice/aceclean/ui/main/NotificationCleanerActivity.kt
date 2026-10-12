@@ -16,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.FragmentNotificationCleanerBinding
 import com.nice.aceclean.notification.AppIconLoader
 import com.nice.aceclean.notification.InterceptedNotificationAdapter
 import com.nice.aceclean.notification.InterceptedNotificationStore
@@ -32,8 +33,9 @@ import kotlinx.coroutines.withContext
 import java.text.NumberFormat
 import kotlin.coroutines.resume
 
-class NotificationCleanerActivity : PermissionFeatureActivity(
+class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificationCleanerBinding>(
     FeatureType.NOTIFICATION_CLEANER,
+    { FragmentNotificationCleanerBinding.inflate(it) },
     R.layout.fragment_notification_cleaner,
 ) {
     private val numberFormatter = NumberFormat.getIntegerInstance()
@@ -41,22 +43,22 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
     private var isClearing = false
 
     override fun initFeatureViews() {
-        view<RecyclerView>(R.id.intercepted_notifications_list).apply {
+        featureBinding.interceptedNotificationsList.apply {
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = this@NotificationCleanerActivity.adapter
         }
-        view<View>(R.id.notification_back).setOnClickListener { finish() }
-        view<View>(R.id.notification_whitelist_entry).setOnClickListener {
+        featureBinding.notificationBack.setOnClickListener { finish() }
+        featureBinding.notificationWhitelistEntry.setOnClickListener {
             startActivity(Intent(this, AllowedAppsActivity::class.java))
         }
-        view<IosSwitchView>(R.id.notification_intercept_switch).apply {
+        featureBinding.notificationInterceptSwitch.apply {
             setTrackOnColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.notification_manager_amber))
             setOnCheckedChangeListener { _, checked ->
                 NotificationInterceptStore.setEnabled(this@NotificationCleanerActivity, checked)
                 renderStats()
             }
         }
-        view<View>(R.id.notification_clean_all).setOnClickListener { clearInterceptedNotifications() }
+        featureBinding.notificationCleanAll.setOnClickListener { clearInterceptedNotifications() }
         observeInterceptedNotifications()
         lifecycleScope.launch(Dispatchers.IO) {
             InterceptedNotificationStore.discardExpired(this@NotificationCleanerActivity)
@@ -65,12 +67,12 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
 
     override fun onResume() {
         super.onResume()
-        if (findViewById<View?>(R.id.notification_intercept_switch) != null) renderStats()
+        if (isFeatureShown) renderStats()
     }
 
     private fun renderStats() {
         val intercepting = NotificationInterceptStore.isEnabled(this)
-        view<IosSwitchView>(R.id.notification_intercept_switch).apply {
+        featureBinding.notificationInterceptSwitch.apply {
             if (isChecked != intercepting) {
                 setOnCheckedChangeListener(null)
                 isChecked = intercepting
@@ -80,13 +82,13 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
                 }
             }
         }
-        view<TextView>(R.id.notification_intercepted_today).text =
+        featureBinding.notificationInterceptedToday.text =
             numberFormatter.format(NotificationInterceptStore.interceptedToday(this))
-        view<TextView>(R.id.notification_whitelist_count).text =
+        featureBinding.notificationWhitelistCount.text =
             NotificationInterceptStore.whitelist(this).size.toString()
 
         val snapshot = NotificationStatsStore.load(this)
-        view<TextView>(R.id.notification_badge_value).text =
+        featureBinding.notificationBadgeValue.text =
             if (snapshot.totalToday > 99) getString(R.string.notif_badge) else snapshot.totalToday.toString()
         renderAppList(snapshot.topApps)
     }
@@ -98,13 +100,13 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
                     if (isClearing) return@collect
                     adapter.submitList(items)
                     val hasItems = items.isNotEmpty()
-                    view<RecyclerView>(R.id.intercepted_notifications_list).isVisible = hasItems
-                    view<TextView>(R.id.intercepted_notifications_empty).isVisible = !hasItems
-                    view<View>(R.id.notification_clean_all).apply {
+                    featureBinding.interceptedNotificationsList.isVisible = hasItems
+                    featureBinding.interceptedNotificationsEmpty.isVisible = !hasItems
+                    featureBinding.notificationCleanAll.apply {
                         isEnabled = hasItems
                         alpha = if (hasItems) 1f else 0.45f
                     }
-                    view<TextView>(R.id.notification_intercepted_today).text =
+                    featureBinding.notificationInterceptedToday.text =
                         numberFormatter.format(NotificationInterceptStore.interceptedToday(this@NotificationCleanerActivity))
                 }
             }
@@ -115,8 +117,8 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
         if (isClearing || adapter.itemCount == 0) return
         val clearedCount = adapter.itemCount
         isClearing = true
-        view<View>(R.id.notification_clean_all).isEnabled = false
-        view<TextView>(R.id.intercepted_notifications_empty).isVisible = false
+        featureBinding.notificationCleanAll.isEnabled = false
+        featureBinding.interceptedNotificationsEmpty.isVisible = false
         val cutoff = System.currentTimeMillis()
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
@@ -132,7 +134,7 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
     }
 
     private suspend fun animateNotificationsOut() {
-        val recyclerView = view<RecyclerView>(R.id.intercepted_notifications_list)
+        val recyclerView = featureBinding.interceptedNotificationsList
         val previousAnimator = recyclerView.itemAnimator
         recyclerView.itemAnimator = null
         recyclerView.scrollToPosition(0)
@@ -164,7 +166,7 @@ class NotificationCleanerActivity : PermissionFeatureActivity(
     }
 
     private fun renderAppList(apps: List<NotificationAppStats>) {
-        val container = view<LinearLayout>(R.id.notification_top_apps)
+        val container = featureBinding.notificationTopApps
         container.removeAllViews()
         val visibleApps = apps.filter { it.packageName != packageName }
         if (visibleApps.isEmpty()) {

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemNetworkAppBinding
+import com.nice.aceclean.databinding.FragmentNetworkTrafficBinding
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.NetworkUsageRepository
@@ -18,15 +20,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NetworkTrafficActivity : PermissionFeatureActivity(
+class NetworkTrafficActivity : PermissionFeatureActivity<FragmentNetworkTrafficBinding>(
     FeatureType.NETWORK_TRAFFIC,
+    { FragmentNetworkTrafficBinding.inflate(it) },
     R.layout.fragment_network_traffic,
 ) {
     private val appAdapter = NetworkAppAdapter()
 
     override fun initFeatureViews() {
-        view<View>(R.id.network_back).setOnClickListener { finish() }
-        view<RecyclerView>(R.id.network_app_list).apply {
+        featureBinding.networkBack.setOnClickListener { finish() }
+        featureBinding.networkAppList.apply {
             layoutManager = LinearLayoutManager(this@NetworkTrafficActivity)
             adapter = appAdapter
         }
@@ -47,29 +50,29 @@ class NetworkTrafficActivity : PermissionFeatureActivity(
             if (isFinishing || isDestroyed) return@launch
             val (usage, apps) = result
 
-            view<TextView>(R.id.network_total).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.totalBytes)
-            view<TextView>(R.id.network_mobile).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.mobileBytes)
-            view<TextView>(R.id.network_wifi).text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.wifiBytes)
+            featureBinding.networkTotal.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.totalBytes)
+            featureBinding.networkMobile.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.mobileBytes)
+            featureBinding.networkWifi.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.wifiBytes)
             renderDailyBars(usage.dailyBytes)
-            view<View>(R.id.network_app_empty).visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
-            view<RecyclerView>(R.id.network_app_list).visibility = if (apps.isEmpty()) View.GONE else View.VISIBLE
+            featureBinding.networkAppEmpty.visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
+            featureBinding.networkAppList.visibility = if (apps.isEmpty()) View.GONE else View.VISIBLE
             appAdapter.submitList(apps) {
-                view<View>(R.id.network_content).visibility = View.VISIBLE
+                featureBinding.networkContent.visibility = View.VISIBLE
             }
         }
     }
 
     private fun renderDailyBars(dailyBytes: List<Long>) {
-        val barIds = intArrayOf(
-            R.id.network_day_1, R.id.network_day_2, R.id.network_day_3, R.id.network_day_4,
-            R.id.network_day_5, R.id.network_day_6, R.id.network_day_7,
+        val bars = listOf(
+            featureBinding.networkDay1, featureBinding.networkDay2, featureBinding.networkDay3,
+            featureBinding.networkDay4, featureBinding.networkDay5, featureBinding.networkDay6,
+            featureBinding.networkDay7,
         )
         val maximum = dailyBytes.maxOrNull()?.coerceAtLeast(1L) ?: 1L
         val minimumHeight = (8 * resources.displayMetrics.density).toInt()
         val maximumHeight = (104 * resources.displayMetrics.density).toInt()
-        barIds.forEachIndexed { index, id ->
+        bars.forEachIndexed { index, bar ->
             val value = dailyBytes.getOrElse(index) { 0L }
-            val bar = view<View>(id)
             bar.layoutParams = bar.layoutParams.apply {
                 height = if (value <= 0L) minimumHeight else
                     (minimumHeight + (maximumHeight - minimumHeight) * value / maximum).toInt()
@@ -80,19 +83,19 @@ class NetworkTrafficActivity : PermissionFeatureActivity(
 
 private class NetworkAppAdapter : ListAdapter<InstalledAppInfo, NetworkAppAdapter.ViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val item = LayoutInflater.from(parent.context).inflate(R.layout.item_network_app, parent, false)
-        return ViewHolder(item)
+        val binding = ItemNetworkAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val icon: ImageView = itemView.findViewById(R.id.network_app_icon)
-        private val name: TextView = itemView.findViewById(R.id.network_app_name)
-        private val packageName: TextView = itemView.findViewById(R.id.network_app_package)
-        private val usage: TextView = itemView.findViewById(R.id.network_app_usage)
+    class ViewHolder(binding: ItemNetworkAppBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val icon: ImageView = binding.networkAppIcon
+        private val name: TextView = binding.networkAppName
+        private val packageName: TextView = binding.networkAppPackage
+        private val usage: TextView = binding.networkAppUsage
 
         fun bind(app: InstalledAppInfo) {
             icon.setImageDrawable(itemView.context.packageManager.getApplicationIcon(app.applicationInfo))

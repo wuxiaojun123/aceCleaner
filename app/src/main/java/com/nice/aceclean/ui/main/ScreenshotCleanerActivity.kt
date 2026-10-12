@@ -20,6 +20,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ItemScreenshotBinding
+import com.nice.aceclean.databinding.ItemScreenshotGroupHeaderBinding
+import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.MediaFileInfo
@@ -28,8 +31,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ScreenshotCleanerActivity : StorageCleanerActivity(
+class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBinding>(
     StorageCleanerType.SCREENSHOT,
+    { FragmentScreenshotCleanerBinding.inflate(it) },
     R.layout.fragment_screenshot_cleaner,
 ) {
 
@@ -42,7 +46,6 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
     private var screenshots = emptyList<MediaFileInfo>()
     private var others = emptyList<MediaFileInfo>()
     private var showingScreenshots = true
-    private lateinit var rootView: View
     private lateinit var adapter: PictureAdapter
     private var deleteConfirmationDialog: Dialog? = null
 
@@ -59,7 +62,6 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
     }
 
     override fun initResultViews() {
-        rootView = findViewById(android.R.id.content)
         adapter = PictureAdapter()
         val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -67,27 +69,27 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
                     if (adapter.rowAt(position) is PictureRow.Header) COLUMN_COUNT else 1
             }
         }
-        rootView.findViewById<RecyclerView>(R.id.picture_list).apply {
+        resultBinding.pictureList.apply {
             layoutManager = manager
             adapter = this@ScreenshotCleanerActivity.adapter
         }
-        rootView.findViewById<View>(R.id.picture_back).setOnClickListener { finish() }
-        rootView.findViewById<View>(R.id.picture_tab_screenshot).setOnClickListener {
+        resultBinding.pictureBack.setOnClickListener { finish() }
+        resultBinding.pictureTabScreenshot.setOnClickListener {
             showingScreenshots = true
             selected.clear()
             render()
         }
-        rootView.findViewById<View>(R.id.picture_tab_others).setOnClickListener {
+        resultBinding.pictureTabOthers.setOnClickListener {
             showingScreenshots = false
             selected.clear()
             render()
         }
-        rootView.findViewById<CheckBox>(R.id.picture_select_all).setOnClickListener {
+        resultBinding.pictureSelectAll.setOnClickListener {
             val files = visibleFiles()
             if ((it as CheckBox).isChecked) selected.addAll(files) else selected.clear()
             render()
         }
-        rootView.findViewById<View>(R.id.picture_clean).setOnClickListener { deleteSelected() }
+        resultBinding.pictureClean.setOnClickListener { deleteSelected() }
         loadPictures()
     }
 
@@ -102,12 +104,12 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
     }
 
     private fun render() {
-        if (!::rootView.isInitialized) return
-        rootView.findViewById<View>(R.id.picture_tab_screenshot).isSelected = showingScreenshots
-        rootView.findViewById<View>(R.id.picture_tab_others).isSelected = !showingScreenshots
+        if (!isResultShown) return
+        resultBinding.pictureTabScreenshot.isSelected = showingScreenshots
+        resultBinding.pictureTabOthers.isSelected = !showingScreenshots
         val files = visibleFiles()
-        rootView.findViewById<CheckBox>(R.id.picture_select_all).isChecked = files.isNotEmpty() && selected.containsAll(files)
-        rootView.findViewById<TextView>(R.id.picture_empty).visibility = if (files.isEmpty()) View.VISIBLE else View.GONE
+        resultBinding.pictureSelectAll.isChecked = files.isNotEmpty() && selected.containsAll(files)
+        resultBinding.pictureEmpty.visibility = if (files.isEmpty()) View.VISIBLE else View.GONE
         adapter.submit(buildList {
             files.groupBy { it.monthLabel() }.forEach { (month, monthFiles) ->
                 add(PictureRow.Header(month, monthFiles))
@@ -118,7 +120,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
     }
 
     private fun updateCleanButton() {
-        rootView.findViewById<TextView>(R.id.picture_clean).text = if (selected.isEmpty()) {
+        resultBinding.pictureClean.text = if (selected.isEmpty()) {
             getString(R.string.clean)
         } else {
             getString(R.string.clean_selected, selected.size)
@@ -200,9 +202,12 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
         override fun getItemViewType(position: Int) = if (rows[position] is PictureRow.Header) TYPE_HEADER else TYPE_PICTURE
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val layout = if (viewType == TYPE_HEADER) R.layout.item_screenshot_group_header else R.layout.item_screenshot
-            val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-            return if (viewType == TYPE_HEADER) HeaderHolder(view) else PictureHolder(view)
+            val inflater = LayoutInflater.from(parent.context)
+            return if (viewType == TYPE_HEADER) {
+                HeaderHolder(ItemScreenshotGroupHeaderBinding.inflate(inflater, parent, false))
+            } else {
+                PictureHolder(ItemScreenshotBinding.inflate(inflater, parent, false))
+            }
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -212,10 +217,10 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
             }
         }
 
-        private inner class HeaderHolder(view: View) : RecyclerView.ViewHolder(view) {
-            private val month = view.findViewById<TextView>(R.id.picture_group_month)
-            private val summary = view.findViewById<TextView>(R.id.picture_group_summary)
-            private val selectAll = view.findViewById<CheckBox>(R.id.picture_group_all)
+        private inner class HeaderHolder(binding: ItemScreenshotGroupHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+            private val month = binding.pictureGroupMonth
+            private val summary = binding.pictureGroupSummary
+            private val selectAll = binding.pictureGroupAll
 
             fun bind(header: PictureRow.Header) {
                 month.text = header.month
@@ -229,10 +234,10 @@ class ScreenshotCleanerActivity : StorageCleanerActivity(
             }
         }
 
-        private inner class PictureHolder(view: View) : RecyclerView.ViewHolder(view) {
-            private val thumbnail = view.findViewById<ImageView>(R.id.picture_thumbnail)
-            private val size = view.findViewById<TextView>(R.id.picture_size)
-            private val check = view.findViewById<CheckBox>(R.id.picture_check)
+        private inner class PictureHolder(binding: ItemScreenshotBinding) : RecyclerView.ViewHolder(binding.root) {
+            private val thumbnail = binding.pictureThumbnail
+            private val size = binding.pictureSize
+            private val check = binding.pictureCheck
 
             fun bind(file: MediaFileInfo) {
                 val key = file.uri.toString()

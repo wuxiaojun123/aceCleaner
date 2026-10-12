@@ -7,10 +7,11 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityMainBinding
 import com.nice.aceclean.service.StickyNotificationService
 import com.nice.aceclean.ui.base.BaseActivity
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }, R.layout.activity_main) {
 
     private val languageLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),

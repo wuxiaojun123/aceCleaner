@@ -9,16 +9,20 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityDeviceReportBinding
+import com.nice.aceclean.databinding.ItemDeviceScanCardBinding
 import com.nice.aceclean.util.DeviceToolsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DeviceReportActivity : DeviceToolActivity(R.layout.activity_device_report, R.string.device_scan) {
+class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ ActivityDeviceReportBinding.inflate(it) }, R.layout.activity_device_report, R.string.device_scan) {
+
+    override val featureHeader get() = binding.featureHeader
 
     override fun initToolViews() {
-        view<View>(R.id.device_ok_button).setOnClickListener { finish() }
+        binding.deviceOkButton.setOnClickListener { finish() }
     }
 
     override fun initData() {
@@ -27,23 +31,23 @@ class DeviceReportActivity : DeviceToolActivity(R.layout.activity_device_report,
                 DeviceToolsRepository.deviceReport(this@DeviceReportActivity)
             }
             for (value in 1..100) {
-                view<TextView>(R.id.device_scan_percent).text =
+                binding.deviceScanPercent.text =
                     getString(R.string.percentage_value, value)
                 delay(DEVICE_SCAN_STEP_MILLIS)
             }
             val report = reportDeferred.await()
             renderReport(report)
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.device_scan_ring).cancelAnimation()
-            view<com.airbnb.lottie.LottieAnimationView>(R.id.device_scan_animation).cancelAnimation()
-            view<View>(R.id.device_scan_container).visibility = View.GONE
-            view<View>(R.id.device_result_container).visibility = View.VISIBLE
+            binding.deviceScanRing.cancelAnimation()
+            binding.deviceScanAnimation.cancelAnimation()
+            binding.deviceScanContainer.visibility = View.GONE
+            binding.deviceResultContainer.visibility = View.VISIBLE
         }
     }
 
     private fun renderReport(report: com.nice.aceclean.util.DeviceReport) {
-        view<TextView>(R.id.device_cpu_value).text =
+        binding.deviceCpuValue.text =
             report.cpuModel.ifBlank { getString(R.string.unknown) }
-        val grid = view<GridLayout>(R.id.device_info_grid)
+        val grid = binding.deviceInfoGrid
         grid.removeAllViews()
         addDeviceCard(grid, R.drawable.device_scan_1, R.string.memory, report.memory)
         addDeviceCard(grid, R.drawable.device_scan_2, R.string.storage, report.storage)
@@ -94,11 +98,11 @@ class DeviceReportActivity : DeviceToolActivity(R.layout.activity_device_report,
         @StringRes labelRes: Int,
         value: String,
     ) {
-        val card = LayoutInflater.from(this).inflate(R.layout.item_device_scan_card, grid, false)
-        card.findViewById<ImageView>(R.id.device_card_icon).setImageResource(iconRes)
-        card.findViewById<TextView>(R.id.device_card_value).text = value
-        card.findViewById<TextView>(R.id.device_card_label).setText(labelRes)
-        card.layoutParams = GridLayout.LayoutParams().apply {
+        val card = ItemDeviceScanCardBinding.inflate(layoutInflater, grid, false)
+        card.deviceCardIcon.setImageResource(iconRes)
+        card.deviceCardValue.text = value
+        card.deviceCardLabel.setText(labelRes)
+        card.root.layoutParams = GridLayout.LayoutParams().apply {
             width = 0
             height = resources.getDimensionPixelSize(R.dimen.device_card_height)
             columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
@@ -106,7 +110,7 @@ class DeviceReportActivity : DeviceToolActivity(R.layout.activity_device_report,
             val bottom = resources.getDimensionPixelSize(R.dimen.device_card_vertical_spacing)
             setMargins(horizontal, 0, horizontal, bottom)
         }
-        grid.addView(card)
+        grid.addView(card.root)
     }
 
     private companion object {

@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.databinding.ActivityLanguageBinding
 import com.nice.aceclean.language.LanguageAdapter
 import com.nice.aceclean.language.LanguageItem
 import com.nice.aceclean.ui.base.BaseActivity
@@ -14,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class LanguageActivity : BaseActivity(R.layout.activity_language) {
+class LanguageActivity : BaseActivity<ActivityLanguageBinding>({ ActivityLanguageBinding.inflate(it) }, R.layout.activity_language) {
 
     override val statusBarColorRes: Int = R.color.language_page_background
 
@@ -135,7 +136,7 @@ class LanguageActivity : BaseActivity(R.layout.activity_language) {
     )
 
     override fun initViews() {
-        view<View>(R.id.back_button).setOnClickListener { finish() }
+        binding.backButton.setOnClickListener { finish() }
         setupLanguageList()
     }
 
@@ -145,7 +146,7 @@ class LanguageActivity : BaseActivity(R.layout.activity_language) {
         languageAdapter = LanguageAdapter(sortedItems, selectedLocale) { item ->
             selectLanguage(item.locale)
         }
-        view<RecyclerView>(R.id.language_recycler_view).apply {
+        binding.languageRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@LanguageActivity)
             adapter = languageAdapter
         }
