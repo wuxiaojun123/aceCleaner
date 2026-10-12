@@ -60,12 +60,10 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="19dp">
 
-                <ImageView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:contentDescription="@null"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/hkep_img_finish_tap_bg" />
+                    android:background="@drawable/hkep_img_finish_tap_bg" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
