@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@drawable/image_home_not_clean_bg" />
+        android:src="@drawable/image_home_not_clean_bg"
+        android:tag="system_bar_background" />
 
     <LinearLayout
         android:layout_width="match_parent"

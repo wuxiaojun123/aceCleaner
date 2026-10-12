@@ -17,7 +17,6 @@ import com.nice.aceclean.ui.base.BaseActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>({ ActivitySplashBinding.inflate(it) }, R.layout.activity_splash) {
 
-    override val statusBarColorRes: Int = R.color.white
 
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView

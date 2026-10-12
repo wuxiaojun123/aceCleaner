@@ -18,6 +18,7 @@ abstract class BaseFragment<B : ViewBinding>(
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val viewBinding = inflateBinding(inflater, container, false)
         _binding = viewBinding
+        SystemBarInsets.apply(viewBinding.root)
         return viewBinding.root
     }
 

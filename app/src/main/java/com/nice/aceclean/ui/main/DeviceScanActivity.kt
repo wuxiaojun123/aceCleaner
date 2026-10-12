@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 
 class DeviceScanActivity : BaseActivity<ActivityDeviceScanBinding>({ ActivityDeviceScanBinding.inflate(it) }, R.layout.activity_device_scan) {
 
-    override val statusBarColorRes: Int = R.color.white
 
     private lateinit var stepsView: RecyclerView
     private lateinit var startButton: TextView
