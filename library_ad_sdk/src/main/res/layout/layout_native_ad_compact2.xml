@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="82dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:background="@drawable/ad_sdk_native_background"
+    android:padding="5dp">
+
+    <FrameLayout
+        android:id="@+id/nativeAdMedia"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:background="@color/ad_sdk_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.55" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ad_sdk_accent"
+        android:paddingStart="5dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="2dp"
+        android:text="AD"
+        android:textColor="@android:color/white"
+        android:textSize="9sp"
+        app:layout_constraintStart_toStartOf="@id/nativeAdMedia"
+        app:layout_constraintTop_toTopOf="@id/nativeAdMedia" />
+
+    <ImageView
+        android:id="@+id/nativeAdIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toEndOf="@id/nativeAdMedia"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/nativeAdTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/ad_sdk_text_primary"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nativeAdIcon"
+        app:layout_constraintTop_toTopOf="@id/nativeAdIcon"
+        tools:text="Advertisement title" />
+
+    <TextView
+        android:id="@+id/nativeAdDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="0dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/ad_sdk_text_secondary"
+        android:textSize="7sp"
+        app:layout_constraintBottom_toTopOf="@id/nativeAdAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nativeAdMedia"
+        app:layout_constraintTop_toBottomOf="@id/nativeAdIcon"
+        tools:text="Advertisement description" />
+
+    <Button
+        android:id="@+id/nativeAdAction"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="5dp"
+        android:backgroundTint="@color/ad_sdk_accent"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nativeAdMedia"
+        tools:text="Open" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

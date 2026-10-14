@@ -3,6 +3,7 @@ package com.nice.aceclean.permission
 import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.nice.aceclean.ad.HotStartManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -27,7 +28,10 @@ internal class SettingsPermissionPoller(
             return true
         }
         val opened = intents.any { intent -> runCatching { activity.startActivity(intent) }.isSuccess }
-        if (opened) startPolling()
+        if (opened) {
+            HotStartManager.markSkipNextHotStart()
+            startPolling()
+        }
         return opened
     }
 

@@ -1,5 +1,6 @@
 # 项目规则
 
+- 日志打印统一使用 `LogUtils`，不要直接使用 `android.util.Log`、`println` 或 `System.out` 打印日志。
 - 对于展示数量不固定的应用、文件或扫描结果列表，使用带适配器和 ViewHolder 的 `RecyclerView`。不要在 `ScrollView` 内反复向 `LinearLayout` 添加列表项。
 - 在 Android Activity、Fragment、Dialog 和 `RecyclerView` 的 ViewHolder 中，使用生成的 ViewBinding 类访问布局视图。不要为应用布局中的视图新增 `findViewById` 调用，也不要使用封装了 `findViewById` 的方法（例如 `BaseActivity.view()`）。修改仍然通过视图 ID 直接查找视图的页面时，应将该页面迁移到 ViewBinding。
 - 向 `res/values/colors.xml` 添加颜色时，资源名称必须是 `color_` 加上大写的八位 ARGB 十六进制值，例如 `<color name="color_FF42B8FF">#FF42B8FF</color>`。添加前先检查是否已有相同颜色值的资源；如果有，直接复用，不要重复添加。

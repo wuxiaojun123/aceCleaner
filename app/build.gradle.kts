@@ -180,6 +180,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nice.aceclean"
+        manifestPlaceholders["admobAppId"] = "ca-app-pub-8618274698733670~1068647389"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -202,6 +203,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
@@ -213,12 +215,14 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":library_ad_sdk"))
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-process:2.8.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.airbnb.android:lottie:6.5.2")
@@ -232,6 +236,7 @@ dependencies {
     implementation(libs.firebase.analytic)
     implementation(libs.firebase.crash)
     implementation(libs.firebase.messaging)
+    implementation(libs.androidx.lifecycle.process)
 
 
 }

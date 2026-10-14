@@ -1,0 +1,99 @@
+{
+  "platform": {
+    "name": "admob",
+    "appid": "ca-app-pub-8618274698733670~1068647389",
+    "appkey": ""
+  },
+  "placement": [
+    {
+      "id": "5001",
+      "type": "native",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/1599964576"}]
+    },
+    {
+      "id": "5002",
+      "type": "native",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/3525174353"}]
+    },
+    {
+      "id": "5003",
+      "type": "native",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/1516204096"}]
+    },
+    {
+      "id": "3001",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/3221922027"}]
+    },
+    {
+      "id": "3002",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/2174679645"}]
+    },
+    {
+      "id": "3003",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/9822989393"}]
+    },
+    {
+      "id": "3004",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/4609271291"}]
+    },
+    {
+      "id": "3005",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/6494118475"}]
+    },
+    {
+      "id": "3006",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/8356944610"}]
+    },
+    {
+      "id": "3007",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/5730781279"}]
+    },
+    {
+      "id": "3008",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/3104617938"}]
+    },
+    {
+      "id": "3009",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/6852291257"}]
+    },
+    {
+      "id": "3010",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/3020857450"}]
+    },
+    {
+      "id": "3011",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/5539209584"}]
+    },
+    {
+      "id": "3012",
+      "type": "interstitial",
+      "extras": {},
+      "units": [{"uid": "ca-app-pub-8618274698733670/4226127913"}]
+    }
+  ]
+}

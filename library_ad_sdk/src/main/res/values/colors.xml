@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ad_sdk_background">#FFF4F6FA</color>
+    <color name="ad_sdk_surface">#FFFFFFFF</color>
+    <color name="ad_sdk_text_primary">#FF20242B</color>
+    <color name="ad_sdk_text_secondary">#FFA0A7B1</color>
+    <color name="ad_sdk_accent">#FFF5364F</color>
+    <color name="ad_sdk_border">#FFE8EBF0</color>
+</resources>

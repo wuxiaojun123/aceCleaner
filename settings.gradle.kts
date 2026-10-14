@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AceClean"
 include(":app")
+include(":library_ad_sdk")
