@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.ActivityDeviceScanBinding
 import com.nice.aceclean.ui.base.BaseActivity
-import com.nice.aceclean.ui.onboarding.DeviceScanStep
-import com.nice.aceclean.ui.onboarding.DeviceScanStepAdapter
+import com.nice.aceclean.ui.adapter.DeviceScanStep
+import com.nice.aceclean.ui.adapter.DeviceScanStepAdapter
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay

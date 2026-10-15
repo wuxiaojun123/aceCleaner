@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:src="@mipmap/onboarding_bg_gradient_lightblue" android:scaleType="centerCrop" android:contentDescription="@null" android:tag="system_bar_background" />
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    tools:context=".ui.DeviceStatusDetailActivity">
+    <!--bg_device_status_page-->
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="36dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="112dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/app_name"
+                android:textColor="#1A1A2E"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/skipButton"
+                android:layout_width="68dp"
+                android:layout_height="30dp"
+                android:background="@drawable/onboarding_bg_device_skip"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/string_onboarding_overlay_permission_skip"
+                android:textColor="#35A3E6"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/deviceCard"
+            android:layout_width="match_parent"
+            android:layout_height="148dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/onboarding_bg_device_status_header">
+
+            <LinearLayout
+                android:id="@+id/manufacturerGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/androidGroup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/onboarding_ic_phone" />
+
+                <TextView
+                    android:id="@+id/deviceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    tools:text="HONOR" />
+
+                <TextView
+                    android:id="@+id/deviceModel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#BDD0FF"
+                    android:textSize="12sp"
+                    tools:text="BRP-AN80" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/androidGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/manufacturerGroup"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/onboarding_ic_android" />
+
+                <TextView
+                    android:id="@+id/androidVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    tools:text="Android 15" />
+
+                <TextView
+                    android:id="@+id/androidRelease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#BDD0FF"
+                    android:textSize="12sp"
+                    tools:text="REL" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ramCard"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/onboarding_bg_device_status_card">
+
+            <ImageView
+                android:id="@+id/ramIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/onboarding_ic_ram"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/ram"
+                android:textColor="#1A1A2E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/ramIcon"
+                app:layout_constraintStart_toEndOf="@id/ramIcon"
+                app:layout_constraintTop_toTopOf="@id/ramIcon" />
+
+            <TextView
+                android:id="@+id/ramPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="#1A1A2E"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/ramIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ramIcon"
+                tools:text="62%" />
+
+            <ProgressBar
+                android:id="@+id/ramProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="62"
+                android:progressDrawable="@drawable/onboarding_progress_device_status_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ramIcon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ramProgress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/string_onboarding_device_status_used"
+                    android:textColor="#6B7C93"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/ramValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#1A1A2E"
+                    android:textSize="12sp"
+                    tools:text="7.48GB" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ramProgress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/string_onboarding_device_status_total"
+                    android:textColor="#6B7C93"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/ramTotalValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#1A1A2E"
+                    android:textSize="12sp"
+                    tools:text="12.01GB" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/storageCard"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/onboarding_bg_device_status_card">
+
+            <ImageView
+                android:id="@+id/storageIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/onboarding_ic_storage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/storage"
+                android:textColor="#1A1A2E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/storageIcon"
+                app:layout_constraintStart_toEndOf="@id/storageIcon"
+                app:layout_constraintTop_toTopOf="@id/storageIcon" />
+
+            <TextView
+                android:id="@+id/storagePercent"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="#1A1A2E"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/storageIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/storageIcon"
+                tools:text="12%" />
+
+            <ProgressBar
+                android:id="@+id/storageProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="12"
+                android:progressDrawable="@drawable/onboarding_progress_device_status_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/storageIcon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/storageProgress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/string_onboarding_device_status_used"
+                    android:textColor="#6B7C93"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/storageValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#1A1A2E"
+                    android:textSize="12sp"
+                    tools:text="480MB" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/storageProgress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/string_onboarding_device_status_total"
+                    android:textColor="#6B7C93"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/storageTotalValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#1A1A2E"
+                    android:textSize="12sp"
+                    tools:text="4GB" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/batteryCard"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/onboarding_bg_device_status_card">
+
+            <ImageView
+                android:id="@+id/batteryIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/onboarding_ic_battery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/notification_battery"
+                android:textColor="#1A1A2E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/batteryIcon"
+                app:layout_constraintStart_toEndOf="@id/batteryIcon"
+                app:layout_constraintTop_toTopOf="@id/batteryIcon" />
+
+            <TextView
+                android:id="@+id/batteryPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="#1A1A2E"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/batteryIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/batteryIcon"
+                tools:text="100%" />
+
+            <ProgressBar
+                android:id="@+id/batteryProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/onboarding_progress_device_status_battery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/batteryIcon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/batteryProgress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/string_onboarding_device_status_battery_status"
+                    android:textColor="#6B7C93"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/batteryValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="#1A1A2E"
+                    android:textSize="12sp"
+                    tools:text="Full" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cpuCard"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/onboarding_bg_device_status_card">
+
+            <ImageView
+                android:id="@+id/cpuIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/onboarding_ic_cpu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/string_onboarding_first_device_cpu"
+                android:textColor="#1A1A2E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/cpuIcon"
+                app:layout_constraintStart_toEndOf="@id/cpuIcon"
+                app:layout_constraintTop_toTopOf="@id/cpuIcon" />
+
+            <View
+                android:id="@+id/cpuDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:background="#F0F4FF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cpuIcon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="18dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cpuDivider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/string_onboarding_device_status_cpu_model"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cpuModelValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="arm64-v8a" />
+                </LinearLayout>
+                <Space android:layout_width="match_parent" android:layout_height="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/string_onboarding_device_status_cpu_frequency"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cpuFrequencyValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="1804 MHz" />
+                </LinearLayout>
+                <Space android:layout_width="match_parent" android:layout_height="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/string_onboarding_device_status_cpu_cores"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cpuCoresValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="8" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/screenCard"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/onboarding_bg_device_status_card">
+
+            <ImageView
+                android:id="@+id/screenIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/onboarding_ic_screen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/string_onboarding_first_device_screen"
+                android:textColor="#1A1A2E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/screenIcon"
+                app:layout_constraintStart_toEndOf="@id/screenIcon"
+                app:layout_constraintTop_toTopOf="@id/screenIcon" />
+
+            <View
+                android:id="@+id/screenDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:background="#F0F4FF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/screenIcon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="18dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/screenDivider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/screen_resolution"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/screenResolutionValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="1224x2700" />
+                </LinearLayout>
+                <Space android:layout_width="match_parent" android:layout_height="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/string_onboarding_device_status_screen_dpi"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/screenDpiValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="520DPI" />
+                </LinearLayout>
+                <Space android:layout_width="match_parent" android:layout_height="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/string_onboarding_device_status_screen_refresh_rate"
+                        android:textColor="#6B7C93"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/screenRefreshValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:textColor="#1A1A2E"
+                        android:textSize="12sp"
+                        tools:text="60Hz" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/continueButton"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/onboarding_bg_device_status_action"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/string_onboarding_device_status_clean_junk_files"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/continueButtonShine"
+            android:layout_width="100dp"
+            android:layout_height="124dp"
+            android:layout_gravity="start|center_vertical"
+            android:background="@drawable/onboarding_bg_quick_scan_shine"
+            android:rotation="-20"
+            android:visibility="gone" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

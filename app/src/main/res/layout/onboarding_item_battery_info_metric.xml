@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboarding_bg_battery_info_card"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/metricIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/metricLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="#646B7C"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/metricValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/string_onboarding_literal_2"
+        android:textColor="#16243D"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

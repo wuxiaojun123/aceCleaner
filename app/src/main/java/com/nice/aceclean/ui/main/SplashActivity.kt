@@ -2,133 +2,125 @@ package com.nice.aceclean.ui.main
 
 import android.Manifest
 import android.animation.ValueAnimator
-import android.content.Intent
+import android.view.animation.DecelerateInterpolator
 import android.content.pm.PackageManager
 import android.os.Build
-import android.view.animation.DecelerateInterpolator
-import android.widget.ProgressBar
-import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
 import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.databinding.ActivitySplashBinding
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.onboarding.OnboardingNavigator
+import com.nice.aceclean.ui.onboarding.OnboardingState
+import com.nice.aceclean.ui.onboarding.OnboardingStep
 import com.nice.aceclean.util.LogUtils
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class SplashActivity : BaseActivity<ActivitySplashBinding>({ ActivitySplashBinding.inflate(it) }, R.layout.activity_splash) {
-
-
-    private lateinit var progressBar: ProgressBar
-    private lateinit var loadingText: TextView
+class SplashActivity : BaseActivity<ActivitySplashBinding>(
+    { ActivitySplashBinding.inflate(it) }, R.layout.activity_splash,
+) {
     private var splashAnimator: ValueAnimator? = null
-    private var navigationStarted = false
-    private val notificationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) {
-        openNextScreen()
+    private var navigating = false
+    private val permissionResult = CompletableDeferred<Unit>()
+    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        permissionResult.complete(Unit)
     }
 
     override fun initViews() {
-        progressBar = binding.splashProgress
-        loadingText = binding.splashLoading
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = Unit
+        })
+        // 暂停首次启动的悬浮窗引导，直接显示原有 Splash 页面。
+        // 恢复此入口时，同时恢复 OnboardingStep.NOT_STARTED 的 OVERLAY 路由。
+        // if (OnboardingState.get(this) == OnboardingStep.NOT_STARTED) {
+        //     startActivity(OnboardingNavigator.intent(this, OnboardingStep.OVERLAY))
+        //     finish()
+        //     return
+        // }
+        renderProgress(0)
     }
 
     override fun initData() {
+        if (isFinishing) return
         HotStartManager.markSplashAdStarted()
-        if (AppAdManager.splashPlacementsConfigured) {
-            startAdFlow()
-            return
-        }
-        splashAnimator = ValueAnimator.ofInt(0, 100).apply {
-            duration = SPLASH_DURATION_MS
+        if (!intent.getBooleanExtra(EXTRA_FROM_ONBOARDING, false) && Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else permissionResult.complete(Unit)
+        val placement = startupPlacement()
+        val adsConfigured = AppAdManager.splashPlacementsConfigured
+        splashAnimator = ValueAnimator.ofInt(0, if (adsConfigured) 99 else 100).apply {
+            duration = if (adsConfigured) AppAdManager.LOAD_TIMEOUT_MS else SPLASH_DURATION_MS
             interpolator = DecelerateInterpolator()
-            addUpdateListener { animator ->
-                val progress = animator.animatedValue as Int
-                progressBar.progress = progress
-                loadingText.text = getString(R.string.loading, progress)
-            }
-            doOnEnd {
-                if (!isFinishing && !isDestroyed) requestNotificationPermissionIfNeeded()
-            }
+            addUpdateListener { renderProgress(it.animatedValue as Int) }
             start()
         }
-    }
-
-    private fun startAdFlow() {
-        val placement = if (intent.getBooleanExtra(EXTRA_HOT_START, false)) {
-            AppAdManager.HOT_START
-        } else {
-            AppAdManager.COLD_START
-        }
-        splashAnimator = ValueAnimator.ofInt(0, 99).apply {
-            duration = AppAdManager.LOAD_TIMEOUT_MS
-            interpolator = DecelerateInterpolator()
-            addUpdateListener { animator ->
-                val progress = animator.animatedValue as Int
-                progressBar.progress = progress
-                loadingText.text = getString(R.string.loading, progress)
-            }
-            start()
-        }
-
         lifecycleScope.launch {
-            try {
-                val loaded = AppAdManager.preload(this@SplashActivity, placement)
-                splashAnimator?.cancel()
-                progressBar.progress = 100
-                loadingText.text = getString(R.string.loading, 100)
-                if (loaded) {
-                    AppAdManager.showLoaded(this@SplashActivity, placement)
-                }
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Exception) {
-                LogUtils.w(tag = TAG, msg = "Startup ad failed for placement $placement", throwable = error)
-            } finally {
-                if (!isFinishing && !isDestroyed) requestNotificationPermissionIfNeeded()
+            val preload = async {
+                if (adsConfigured) AppAdManager.preload(this@SplashActivity, placement)
+                else { delay(SPLASH_DURATION_MS); false }
             }
-        }
-    }
-
-    private fun requestNotificationPermissionIfNeeded() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
+            permissionResult.await()
+            val loaded = preload.await()
+            splashAnimator?.cancel()
+            renderProgress(100)
+            lifecycle.currentStateFlow.first { it.isAtLeast(Lifecycle.State.RESUMED) }
+            if (loaded) {
+                try { AppAdManager.showLoaded(this@SplashActivity, placement) }
+                catch (error: CancellationException) { throw error }
+                catch (error: Exception) {
+                    LogUtils.w(tag = "SplashActivity", msg = "Startup ad failed for $placement", throwable = error)
+                }
+            }
             openNextScreen()
         }
     }
 
-    private fun openNextScreen() {
-        if (navigationStarted || isFinishing || isDestroyed) return
-        navigationStarted = true
-        val target = if (DeviceScanActivity.shouldShow(this)) {
-            DeviceScanActivity::class.java
-        } else {
-            MainActivity::class.java
+    private fun startupPlacement(): String {
+        if (intent.getBooleanExtra(EXTRA_HOT_START, false)) return AppAdManager.HOT_START
+        val prefs = getSharedPreferences("onboarding", MODE_PRIVATE)
+        if (OnboardingState.get(this) != OnboardingStep.COMPLETED && !prefs.getBoolean("first_splash_consumed", false)) {
+            prefs.edit().putBoolean("first_splash_consumed", true).apply()
+            return AppAdManager.FIRST_START
         }
-        startActivity(Intent(this, target))
+        return AppAdManager.COLD_START
+    }
+
+    private fun renderProgress(progress: Int) {
+        binding.splashProgress.progress = progress
+        binding.splashLoading.text = getString(R.string.loading, progress)
+    }
+
+    private fun openNextScreen() {
+        if (navigating || isFinishing || isDestroyed) return
+        navigating = true
+        val next = OnboardingState.get(this).restored(intent.getBooleanExtra(EXTRA_HOT_START, false))
+        val target = OnboardingNavigator.intent(this, next)
+        startActivity(target)
         finish()
     }
 
     override fun onDestroy() {
         splashAnimator?.removeAllListeners()
         splashAnimator?.cancel()
+        splashAnimator = null
         HotStartManager.markHotStartAdFinished()
         super.onDestroy()
     }
 
     companion object {
         const val EXTRA_HOT_START = "extra_hot_start"
-        private const val TAG = "SplashActivity"
+        const val EXTRA_FROM_ONBOARDING = "extra_from_onboarding"
         private const val SPLASH_DURATION_MS = 1_450L
     }
 }

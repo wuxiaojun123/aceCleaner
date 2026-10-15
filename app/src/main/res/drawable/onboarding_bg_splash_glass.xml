@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base multi-layer blue gradient card -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <gradient
+                android:angle="315"
+                android:startColor="@color/color_FF6FB9F7"
+                android:endColor="@color/color_FF1F8FE6" />
+        </shape>
+    </item>
+    <!-- Soft top gloss highlight -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#5CFFFFFF"
+                android:centerColor="#14FFFFFF"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+    <!-- Glass edge -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <stroke android:width="1.5dp" android:color="#73FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

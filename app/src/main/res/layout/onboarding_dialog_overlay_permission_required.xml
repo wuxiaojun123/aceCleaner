@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/onboarding_bg_common_overlay_permission_dialog"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/settingsPathText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:includeFontPadding="false"
+        android:text="@string/string_onboarding_overlay_permission_dialog_settings_path"
+        android:textColor="#080808"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/permissionRow"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/onboarding_bg_common_overlay_permission_row"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsPathText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="92dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="@string/string_onboarding_overlay_permission_dialog_permission_label"
+            android:textColor="#0A0A0A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/permissionSwitchAnimation"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:layout_gravity="end|top"
+            android:translationX="16dp"
+            android:clipChildren="false"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/onboarding_lottie_overlay_permission_guide" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/inactiveStatusText"
+        android:layout_width="194dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/onboarding_bg_common_overlay_permission_inactive"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/string_onboarding_overlay_permission_dialog_inactive"
+        android:textColor="#FF3B3B"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/permissionRow" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2dp"
+        android:text="@string/string_onboarding_overlay_permission_back_description"
+        android:textColor="#7B8189"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inactiveStatusText" />
+
+    <TextView
+        android:id="@+id/notNowButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/onboarding_bg_common_overlay_permission_secondary_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/string_onboarding_overlay_permission_dialog_not_now"
+        android:textColor="#080808"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/fixNowButton"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionText" />
+
+    <TextView
+        android:id="@+id/fixNowButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/onboarding_bg_common_overlay_permission_primary_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/string_onboarding_overlay_permission_dialog_fix_now"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/notNowButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/notNowButton"
+        app:layout_constraintTop_toTopOf="@id/notNowButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

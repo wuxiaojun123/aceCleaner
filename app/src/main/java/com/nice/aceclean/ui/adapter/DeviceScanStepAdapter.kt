@@ -1,4 +1,4 @@
-package com.nice.aceclean.ui.onboarding
+package com.nice.aceclean.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
