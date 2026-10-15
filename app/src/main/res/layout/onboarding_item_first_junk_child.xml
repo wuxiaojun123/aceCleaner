@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="54dp"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="44dp"
-    android:paddingEnd="16dp">
+    android:paddingStart="54dp"
+    android:paddingEnd="12dp"
+    android:paddingVertical="8dp">
 
     <TextView
         android:id="@+id/itemName"
@@ -14,7 +16,8 @@
         android:layout_weight="1"
         android:ellipsize="middle"
         android:maxLines="1"
-        android:textColor="#4B5261"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/color_FF171D27"
         android:textSize="14sp" />
 
     <TextView
@@ -22,17 +25,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textColor="#8C94A3"
+        android:textColor="@color/color_FF788392"
         android:textSize="13sp" />
 
     <TextView
         android:id="@+id/itemCheck"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/onboarding_bg_first_junk_check_selected"
         android:gravity="center"
         android:text="@string/string_onboarding_literal_5"
-        android:textColor="#FFFFFF"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="bold" />
 </LinearLayout>

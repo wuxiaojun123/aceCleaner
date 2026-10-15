@@ -1,6 +1,25 @@
 # 新手流程
 
-参考项目：`cleanGo/cleanboxpro`。新手功能页面的布局、图片和 Lottie 动画先复用参考项目；应用名称与功能入口使用 AceClean 本身的配置。启动页沿用原有 `ActivitySplashBinding`、`activity_splash.xml`、Logo、横向进度条与加载文案，只接入新手路由和广告场景。
+流程最初参考 `cleanGo/cleanboxpro`，当前界面已按 `designs/onboarding-orange/` 的交互原型落地。页面统一使用暖白 `#FAF9F7`、白色卡片、橙色 `#FF6B2C` 与深灰文字。首页保持原有设计。启动页沿用原有 `ActivitySplashBinding`、`activity_splash.xml`、Logo、横向进度条与加载文案，仅统一背景和进度颜色。
+
+## 当前视觉与动画
+
+设备扫描、垃圾扫描、清理、电池扫描、电池详情、电池检查、完成页和备用悬浮窗引导均使用同一套橙色图标与动画。设备信息与垃圾结果页保留真实数据、分类展开、勾选及金额联动。下载／APK 仍默认不选，没有选中项时允许 Continue。
+
+| Android 资源 | 对应原型动画 | 使用页面 |
+| --- | --- | --- |
+| `raw/onboarding_orange_device_scan.json` | `device-scan.json` | 设备扫描 |
+| `raw/onboarding_orange_junk_scan.json` | `junk-scan.json` | 垃圾扫描 |
+| `raw/onboarding_orange_junk_clean.json` | `junk-clean.json` | 清理、备用悬浮窗引导 |
+| `raw/onboarding_orange_battery_scan.json` | `battery-scan.json` | 电池扫描、电池详情 |
+| `raw/onboarding_orange_battery_check.json` | `battery-check.json` | 电池检查 |
+| `raw/onboarding_orange_complete.json` | `complete.json` | 清理／电池检查完成 |
+
+六个 JSON 与原型资源相同，均为透明背景、320×320、30 fps、90 帧的纯形状动画。前四个循环，电池检查与完成反馈播放一次后停留。页面通过 `BaseOnboardingActivity.trackOnboardingAnimation(binding.xxx)` 注册动画，进入前台恢复，进入后台暂停，销毁时释放。布局中的 `lottie_autoPlay` 关闭，避免页面被广告或系统设置遮盖时继续播放。
+
+权限说明使用白色圆角底部弹窗，继续调用真实 Android 权限设置，不使用原型的模拟开关。完成动画显示约 1.6 秒后再出现通知访问说明；提前返回或进入推荐功能会取消这次延迟提示。主要按钮保留轻微扫光，移除了反复放大和透明度呼吸。
+
+共用视觉样式位于 `values/styles_onboarding_orange.xml`，底部弹窗背景为 `drawable/onboarding_bg_orange_sheet.xml`，进度条复用 `drawable/onboarding_progress_detail_orange.xml`。状态栏透明，浅色背景使用深色系统栏图标，导航栏与页面底色一致。
 
 ## 页面顺序
 
@@ -59,13 +78,13 @@
 
 - 布局：`res/layout/onboarding_*.xml`。
 - 图片、形状、进度条：`res/drawable*/onboarding_*` 和 `res/mipmap*/onboarding_*`。
-- 动画：`res/raw/onboarding_*.zip`、`onboarding_*.json`；ZIP 内包含对应图片，无需外部 assets 目录。
+- 当前动画：上表的 `res/raw/onboarding_orange_*.json`；原型源文件在 `designs/onboarding-orange/animations/`。旧参考动画资源仍保留，但新手页面已切换到橙色动画。
 - 新增文案：`res/values/strings.xml` 中的 `string_onboarding_*`；相同文案复用已有字符串。
 - 新增颜色：`res/values/colors.xml` 中按 `color_AARRGGBB` 命名的资源。
 - 启动页：保留原有 `activity_splash.xml`；进度动画在 `ui/main/SplashActivity.kt` 中维护。
-- 按钮呼吸与扫光：`OnboardingButtonAnimation.kt`。
+- 按钮轻微扫光：`OnboardingButtonAnimation.kt`。
 
-背景继续延伸到透明状态栏后方，前景内容通过共用 `SystemBarInsets` 避开系统栏。深色扫描页面使用浅色状态栏图标，浅色详情页面使用深色图标。
+背景继续延伸到透明状态栏后方，前景内容通过共用 `SystemBarInsets` 避开系统栏。当前新手页面均为浅色背景，使用深色状态栏图标。
 
 ## 扫描结果与验证
 

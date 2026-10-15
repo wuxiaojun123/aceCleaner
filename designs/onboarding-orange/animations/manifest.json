@@ -1,0 +1,56 @@
+[
+  {
+    "name": "device-scan",
+    "file": "device-scan.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": true,
+    "transparent": true,
+    "scene": "scene-1"
+  },
+  {
+    "name": "junk-scan",
+    "file": "junk-scan.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": true,
+    "transparent": true,
+    "scene": "scene-2"
+  },
+  {
+    "name": "junk-clean",
+    "file": "junk-clean.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": true,
+    "transparent": true,
+    "scene": "scene-3"
+  },
+  {
+    "name": "battery-scan",
+    "file": "battery-scan.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": true,
+    "transparent": true,
+    "scene": "scene-4"
+  },
+  {
+    "name": "battery-check",
+    "file": "battery-check.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": false,
+    "transparent": true,
+    "scene": "scene-5"
+  },
+  {
+    "name": "complete",
+    "file": "complete.json",
+    "frames": 90,
+    "fps": 30,
+    "loop": false,
+    "transparent": true,
+    "scene": "scene-6"
+  }
+]

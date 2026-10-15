@@ -2,6 +2,7 @@ package com.nice.aceclean.ui.main
 
 import android.Manifest
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.view.animation.DecelerateInterpolator
 import android.content.pm.PackageManager
 import android.os.Build
@@ -26,9 +27,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     { ActivitySplashBinding.inflate(it) }, R.layout.activity_splash,
 ) {
+    override val navigationBarColorRes: Int = R.color.color_FFFAF9F7
     private var splashAnimator: ValueAnimator? = null
     private var navigating = false
     private val permissionResult = CompletableDeferred<Unit>()

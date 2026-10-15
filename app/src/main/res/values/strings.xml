@@ -444,4 +444,11 @@
     <string name="string_onboarding_voltage">%1$d mV</string>
     <string name="string_onboarding_duration_hours">%1$dh %2$dm</string>
     <string name="string_onboarding_duration_minutes">%1$dm</string>
+    <string name="string_onboarding_fix_now">Fix Now</string>
+    <string name="string_onboarding_overlay_description_simple">Enjoy faster cleanup to wipe clutter &amp; free up space anywhere.</string>
+    <string name="string_ram_usage_access_description">Allow usage access to view recently used apps. Android limits access to background processes.</string>
+    <string name="string_ram_allow_usage_access">Allow usage access</string>
+    <string name="string_ram_recent_apps_count">%1$d recently used apps</string>
+    <string name="string_ram_usage_access_required">Usage access required</string>
+    <string name="string_ram_no_recent_apps">No recently used apps found</string>
 </resources>

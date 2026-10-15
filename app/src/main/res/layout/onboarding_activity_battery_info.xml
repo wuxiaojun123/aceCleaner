@@ -1,335 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
-<ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:src="@mipmap/onboarding_bg_gradient_lightblue" android:scaleType="centerCrop" android:contentDescription="@null" android:tag="system_bar_background" />
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/color_FFFAF9F7"
     android:layout_height="match_parent"
-    >
-
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/go_back"
-        android:padding="12dp"
-        android:src="@drawable/onboarding_ic_first_complete_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
+        android:gravity="center_vertical"
         android:id="@+id/titleView"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="52dp"
-        android:gravity="center"
+        android:minHeight="48dp"
         android:text="@string/battery_info"
-        android:textColor="#16243D"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/OnboardingPageTitle" />
+    <ImageView
+        android:contentDescription="@string/go_back"
+        android:id="@+id/backButton"
+        android:layout_height="48dp"
+        android:layout_width="44dp"
+        android:src="@drawable/onboarding_ic_first_complete_back"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
+        android:background="@drawable/onboarding_bg_detail_action"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:id="@+id/bottomActionContainer"
+        android:layout_height="56dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/checkNowButton"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="@string/string_onboarding_battery_info_check_now"
+            style="@style/OnboardingActionText" />
+        <View
+            android:background="@drawable/onboarding_bg_quick_scan_shine"
+            android:id="@+id/checkNowButtonShine"
+            android:layout_gravity="start|center_vertical"
+            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:rotation="-20"
+            android:visibility="gone" />
+    </FrameLayout>
+    <androidx.core.widget.NestedScrollView
         android:clipToPadding="false"
         android:fillViewport="true"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
         android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/bottomActionContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleView">
-
         <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingTop="42dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="28dp">
-
-            <TextView
-                android:id="@+id/batteryPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="@string/string_onboarding_literal_3"
-                android:textColor="#16243D"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/batteryEstimate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/string_onboarding_battery_estimated_calculating"
-                android:textColor="#646B7C"
-                android:textSize="16sp" />
-
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp">
             <com.airbnb.lottie.LottieAnimationView
+                android:contentDescription="@null"
                 android:id="@+id/scanAnimation"
-                android:layout_width="165dp"
-                android:layout_height="92dp"
-                android:layout_marginTop="24dp"
-                app:lottie_autoPlay="true"
+                android:importantForAccessibility="no"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="190dp"
+                android:layout_width="190dp"
+                app:lottie_autoPlay="false"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/onboarding_competitor_battery" />
-
-            <LinearLayout
+                app:lottie_rawRes="@raw/onboarding_orange_battery_scan" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/batteryPercent"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/onboarding_bg_battery_info_card"
+                android:text="@string/string_onboarding_literal_3"
+                android:textSize="42sp"
+                style="@style/OnboardingScanPercent" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/batteryEstimate"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:text="@string/string_onboarding_battery_estimated_calculating"
+                style="@style/OnboardingBody" />
+            <LinearLayout
+                android:background="@drawable/onboarding_bg_device_status_card"
                 android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
+                android:padding="12dp">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:background="@drawable/onboarding_bg_detail_icon"
                     android:contentDescription="@null"
-                    android:src="@drawable/onboarding_ic_battery_status_competitor" />
-
+                    android:layout_height="34dp"
+                    android:layout_width="34dp"
+                    android:padding="6dp"
+                    android:src="@drawable/onboarding_ic_detail_battery" />
                 <TextView
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:text="@string/string_onboarding_battery_status_label"
-                    android:textColor="#646B7C"
-                    android:textSize="16sp" />
-
+                    style="@style/OnboardingBody" />
                 <TextView
                     android:id="@+id/batteryStatusValue"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
                     android:text="@string/string_onboarding_literal_2"
-                    android:textColor="#16243D"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/OnboardingBody" />
             </LinearLayout>
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:baselineAligned="false"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:orientation="horizontal">
-
                 <include
                     android:id="@+id/temperatureCard"
-                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="124dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1" />
-
+                    layout="@layout/onboarding_item_battery_info_metric" />
                 <include
                     android:id="@+id/voltageCard"
-                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="124dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1" />
+                    layout="@layout/onboarding_item_battery_info_metric" />
             </LinearLayout>
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:baselineAligned="false"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:orientation="horizontal">
-
                 <include
                     android:id="@+id/typeCard"
-                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="124dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1" />
-
+                    layout="@layout/onboarding_item_battery_info_metric" />
                 <include
                     android:id="@+id/powerCard"
-                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="124dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1" />
+                    layout="@layout/onboarding_item_battery_info_metric" />
             </LinearLayout>
-
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:background="@drawable/onboarding_bg_detail_icon"
+                    android:contentDescription="@null"
+                    android:layout_height="28dp"
+                    android:layout_width="28dp"
+                    android:padding="6dp"
+                    android:src="@drawable/onboarding_ic_detail_android" />
+                <TextView
+                    android:id="@+id/checkedUserCount"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_onboarding_battery_checked_user_count"
+                    android:textSize="12sp"
+                    style="@style/DeviceDetailTitle" />
+                <TextView
+                    android:id="@+id/checkedTodayText"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_onboarding_battery_users_checked_today"
+                    android:textSize="12sp"
+                    style="@style/OnboardingBody" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomActionContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="26dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/checkedTodayBubble"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/onboarding_bg_battery_check_social_proof"
-            android:elevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <FrameLayout
-                android:id="@+id/checkedUserAvatars"
-                android:layout_width="76dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="start|center_vertical"
-                    android:contentDescription="@null"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/onboarding_avatar_checked_woman_1"
-                    app:shapeAppearanceOverlay="@style/onboarding_BatteryCheckedAvatar"
-                    app:strokeColor="#FFFFFF"
-                    app:strokeWidth="2dp" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="22dp"
-                    android:contentDescription="@null"
-                    android:elevation="1dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/onboarding_avatar_checked_man"
-                    app:shapeAppearanceOverlay="@style/onboarding_BatteryCheckedAvatar"
-                    app:strokeColor="#FFFFFF"
-                    app:strokeWidth="2dp" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="44dp"
-                    android:contentDescription="@null"
-                    android:elevation="2dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/onboarding_avatar_checked_woman_2"
-                    app:shapeAppearanceOverlay="@style/onboarding_BatteryCheckedAvatar"
-                    app:strokeColor="#FFFFFF"
-                    app:strokeWidth="2dp" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/checkedUserCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:includeFontPadding="false"
-                android:text="@string/string_onboarding_battery_checked_user_count"
-                android:textColor="#172033"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/checkedUserAvatars"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/checkedTodayText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:ellipsize="end"
-                android:includeFontPadding="false"
-                android:maxLines="1"
-                android:text="@string/string_onboarding_battery_users_checked_today"
-                android:textColor="#283142"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/checkedTodaySparkle"
-                app:layout_constraintStart_toEndOf="@id/checkedUserCount"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/checkedTodaySparkle"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="@null"
-                android:src="@drawable/onboarding_ic_sparkle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#FFC43D" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/checkedTodayPointer"
-            android:layout_width="16dp"
-            android:layout_height="9dp"
-            android:contentDescription="@null"
-            android:elevation="6dp"
-            android:src="@drawable/onboarding_ic_battery_check_bubble_pointer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkedTodayBubble" />
-
-        <FrameLayout
-            android:id="@+id/checkNowButton"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/onboarding_bg_battery_check_now_reference"
-            android:clipToOutline="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkedTodayBubble">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/string_onboarding_battery_info_check_now"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <View
-                android:id="@+id/checkNowButtonShine"
-                android:layout_width="100dp"
-                android:layout_height="124dp"
-                android:layout_gravity="start|center_vertical"
-                android:background="@drawable/onboarding_bg_battery_check_now_shine"
-                android:rotation="-20"
-                android:visibility="gone" />
-        </FrameLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>

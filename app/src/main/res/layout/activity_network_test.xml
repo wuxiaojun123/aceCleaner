@@ -18,7 +18,9 @@
         android:orientation="vertical"
         android:paddingTop="8dp">
 
-        <include android:id="@+id/feature_header" layout="@layout/layout_feature_header" />
+        <include
+            android:id="@+id/feature_header"
+            layout="@layout/layout_feature_header" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -199,5 +201,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
+
     </LinearLayout>
+
 </FrameLayout>

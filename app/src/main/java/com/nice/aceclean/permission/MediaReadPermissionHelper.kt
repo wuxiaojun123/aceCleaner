@@ -24,6 +24,7 @@ class MediaReadPermissionHelper(
         activity = activity,
         isGranted = { isGranted() },
         onGranted = onGranted,
+        onDenied = onDenied,
     )
 
     fun isGranted(): Boolean = when {

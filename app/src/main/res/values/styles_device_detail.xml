@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DeviceDetailLabel">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_FF788392</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="DeviceDetailValue" parent="DeviceDetailLabel">
+        <item name="android:textColor">@color/color_FF171D27</item>
+    </style>
+    <style name="DeviceDetailTitle" parent="DeviceDetailValue">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="DeviceDetailPercent" parent="DeviceDetailTitle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+</resources>

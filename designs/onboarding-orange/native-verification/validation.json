@@ -1,0 +1,142 @@
+{
+  "checks": [
+    "6 Lottie scenes parse and render at 18 native Android frames with zero warnings",
+    "Device scan finishes at device details",
+    "Returning from storage settings without grant takes battery branch",
+    "Battery detail check reaches health result",
+    "Declining overlay on completion returns to home",
+    "Category selection updates real total and empty selection offers Continue",
+    "Actual app-cache scan and cleanup finishes with nonzero measured bytes; own fixture removed",
+    "Disabled first-launch overlay guide remains functional as an optional page"
+  ],
+  "lottie": [
+    {
+      "name": "device_scan",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 324
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 324
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 324
+        }
+      ]
+    },
+    {
+      "name": "junk_scan",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 984
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 989
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 984
+        }
+      ]
+    },
+    {
+      "name": "junk_clean",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 3525
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 3516
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 3522
+        }
+      ]
+    },
+    {
+      "name": "battery_scan",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 652
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 0
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 651
+        }
+      ]
+    },
+    {
+      "name": "battery_check",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 0
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 469
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 469
+        }
+      ]
+    },
+    {
+      "name": "complete",
+      "warnings": [],
+      "frames": [
+        {
+          "frame": 0,
+          "visiblePixels": 46387,
+          "orangePixels": 12848
+        },
+        {
+          "frame": 45,
+          "visiblePixels": 46387,
+          "orangePixels": 15513
+        },
+        {
+          "frame": 89,
+          "visiblePixels": 46387,
+          "orangePixels": 15513
+        }
+      ]
+    }
+  ],
+  "cleanedMessage": "1.1 MB of storage has been cleared successfully for you.",
+  "package": "com.nice.aceclean.onboardingverify"
+}

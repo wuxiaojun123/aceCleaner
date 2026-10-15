@@ -12,18 +12,23 @@ class BatteryInfoScanActivity : BaseOnboardingActivity<OnboardingActivityBattery
     { OnboardingActivityBatteryInfoScanBinding.inflate(it) }, R.layout.onboarding_activity_battery_info_scan,
 ) {
     internal override val onboardingStep = OnboardingStep.BATTERY_SCAN
-    override val lightStatusBarIcons = true
 
     override fun initOnboardingViews() {
+        trackOnboardingAnimation(binding.scanAnimation)
         AdSdkManager.preloadAsync(this, AppAdManager.ONBOARDING_ANALYSIS)
         lifecycleScope.launch {
-            animateProgress(SCAN_DURATION_MS) { binding.progressView.text = getString(R.string.percentage_value, it) }
+            animateProgress(SCAN_DURATION_MS, ::renderProgress)
             delay(SCAN_DURATION_MS)
             stopProgress()
-            binding.progressView.text = getString(R.string.percentage_value, 100)
+            renderProgress(100)
             awaitResumed()
             navigateTo(BatteryInfoActivity::class.java)
         }
+    }
+
+    private fun renderProgress(progress: Int) {
+        binding.progressView.text = getString(R.string.percentage_value, progress)
+        binding.progressBar.progress = progress
     }
 
     private companion object { const val SCAN_DURATION_MS = 3_200L }

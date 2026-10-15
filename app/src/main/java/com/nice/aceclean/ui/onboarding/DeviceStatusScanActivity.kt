@@ -12,9 +12,9 @@ class DeviceStatusScanActivity : BaseOnboardingActivity<OnboardingActivityDevice
     { OnboardingActivityDeviceStatusScanBinding.inflate(it) }, R.layout.onboarding_activity_device_status_scan,
 ) {
     internal override val onboardingStep = OnboardingStep.DEVICE_SCAN
-    override val lightStatusBarIcons = true
 
     override fun initOnboardingViews() {
+        trackOnboardingAnimation(binding.deviceScanAnimation)
         lifecycleScope.launch {
             val ad = async { AppAdManager.preload(this@DeviceStatusScanActivity, AppAdManager.ONBOARDING_DEVICE_SCAN) }
             animateProgress(SCAN_DURATION_MS, ::renderProgress)

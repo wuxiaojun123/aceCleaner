@@ -17,20 +17,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.ItemRunningAppBinding
 import com.nice.aceclean.databinding.ActivityRamStatusBinding
+import com.nice.aceclean.permission.UsageAccessPermissionHelper
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.RunningAppInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ ActivityRamStatusBinding.inflate(it) }, R.layout.activity_ram_status, R.string.ram_status) {
     private val runningAppsAdapter = RunningAppsAdapter(::openAppSettings)
+    private lateinit var usageAccessPermission: UsageAccessPermissionHelper
+    private var resultShown = false
+    private var refreshJob: Job? = null
 
     override val featureHeader get() = binding.featureHeader
 
     override fun initToolViews() {
+        usageAccessPermission = UsageAccessPermissionHelper(this, ::refreshResult)
+        binding.ramUsageAllow.setOnClickListener { usageAccessPermission.request() }
         binding.ramOkButton.setOnClickListener { finish() }
         binding.ramAppList.apply {
             layoutManager = LinearLayoutManager(this@RamStatusActivity)
@@ -66,7 +74,30 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
             binding.ramScanAnimation.cancelAnimation()
             binding.ramScanContainer.visibility = View.GONE
             binding.ramResultContainer.visibility = View.VISIBLE
+            resultShown = true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resultShown) refreshResult()
+    }
+
+    private fun refreshResult() {
+        if (!resultShown) return
+        refreshJob?.cancel()
+        refreshJob = lifecycleScope.launch {
+            val apps = withContext(Dispatchers.IO) {
+                DeviceToolsRepository.runningApps(this@RamStatusActivity)
+            }
+            renderMemory()
+            renderRunningApps(apps)
+        }
+    }
+
+    override fun onDestroy() {
+        usageAccessPermission.close()
+        super.onDestroy()
     }
 
     private fun renderMemory() {
@@ -76,10 +107,15 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
     }
 
     private fun renderRunningApps(apps: List<RunningAppInfo>) {
-        binding.ramRunningSummary.text = if (apps.isEmpty()) {
-            getString(R.string.no_running_apps)
+        val hasUsageAccess = usageAccessPermission.isGranted()
+        binding.ramUsagePermission.visibility = if (hasUsageAccess) View.GONE else View.VISIBLE
+        binding.ramEmptyMessage.visibility = if (hasUsageAccess && apps.isEmpty()) View.VISIBLE else View.GONE
+        binding.ramRunningSummary.text = if (!hasUsageAccess && apps.isEmpty()) {
+            getString(R.string.string_ram_usage_access_required)
+        } else if (apps.isEmpty()) {
+            getString(R.string.string_ram_no_recent_apps)
         } else {
-            getString(R.string.running_apps_count, apps.size)
+            getString(R.string.string_ram_recent_apps_count, apps.size)
         }
         runningAppsAdapter.submitList(apps)
     }

@@ -14,10 +14,10 @@ class FirstJunkStartScanningActivity : BaseOnboardingActivity<OnboardingActivity
     { OnboardingActivityFirstJunkStartScanningBinding.inflate(it) }, R.layout.onboarding_activity_first_junk_start_scanning,
 ) {
     internal override val onboardingStep = OnboardingStep.JUNK_SCAN
-    override val lightStatusBarIcons = true
     private val model: FirstJunkScanViewModel by viewModels()
 
     override fun initOnboardingViews() {
+        trackOnboardingAnimation(binding.scanAnimation)
         lifecycleScope.launch {
             model.progress.collect { binding.scannedFiles.text = getString(R.string.items_found, it) }
         }

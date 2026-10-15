@@ -27,12 +27,15 @@ import com.nice.aceclean.ui.main.RamStatusActivity
 import com.nice.aceclean.ui.viewmodel.FirstJunkCompleteViewModel
 import com.nice.library_ad_sdk.AdSdkManager
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
 
 class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirstJunkCompleteBinding>(
     { OnboardingActivityFirstJunkCompleteBinding.inflate(it) }, R.layout.onboarding_activity_first_junk_complete,
 ) {
     internal override val onboardingStep = OnboardingStep.COMPLETE
     private val model: FirstJunkCompleteViewModel by viewModels()
+    private var notificationPrompt: Job? = null
     private val notificationListener = NotificationListenerPermissionHelper(this) {
         dismissGuideDialog()
         openFeature(NotificationCleanerActivity::class.java)
@@ -42,6 +45,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     override fun initOnboardingViews() {
         FirstRunJunkSession.result = null
         overlayPermission.restorePendingRequest()
+        trackOnboardingAnimation(binding.finishImage)
         renderResult()
         binding.backButton.setOnClickListener { leaveComplete() }
         listOf(binding.appProcessCard, binding.appProcessButton).forEach { it.setOnClickListener { openFeature(RamStatusActivity::class.java) } }
@@ -51,14 +55,21 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
             AdSdkManager.loadAndShowNative(this@FirstJunkCompleteActivity, AppAdManager.ONBOARDING_NATIVE, binding.adContainer, this@FirstJunkCompleteActivity)
         }
         if (!model.notificationPromptShown && !notificationListener.isGranted()) {
-            model.notificationPromptShown = true
-            binding.root.post { if (!isFinishing && !isDestroyed) showNotificationDialog() }
+            notificationPrompt = lifecycleScope.launch {
+                delay(1_600L) // Let the completion check settle before presenting the permission sheet.
+                awaitResumed()
+                if (!model.notificationPromptShown && !notificationListener.isGranted() && !isFinishing && !isDestroyed) {
+                    model.notificationPromptShown = true
+                    showNotificationDialog()
+                }
+            }
         }
     }
 
     private fun renderResult() {
         if (intent.getBooleanExtra(EXTRA_FROM_BATTERY, false)) {
             binding.titleView.setText(R.string.string_onboarding_battery_check_title)
+            binding.resultTitle.setText(R.string.string_onboarding_battery_check_title)
             binding.resultMessage.setText(R.string.string_onboarding_first_junk_complete_battery_status_good)
             return
         }
@@ -68,7 +79,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
             val index = message.indexOf(size)
             if (index >= 0) {
                 setSpan(StyleSpan(Typeface.BOLD), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FF3F73F5)), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FFFF6B2C)), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
         }
     }
@@ -81,6 +92,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     }
 
     private fun leaveComplete() {
+        notificationPrompt?.cancel()
         if (Settings.canDrawOverlays(this)) return openHome()
         val dialogBinding = OnboardingDialogOverlayPermissionRequiredBinding.inflate(layoutInflater)
         showGuideDialog(dialogBinding)
@@ -93,6 +105,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     }
 
     private fun openFeature(destination: Class<out Activity>) {
+        notificationPrompt?.cancel()
         OnboardingState.set(this, OnboardingStep.COMPLETED)
         navigateTo(destination)
     }

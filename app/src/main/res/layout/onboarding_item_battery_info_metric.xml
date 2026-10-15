@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:background="@drawable/onboarding_bg_device_status_card"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/onboarding_bg_battery_info_card"
-    android:gravity="center"
+    android:minHeight="104dp"
     android:orientation="vertical"
-    android:padding="12dp">
-
-    <ImageView
-        android:id="@+id/metricIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@null" />
-
-    <TextView
-        android:id="@+id/metricLabel"
-        android:layout_width="match_parent"
+    android:padding="14dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center_vertical"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textColor="#646B7C"
-        android:textSize="14sp" />
-
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:contentDescription="@null"
+            android:id="@+id/metricIcon"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:tint="@color/color_FFFF6B2C" />
+        <TextView
+            android:id="@+id/metricLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="12sp"
+            style="@style/OnboardingBody" />
+    </LinearLayout>
     <TextView
         android:id="@+id/metricValue"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
         android:text="@string/string_onboarding_literal_2"
-        android:textColor="#16243D"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        style="@style/OnboardingMetricValue" />
 </LinearLayout>

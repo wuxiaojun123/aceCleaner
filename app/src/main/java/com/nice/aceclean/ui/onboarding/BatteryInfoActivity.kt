@@ -27,6 +27,7 @@ class BatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatteryInfo
     override fun initOnboardingViews() {
         binding.backButton.isVisible = false
         binding.bottomActionContainer.isVisible = true
+        trackOnboardingAnimation(binding.scanAnimation)
         renderBatteryInformation(registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)))
         binding.checkNowButton.setOnClickListener { navigateTo(BatteryCheckScanActivity::class.java) }
         buttonAnimation = OnboardingButtonAnimation(this, binding.checkNowButton, binding.checkNowButtonShine)
@@ -42,11 +43,6 @@ class BatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatteryInfo
         val percent = level * 100 / scale.coerceAtLeast(1)
         binding.batteryPercent.text = getString(R.string.percentage_value, percent)
         val charging = battery?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) in listOf(BatteryManager.BATTERY_STATUS_CHARGING, BatteryManager.BATTERY_STATUS_FULL)
-        if (binding.scanAnimation.tag != charging) {
-            binding.scanAnimation.tag = charging
-            binding.scanAnimation.setAnimation(if (charging) R.raw.onboarding_competitor_charge_battery else R.raw.onboarding_competitor_battery)
-            binding.scanAnimation.playAnimation()
-        }
         val manager = getSystemService(BATTERY_SERVICE) as BatteryManager
         val charge = manager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
         val capacity = if (charge > 0 && percent > 0) (charge / 1000.0 * 100 / percent).toInt() else 0

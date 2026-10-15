@@ -36,6 +36,13 @@ internal class OnboardingJunkAdapter(
                 FirstRunJunkCategory.APKS -> R.string.string_onboarding_first_junk_apks
             })
             binding.categorySize.text = Formatter.formatShortFileSize(context, group.bytes)
+            binding.categoryIcon.setImageResource(when (group.category) {
+                FirstRunJunkCategory.SYSTEM_CACHE -> R.drawable.onboarding_ic_detail_chip
+                FirstRunJunkCategory.THUMBNAILS -> R.drawable.onboarding_ic_junk_thumbnails
+                FirstRunJunkCategory.EMPTY_FOLDERS -> R.drawable.onboarding_ic_junk_folder
+                FirstRunJunkCategory.DOWNLOADS -> R.drawable.onboarding_ic_junk_download
+                FirstRunJunkCategory.APKS -> R.drawable.onboarding_ic_detail_android
+            })
             binding.expandView.visibility = if (group.items.isNotEmpty()) View.VISIBLE else View.INVISIBLE
             binding.expandView.rotation = if (group.expanded) 180f else 0f
             check(binding.categoryCheck, group.allSelected)

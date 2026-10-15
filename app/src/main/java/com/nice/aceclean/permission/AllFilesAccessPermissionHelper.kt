@@ -20,6 +20,7 @@ class AllFilesAccessPermissionHelper(
         activity = activity,
         isGranted = { StorageAccess.hasBroadAccess(it) },
         onGranted = onGranted,
+        onDenied = onDenied,
     )
 
     fun isGranted(): Boolean = StorageAccess.hasBroadAccess(activity)
@@ -39,6 +40,10 @@ class AllFilesAccessPermissionHelper(
     }
 
     fun openAppSettings() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            request()
+            return
+        }
         if (!poller.openSettings(StorageAccess.appSettingsIntent(activity))) onDenied()
     }
 

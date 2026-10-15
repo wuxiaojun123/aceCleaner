@@ -1,0 +1,35 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "新手流程 · Orange": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-10-15T09:05:08.362Z",
+          "status": "needs-review",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          }
+        }
+      ]
+    },
+    "新手流程 Lottie 动画": {
+      "versions": [
+        {
+          "path": "animations.html",
+          "createdAt": "2026-10-15T09:14:02.260Z",
+          "status": "needs-review",
+          "viewport": {
+            "width": 1100,
+            "height": 900
+          }
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-10-15T09:05:08.363Z",
+  "updatedAt": "2026-10-15T09:21:49.113Z"
+}

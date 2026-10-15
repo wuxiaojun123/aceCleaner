@@ -15,10 +15,10 @@ class FirstJunkCleaningActivity : BaseOnboardingActivity<OnboardingActivityFirst
     { OnboardingActivityFirstJunkCleaningBinding.inflate(it) }, R.layout.onboarding_activity_first_junk_cleaning,
 ) {
     internal override val onboardingStep = OnboardingStep.CLEANING
-    override val lightStatusBarIcons = true
     private val model: FirstJunkCleaningViewModel by viewModels()
 
     override fun initOnboardingViews() {
+        trackOnboardingAnimation(binding.cleanAnimation)
         val result = FirstRunJunkSession.result ?: return navigateTo(FirstJunkStartScanningActivity::class.java)
         val selectedBytes = result.selectedBytes
         val progressJob = lifecycleScope.launch {

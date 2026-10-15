@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboarding_bg_first_run_screen">
+    android:background="@color/color_FFFAF9F7">
 
     <TextView
         android:id="@+id/titleView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:minHeight="48dp"
         android:text="@string/string_onboarding_first_junk_title"
-        android:textColor="#1E2433"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textColor="@color/color_FF171D27"
+        android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,47 +26,48 @@
     <LinearLayout
         android:id="@+id/resultHeader"
         android:layout_width="0dp"
-        android:layout_height="170dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/onboarding_bg_competitor_junk_result_header"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/onboarding_bg_device_status_card"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleView">
 
-        <FrameLayout
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/onboarding_bg_detail_icon"
+            android:contentDescription="@null"
+            android:padding="10dp"
+            android:src="@drawable/onboarding_ic_detail_broom"
+            android:tint="@color/color_FFFF6B2C" />
+
+        <TextView
+            android:id="@+id/totalSize"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/onboarding_bg_first_junk_textview"
-            android:layout_marginHorizontal="18dp"
-            >
-
-            <TextView
-                android:id="@+id/totalSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="38sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                />
-
-        </FrameLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/color_FFFF6B2C"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:text="1.28 GB" />
 
         <TextView
             android:id="@+id/completeMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:text="@string/string_onboarding_first_junk_scan_complete"
-            android:textColor="#EFFFFFFF"
-            android:textSize="13sp"
-            android:layout_marginTop="12dp"
-            />
-
+            android:textColor="@color/color_FF788392"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -70,23 +75,28 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:clipToPadding="false"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="16dp"
         android:paddingBottom="8dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/cleanButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/resultHeader" />
+        app:layout_constraintTop_toBottomOf="@id/resultHeader"
+        tools:listitem="@layout/onboarding_item_first_junk_category" />
 
     <FrameLayout
         android:id="@+id/cleanButton"
         android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:layout_marginHorizontal="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="22dp"
-        android:background="@drawable/onboarding_bg_first_run_button"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/onboarding_bg_detail_action"
+        android:clickable="true"
         android:clipToOutline="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -95,20 +105,20 @@
             android:id="@+id/cleanButtonText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="sans-serif-medium"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:text="@string/string_onboarding_first_junk_title"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <View
             android:id="@+id/cleanButtonShine"
             android:layout_width="100dp"
-            android:layout_height="116dp"
+            android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
             android:background="@drawable/onboarding_bg_first_junk_result_shine"
             android:rotation="-20"
             android:visibility="gone" />
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

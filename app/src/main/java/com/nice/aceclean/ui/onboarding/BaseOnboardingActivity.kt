@@ -5,13 +5,17 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.Gravity
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.ad.AppAdManager
+import com.airbnb.lottie.LottieAnimationView
+import com.nice.aceclean.R
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.main.MainActivity
@@ -30,6 +34,24 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
         private set
     private var animator: ValueAnimator? = null
     private var guideDialog: Dialog? = null
+    private val animations = mutableListOf<LottieAnimationView>()
+
+    override val navigationBarColorRes: Int = R.color.color_FFFAF9F7
+
+    /** Register explicit binding views; pause motion while ads or settings cover the page. */
+    protected fun trackOnboardingAnimation(view: LottieAnimationView) {
+        animations += view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        animations.forEach { if (it.repeatCount != 0 || it.progress < 1f) it.resumeAnimation() }
+    }
+
+    override fun onStop() {
+        animations.forEach { it.pauseAnimation() }
+        super.onStop()
+    }
 
     final override fun initViews() {
         OnboardingState.set(this, if (onboardingStep == OnboardingStep.COMPLETE) OnboardingStep.COMPLETED else onboardingStep)
@@ -98,8 +120,14 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
             setCancelable(false)
             show()
             window?.setBackgroundDrawableResource(android.R.color.transparent)
-            window?.setLayout(resources.displayMetrics.widthPixels - (40 * resources.displayMetrics.density).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
-            window?.setDimAmount(0.55f)
+            window?.apply {
+                setGravity(Gravity.BOTTOM)
+                setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                setDimAmount(0.30f)
+                setWindowAnimations(R.style.OnboardingSheetAnimation)
+                navigationBarColor = ContextCompat.getColor(this@BaseOnboardingActivity, R.color.white)
+                WindowInsetsControllerCompat(this, decorView).isAppearanceLightNavigationBars = true
+            }
         }
     }
 
@@ -110,6 +138,8 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
 
     override fun onDestroy() {
         stopProgress()
+        animations.forEach { it.cancelAnimation() }
+        animations.clear()
         dismissGuideDialog()
         super.onDestroy()
     }

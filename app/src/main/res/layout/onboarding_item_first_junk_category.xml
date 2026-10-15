@@ -1,62 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout
+    android:background="@drawable/onboarding_bg_device_status_card"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="6dp"
-    android:background="@drawable/onboarding_bg_first_junk_category"
-    android:orientation="vertical">
-
+    android:layout_marginVertical="4dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
-        android:id="@+id/categoryHeader"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
+        android:id="@+id/categoryHeader"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="68dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp">
-
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp">
         <ImageView
-            android:id="@+id/expandView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@string/string_onboarding_first_junk_expand"
-            android:src="@drawable/onboarding_competitor_universal_expand" />
-
+            android:background="@drawable/onboarding_bg_detail_icon"
+            android:contentDescription="@null"
+            android:id="@+id/categoryIcon"
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:padding="6dp"
+            tools:src="@drawable/onboarding_ic_detail_chip" />
         <TextView
+            android:fontFamily="sans-serif-medium"
             android:id="@+id/categoryName"
-            android:layout_width="0dp"
+            android:includeFontPadding="false"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="#252B38"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
+            android:layout_width="0dp"
+            android:textColor="@color/color_FF171D27"
+            android:textSize="15sp"
+            tools:text="System cache" />
         <TextView
             android:id="@+id/categorySize"
-            android:layout_width="wrap_content"
+            android:includeFontPadding="false"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="#7D8594"
-            android:textSize="14sp" />
-
+            android:layout_width="wrap_content"
+            android:textColor="@color/color_FF788392"
+            android:textSize="13sp"
+            tools:text="128 MB" />
+        <ImageView
+            android:contentDescription="@string/string_onboarding_first_junk_expand"
+            android:id="@+id/expandView"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="18dp"
+            android:src="@drawable/onboarding_competitor_universal_expand"
+            android:tint="@color/color_FF788392" />
         <TextView
-            android:id="@+id/categoryCheck"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="10dp"
+            android:background="@drawable/onboarding_bg_first_junk_check_selected"
             android:gravity="center"
+            android:id="@+id/categoryCheck"
+            android:includeFontPadding="false"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_width="24dp"
             android:text="@string/string_onboarding_literal_5"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/childContainer"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:nestedScrollingEnabled="false"
         android:paddingBottom="8dp"
         android:visibility="gone" />
