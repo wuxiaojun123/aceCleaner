@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
+import androidx.core.view.doOnLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,6 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
     private var syncingNotificationSwitch = false
 
     override fun initViews() {
+        setupPinnedTopBar()
         binding.cleanUpButton.setOnClickListener {
             (activity as? MainActivity)?.openCleanUp()
         }
@@ -64,6 +66,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
         binding.languageButton.setOnClickListener {
             (activity as? MainActivity)?.openLanguage()
         }
+        binding.pinnedLanguageButton.setOnClickListener {
+            (activity as? MainActivity)?.openLanguage()
+        }
 
         binding.settingsButton.setOnClickListener {
             startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${requireContext().packageName}")))
@@ -77,6 +82,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
 
         renderDeviceState()
         observeNetworkSpeed()
+    }
+
+    private fun setupPinnedTopBar() {
+        binding.homeScrollView.setOnScrollChangeListener(
+            androidx.core.widget.NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+                updatePinnedTopBar(scrollY)
+            },
+        )
+        binding.homeScrollView.doOnLayout {
+            updatePinnedTopBar(binding.homeScrollView.scrollY)
+        }
+    }
+
+    private fun updatePinnedTopBar(scrollY: Int) {
+        val showDistance = binding.homeHeader.bottom.coerceAtLeast(1)
+        val alpha = (scrollY.toFloat() / showDistance).coerceIn(0f, 1f)
+        binding.homePinnedTopBar.alpha = alpha
+        binding.homePinnedTopBar.visibility = if (alpha > 0f) View.VISIBLE else View.GONE
+        // Keep the duplicate language entry out of accessibility traversal once the bar is shown.
+        binding.homeHeader.importantForAccessibility = if (alpha >= 1f) {
+            View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        } else {
+            View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
+        }
     }
 
     override fun onResume() {

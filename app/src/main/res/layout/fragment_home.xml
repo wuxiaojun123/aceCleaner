@@ -11,176 +11,222 @@
         android:src="@drawable/image_home_not_clean_bg"
         android:tag="system_bar_background" />
 
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:overScrollMode="never"
-        android:paddingBottom="32dp"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/home_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="14dp"
-            android:paddingTop="6dp"
-            android:paddingEnd="14dp">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingBottom="32dp"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/app_name"
-                    android:textColor="#FF000000"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/settings_button"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/settings"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_settings"
-                    android:visibility="gone" />
-
-                <ImageButton
-                    android:id="@+id/language_button"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/language_entry_content_description"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_language" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/notification_card"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_home_card"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="20dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="14dp"
+                android:paddingTop="6dp"
                 android:paddingEnd="14dp">
 
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/icon_notification" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:text="@string/never_miss_key_tip"
-                    android:textColor="#FF353535"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <com.nice.aceclean.ui.widget.IosSwitchView
-                    android:id="@+id/notification_switch"
-                    android:layout_width="51dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="@string/notification_cleaner" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/storage_usage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:text="@string/storage_usage_placeholder"
-                android:textColor="#FF000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:layout_width="210dp"
-                android:layout_height="210dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_home_gauge_outer"
-                android:elevation="12dp"
-                android:padding="33dp">
-
-                <TextView
-                    android:id="@+id/storage_percentage"
+                <LinearLayout
+                    android:id="@+id/home_header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_home_gauge_inner"
-                    android:gravity="center"
-                    android:text="@string/zero_percentage"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="40sp"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/app_name"
+                        android:textColor="#FF000000"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/settings_button"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/settings"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_settings"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/language_button"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/language_entry_content_description"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_language" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/notification_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_home_card"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/icon_notification" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="@string/never_miss_key_tip"
+                        android:textColor="#FF353535"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <com.nice.aceclean.ui.widget.IosSwitchView
+                        android:id="@+id/notification_switch"
+                        android:layout_width="51dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="@string/notification_cleaner" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/storage_usage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/storage_usage_placeholder"
+                    android:textColor="#FF000000"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
-            </FrameLayout>
 
-            <com.nice.aceclean.ui.widget.ShimmerShakeButton
-                android:id="@+id/clean_up_button"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="48dp"
-                android:background="@drawable/bg_home_clean_button"
-                android:clickable="true"
-                android:elevation="5dp"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="@string/clean_up"
-                android:textColor="#FFFFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <FrameLayout
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_home_gauge_outer"
+                    android:elevation="12dp"
+                    android:padding="33dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="112dp"
-                android:layout_marginTop="28dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/storage_percentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_home_gauge_inner"
+                        android:gravity="center"
+                        android:text="@string/zero_percentage"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
 
-                <include android:id="@+id/home_primary_network" layout="@layout/item_home_primary_network" />
+                <com.nice.aceclean.ui.widget.ShimmerShakeButton
+                    android:id="@+id/clean_up_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="48dp"
+                    android:background="@drawable/bg_home_clean_button"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/clean_up"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                <include android:id="@+id/home_primary_duplicate" layout="@layout/item_home_primary_duplicate" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="112dp"
+                    android:layout_marginTop="28dp"
+                    android:orientation="horizontal">
 
-                <include android:id="@+id/home_primary_app_manager" layout="@layout/item_home_primary_app_manager" />
+                    <include android:id="@+id/home_primary_network" layout="@layout/item_home_primary_network" />
+
+                    <include android:id="@+id/home_primary_duplicate" layout="@layout/item_home_primary_duplicate" />
+
+                    <include android:id="@+id/home_primary_app_manager" layout="@layout/item_home_primary_app_manager" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal">
+
+                    <include android:id="@+id/home_secondary_screenshot" layout="@layout/item_home_secondary_screenshot" />
+
+                    <include android:id="@+id/home_secondary_large_file" layout="@layout/item_home_secondary_large_file" />
+                </LinearLayout>
+
+                <include android:id="@+id/home_wide_notification" layout="@layout/item_home_wide_notification" />
+
+                <include android:id="@+id/home_wide_video" layout="@layout/item_home_wide_video" />
+
+                <include android:id="@+id/home_tool_ram" layout="@layout/item_home_tool_ram" />
+
+                <include android:id="@+id/home_tool_device" layout="@layout/item_home_tool_device" />
+
+                <include android:id="@+id/home_tool_battery" layout="@layout/item_home_tool_battery" />
+
+                <include android:id="@+id/home_tool_network_test" layout="@layout/item_home_tool_network_test" />
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="14dp"
-                android:orientation="horizontal">
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                <include android:id="@+id/home_secondary_screenshot" layout="@layout/item_home_secondary_screenshot" />
+    <LinearLayout
+        android:id="@+id/home_pinned_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="top"
+        android:alpha="0"
+        android:background="@color/white"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:tag="system_bar_top_overlay"
+        android:visibility="gone">
 
-                <include android:id="@+id/home_secondary_large_file" layout="@layout/item_home_secondary_large_file" />
-            </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-            <include android:id="@+id/home_wide_notification" layout="@layout/item_home_wide_notification" />
+        <ImageButton
+            android:id="@+id/pinned_language_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/language_entry_content_description"
+            android:padding="8dp"
+            android:src="@drawable/ic_language" />
+    </LinearLayout>
 
-            <include android:id="@+id/home_wide_video" layout="@layout/item_home_wide_video" />
-
-            <include android:id="@+id/home_tool_ram" layout="@layout/item_home_tool_ram" />
-
-            <include android:id="@+id/home_tool_device" layout="@layout/item_home_tool_device" />
-
-            <include android:id="@+id/home_tool_battery" layout="@layout/item_home_tool_battery" />
-
-            <include android:id="@+id/home_tool_network_test" layout="@layout/item_home_tool_network_test" />
-        </LinearLayout>
-    </ScrollView>
 </FrameLayout>

@@ -36,6 +36,7 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
 ) {
 
     private val uninstallQueue = ArrayDeque<String>()
+    private var uninstalledCount = 0
     private var apps: List<InstalledAppInfo> = emptyList()
     private var sortMode = SortMode.NAME
     private var sortOrder = SortOrder.ASCENDING
@@ -48,11 +49,10 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
         if (result.resultCode != Activity.RESULT_OK) {
             uninstallQueue.clear()
             Toast.makeText(this, R.string.uninstall_cancelled, Toast.LENGTH_SHORT).show()
-            loadApps()
-        } else if (uninstallQueue.isNotEmpty()) {
-            uninstallNext()
+            finishUninstall()
         } else {
-            loadApps()
+            uninstalledCount++
+            uninstallNext()
         }
     }
 
@@ -70,6 +70,7 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
                 Toast.makeText(this, R.string.select_apps_first, Toast.LENGTH_SHORT).show()
             } else {
                 uninstallQueue.clear()
+                uninstalledCount = 0
                 uninstallQueue.addAll(selectedApps.map(InstalledAppInfo::packageName))
                 uninstallNext()
             }
@@ -198,7 +199,7 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
 
     private fun uninstallNext() {
         if (uninstallQueue.isEmpty()) {
-            loadApps()
+            finishUninstall()
             return
         }
         val packageName = uninstallQueue.removeFirst()
@@ -208,6 +209,17 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
                 putExtra(Intent.EXTRA_RETURN_RESULT, true)
             },
         )
+    }
+
+    private fun finishUninstall() {
+        loadApps()
+        DeleteSuccessActivity.show(
+            context = this,
+            removedCount = uninstalledCount,
+            freedBytes = 0L,
+            source = DeleteSuccessActivity.SOURCE_APP_MANAGER,
+        )
+        uninstalledCount = 0
     }
 
     private enum class SortMode(val defaultOrder: SortOrder) {

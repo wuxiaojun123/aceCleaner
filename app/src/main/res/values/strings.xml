@@ -185,6 +185,7 @@
     <string name="notif_clear_success_subtitle">Blocked notifications have been cleared</string>
     <string name="uninstall_count">Uninstall (%1$d)</string>
     <string name="uninstall_cancelled">Uninstall cancelled</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d apps uninstalled</string>
     <string name="apps_found">%1$d apps</string>
     <string name="apps_found_initial">0 apps</string>
     <string name="picture">Picture</string>

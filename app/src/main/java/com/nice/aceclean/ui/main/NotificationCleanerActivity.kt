@@ -2,12 +2,12 @@ package com.nice.aceclean.ui.main
 
 import android.content.Intent
 import android.provider.Settings
-import android.view.Gravity
 import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.view.doOnLayout
+import androidx.core.widget.NestedScrollView
 import android.view.animation.AccelerateInterpolator
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.FragmentNotificationCleanerBinding
+import com.nice.aceclean.databinding.ItemNotificationTopAppBinding
 import com.nice.aceclean.notification.AppIconLoader
 import com.nice.aceclean.notification.InterceptedNotificationAdapter
 import com.nice.aceclean.notification.InterceptedNotificationStore
 import com.nice.aceclean.notification.NotificationAppStats
 import com.nice.aceclean.notification.NotificationInterceptStore
 import com.nice.aceclean.notification.NotificationStatsStore
-import com.nice.aceclean.ui.widget.IosSwitchView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -40,14 +40,21 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
 ) {
     private val numberFormatter = NumberFormat.getIntegerInstance()
     private val adapter = InterceptedNotificationAdapter()
+    private val topAppsAdapter = TopAppsAdapter()
     private var isClearing = false
 
     override fun initFeatureViews() {
+        setupPinnedTopBar()
+        featureBinding.notificationTopApps.apply {
+            layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
+            adapter = topAppsAdapter
+        }
         featureBinding.interceptedNotificationsList.apply {
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = this@NotificationCleanerActivity.adapter
         }
         featureBinding.notificationBack.setOnClickListener { finish() }
+        featureBinding.notificationPinnedBack.setOnClickListener { finish() }
         featureBinding.notificationWhitelistEntry.setOnClickListener {
             startActivity(Intent(this, AllowedAppsActivity::class.java))
         }
@@ -165,68 +172,69 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
         recyclerView.itemAnimator = previousAnimator
     }
 
+    private fun setupPinnedTopBar() {
+        featureBinding.notificationScrollView.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+                updatePinnedTopBar(scrollY)
+            },
+        )
+        featureBinding.notificationScrollView.doOnLayout {
+            updatePinnedTopBar(featureBinding.notificationScrollView.scrollY)
+        }
+    }
+
+    private fun updatePinnedTopBar(scrollY: Int) {
+        val showDistance = (featureBinding.notificationHeader.bottom +
+            featureBinding.notificationScrollView.paddingTop).coerceAtLeast(1)
+        val alpha = (scrollY.toFloat() / showDistance).coerceIn(0f, 1f)
+        featureBinding.notificationPinnedTopBar.alpha = alpha
+        featureBinding.notificationPinnedTopBar.isVisible = alpha > 0f
+        featureBinding.notificationHeader.importantForAccessibility = if (alpha >= 1f) {
+            View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        } else {
+            View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
+        }
+    }
+
     private fun renderAppList(apps: List<NotificationAppStats>) {
-        val container = featureBinding.notificationTopApps
-        container.removeAllViews()
         val visibleApps = apps.filter { it.packageName != packageName }
-        if (visibleApps.isEmpty()) {
-            container.addView(TextView(this).apply {
-                text = getString(R.string.notif_no_data)
-                textSize = 13f
-                setTextColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.notification_manager_muted))
-            })
-            return
-        }
-        visibleApps.forEachIndexed { index, app -> container.addView(createAppRow(app, index > 0)) }
+        topAppsAdapter.submitList(visibleApps)
+        featureBinding.notificationTopApps.isVisible = visibleApps.isNotEmpty()
+        featureBinding.notificationTopAppsEmpty.isVisible = visibleApps.isEmpty()
     }
 
-    private fun createAppRow(app: NotificationAppStats, hasTopMargin: Boolean): View {
-        val row = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            setBackgroundResource(R.drawable.bg_notif_app_row)
-            setPadding(dp(13), dp(11), dp(13), dp(11))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-            ).apply { if (hasTopMargin) topMargin = dp(10) }
-            isClickable = true
-            isFocusable = true
-            setOnClickListener {
-                startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, app.packageName))
+    private inner class TopAppsAdapter : RecyclerView.Adapter<TopAppsAdapter.Holder>() {
+        private var apps = emptyList<NotificationAppStats>()
+
+        @android.annotation.SuppressLint("NotifyDataSetChanged")
+        fun submitList(items: List<NotificationAppStats>) {
+            apps = items
+            notifyDataSetChanged()
+        }
+
+        override fun getItemCount() = apps.size
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(
+            ItemNotificationTopAppBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        )
+
+        override fun onBindViewHolder(holder: Holder, position: Int) = holder.bind(apps[position])
+
+        inner class Holder(private val binding: ItemNotificationTopAppBinding) : RecyclerView.ViewHolder(binding.root) {
+            fun bind(app: NotificationAppStats) {
+                binding.appIcon.setImageDrawable(
+                    AppIconLoader.load(this@NotificationCleanerActivity, app.packageName)
+                        ?: ContextCompat.getDrawable(this@NotificationCleanerActivity, R.drawable.icon_notification),
+                )
+                binding.appName.text = app.appName
+                binding.appCount.text = getString(R.string.notif_count_fmt, app.count)
+                binding.root.setOnClickListener {
+                    startActivity(
+                        Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                            .putExtra(Settings.EXTRA_APP_PACKAGE, app.packageName),
+                    )
+                }
             }
         }
-        val icon = AppIconLoader.load(this, app.packageName)
-        row.addView(if (icon != null) ImageView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(dp(36), dp(36))
-            scaleType = ImageView.ScaleType.FIT_CENTER
-            setImageDrawable(icon)
-        } else TextView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(dp(36), dp(36))
-            gravity = Gravity.CENTER
-            setTextColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.white))
-            textSize = 13f
-            setTypeface(typeface, android.graphics.Typeface.BOLD)
-            setBackgroundResource(R.drawable.bg_notif_app_shopping)
-            text = app.appName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
-        })
-        row.addView(TextView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                marginStart = dp(11)
-            }
-            text = app.appName
-            textSize = 13f
-            setTextColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.home_text))
-            setTypeface(typeface, android.graphics.Typeface.BOLD)
-        })
-        row.addView(TextView(this).apply {
-            text = getString(R.string.notif_count_fmt, app.count)
-            textSize = 12f
-            setTextColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.notification_manager_amber))
-            setTypeface(typeface, android.graphics.Typeface.BOLD)
-        })
-        return row
     }
-
-    private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
 }

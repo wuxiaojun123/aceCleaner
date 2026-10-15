@@ -18,7 +18,7 @@ import com.nice.aceclean.databinding.ItemDeleteSuccessFeatureBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
 
-/** Shared completion screen displayed after files have actually been removed. */
+/** Shared completion screen displayed after files or apps have actually been removed. */
 class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
     { ActivityDeleteSuccessBinding.inflate(it) },
     R.layout.activity_delete_success,
@@ -31,7 +31,12 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
         val freedBytes = intent.getLongExtra(EXTRA_FREED_BYTES, 0L).coerceAtLeast(0L)
 
         binding.deleteSuccessTitle.setText(current.titleRes)
-        binding.deleteSuccessResultMessage.text = getString(R.string.clean_success_files, removedCount).let { result ->
+        val resultMessageRes = if (current == Feature.APP_MANAGER) {
+            R.string.string_delete_success_apps_uninstalled
+        } else {
+            R.string.clean_success_files
+        }
+        binding.deleteSuccessResultMessage.text = getString(resultMessageRes, removedCount).let { result ->
             if (freedBytes > 0L) {
                 result + "\n" + getString(
                     R.string.string_delete_success_space_freed,
@@ -115,6 +120,11 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
             R.drawable.hkep_icon_duplicate_photo_cleaner_finish,
             R.drawable.hkep_icon_duplicate_photo_cleaner_finish_top,
             SimilarPhotoCleanerActivity::class.java,
+        ),
+        APP_MANAGER(
+            SOURCE_APP_MANAGER, R.string.app_manager, R.string.uninstall_unused_apps,
+            R.drawable.icon_app_manager, R.drawable.icon_app_manager,
+            AppManagerActivity::class.java,
         );
 
         val recommended: Feature
@@ -124,6 +134,7 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
                 BIG_FILE -> VIDEO
                 VIDEO -> SCREENSHOT
                 DUPLICATE -> BIG_FILE
+                APP_MANAGER -> CLEAN_UP
             }
 
         companion object {
@@ -162,6 +173,7 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
         const val SOURCE_BIG_FILE = "big_file"
         const val SOURCE_VIDEO = "video"
         const val SOURCE_DUPLICATE = "duplicate"
+        const val SOURCE_APP_MANAGER = "app_manager"
 
         fun show(
             context: Context,
