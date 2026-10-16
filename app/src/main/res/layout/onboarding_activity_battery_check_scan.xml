@@ -61,7 +61,7 @@
                 android:layout_height="234dp"
                 android:layout_width="234dp"
                 app:lottie_autoPlay="false"
-                app:lottie_loop="false"
+                app:lottie_loop="true"
                 app:lottie_rawRes="@raw/onboarding_orange_battery_check" />
             <TextView
                 android:gravity="center"

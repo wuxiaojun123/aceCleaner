@@ -33,8 +33,8 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 | `device-scan.json` | 设备扫描线、设备轮廓 | 3 秒循环 |
 | `junk-scan.json` | 文件列表扫描 | 3 秒循环 |
 | `junk-clean.json` | 扫帚与碎屑清理 | 3 秒循环 |
-| `battery-scan.json` | 电池信息读取 | 3 秒循环 |
-| `battery-check.json` | 电池检查完成 | 播放一次后停留 |
+| `battery-scan.json` | 电池信息读取，一格逐步充满五格 | 3 秒循环 |
+| `battery-check.json` | 一格逐步充满五格，满格显示对勾 | 3 秒循环 |
 | `complete.json` | 清理／检查成功反馈 | 播放一次后停留 |
 
 可在动画展示页逐个下载 JSON。`build-animations.py` 是可重复生成脚本；传入官方播放器目录时，会同时写入其 `public/projects/ace-onboarding/scene-N/lottie.json`。原型预览使用 Skia Skottie；动画现已接入 Android Activity，并使用项目的 Lottie 6.5.2 在 Android 11 真机完成六个场景、18 个关键帧的解析与绘制检查，兼容警告为 0。

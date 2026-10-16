@@ -15,7 +15,7 @@
 | `raw/onboarding_orange_battery_check.json` | `battery-check.json` | 电池检查 |
 | `raw/onboarding_orange_complete.json` | `complete.json` | 清理／电池检查完成 |
 
-六个 JSON 与原型资源相同，均为透明背景、320×320、30 fps、90 帧的纯形状动画。前四个循环，电池检查与完成反馈播放一次后停留。页面通过 `BaseOnboardingActivity.trackOnboardingAnimation(binding.xxx)` 注册动画，进入前台恢复，进入后台暂停，销毁时释放。布局中的 `lottie_autoPlay` 关闭，避免页面被广告或系统设置遮盖时继续播放。
+六个 JSON 与原型资源相同，均为透明背景、320×320、30 fps、90 帧的纯形状动画。前五个循环，完成反馈播放一次后停留。两个电池动画均从底部一格逐步充满五格，满格短暂停留后重置循环。页面通过 `BaseOnboardingActivity.trackOnboardingAnimation(binding.xxx)` 注册动画，进入前台恢复，进入后台暂停，销毁时释放。布局中的 `lottie_autoPlay` 关闭，避免页面被广告或系统设置遮盖时继续播放。
 
 权限说明使用白色圆角底部弹窗，继续调用真实 Android 权限设置，不使用原型的模拟开关。完成动画显示约 1.6 秒后再出现通知访问说明；提前返回或进入推荐功能会取消这次延迟提示。主要按钮保留轻微扫光，移除了反复放大和透明度呼吸。
 
