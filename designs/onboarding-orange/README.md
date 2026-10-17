@@ -57,3 +57,10 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 ## 验证
 
 已完成权限主线与电池分支、分类与子项勾选、金额同步、空选择继续、插屏关闭、完成页权限、页面直达链接、从头体验，以及 390px / 375px 窄屏检查。六个动画均在官方 Skottie 播放器检查第 0 / 45 / 89 帧。运行错误为 0，详情见 `validation.json`；静态预览在 `previews/`。
+
+
+## 网络测速设计（新增）
+
+统一入口仍为 `index.html?auto=0#splash`。左侧「网络测速」或首页底部 Network Test 可进入；直达 `index.html?auto=0#networkTest`。手机端通过「预览导航」进入。
+
+页面通过本目录 `network-test.html` 加载，共用原型的手机外框和导航，不依赖 `../network-speed/`。进入后自动模拟延迟、下载和上传，结束可重测，返回回到首页。右侧可切换待测、下载、上传、完成、失败、断网状态。仅为设计演示，未修改 Android 代码。

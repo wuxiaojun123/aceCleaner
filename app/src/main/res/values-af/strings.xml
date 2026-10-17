@@ -336,5 +336,15 @@
     <string name="app_manager_last_used_today">Vandag</string>
     <string name="app_manager_last_used_unknown">onbekend</string>
 
+    <string name="string_network_overline">JOU NETWERK IN EEN OOGOPSLAG</string>
+    <string name="string_network_intro">Toets jou verbinding vinnig.</string>
+    <string name="string_network_results_hint">Resultate sal tydens die toets verskyn.</string>
+    <string name="string_network_results_complete">Resultate weerspieël jou verbinding tydens die toets.</string>
+    <string name="string_network_download">Aflaai</string>
+    <string name="string_network_upload">Oplaai</string>
+    <string name="string_network_complete_title">Toets voltooi</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Aflaai</string>
+    <string name="string_network_step_upload">3  Oplaai</string>
 </resources>
 

@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">اليوم</string>
     <string name="app_manager_last_used_unknown">غير معروف</string>
 
+    <string name="string_network_overline">نظرة سريعة على شبكتك</string>
+    <string name="string_network_intro">فحص سريع لاتصالك.</string>
+    <string name="string_network_results_hint">ستظهر النتائج هنا أثناء الاختبار.</string>
+    <string name="string_network_results_complete">تعكس النتائج حالة اتصالك أثناء الاختبار.</string>
+    <string name="string_network_download">تنزيل</string>
+    <string name="string_network_upload">رفع</string>
+    <string name="string_network_complete_title">اكتمل الاختبار</string>
+    <string name="string_network_step_ping">1  زمن الاستجابة</string>
+    <string name="string_network_step_download">2  تنزيل</string>
+    <string name="string_network_step_upload">3  رفع</string>
 </resources>

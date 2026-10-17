@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Karon</string>
     <string name="app_manager_last_used_unknown">wala mailhi</string>
 
+    <string name="string_network_overline">IMONG NETWORK SA USA KA TAN-AW</string>
+    <string name="string_network_intro">Dali nga pagsusi sa imong koneksyon.</string>
+    <string name="string_network_results_hint">Mogawas ang mga resulta samtang nagdagan ang pagsulay.</string>
+    <string name="string_network_results_complete">Ang mga resulta nagpakita sa imong koneksyon panahon sa pagsulay.</string>
+    <string name="string_network_download">Download</string>
+    <string name="string_network_upload">Upload</string>
+    <string name="string_network_complete_title">Nahuman ang pagsulay</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Download</string>
+    <string name="string_network_step_upload">3  Upload</string>
 </resources>

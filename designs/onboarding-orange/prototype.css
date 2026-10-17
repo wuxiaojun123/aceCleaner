@@ -12,3 +12,6 @@
 .phone-header{min-height:48px}.metric{padding:8px 12px}.metric .icon-badge,.spec .icon-badge{width:30px;height:30px}.metric .track{margin-top:6px}.metric-foot{margin-top:5px}.spec{padding:8px 12px}.spec-row{padding:2px 0}.identity{padding:12px 8px}
 
 .system-sheet .toggle{width:48px;height:44px;background:transparent;position:relative;padding:0}.system-sheet .toggle:after{content:"";position:absolute;left:0;top:8px;width:45px;height:27px;border-radius:20px;background:#c1c4ca}.system-sheet .toggle.on:after{background:var(--accent)}.system-sheet .toggle:before{position:absolute;z-index:1;left:3px;top:11px}
+
+/* Integrated network speed prototype: keep the same device and navigation. */
+.phone-app.network-test-shell{padding:0;background:#fafbf9}.network-test-shell:after{display:none}.network-test-frame{display:block;width:100%;height:100%;border:0;flex:1;min-height:0;background:#fafbf9}.home-network-entry{width:100%;text-align:left;color:inherit}.network-state-select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:white;color:var(--ink);font:inherit;font-size:12px}

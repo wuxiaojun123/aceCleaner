@@ -1,0 +1,22 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "网络测速 · 清爽浅色": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-10-16T15:21:55.078Z",
+          "status": "needs-review",
+          "viewport": {
+            "width": 1360,
+            "height": 940
+          }
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-10-16T15:21:55.094Z",
+  "updatedAt": "2026-10-16T15:31:36.624Z"
+}

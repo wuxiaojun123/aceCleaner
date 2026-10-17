@@ -7,4 +7,7 @@
         <attr name="gaugeStrokeWidth" format="dimension" />
         <attr name="gaugeStartAngle" format="float" />
     </declare-styleable>
+    <declare-styleable name="CheckmarkAnimationView">
+        <attr name="checkmarkColor" format="color" />
+    </declare-styleable>
 </resources>

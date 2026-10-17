@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">วันนี้</string>
     <string name="app_manager_last_used_unknown">ไม่ทราบ</string>
 
+    <string name="string_network_overline">ภาพรวมเครือข่ายของคุณ</string>
+    <string name="string_network_intro">ตรวจสอบการเชื่อมต่ออย่างรวดเร็ว</string>
+    <string name="string_network_results_hint">ผลลัพธ์จะแสดงระหว่างการทดสอบ</string>
+    <string name="string_network_results_complete">ผลลัพธ์แสดงสถานะการเชื่อมต่อระหว่างการทดสอบ</string>
+    <string name="string_network_download">ดาวน์โหลด</string>
+    <string name="string_network_upload">อัปโหลด</string>
+    <string name="string_network_complete_title">ทดสอบเสร็จแล้ว</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  ดาวน์โหลด</string>
+    <string name="string_network_step_upload">3  อัปโหลด</string>
 </resources>

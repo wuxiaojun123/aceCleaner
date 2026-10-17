@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">आज</string>
     <string name="app_manager_last_used_unknown">अज्ञात</string>
 
+    <string name="string_network_overline">एक नज़र में आपका नेटवर्क</string>
+    <string name="string_network_intro">अपने कनेक्शन की त्वरित जाँच करें।</string>
+    <string name="string_network_results_hint">जाँच के दौरान परिणाम यहाँ दिखाई देंगे।</string>
+    <string name="string_network_results_complete">परिणाम जाँच के दौरान आपके कनेक्शन की स्थिति दिखाते हैं।</string>
+    <string name="string_network_download">डाउनलोड</string>
+    <string name="string_network_upload">अपलोड</string>
+    <string name="string_network_complete_title">जाँच पूरी हुई</string>
+    <string name="string_network_step_ping">1  पिंग</string>
+    <string name="string_network_step_download">2  डाउनलोड</string>
+    <string name="string_network_step_upload">3  अपलोड</string>
 </resources>

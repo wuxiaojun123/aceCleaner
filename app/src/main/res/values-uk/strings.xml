@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Сьогодні</string>
     <string name="app_manager_last_used_unknown">невідомо</string>
 
+    <string name="string_network_overline">ВАША МЕРЕЖА З ОДНОГО ПОГЛЯДУ</string>
+    <string name="string_network_intro">Швидка перевірка з’єднання.</string>
+    <string name="string_network_results_hint">Результати з’являться під час перевірки.</string>
+    <string name="string_network_results_complete">Результати відображають стан мережі під час перевірки.</string>
+    <string name="string_network_download">Завантаження</string>
+    <string name="string_network_upload">Надсилання</string>
+    <string name="string_network_complete_title">Перевірку завершено</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Завантаження</string>
+    <string name="string_network_step_upload">3  Надсилання</string>
 </resources>

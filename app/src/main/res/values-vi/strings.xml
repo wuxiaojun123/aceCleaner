@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Hôm nay</string>
     <string name="app_manager_last_used_unknown">không xác định</string>
 
+    <string name="string_network_overline">TỔNG QUAN MẠNG CỦA BẠN</string>
+    <string name="string_network_intro">Kiểm tra nhanh kết nối của bạn.</string>
+    <string name="string_network_results_hint">Kết quả sẽ xuất hiện trong khi kiểm tra.</string>
+    <string name="string_network_results_complete">Kết quả phản ánh kết nối của bạn trong lúc kiểm tra.</string>
+    <string name="string_network_download">Tải xuống</string>
+    <string name="string_network_upload">Tải lên</string>
+    <string name="string_network_complete_title">Kiểm tra hoàn tất</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Tải xuống</string>
+    <string name="string_network_step_upload">3  Tải lên</string>
 </resources>

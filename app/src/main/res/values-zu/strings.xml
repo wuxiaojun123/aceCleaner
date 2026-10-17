@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Namuhla</string>
     <string name="app_manager_last_used_unknown">akwaziwa</string>
 
+    <string name="string_network_overline">INETHIWEKHI YAKHO NGOKUSHESHA</string>
+    <string name="string_network_intro">Ukuhlola uxhumano lwakho ngokushesha.</string>
+    <string name="string_network_results_hint">Imiphumela izovela ngesikhathi sokuhlola.</string>
+    <string name="string_network_results_complete">Imiphumela ibonisa uxhumano lwakho ngesikhathi sokuhlola.</string>
+    <string name="string_network_download">Landa</string>
+    <string name="string_network_upload">Layisha</string>
+    <string name="string_network_complete_title">Ukuhlola kuqediwe</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Landa</string>
+    <string name="string_network_step_upload">3  Layisha</string>
 </resources>

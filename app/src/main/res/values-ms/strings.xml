@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Hari ini</string>
     <string name="app_manager_last_used_unknown">tidak diketahui</string>
 
+    <string name="string_network_overline">RANGKAIAN ANDA SEKILAS PANDANG</string>
+    <string name="string_network_intro">Semakan pantas sambungan anda.</string>
+    <string name="string_network_results_hint">Keputusan akan muncul semasa ujian.</string>
+    <string name="string_network_results_complete">Keputusan mencerminkan sambungan anda semasa ujian.</string>
+    <string name="string_network_download">Muat turun</string>
+    <string name="string_network_upload">Muat naik</string>
+    <string name="string_network_complete_title">Ujian selesai</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Muat turun</string>
+    <string name="string_network_step_upload">3  Muat naik</string>
 </resources>

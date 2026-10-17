@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Bugün</string>
     <string name="app_manager_last_used_unknown">bilinmiyor</string>
 
+    <string name="string_network_overline">BİR BAKIŞTA AĞINIZ</string>
+    <string name="string_network_intro">Bağlantınızı hızlıca kontrol edin.</string>
+    <string name="string_network_results_hint">Test sırasında sonuçlar burada görünecek.</string>
+    <string name="string_network_results_complete">Sonuçlar test sırasındaki bağlantınızı yansıtır.</string>
+    <string name="string_network_download">İndirme</string>
+    <string name="string_network_upload">Yükleme</string>
+    <string name="string_network_complete_title">Test tamamlandı</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  İndirme</string>
+    <string name="string_network_step_upload">3  Yükleme</string>
 </resources>

@@ -451,4 +451,20 @@
     <string name="string_ram_recent_apps_count">%1$d recently used apps</string>
     <string name="string_ram_usage_access_required">Usage access required</string>
     <string name="string_ram_no_recent_apps">No recently used apps found</string>
+    <string name="string_network_overline">YOUR NETWORK, AT A GLANCE</string>
+    <string name="string_network_intro">A quick check of your connection.</string>
+    <string name="string_network_results_hint">Your results will appear here as the test runs.</string>
+    <string name="string_network_results_complete">Results reflect your connection during this test.</string>
+    <string name="string_network_download">Download</string>
+    <string name="string_network_upload">Upload</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Download</string>
+    <string name="string_network_step_upload">3  Upload</string>
+    <string name="string_network_complete_title">Test complete</string>
+    <string name="string_network_speed_unit" translatable="false">Mbps</string>
+    <string name="string_network_ping_unit" translatable="false">ms</string>
+    <string name="string_network_number_placeholder" translatable="false">—</string>
+    <string name="string_network_zero" translatable="false">0.0</string>
+    <string name="string_network_ping_number" translatable="false">%1$d</string>
+    <string name="string_network_speed_number" translatable="false">%1$.1f</string>
 </resources>

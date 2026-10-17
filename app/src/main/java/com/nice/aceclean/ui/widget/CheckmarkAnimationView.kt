@@ -10,6 +10,8 @@ import android.graphics.PathMeasure
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import androidx.core.content.withStyledAttributes
+import com.nice.aceclean.R
 
 /** Draws a checkmark progressively with [PathMeasure] when a speed test succeeds. */
 class CheckmarkAnimationView @JvmOverloads constructor(
@@ -29,6 +31,12 @@ class CheckmarkAnimationView @JvmOverloads constructor(
     private val pathMeasure = PathMeasure()
     private var revealProgress = 0f
     private var animator: ValueAnimator? = null
+
+    init {
+        context.withStyledAttributes(attrs, R.styleable.CheckmarkAnimationView) {
+            paint.color = getColor(R.styleable.CheckmarkAnimationView_checkmarkColor, paint.color)
+        }
+    }
 
     fun play() {
         animator?.cancel()

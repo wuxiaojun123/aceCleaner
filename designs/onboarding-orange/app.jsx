@@ -10,7 +10,8 @@ const prototypeScreens=[
     ['batteryInfo','电池信息','电量、充电估计、状态及四项指标，保持原有检查入口。'],
     ['batteryCheck','电池检查','电池轮廓中绘制对勾，表达检查完成。'],
     ['overlay','悬浮窗引导 · 备用','当前 App 已暂时关闭首次入口；这里只提供备用设计预览。'],
-    ['home','首页 · 固定参照','按现有 fragment_home.xml 及其资源复现：首页不属于本次重设计范围。']
+    ['home','首页 · 固定参照','按现有 fragment_home.xml 及其资源复现。点击 Network Test 体验新增测速设计。'],
+    ['networkTest','网络测速','暖白底、轻圆环、大读数；保留自动测速、延迟/下载/上传、结果与重测。数据为本地模拟。']
 ];
 const newGroups=()=>[
     {title:'System cache',icon:'ram',expanded:false,items:[{name:'App cache',bytes:60*1048576,selected:true},{name:'Ad cache',bytes:16*1048576,selected:true}]},
@@ -30,6 +31,8 @@ function App(){
     const [cleaned,setCleaned]=React.useState(94*1048576);const [fromBattery,setFromBattery]=React.useState(false);
     const [destination,setDestination]=React.useState('');const [autoPrompts,setAutoPrompts]=React.useState(true);
     const notificationShown=React.useRef(false);
+    const networkFrame=React.useRef(null);
+    React.useEffect(()=>{function receive(event){if(event.origin===location.origin&&event.source===networkFrame.current?.contentWindow&&event.data?.type==='network-test-back')go('home');}window.addEventListener('message',receive);return()=>window.removeEventListener('message',receive);},[]);
     React.useEffect(()=>{
         function syncHash(){const next=location.hash.slice(1);if(prototypeScreens.some(s=>s[0]===next)){
             setScreen(next);setSheet(null);setSystem(null);setAd(null);
@@ -52,6 +55,7 @@ function App(){
         else if(screen==='batteryCheck'){setFromBattery(true);withAd('3005 · FINISH','complete')}
         else if(screen==='complete')leaveComplete();
         else if(screen==='overlay')go('splash');
+        else if(screen==='home')go('networkTest');
     }
     const advanceRef=React.useRef(advance);advanceRef.current=advance;
     React.useEffect(()=>{
@@ -101,15 +105,16 @@ function App(){
     if(screen==='batteryInfo')content=<BatteryInfo onCheck={()=>go('batteryCheck')} playing={playing}/>;
     if(screen==='complete')content=<Complete {...{cleaned,fromBattery,playing}} onLeave={leaveComplete} onFeature={feature}/>;
     if(screen==='overlay')content=<OverlayGuide onContinue={()=>setSheet('overlay')} onSkip={()=>go('splash')} playing={playing}/>;
-    if(screen==='home')content=<Home onClean={()=>go('junkScan')}/>;
+    if(screen==='home')content=<Home onClean={()=>go('junkScan')} onNetworkTest={()=>go('networkTest')}/>;
+    if(screen==='networkTest')content=<iframe ref={networkFrame} className="network-test-frame" src="network-test.html" title="Network Test interactive prototype"/>;
     const steps=<nav className="steps" aria-label="原型页面">{prototypeScreens.map((s,i)=><button key={s[0]} className={'step '+(screen===s[0]?'active':'')} onClick={()=>go(s[0])}><span>{String(i+1).padStart(2,'0')}</span>{s[1]}</button>)}</nav>;
     return <div className="workspace"><aside className="sidebar"><div className="wordmark"><img src="icon.png" alt=""/><div><strong>Smart AI Cleaner</strong><small>ONBOARDING / ORANGE</small></div></div><p className="eyebrow">页面预览</p>{steps}<div className="subtle-rule"><button className="review-button" onClick={reset}>↻ 从头体验新手流程</button><a className="review-button" href="animations.html">查看全部 Lottie 动画 ↗</a></div></aside>
-        <main className="stage"><div className="stage-top"><span>ACE CLEANER / PROTOTYPE</span><b>{String(index+1).padStart(2,'0')} · {current[1]}</b></div><div className="device"><div className="phone-app" id="app"><div className="phone-content" key={screen} data-screen-label={current[1]}>{content}</div>
+        <main className="stage"><div className="stage-top"><span>ACE CLEANER / PROTOTYPE</span><b>{String(index+1).padStart(2,'0')} · {current[1]}</b></div><div className="device"><div className={"phone-app"+(screen==='networkTest'?' network-test-shell':'')} id="app"><div className="phone-content" key={screen} data-screen-label={current[1]}>{content}</div>
             {sheet&&<PermissionSheet type={sheet} onClose={closePermission} onAllow={allow} onDeny={()=>go('home')}/>}
             {system&&<SystemSheet kind={system} granted={granted} setGranted={setGranted} onDone={finishSystem}/>}
             {ad&&<section className="ad-preview" role="dialog" aria-modal="true" aria-label="Interstitial ad preview"><small>Sponsored</small><img src="icon.png" alt=""/><h2>Interstitial preview</h2><p>Smart AI Cleaner</p><button className="primary" onClick={()=>go(ad.next)}>Continue</button></section>}
-        </div></div><div className="review-nav"><button disabled={index===0} onClick={()=>go(prototypeScreens[index-1][0])}>← 上一页</button><span>{scannerPages.includes(screen)?'扫描将自动推进':'点击手机内按钮体验'}</span><button disabled={screen==='home'} onClick={advance}>下一步 →</button></div></main>
-        <aside className="review-notes"><p className="note-label">设计说明</p><h2>{current[1]}</h2><p>{current[2]}</p><div className="swatches"><i style={{background:'#ff6b2c'}} title="#FF6B2C"></i><i style={{background:'#fff2ea'}} title="#FFF2EA"></i><i style={{background:'#faf9f7'}} title="#FAF9F7"></i><i style={{background:'#171d27'}} title="#171D27"></i></div><div className="note-card"><p className="note-label">预览控制</p><label className="motion-control"><input type="checkbox" checked={continuous} onChange={e=>setContinuous(e.target.checked)}/>自动推进扫描</label><label className="motion-control"><input type="checkbox" checked={playing} onChange={e=>setPlaying(e.target.checked)}/>播放 Lottie</label><label className="motion-control"><input type="checkbox" checked={ads} onChange={e=>setAds(e.target.checked)}/>展示插屏节点</label><label className="motion-control"><input type="checkbox" checked={autoPrompts} onChange={e=>setAutoPrompts(e.target.checked)}/>完成后展示权限引导</label></div>
+        </div></div><div className="review-nav"><button disabled={index===0} onClick={()=>go(prototypeScreens[index-1][0])}>← 上一页</button><span>{scannerPages.includes(screen)?'扫描将自动推进':'点击手机内按钮体验'}</span><button disabled={screen==='networkTest'} onClick={advance}>下一步 →</button></div></main>
+        <aside className="review-notes"><p className="note-label">设计说明</p><h2>{current[1]}</h2><p>{current[2]}</p><div className="swatches"><i style={{background:'#ff6b2c'}} title="#FF6B2C"></i><i style={{background:'#fff2ea'}} title="#FFF2EA"></i><i style={{background:'#faf9f7'}} title="#FAF9F7"></i><i style={{background:'#171d27'}} title="#171D27"></i></div>{screen==='networkTest'&&<div className="note-card"><p className="note-label">测速状态预览</p><select className="network-state-select" aria-label="测速状态" defaultValue="auto" onChange={e=>networkFrame.current?.contentWindow.postMessage({type:'network-test-state',state:e.target.value},location.origin)}><option value="auto">自动演示完整流程</option><option value="ready">待测速</option><option value="download">下载测速中</option><option value="upload">上传测速中</option><option value="complete">测试完成</option><option value="failed">测试失败</option><option value="offline">网络不可用</option></select><p className="quiet">进入后自动测速。点击手机内返回键回到首页。</p></div>}<div className="note-card"><p className="note-label">预览控制</p><label className="motion-control"><input type="checkbox" checked={continuous} onChange={e=>setContinuous(e.target.checked)}/>自动推进扫描</label><label className="motion-control"><input type="checkbox" checked={playing} onChange={e=>setPlaying(e.target.checked)}/>播放 Lottie</label><label className="motion-control"><input type="checkbox" checked={ads} onChange={e=>setAds(e.target.checked)}/>展示插屏节点</label><label className="motion-control"><input type="checkbox" checked={autoPrompts} onChange={e=>setAutoPrompts(e.target.checked)}/>完成后展示权限引导</label></div>
         {ad&&<div className="note-card"><p className="note-label">当前广告场景</p><p>{ad.slot}<br/>关闭后进入：{prototypeScreens.find(x=>x[0]===ad.next)?.[1]}</p></div>}
         <div className="note-card"><p className="note-label">两条体验路径</p><p>允许存储访问 → 垃圾扫描与清理。<br/>关闭弹窗或不授权 → 电池检查。</p><p className="quiet">设备数据、扫描结果、权限设置与广告均为本地演示。页面沿用现有内容，未接入广告或系统授权。</p></div>{destination&&<div className="note-card">{destination}</div>}<a href="README.md">查看交付与资源说明 ↗</a></aside>
         <div className="mobile-tools"><button onClick={()=>setMobileMenu(!mobileMenu)} aria-expanded={mobileMenu}>预览导航</button>{mobileMenu&&<div className="mobile-menu">{steps}<label className="motion-control"><input type="checkbox" checked={continuous} onChange={e=>setContinuous(e.target.checked)}/>自动推进扫描</label><button className="review-button" onClick={advance}>下一步 →</button><a href="animations.html">Lottie 动画</a></div>}</div>

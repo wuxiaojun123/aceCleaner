@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Namhlanje</string>
     <string name="app_manager_last_used_unknown">ayaziwa</string>
 
+    <string name="string_network_overline">INETHIWEKHI YAKHO NGOKUKHAWULEZA</string>
+    <string name="string_network_intro">Jonga uqhagamshelwano lwakho ngokukhawuleza.</string>
+    <string name="string_network_results_hint">Iziphumo ziya kuvela ngexesha lovavanyo.</string>
+    <string name="string_network_results_complete">Iziphumo zibonisa uqhagamshelwano lwakho ngexesha lovavanyo.</string>
+    <string name="string_network_download">Khuphela</string>
+    <string name="string_network_upload">Layisha</string>
+    <string name="string_network_complete_title">Uvavanyo lugqityiwe</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Khuphela</string>
+    <string name="string_network_step_upload">3  Layisha</string>
 </resources>

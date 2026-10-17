@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Hoje</string>
     <string name="app_manager_last_used_unknown">desconhecido</string>
 
+    <string name="string_network_overline">SUA REDE EM RESUMO</string>
+    <string name="string_network_intro">Uma verificação rápida da sua conexão.</string>
+    <string name="string_network_results_hint">Os resultados aparecerão durante o teste.</string>
+    <string name="string_network_results_complete">Os resultados refletem sua conexão durante o teste.</string>
+    <string name="string_network_download">Download</string>
+    <string name="string_network_upload">Upload</string>
+    <string name="string_network_complete_title">Teste concluído</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Download</string>
+    <string name="string_network_step_upload">3  Upload</string>
 </resources>

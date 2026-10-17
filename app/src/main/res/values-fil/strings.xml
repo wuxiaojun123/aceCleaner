@@ -336,4 +336,14 @@
     <string name="app_manager_last_used_today">Ngayon</string>
     <string name="app_manager_last_used_unknown">hindi alam</string>
 
+    <string name="string_network_overline">ISANG TINGIN SA IYONG NETWORK</string>
+    <string name="string_network_intro">Mabilis na pagsusuri ng iyong koneksyon.</string>
+    <string name="string_network_results_hint">Lalabas ang mga resulta habang tumatakbo ang pagsusuri.</string>
+    <string name="string_network_results_complete">Ipinapakita ng mga resulta ang iyong koneksyon sa oras ng pagsusuri.</string>
+    <string name="string_network_download">Download</string>
+    <string name="string_network_upload">Upload</string>
+    <string name="string_network_complete_title">Tapos na ang pagsusuri</string>
+    <string name="string_network_step_ping">1  Ping</string>
+    <string name="string_network_step_download">2  Download</string>
+    <string name="string_network_step_upload">3  Upload</string>
 </resources>
