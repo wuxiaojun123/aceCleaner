@@ -183,8 +183,9 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
             freedBytes: Long,
             featureIcon: Int = R.drawable.ic_competitor_success,
             source: String = SOURCE_CLEAN_UP,
+            allowEmptyResult: Boolean = false,
         ) {
-            if (removedCount <= 0) return
+            if (removedCount <= 0 && !allowEmptyResult) return
             context.startActivity(
                 Intent(context, DeleteSuccessActivity::class.java).apply {
                     putExtra(EXTRA_REMOVED_COUNT, removedCount)

@@ -74,6 +74,21 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
         finish()
     }
 
+    /** End onboarding with a real home entry beneath the recommended feature. */
+    protected fun navigateToFeatureWithHome(destination: Class<out Activity>) {
+        if (navigating || isFinishing || isDestroyed) return
+        navigating = true
+        startActivities(
+            arrayOf(
+                Intent(this, MainActivity::class.java).addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK,
+                ),
+                Intent(this, destination),
+            ),
+        )
+        finish()
+    }
+
     protected fun openHome() {
         OnboardingState.set(this, OnboardingStep.COMPLETED)
         FirstRunJunkSession.result = null

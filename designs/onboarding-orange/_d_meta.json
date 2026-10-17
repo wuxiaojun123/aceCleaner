@@ -13,7 +13,7 @@
             "width": 412,
             "height": 915
           },
-          "subtitle": "完成页与三类权限弹窗 Taste 改版，保留橙色品牌"
+          "subtitle": "清理中页面新增 GIF 参考橙色机器人 Lottie，4 秒无缝循环"
         }
       ]
     },
@@ -26,11 +26,12 @@
           "viewport": {
             "width": 1100,
             "height": 900
-          }
+          },
+          "subtitle": "新增橙色机器人清理动画，可预览并下载 JSON"
         }
       ]
     }
   },
   "createdAt": "2026-10-15T09:05:08.363Z",
-  "updatedAt": "2026-10-17T09:09:15.917Z"
+  "updatedAt": "2026-10-17T10:00:58.412Z"
 }

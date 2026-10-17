@@ -143,3 +143,11 @@
 .ps-sheet .ps-explanation .ps-description{margin:0;font-size:13px;line-height:1.65}
 .ps-sheet .ps-allow{margin-bottom:5px}
 @media(max-height:700px){.ps-explanation{padding:13px;margin:14px 0 18px}}
+
+/* GIF-reference orange robot: preserve the scanner structure, enlarge only this illustration. */
+.robot-cleaning-content{gap:14px;padding-top:8px}
+.robot-cleaning-content .motion{width:286px;height:286px;max-width:100%;margin:0 auto}
+.robot-cleaning-content .scan-value{order:-1;font-size:43px;letter-spacing:-1.3px;color:var(--ink);font-variant-numeric:tabular-nums}
+.robot-cleaning-content .scan-number{font-size:18px;letter-spacing:0;font-weight:550;color:var(--muted)}
+.robot-cleaning-content .scan-number span{font-size:16px!important}
+.robot-cleaning-content .scan-caption{font-size:14px}

@@ -2,7 +2,9 @@ package com.nice.aceclean.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
+import androidx.core.view.updateLayoutParams
 import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
@@ -36,7 +38,17 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
         }
         val config = featureType.config
         binding.permissionToolbarTitle.setText(config.toolbarTitle)
-        binding.permissionImage.setImageResource(config.image)
+        if (featureType == FeatureType.NOTIFICATION_CLEANER) {
+            binding.permissionImage.visibility = View.GONE
+            binding.permissionAnimation.visibility = View.VISIBLE
+            binding.permissionAnimation.setAnimation(R.raw.notification_permission_guide)
+            binding.permissionTitle.textSize = 24f
+            binding.permissionTitle.updateLayoutParams<LinearLayout.LayoutParams> {
+                topMargin = (22 * resources.displayMetrics.density).toInt()
+            }
+        } else {
+            binding.permissionImage.setImageResource(config.image)
+        }
         binding.permissionTitle.setText(config.title)
         binding.permissionDescription.setText(config.description)
         val (backEvent, allowEvent) = when (featureType) {
@@ -63,6 +75,7 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
     private fun showFeature() {
         if (featureShown) return
         featureShown = true
+        binding.permissionAnimation.cancelAnimation()
         permissionHelper?.close()
         permissionHelper = null
         featureBinding = setActivityContent(inflateFeature(layoutInflater), featureLayout)
@@ -71,7 +84,20 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
 
     protected abstract fun initFeatureViews()
 
+    override fun onStart() {
+        super.onStart()
+        if (!featureShown && binding.permissionAnimation.visibility == View.VISIBLE) {
+            binding.permissionAnimation.resumeAnimation()
+        }
+    }
+
+    override fun onStop() {
+        binding.permissionAnimation.pauseAnimation()
+        super.onStop()
+    }
+
     override fun onDestroy() {
+        binding.permissionAnimation.cancelAnimation()
         permissionHelper?.close()
         permissionHelper = null
         super.onDestroy()

@@ -467,4 +467,16 @@
     <string name="string_network_zero" translatable="false">0.0</string>
     <string name="string_network_ping_number" translatable="false">%1$d</string>
     <string name="string_network_speed_number" translatable="false">%1$.1f</string>
+    <string name="string_onboarding_complete_status">CLEANUP COMPLETE</string>
+    <string name="string_onboarding_complete_check_status">CHECK COMPLETE</string>
+    <string name="string_onboarding_complete_tools_title">Keep the good going</string>
+    <string name="string_onboarding_complete_tools_label">MORE TOOLS</string>
+    <string name="string_onboarding_complete_result">%1$s\nof storage cleared. More room for you.</string>
+    <string name="string_onboarding_complete_battery_title">Looking good!</string>
+    <string name="string_onboarding_complete_battery_result">In good health\nYour battery is ready for the day.</string>
+    <string name="string_onboarding_complete_process_description">One-tap close of redundant\nbackground processes.</string>
+    <string name="string_onboarding_complete_notification_description">Fewer alerts. Fewer interruptions.</string>
+    <string name="string_onboarding_complete_battery_description">Get to know your battery better.</string>
+    <string name="string_junk_cleaning_session_expired">Please scan again before cleaning.</string>
+    <string name="string_junk_cleaning_failed">Could not clean the selected files. Please scan and try again.</string>
 </resources>

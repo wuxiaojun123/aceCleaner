@@ -17,6 +17,8 @@ import kotlinx.coroutines.launch
 
 class LanguageActivity : BaseActivity<ActivityLanguageBinding>({ ActivityLanguageBinding.inflate(it) }, R.layout.activity_language) {
 
+    override val navigationBarColorRes: Int = R.color.color_FFFAF9F7
+
     private lateinit var languageAdapter: LanguageAdapter
     private var isClosing = false
 

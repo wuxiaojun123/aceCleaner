@@ -100,6 +100,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
             val result = withContext(Dispatchers.IO) { MediaStoreRepository.pictures(this@ScreenshotCleanerActivity) }
             screenshots = result.first
             others = result.second
+            if (screenshots.isEmpty()) showingScreenshots = false
             selected.clear()
             render()
         }

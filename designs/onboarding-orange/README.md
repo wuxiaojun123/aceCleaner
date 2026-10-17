@@ -26,13 +26,14 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 
 ## 配套动画
 
-动画都在 `animations/`，透明背景、320×320、30 fps、90 帧，全部为形状图层，不依赖图片、字体或表达式。
+动画都在 `animations/`。原六个动画为透明背景、320×320、30 fps、90 帧；新增机器人清理动画为 480×480、30 fps、120 帧。全部为形状图层，不依赖图片、字体或表达式。
 
 | 文件 | 用途 | 播放 |
 | --- | --- | --- |
 | `device-scan.json` | 设备扫描线、设备轮廓 | 3 秒循环 |
 | `junk-scan.json` | 文件列表扫描 | 3 秒循环 |
-| `junk-clean.json` | 扫帚与碎屑清理 | 3 秒循环 |
+| `junk-clean.json` | 原扫帚与碎屑清理，保留 | 3 秒循环 |
+| `robot-cleaning-orange.json` | GIF 参考橙色机器人清理，当前清理中页面使用 | 4 秒循环 |
 | `battery-scan.json` | 电池信息读取，一格逐步充满五格 | 3 秒循环 |
 | `battery-check.json` | 一格逐步充满五格，满格显示对勾 | 3 秒循环 |
 | `complete.json` | 清理／检查成功反馈 | 播放一次后停留 |
@@ -45,7 +46,7 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 - `app.jsx`：流程、权限模拟、选择与金额状态。
 - `components.jsx`：独立页面、公共组件与动画播放。
 - `prototype.css`：设计颜色、尺寸和响应式样式。
-- `animations.html`：六个 Lottie 的播放、暂停、重播与下载。
+- `animations.html`：七个 Lottie 的播放、暂停、重播与下载。
 - `assets/`：从当前项目定向复制或转换的图片与图标。
 - `vendor/`：固定版本 React 18.3.1、React DOM 18.3.1、Babel 7.29.0，以及 CanvasKit 0.41.1 完整运行时。资源均本地加载，原型运行不依赖 CDN。
 - `_d_meta.json`：baoyu-design 的交付版本索引。
@@ -75,3 +76,17 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 CPU / Screen 字号与最新原生 XML 同步：标题 15、标签和型号 13、主要数值 24、分辨率 20；分组间距 18、标签与数值间距 7。原型允许内容区滚动，底部按钮保持固定。
 
 来源：https://store.google.com/us/product/pixel_8_specs 与 https://www.webmobilefirst.com/en/devices/google-pixel-8-2024/ 。本次按用户要求仅作尺寸/代码静态调整，未运行设备或模拟器测试。
+
+
+## GIF 参考橙色机器人清理（新增）
+
+直达预览：http://localhost:4311/onboarding-orange/index.html?auto=0#junkCleaning 。原来的 `#splash` 入口仍可用，左侧选择「清理中」即可查看。`auto=0` 只暂停页面自动推进，Lottie 默认持续播放，右侧可单独暂停。
+
+依据用户提供的 `laji_qingli_zhong.gif` 重绘机器人、圆形舞台，并将扫帚替换为手持吸尘器。保留轻微起伏，彩色垃圾沿弧线加速进入吸头，缩小消失，采用 #FF6B2C 品牌橙、暖白机身与深棕面罩。动画四角透明，内部保留浅橙圆盘，不包含页面标题、数值、进度条或原始 GIF 帧。
+
+资源：`animations/robot-cleaning-orange.json`；可复现生成脚本：`tools/generate-robot-cleaning.py`。已在官方 Diffusion Studio Skottie 播放器检查第 0、60、119 帧与循环端点，并检查 1440×1100、412×915 原型；连续截图确认实际播放，运行错误为 0。详情见 `previews/robot-cleaning-validation.json`。本次只更新 HTML 原型与动画资产，尚未替换 Android 原生动画，也未进行 Android 真机兼容性验证。修改前的原型保存在 `history/before-robot-cleaning/`。
+
+
+### Android 常规垃圾清理流程
+
+`CleanUpActivity` 的清理按钮进入新增 `JunkCleaningActivity`，使用 `res/raw/robot_cleaning_orange.json`（与本目录吸尘器动画一致）。后台执行实际删除，展示真实释放空间，进度从 0 平滑递增至 100，并在满格停留 300ms 后跳转；至少展示一轮约 4 秒动画，耗时任务继续等待，成功后打开原有 `DeleteSuccessActivity`。全部失败或进程恢复时缺少会话则返回扫描，不展示成功结果。任务由 ViewModel 持有，配置变化不会重复删除；动画随页面前后台暂停、恢复。扫描没有垃圾时跳过结果页与动画页，直接打开 `DeleteSuccessActivity`。首次引导的 `FirstJunkCleaningActivity` 仍使用原有资源。

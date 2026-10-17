@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    android:background="@drawable/onboarding_bg_orange_sheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/onboarding_bg_permission_sheet"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent">
     <androidx.core.widget.NestedScrollView
         android:fillViewport="false"
         android:layout_height="wrap_content"
@@ -14,56 +14,124 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="24dp"
+            android:paddingBottom="28dp"
             android:paddingEnd="24dp"
             android:paddingStart="24dp"
-            android:paddingTop="28dp">
+            android:paddingTop="11dp">
+            <View
+                android:background="@drawable/onboarding_bg_permission_handle"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="4dp"
+                android:layout_width="34dp" />
             <ImageView
-                android:background="@drawable/onboarding_bg_detail_icon"
                 android:contentDescription="@null"
-                android:layout_height="48dp"
-                android:layout_width="48dp"
-                android:padding="10dp"
-                android:src="@drawable/icon_notification" />
+                android:importantForAccessibility="no"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="180dp"
+                android:layout_marginBottom="22dp"
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/onboarding_image_permission_notification" />
             <TextView
+                style="@style/OnboardingCompleteHeading"
                 android:id="@+id/notificationAccessTitle"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:letterSpacing="-0.032"
+                android:text="@string/string_onboarding_first_notification_access_title"
+                android:textColor="@color/color_FF252A30"
+                android:textSize="28sp" />
+            <LinearLayout
+                android:background="@drawable/onboarding_bg_permission_explanation"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
                 android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
-                android:text="@string/string_onboarding_first_notification_access_title"
-                style="@style/OnboardingSheetTitle" />
-            <TextView
-                android:id="@+id/notificationAccessDescription"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <ImageView
+                    android:background="@drawable/onboarding_bg_complete_icon"
+                    android:contentDescription="@null"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_width="36dp"
+                    android:padding="7dp"
+                    android:src="@drawable/onboarding_ic_detail_screen" />
+                <TextView
+                    style="@style/OnboardingCompleteText"
+                    android:id="@+id/notificationAccessDescription"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="@string/string_onboarding_first_notification_access_description"
+                    android:textColor="@color/color_FF67717B"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <FrameLayout
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/string_onboarding_first_notification_access_description"
-                android:textSize="14sp"
-                style="@style/OnboardingBody" />
-            <TextView
-                android:background="@drawable/onboarding_bg_detail_action"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:id="@+id/grantAccessButton"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_width="match_parent"
-                android:minHeight="54dp"
-                android:padding="12dp"
-                android:text="@string/string_onboarding_first_notification_access_grant"
-                style="@style/OnboardingActionText" />
+                android:layout_width="match_parent">
+                <TextView
+                    style="@style/OnboardingCompleteHeading"
+                    android:background="@drawable/onboarding_bg_permission_action"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:id="@+id/grantAccessButton"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:minHeight="54dp"
+                    android:padding="12dp"
+                    android:text="@string/string_onboarding_first_notification_access_grant"
+                    android:textColor="@android:color/transparent"
+                    android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:importantForAccessibility="noHideDescendants">
+                    <TextView
+                        style="@style/OnboardingCompleteHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/string_onboarding_first_notification_access_grant"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/onboarding_ic_permission_continue"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <ImageView
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/close"
-        android:id="@+id/closeButton"
+    <FrameLayout
         android:layout_gravity="top|end"
         android:layout_height="48dp"
-        android:layout_width="48dp"
-        android:padding="15dp"
-        android:src="@drawable/onboarding_ic_first_notification_access_close"
-        android:tint="@color/color_FF788392" />
+        android:layout_marginEnd="9dp"
+        android:layout_marginTop="9dp"
+        android:layout_width="48dp">
+        <View
+            android:background="@drawable/onboarding_bg_permission_close"
+            android:layout_gravity="center"
+            android:layout_height="36dp"
+            android:layout_width="36dp" />
+        <ImageView
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/close"
+            android:focusable="true"
+            android:id="@+id/closeButton"
+            android:layout_height="48dp"
+            android:layout_width="48dp"
+            android:padding="15dp"
+            android:src="@drawable/onboarding_ic_first_notification_access_close"
+            android:tint="@color/color_FF67717B" />
+    </FrameLayout>
 </FrameLayout>

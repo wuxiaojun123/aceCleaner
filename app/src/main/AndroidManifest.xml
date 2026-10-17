@@ -143,6 +143,11 @@
             android:theme="@style/Theme.AceClean" />
         <activity
             android:screenOrientation="portrait"
+            android:name=".ui.main.JunkCleaningActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AceClean" />
+        <activity
+            android:screenOrientation="portrait"
             android:name=".ui.main.CleanUpActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean" />

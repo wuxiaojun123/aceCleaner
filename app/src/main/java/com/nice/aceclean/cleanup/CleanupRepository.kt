@@ -176,7 +176,11 @@ object CleanupRepository {
         return runCatching { directory.listFiles()?.isEmpty() == true }.getOrDefault(false)
     }
 
-    suspend fun delete(context: Context, candidates: List<CleanupCandidate>): CleanupDeleteResult = withContext(Dispatchers.IO) {
+    suspend fun delete(
+        context: Context,
+        candidates: List<CleanupCandidate>,
+        onProgress: (processed: Int, total: Int, releasedBytes: Long) -> Unit = { _, _, _ -> },
+    ): CleanupDeleteResult = withContext(Dispatchers.IO) {
         var deleted = 0
         var failed = 0
         var released = 0L
@@ -201,6 +205,7 @@ object CleanupRepository {
             } else {
                 failed++
             }
+            onProgress(deleted + failed, candidates.size, released)
         }
         CleanupDeleteResult(deleted, failed, released)
     }

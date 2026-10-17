@@ -8,7 +8,7 @@ function Motion({name,playing=true,loop=true}){
         const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
         (async()=>{
             skottieReady ||= CanvasKitInit({locateFile:()=> 'vendor/canvaskit.wasm'});
-            const [ck,json]=await Promise.all([skottieReady,fetch('animations/'+name+'.json').then(r=>{if(!r.ok)throw Error('Animation missing');return r.text()})]);
+            const [ck,json]=await Promise.all([skottieReady,fetch('animations/'+name+'.json?v=vacuum-2').then(r=>{if(!r.ok)throw Error('Animation missing');return r.text()})]);
             if(disposed)return;
             surface=ck.MakeCanvasSurface(canvasRef.current);if(!surface)throw Error('Canvas unavailable');
             animation=ck.MakeManagedAnimation(json,{});if(!animation)throw Error('Invalid Lottie');
@@ -23,7 +23,7 @@ function Motion({name,playing=true,loop=true}){
         })().catch(e=>{if(!disposed){setError('Animation unavailable');(window.prototypeErrors||=[]).push(String(e))}});
         return()=>{disposed=true;cancelAnimationFrame(raf);animation?.delete();surface?.delete()};
     },[name,playing,loop]);
-    return <div className="motion" role="img" aria-label={name.replaceAll('-',' ')+' animation'}><canvas ref={canvasRef} width="640" height="640"></canvas>{error&&<span className="motion-error">{error}</span>}</div>
+    return <div className="motion" data-motion-name={name} role="img" aria-label={name.replaceAll('-',' ')+' animation'}><canvas ref={canvasRef} width="640" height="640"></canvas>{error&&<span className="motion-error">{error}</span>}</div>
 }
 function Header({title,skip,onBack}){return <header className="phone-header"><div className="header-left">{onBack&&<button className="back" onClick={onBack} aria-label="Back">‹</button>}<h1>{title}</h1></div>{skip&&<button className="text-button" onClick={skip}>Skip</button>}</header>}
 function Primary({children,onClick,broom=false}){return <div className="cta-wrap"><button className="primary" onClick={onClick}>{broom&&<img src="assets/onboarding_ic_detail_broom.svg" alt=""/>}{children}</button></div>}
@@ -49,7 +49,7 @@ function DeviceDetail({onContinue,onSkip}){return <section className="dd-page dd
     <div className="dd-footer"><button className="dd-clean" onClick={onContinue}><img src="assets/onboarding_ic_detail_broom.svg" alt=""/><span>Clean Junk Files</span></button></div>
 </section>}
 
-function Scan({title,message,motion,progress,items,cleaned,playing}){return <><Header title={title}/><div className="scan-content"><Motion name={motion} playing={playing} loop={true}/>{cleaned!==undefined&&<div className="scan-value">{formatBytes(cleaned)}</div>}<div className="scan-number">{Math.floor(progress)}<span style={{fontSize:27}}>%</span></div><p className="scan-caption">{message}</p>{items!==undefined&&<p className="count">Items: {Math.floor(items)}</p>}</div><div className="scan-footer"><div className="track"><div style={{width:progress+'%'}}></div></div></div></>}
+function Scan({title,message,motion,progress,items,cleaned,playing}){return <><Header title={title}/><div className={"scan-content"+(cleaned!==undefined?" robot-cleaning-content":"")}><Motion name={motion} playing={playing} loop={true}/>{cleaned!==undefined&&<div className="scan-value">{formatBytes(cleaned)}</div>}<div className="scan-number">{Math.floor(progress)}<span style={{fontSize:27}}>%</span></div><p className="scan-caption">{message}</p>{items!==undefined&&<p className="count">Items: {Math.floor(items)}</p>}</div><div className="scan-footer"><div className="track"><div style={{width:progress+'%'}}></div></div></div></>}
 function Check({checked,onClick,label}){return <button className="check-button" role="checkbox" aria-checked={checked} aria-label={label} onClick={onClick}><span className={'check-circle '+(checked?'checked':'')}>{checked?'✓':''}</span></button>}
 function JunkResults({groups,setGroups,total,onClean}){
     const toggleGroup=i=>setGroups(groups.map((g,j)=>j===i?{...g,items:g.items.map(x=>({...x,selected:!g.items.every(x=>x.selected)}))}:g));

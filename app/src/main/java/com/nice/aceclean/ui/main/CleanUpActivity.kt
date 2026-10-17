@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -32,6 +33,15 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
     private val selected = CleanupCategory.entries.toMutableSet()
     private var scanJob: Job? = null
     private var progressJob: Job? = null
+    private var isDeleting = false
+    private val cleaningLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        isDeleting = false
+        // 成功时关闭旧扫描页，避免后台重扫为空后再次打开一个成功页。
+        when (it.resultCode) {
+            RESULT_OK -> finish()
+            JunkCleaningActivity.RESULT_RESCAN -> startScan()
+        }
+    }
 
     private val storagePermission = AllFilesAccessPermissionHelper(
         activity = this,
@@ -87,13 +97,18 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
     }
 
     private fun showCleanResult() {
+        if (viewModel.scanResult?.candidates?.isEmpty() == true) {
+            DeleteSuccessActivity.show(this, removedCount = 0, freedBytes = 0L, allowEmptyResult = true)
+            finish()
+            return
+        }
         resultBinding = setActivityContent(FragmentCleanResultBinding.inflate(layoutInflater), R.layout.fragment_clean_result)
         selected.clear()
         selected.addAll(CleanupCategory.entries)
         resultBinding.cleanResultBack.setTrackedClickListener(EventUtils.CLICK_CLEANUP_BACK) { finish() }
         categoryViews().forEach { (category, row, check, size) -> bindCategory(row, size, check, category) }
         resultBinding.cleanupMoreRow.setTrackedClickListener(EventUtils.CLICK_CLEANUP_MORE) { openBigFileCleaner() }
-        resultBinding.removeButton.setTrackedClickListener(EventUtils.CLICK_CLEANUP_REMOVE) { confirmDelete() }
+        resultBinding.removeButton.setTrackedClickListener(EventUtils.CLICK_CLEANUP_REMOVE) { deleteSelected() }
         resultBinding.cleanupRescan.setTrackedClickListener(EventUtils.CLICK_CLEANUP_RESCAN) { startScan() }
         resultBinding.cleanupFindLargeFiles.setTrackedClickListener(EventUtils.CLICK_CLEANUP_LARGE_FILES) { openBigFileCleaner() }
         resultBinding.cleanupSystemCache.apply {
@@ -149,35 +164,16 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
         )
     }
 
-    private fun confirmDelete() {
-        val candidates = viewModel.scanResult?.candidates?.filter { it.category in selected }.orEmpty()
+    private fun deleteSelected() {
+        if (isDeleting) return
+        val selectedCategories = selected.toSet()
+        val candidates = viewModel.scanResult?.candidates?.filter { it.category in selectedCategories }.orEmpty()
         if (candidates.isEmpty()) {
             Toast.makeText(this, R.string.no_junk, Toast.LENGTH_SHORT).show()
             return
         }
-        IosActionSheetDialog.show(
-            activity = this,
-            title = getString(R.string.clean_confirm_title),
-            message = getString(
-                R.string.clean_confirm_message,
-                candidates.size,
-                DeviceStats.formatBytes(this, candidates.sumOf { it.sizeBytes }),
-            ),
-            cancelEventName = EventUtils.CLICK_CLEANUP_CANCEL_DELETE,
-            actions = listOf(IosActionSheetDialog.Action(getString(R.string.clean), eventName = EventUtils.CLICK_CLEANUP_CONFIRM_DELETE, onClick = ::deleteSelected)),
-        )
-    }
-
-    private fun deleteSelected() {
-        lifecycleScope.launch {
-            val result = viewModel.delete(selected)
-            DeleteSuccessActivity.show(
-                context = this@CleanUpActivity,
-                removedCount = result.deletedCount,
-                freedBytes = result.releasedBytes,
-            )
-            if (result.deletedCount == 0) render()
-        }
+        isDeleting = true
+        cleaningLauncher.launch(JunkCleaningActivity.createIntent(this, candidates))
     }
 
     private fun openSystemCacheCleaner() {

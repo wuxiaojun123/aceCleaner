@@ -10,6 +10,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.format.Formatter
 import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -71,17 +72,31 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     private fun renderResult() {
         if (intent.getBooleanExtra(EXTRA_FROM_BATTERY, false)) {
             binding.titleView.setText(R.string.string_onboarding_battery_check_title)
-            binding.resultTitle.setText(R.string.string_onboarding_battery_check_title)
-            binding.resultMessage.setText(R.string.string_onboarding_first_junk_complete_battery_status_good)
+            binding.completionStatusLabel.setText(R.string.string_onboarding_complete_check_status)
+            binding.resultTitle.setText(R.string.string_onboarding_complete_battery_title)
+            val message = getString(R.string.string_onboarding_complete_battery_result)
+            binding.resultMessage.text = SpannableString(message).apply {
+                val end = message.indexOf('\n').takeIf { it >= 0 } ?: message.length
+                setSpan(RelativeSizeSpan(35f / 12f), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(StyleSpan(Typeface.BOLD), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FFAD431B)), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
             return
         }
         val size = Formatter.formatShortFileSize(this, intent.getLongExtra(EXTRA_CLEANED_BYTES, 0L))
-        val message = getString(R.string.string_onboarding_first_junk_complete_description, size)
+        val message = getString(R.string.string_onboarding_complete_result, size)
         binding.resultMessage.text = SpannableString(message).apply {
             val index = message.indexOf(size)
             if (index >= 0) {
+                val numberEnd = size.indexOfLast(Char::isDigit) + 1
+                setSpan(RelativeSizeSpan(25f / 12f), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 setSpan(StyleSpan(Typeface.BOLD), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FFFF6B2C)), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FFAE4218)), index, index + size.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (numberEnd > 0) {
+                    // The number also inherits the 25sp unit span; keep both responsive to font scale.
+                    setSpan(RelativeSizeSpan(72f / 25f), index, index + numberEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(ForegroundColorSpan(ContextCompat.getColor(this@FirstJunkCompleteActivity, R.color.color_FF252A30)), index, index + numberEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
             }
         }
     }
@@ -109,7 +124,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     private fun openFeature(destination: Class<out Activity>) {
         notificationPrompt?.cancel()
         OnboardingState.set(this, OnboardingStep.COMPLETED)
-        navigateTo(destination)
+        navigateToFeatureWithHome(destination)
     }
 
     override fun onGuideBackPressed() = leaveComplete()

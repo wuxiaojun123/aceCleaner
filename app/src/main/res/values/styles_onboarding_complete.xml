@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="OnboardingCompleteText">
+        <item name="android:fontFamily">sans-serif</item><item name="android:textColor">@color/color_FF252A30</item><item name="android:textSize">13sp</item><item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="OnboardingCompleteHeading" parent="OnboardingCompleteText"><item name="android:fontFamily">sans-serif-medium</item><item name="android:textFontWeight" tools:targetApi="28">650</item></style>
+</resources>

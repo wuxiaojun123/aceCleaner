@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/color_FFFAF9F7"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/titleView"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:minHeight="48dp"
+        android:text="@string/clean_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/OnboardingPageTitle" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminate="false"
+        android:layout_height="6dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_width="0dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/onboarding_progress_detail_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/progressBarStyleHorizontal" />
+    <androidx.core.widget.NestedScrollView
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleView">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="24dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp">
+            <TextView
+                android:gravity="center"
+                android:id="@+id/cleanedSize"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:text="@string/zero_bytes"
+                style="@style/OnboardingScanAmount" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:contentDescription="@null"
+                android:id="@+id/cleanAnimation"
+                android:importantForAccessibility="no"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="286dp"
+                android:layout_width="286dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/robot_cleaning_orange" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/progressView"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_width="match_parent"
+                android:text="@string/zero_percentage"
+                style="@style/OnboardingScanPercent" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/messageView"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_width="match_parent"
+                android:text="@string/string_onboarding_first_junk_cleaning"
+                style="@style/OnboardingBody" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
