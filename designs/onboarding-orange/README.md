@@ -64,3 +64,14 @@ python3 -m http.server 4311 --bind 127.0.0.1 --directory designs
 统一入口仍为 `index.html?auto=0#splash`。左侧「网络测速」或首页底部 Network Test 可进入；直达 `index.html?auto=0#networkTest`。手机端通过「预览导航」进入。
 
 页面通过本目录 `network-test.html` 加载，共用原型的手机外框和导航，不依赖 `../network-speed/`。进入后自动模拟延迟、下载和上传，结束可重测，返回回到首页。右侧可切换待测、下载、上传、完成、失败、断网状态。仅为设计演示，未修改 Android 代码。
+
+
+## Pixel 8 画布基准
+
+桌面预览的内容画布统一为 412 × 915 CSS px（浏览器缩放 100%），手机边框额外占 7px，不再从内容宽度扣除。移除桌面随窗口高度切换的 376 × 830 内容画布及 0.896 / 0.792 缩放规则对最终尺寸的影响。小窗口通过页面滚动查看完整稿。
+
+参考 Pixel 8 1080 × 2400 的物理屏幕与常用 412 × 915 逻辑视口；物理像素不能直接作为 Android dp 布局尺寸。桌面原型顶部 28px、底部 24px 仅为系统栏参考 inset；真实可用空间取决于 Android 版本、导航方式、显示大小和字号，连接设备后应读取 WindowInsets 再核对。手机浏览器打开时仍按实际窗口自适应，不把其他设备声称为 Pixel 8。
+
+CPU / Screen 字号与最新原生 XML 同步：标题 15、标签和型号 13、主要数值 24、分辨率 20；分组间距 18、标签与数值间距 7。原型允许内容区滚动，底部按钮保持固定。
+
+来源：https://store.google.com/us/product/pixel_8_specs 与 https://www.webmobilefirst.com/en/devices/google-pixel-8-2024/ 。本次按用户要求仅作尺寸/代码静态调整，未运行设备或模拟器测试。

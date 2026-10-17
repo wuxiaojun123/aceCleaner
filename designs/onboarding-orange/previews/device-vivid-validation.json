@@ -1,0 +1,16 @@
+{
+  "accent": "#FF6B2C",
+  "heroAndButtonMatch": true,
+  "illustrationLoaded": true,
+  "runtimeErrors": [],
+  "390x844": {
+    "horizontalOverflow": false,
+    "allParametersFit": true
+  },
+  "320x700": {
+    "horizontalOverflow": false,
+    "contentScrolls": true,
+    "ctaVisible": true
+  },
+  "cleanAction": "Existing storage permission sheet opened"
+}

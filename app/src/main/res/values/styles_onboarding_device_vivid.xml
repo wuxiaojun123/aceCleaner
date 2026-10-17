@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="DeviceVividLabel" parent="DeviceDetailLabel">
+        <item name="android:textColor">@color/color_FF616975</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="DeviceVividTitle" parent="DeviceDetailTitle">
+        <item name="android:textFontWeight" tools:targetApi="28">600</item>
+        <item name="android:textColor">@color/color_FF252A30</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="DeviceVividValue" parent="DeviceVividTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="DeviceVividPercent" parent="DeviceVividValue">
+        <item name="android:textFontWeight" tools:targetApi="28">650</item>
+        <item name="android:textSize">43sp</item>
+        <item name="android:letterSpacing">-0.04</item>
+    </style>
+</resources>

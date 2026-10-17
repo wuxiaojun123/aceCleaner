@@ -21,6 +21,8 @@ extensions.configure<ActivityGuardExtension>("actGuard") {
     isEnable = true
     whiteClassList = hashSetOf(
         "com.activityGuard.model.Bean",
+        // Page event names use Activity.simpleName; preserve them before R8 runs.
+        "com.nice.aceclean.*Activity",
         "com.airbnb.*",
         "com.applovin.*",
         "com.artifex.*",

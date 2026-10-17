@@ -22,3 +22,6 @@
 
 # javax.annotation.Nullable is a compile-time-only annotation referenced by a dependency.
 -dontwarn javax.annotation.Nullable
+
+# Page event names use Activity.simpleName (show_MainActivity, etc.).
+-keepnames class com.nice.aceclean.** extends android.app.Activity

@@ -14,7 +14,7 @@ import com.nice.aceclean.databinding.OnboardingActivityBatteryInfoBinding
 import kotlinx.coroutines.launch
 
 /** Battery detail used by the first-run flow; the main feature keeps its own Activity. */
-class BatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatteryInfoBinding>(
+class FirstBatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatteryInfoBinding>(
     { OnboardingActivityBatteryInfoBinding.inflate(it) }, R.layout.onboarding_activity_battery_info,
 ) {
     internal override val onboardingStep = OnboardingStep.BATTERY_DETAIL

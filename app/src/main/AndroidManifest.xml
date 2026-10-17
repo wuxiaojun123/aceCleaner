@@ -93,7 +93,7 @@
             android:theme="@style/Theme.AceClean.Onboarding" />
         <activity
             android:screenOrientation="portrait"
-            android:name=".ui.onboarding.BatteryInfoActivity"
+            android:name=".ui.onboarding.FirstBatteryInfoActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean.Onboarding" />
         <activity

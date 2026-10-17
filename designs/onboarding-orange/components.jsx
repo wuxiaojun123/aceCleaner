@@ -30,14 +30,25 @@ function Primary({children,onClick,broom=false}){return <div className="cta-wrap
 function Metric({icon,label,percent,left,right}){return <section className="card metric"><div className="metric-top"><Icon name={icon}/><span>{label}</span><strong>{percent}%</strong></div><div className="track"><div style={{width:percent+'%'}}></div></div><div className="metric-foot"><span>{left}</span><span>{right}</span></div></section>}
 function Specs({title,icon,children}){return <section className="card spec"><div className="metric-top"><Icon name={icon}/><span>{title}</span></div>{children}</section>}
 function SpecRow({label,value}){return <div className="spec-row"><span>{label}</span><span>{value}</span></div>}
-function DeviceDetail({onContinue,onSkip}){return <><Header title="Smart AI Cleaner" skip={onSkip}/><div className="scroll-content">
-    <section className="card identity"><div><Icon name="phone" size="large"/><strong>MOTOROLA</strong><small>moto e20</small></div><div><Icon name="android" size="large"/><strong>Android 11</strong><small>REL</small></div></section>
-    <Metric icon="ram" label="RAM" percent={63} left="Used: 1.2 GB" right="Total: 1.9 GB"/>
-    <Metric icon="storage" label="Storage" percent={36} left="Used: 9.0 GB" right="Total: 25 GB"/>
-    <Metric icon="battery" label="Battery" percent={99} left="Status: Charging"/>
-    <Specs title="CPU" icon="cpu"><SpecRow label="CPU Model" value="ums9230_4h10_go"/><SpecRow label="CPU Frequency" value="1612 MHz"/><SpecRow label="CPU Cores" value="8"/></Specs>
-    <Specs title="Screen" icon="screen"><SpecRow label="Screen resolution" value="720 × 1600"/><SpecRow label="Screen DPI" value="280 DPI"/><SpecRow label="Screen refresh rate" value="60 Hz"/></Specs>
-    </div><Primary broom onClick={onContinue}>Clean Junk Files</Primary></>}
+// Taste redesign: existing React/CSS, original device values and callbacks preserved.
+function DeviceDetail({onContinue,onSkip}){return <section className="dd-page dd-vivid" aria-label="Device overview">
+    <Header title="Smart AI Cleaner" skip={onSkip}/>
+    <div className="dd-scroll">
+        <section className="dd-device" aria-label="Device and operating system">
+            <div className="dd-device-copy"><p className="dd-brand">MOTOROLA</p><h2><span>moto</span><span>e20</span></h2><div className="dd-os"><img src="assets/onboarding_ic_detail_android.svg" alt=""/><span>Android 11</span><span className="dd-build">REL</span></div></div>
+            <div className="dd-device-symbol"><img src="assets/device-phone-orange-3d.png" alt=""/></div>
+        </section>
+        <section className="dd-resources" aria-label="Resource usage">
+            <article className="dd-resource"><div className="dd-label"><img src="assets/onboarding_ic_detail_chip.svg" alt=""/><h3>RAM</h3></div><p className="dd-percent">63<span>%</span></p><div className="dd-meter" role="meter" aria-label="RAM used" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100"><span className="dd-fill-ram"></span></div><p className="dd-capacity"><strong>1.2 GB</strong><span>of 1.9 GB used</span></p></article>
+            <article className="dd-resource"><div className="dd-label"><img src="assets/onboarding_ic_detail_storage.svg" alt=""/><h3>Storage</h3></div><p className="dd-percent">36<span>%</span></p><div className="dd-meter" role="meter" aria-label="Storage used" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"><span className="dd-fill-storage"></span></div><p className="dd-capacity"><strong>9.0 GB</strong><span>of 25 GB used</span></p></article>
+        </section>
+        <section className="dd-battery" aria-label="Battery status"><div className="dd-battery-label"><img src="assets/onboarding_ic_detail_battery.svg" alt=""/><div><h3>Battery</h3><p>Charging</p></div></div><p className="dd-battery-value">99<span>%</span></p></section>
+        <div className="dd-hardware-grid"><section className="dd-hardware" aria-labelledby="dd-cpu-heading"><div className="dd-section-heading"><img src="assets/onboarding_ic_detail_chip.svg" alt=""/><h3 id="dd-cpu-heading">CPU</h3></div><dl className="dd-cpu"><div className="dd-model"><dt>CPU Model</dt><dd>ums9230_4h10_go</dd></div><div><dt>CPU Frequency</dt><dd>1612 <span>MHz</span></dd></div><div><dt>CPU Cores</dt><dd>8</dd></div></dl></section>
+        <section className="dd-hardware dd-screen" aria-labelledby="dd-screen-heading"><div className="dd-section-heading"><img src="assets/onboarding_ic_detail_screen.svg" alt=""/><h3 id="dd-screen-heading">Screen</h3></div><dl className="dd-screen-specs"><div className="dd-resolution"><dt>Screen resolution</dt><dd>720 × 1600</dd></div><div><dt>Screen DPI</dt><dd>280 <span>DPI</span></dd></div><div><dt>Screen refresh rate</dt><dd>60 <span>Hz</span></dd></div></dl></section></div>
+    </div>
+    <div className="dd-footer"><button className="dd-clean" onClick={onContinue}><img src="assets/onboarding_ic_detail_broom.svg" alt=""/><span>Clean Junk Files</span></button></div>
+</section>}
+
 function Scan({title,message,motion,progress,items,cleaned,playing}){return <><Header title={title}/><div className="scan-content"><Motion name={motion} playing={playing} loop={true}/>{cleaned!==undefined&&<div className="scan-value">{formatBytes(cleaned)}</div>}<div className="scan-number">{Math.floor(progress)}<span style={{fontSize:27}}>%</span></div><p className="scan-caption">{message}</p>{items!==undefined&&<p className="count">Items: {Math.floor(items)}</p>}</div><div className="scan-footer"><div className="track"><div style={{width:progress+'%'}}></div></div></div></>}
 function Check({checked,onClick,label}){return <button className="check-button" role="checkbox" aria-checked={checked} aria-label={label} onClick={onClick}><span className={'check-circle '+(checked?'checked':'')}>{checked?'✓':''}</span></button>}
 function JunkResults({groups,setGroups,total,onClean}){

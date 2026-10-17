@@ -22,7 +22,7 @@ class BatteryInfoScanActivity : BaseOnboardingActivity<OnboardingActivityBattery
             stopProgress()
             renderProgress(100)
             awaitResumed()
-            navigateTo(BatteryInfoActivity::class.java)
+            navigateTo(FirstBatteryInfoActivity::class.java)
         }
     }
 

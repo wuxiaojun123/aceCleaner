@@ -1,0 +1,21 @@
+{
+  "ctaContrast": 5.31,
+  "runtimeErrors": [],
+  "viewports": {
+    "390x844": {
+      "horizontalOverflow": false,
+      "contentFits": true,
+      "ctaSingleLine": true
+    },
+    "320x700": {
+      "horizontalOverflow": false,
+      "contentScrolls": true,
+      "ctaVisible": true
+    }
+  },
+  "actions": [
+    "Clean Junk Files -> storage permission",
+    "Skip -> interstitial -> home"
+  ],
+  "data": "original prototype values preserved"
+}

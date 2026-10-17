@@ -4,347 +4,421 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_FFFAF9F7"
+    android:background="@color/color_FFF7F8F8"
     tools:context=".ui.onboarding.DeviceStatusDetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:id="@+id/titleView"
+                style="@style/DeviceVividTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/skipButton"
+                style="@style/DeviceVividTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:text="@string/string_onboarding_overlay_permission_skip"
+                android:textSize="13sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/contentScroll"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
             android:fillViewport="true"
             android:overScrollMode="never"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toTopOf="@id/continueButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingTop="3dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="12dp">
+                android:paddingStart="18dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="16dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:minHeight="48dp">
+                    android:background="@drawable/onboarding_bg_device_vivid_hero"
+                    android:clipChildren="false"
+                    android:clipToOutline="true"
+                    android:minHeight="214dp">
 
-                    <TextView
-                        android:id="@+id/titleView"
-                        style="@style/DeviceDetailTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/app_name"
-                        android:textSize="21sp" />
-
-                    <TextView
-                        android:id="@+id/skipButton"
-                        style="@style/DeviceDetailTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:gravity="center"
-                        android:minWidth="48dp"
-                        android:minHeight="48dp"
-                        android:text="@string/string_onboarding_overlay_permission_skip"
-                        android:textColor="@color/color_FFFF6B2C"
-                        android:textSize="16sp"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/deviceCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingTop="14dp"
-                    android:paddingBottom="14dp">
+                    <com.nice.aceclean.ui.widget.DeviceDetailPhoneView
+                        android:layout_width="205dp"
+                        android:layout_height="307.5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="-25dp"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/onboarding_image_device_phone_orange"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_wrapBehaviorInParent="skipped" />
 
                     <LinearLayout
-                        android:id="@+id/manufacturerGroup"
+                        android:id="@+id/deviceCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="214dp"
+                        android:orientation="vertical"
+                        android:paddingStart="22dp"
+                        android:paddingTop="21dp"
+                        android:paddingEnd="130dp"
+                        android:paddingBottom="29dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/manufacturerGroup"
+                            android:layout_width="132dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/deviceName"
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:letterSpacing="0.14"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                tools:text="MOTOROLA" />
+
+                            <TextView
+                                android:id="@+id/deviceModel"
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:letterSpacing="-0.04"
+                                android:maxLines="2"
+                                android:textColor="@color/white"
+                                android:textFontWeight="650"
+                                android:textSize="42dp"
+                                app:autoSizeMaxTextSize="48sp"
+                                app:autoSizeMinTextSize="22sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:targetApi="28"
+                                tools:text="moto&#10;e20" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/androidGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/androidVersion"
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="132dp"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                tools:text="Android 11" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="12dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:alpha="0.4"
+                                android:background="@color/white" />
+
+                            <TextView
+                                android:id="@+id/androidRelease"
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="44dp"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                tools:text="REL" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="-19dp"
+                    android:layout_marginEnd="9dp"
+                    android:background="@drawable/onboarding_bg_device_vivid_surface"
+                    android:baselineAligned="false"
+                    android:elevation="4dp"
+                    android:orientation="horizontal"
+                    android:outlineAmbientShadowColor="@color/color_FF252A30"
+                    android:outlineSpotShadowColor="@color/color_FF252A30"
+                    android:paddingStart="18dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="15dp"
+                    tools:targetApi="28">
+
+                    <LinearLayout
+                        android:id="@+id/ramCard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp">
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="76dp"
-                            android:layout_height="76dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="12dp"
-                            android:src="@drawable/onboarding_ic_detail_phone" />
-
-                        <TextView
-                            android:id="@+id/deviceName"
-                            style="@style/DeviceDetailTitle"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center"
-                            android:textSize="17sp"
-                            tools:text="HONOR" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ramIcon"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/onboarding_ic_detail_chip" />
+
+                            <TextView
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:layout_weight="1"
+                                android:text="@string/ram"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/deviceModel"
-                            style="@style/DeviceDetailLabel"
+                            android:id="@+id/ramPercent"
+                            style="@style/DeviceVividPercent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFeatureSettings="tnum"
+                            android:maxLines="1"
+                            app:autoSizeMaxTextSize="43sp"
+                            app:autoSizeMinTextSize="24sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:autoSizeTextType="uniform"
+                            tools:text="@string/string_device_detail_preview_ram" />
+
+                        <ProgressBar
+                            android:id="@+id/ramProgress"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="11dp"
+                            android:indeterminateOnly="false"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/onboarding_progress_detail_orange"
+                            tools:progress="63" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/ramValue"
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:textSize="13sp"
+                                app:autoSizeMaxTextSize="13sp"
+                                app:autoSizeMinTextSize="11sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="1.2 GB" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:gravity="center"
-                            tools:text="BRP-AN80" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_total"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/ramTotalValue"
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:textSize="10sp"
+                                app:autoSizeMaxTextSize="10sp"
+                                app:autoSizeMinTextSize="9sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="1.9 GB" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="112dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginEnd="17dp"
                         android:background="@color/color_FFE8E9ED" />
 
                     <LinearLayout
-                        android:id="@+id/androidGroup"
+                        android:id="@+id/storageCard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp">
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="76dp"
-                            android:layout_height="76dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="12dp"
-                            android:src="@drawable/onboarding_ic_detail_android" />
-
-                        <TextView
-                            android:id="@+id/androidVersion"
-                            style="@style/DeviceDetailTitle"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center"
-                            android:textSize="17sp"
-                            tools:text="Android 15" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/androidRelease"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"
-                            tools:text="REL" />
-                    </LinearLayout>
-                </LinearLayout>
+                            <ImageView
+                                android:id="@+id/storageIcon"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/onboarding_ic_detail_storage" />
 
-                <LinearLayout
-                    android:id="@+id/ramCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:orientation="vertical"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/ramIcon"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="6dp"
-                            android:src="@drawable/onboarding_ic_detail_chip" />
-
-                        <TextView
-                            style="@style/DeviceDetailTitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/ram" />
-
-                        <TextView
-                            android:id="@+id/ramPercent"
-                            style="@style/DeviceDetailPercent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="62%" />
-                    </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/ramProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="6dp"
-                        android:indeterminateOnly="false"
-                        android:max="100"
-                        android:progress="0"
-                        android:progressDrawable="@drawable/onboarding_progress_detail_orange"
-                        tools:progress="62" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/string_onboarding_device_status_used" />
-
-                        <TextView
-                            android:id="@+id/ramValue"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            tools:text="7.48GB" />
-
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/string_onboarding_device_status_total" />
-
-                        <TextView
-                            android:id="@+id/ramTotalValue"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            tools:text="12.01GB" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/storageCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:orientation="vertical"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/storageIcon"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="6dp"
-                            android:src="@drawable/onboarding_ic_detail_storage" />
-
-                        <TextView
-                            style="@style/DeviceDetailTitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/storage" />
+                            <TextView
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:layout_weight="1"
+                                android:text="@string/storage"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/storagePercent"
-                            style="@style/DeviceDetailPercent"
-                            android:layout_width="wrap_content"
+                            style="@style/DeviceVividPercent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            tools:text="12%" />
-                    </LinearLayout>
+                            android:layout_marginTop="10dp"
+                            android:fontFeatureSettings="tnum"
+                            android:maxLines="1"
+                            app:autoSizeMaxTextSize="43sp"
+                            app:autoSizeMinTextSize="24sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:autoSizeTextType="uniform"
+                            tools:text="@string/string_device_detail_preview_storage" />
 
-                    <ProgressBar
-                        android:id="@+id/storageProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="6dp"
-                        android:indeterminateOnly="false"
-                        android:max="100"
-                        android:progress="0"
-                        android:progressDrawable="@drawable/onboarding_progress_detail_orange"
-                        tools:progress="12" />
+                        <ProgressBar
+                            android:id="@+id/storageProgress"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="11dp"
+                            android:indeterminateOnly="false"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/onboarding_progress_detail_orange"
+                            tools:progress="36" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/string_onboarding_device_status_used" />
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/storageValue"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/storageValue"
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:textSize="13sp"
+                                app:autoSizeMaxTextSize="13sp"
+                                app:autoSizeMinTextSize="11sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="9.0 GB" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            tools:text="480MB" />
+                            android:layout_marginTop="3dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_weight="1" />
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_total"
+                                android:textSize="10sp" />
 
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/string_onboarding_device_status_total" />
-
-                        <TextView
-                            android:id="@+id/storageTotalValue"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            tools:text="4GB" />
+                            <TextView
+                                android:id="@+id/storageTotalValue"
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:textSize="10sp"
+                                app:autoSizeMaxTextSize="10sp"
+                                app:autoSizeMinTextSize="9sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="25 GB" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -352,329 +426,311 @@
                     android:id="@+id/batteryCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:orientation="vertical"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="10dp">
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/onboarding_bg_device_vivid_battery"
+                    android:elevation="1dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="15dp">
+
+                    <ImageView
+                        android:id="@+id/batteryIcon"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/onboarding_ic_detail_battery" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/batteryIcon"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="6dp"
-                            android:src="@drawable/onboarding_ic_detail_battery" />
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            style="@style/DeviceDetailTitle"
-                            android:layout_width="0dp"
+                            style="@style/DeviceVividTitle"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/notification_battery" />
+                            android:text="@string/notification_battery"
+                            android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/batteryPercent"
-                            style="@style/DeviceDetailPercent"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/batteryValue"
+                            style="@style/DeviceVividLabel"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            tools:text="100%" />
+                            android:layout_marginTop="3dp"
+                            android:textSize="10sp"
+                            tools:text="Charging" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/batteryPercent"
+                        style="@style/DeviceVividValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:textSize="27sp"
+                        tools:text="@string/string_device_detail_preview_battery" />
 
                     <ProgressBar
                         android:id="@+id/batteryProgress"
                         style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_width="34dp"
+                        android:layout_height="13dp"
+                        android:layout_marginStart="10dp"
                         android:indeterminateOnly="false"
                         android:max="100"
                         android:progress="0"
-                        android:progressDrawable="@drawable/onboarding_progress_detail_orange"
-                        tools:progress="100" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/string_onboarding_device_status_battery_status" />
-
-                        <TextView
-                            android:id="@+id/batteryValue"
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            tools:text="Full" />
-                    </LinearLayout>
+                        android:progressDrawable="@drawable/onboarding_progress_device_vivid_battery"
+                        tools:progress="99" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/cpuCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:orientation="vertical"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="10dp">
+                    android:layout_marginTop="16dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:id="@+id/cpuCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/onboarding_bg_device_vivid_hardware"
+                        android:orientation="vertical"
+                        android:paddingStart="15dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="16dp">
 
-                        <ImageView
-                            android:id="@+id/cpuIcon"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="6dp"
-                            android:src="@drawable/onboarding_ic_detail_chip" />
-
-                        <TextView
-                            style="@style/DeviceDetailTitle"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/string_onboarding_first_device_cpu" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/cpuIcon"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/onboarding_ic_detail_chip" />
+
+                            <TextView
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:layout_weight="1"
+                                android:text="@string/string_onboarding_first_device_cpu"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/cpuDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_cpu_model"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cpuModelValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFamily="monospace"
+                                android:textFontWeight="500"
+                                android:textSize="13sp"
+                                tools:targetApi="28"
+                                tools:text="ums9230_4h10_go" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_cpu_frequency"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cpuFrequencyValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFeatureSettings="tnum"
+                                android:textSize="24sp"
+                                tools:text="@string/string_device_detail_preview_frequency" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_cpu_cores"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cpuCoresValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFeatureSettings="tnum"
+                                android:textSize="24sp"
+                                tools:text="8" />
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <View
-                        android:id="@+id/cpuDivider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@color/color_FFF1F1F3" />
-
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
+                        android:id="@+id/screenCard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/onboarding_bg_device_vivid_screen"
+                        android:orientation="vertical"
+                        android:paddingStart="15dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="16dp">
 
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/string_onboarding_device_status_cpu_model" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/cpuModelValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
+                            <ImageView
+                                android:id="@+id/screenIcon"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/onboarding_ic_detail_screen" />
+
+                            <TextView
+                                style="@style/DeviceVividTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:layout_weight="1"
+                                android:text="@string/string_onboarding_first_device_screen"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/screenDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="arm64-v8a" />
-                    </LinearLayout>
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/color_FFF1F1F3" />
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/screen_resolution"
+                                android:textSize="13sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
+                            <TextView
+                                android:id="@+id/screenResolutionValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFeatureSettings="tnum"
+                                android:maxLines="1"
+                                android:textSize="20sp"
+                                app:autoSizeMaxTextSize="20sp"
+                                app:autoSizeMinTextSize="16sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="720 × 1600" />
+                        </LinearLayout>
 
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/string_onboarding_device_status_cpu_frequency" />
+                            android:layout_marginTop="18dp"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/cpuFrequencyValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_screen_dpi"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/screenDpiValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFeatureSettings="tnum"
+                                android:textSize="24sp"
+                                tools:text="@string/string_device_detail_preview_dpi" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="1804 MHz" />
-                    </LinearLayout>
+                            android:layout_marginTop="18dp"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/color_FFF1F1F3" />
+                            <TextView
+                                style="@style/DeviceVividLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/string_onboarding_device_status_screen_refresh_rate"
+                                android:textSize="13sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/string_onboarding_device_status_cpu_cores" />
-
-                        <TextView
-                            android:id="@+id/cpuCoresValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="8" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/screenCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/onboarding_bg_device_status_card"
-                    android:orientation="vertical"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/screenIcon"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:background="@drawable/onboarding_bg_detail_icon"
-                            android:contentDescription="@null"
-                            android:padding="6dp"
-                            android:src="@drawable/onboarding_ic_detail_screen" />
-
-                        <TextView
-                            style="@style/DeviceDetailTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/string_onboarding_first_device_screen" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/screenDivider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@color/color_FFF1F1F3" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/screen_resolution" />
-
-                        <TextView
-                            android:id="@+id/screenResolutionValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="1224x2700" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/color_FFF1F1F3" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/string_onboarding_device_status_screen_dpi" />
-
-                        <TextView
-                            android:id="@+id/screenDpiValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="520DPI" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/color_FFF1F1F3" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp">
-
-                        <TextView
-                            style="@style/DeviceDetailLabel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/string_onboarding_device_status_screen_refresh_rate" />
-
-                        <TextView
-                            android:id="@+id/screenRefreshValue"
-                            style="@style/DeviceDetailValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:maxWidth="168dp"
-                            tools:text="60Hz" />
+                            <TextView
+                                android:id="@+id/screenRefreshValue"
+                                style="@style/DeviceVividValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:fontFeatureSettings="tnum"
+                                android:textSize="24sp"
+                                tools:text="@string/string_device_detail_preview_refresh" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -682,45 +738,45 @@
 
         <FrameLayout
             android:id="@+id/continueButton"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/onboarding_bg_detail_action"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/onboarding_bg_device_vivid_action"
             android:clickable="true"
             android:clipToOutline="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:minHeight="52dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:minHeight="54dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minHeight="52dp"
-                android:paddingStart="12dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="10dp">
+                android:minHeight="54dp"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/onboarding_ic_detail_broom" />
+                    android:src="@drawable/onboarding_ic_detail_broom"
+                    app:tint="@color/white" />
 
                 <TextView
-                    style="@style/DeviceDetailTitle"
+                    style="@style/DeviceVividTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/string_onboarding_device_status_clean_junk_files"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <View
@@ -732,5 +788,5 @@
                 android:rotation="-20"
                 android:visibility="gone" />
         </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </FrameLayout>

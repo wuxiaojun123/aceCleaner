@@ -14,7 +14,7 @@ internal object OnboardingNavigator {
         OnboardingStep.DEVICE_SCAN -> DeviceStatusScanActivity::class.java
         OnboardingStep.DEVICE_DETAIL -> DeviceStatusDetailActivity::class.java
         OnboardingStep.BATTERY_SCAN -> BatteryInfoScanActivity::class.java
-        OnboardingStep.BATTERY_DETAIL -> BatteryInfoActivity::class.java
+        OnboardingStep.BATTERY_DETAIL -> FirstBatteryInfoActivity::class.java
         OnboardingStep.BATTERY_CHECK -> BatteryCheckScanActivity::class.java
         OnboardingStep.JUNK_SCAN -> FirstJunkStartScanningActivity::class.java
         OnboardingStep.JUNK_RESULT -> FirstJunkResultActivity::class.java
