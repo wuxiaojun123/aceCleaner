@@ -1,0 +1,98 @@
+const {useState,useEffect,useRef} = React;
+const iconFiles={phone:'detail_phone',android:'detail_android',ram:'detail_chip',cpu:'detail_chip',storage:'detail_storage',battery:'detail_battery',screen:'detail_screen',broom:'detail_broom',thumbnail:'junk_thumbnails',folder:'junk_folder',download:'junk_download'};
+function Icon({name,size=''}){return <span className={'icon-badge '+size}><img alt="" src={'assets/onboarding_ic_'+iconFiles[name]+'.svg'}/></span>}
+let skottieReady;
+function Motion({name,playing=true,loop=true}){
+    const canvasRef=useRef(null);const [error,setError]=useState('');
+    useEffect(()=>{let disposed=false,raf,surface,animation;setError('');
+        const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+        (async()=>{
+            skottieReady ||= CanvasKitInit({locateFile:()=> 'vendor/canvaskit.wasm'});
+            const [ck,json]=await Promise.all([skottieReady,fetch('animations/'+name+'.json').then(r=>{if(!r.ok)throw Error('Animation missing');return r.text()})]);
+            if(disposed)return;
+            surface=ck.MakeCanvasSurface(canvasRef.current);if(!surface)throw Error('Canvas unavailable');
+            animation=ck.MakeManagedAnimation(json,{});if(!animation)throw Error('Invalid Lottie');
+            const data=JSON.parse(json);const start=performance.now();
+            function draw(now){if(disposed)return;const elapsed=(now-start)/1000*data.fr;
+                const frame=(!playing||reduced)?(loop?45:89):(loop?elapsed%data.op:Math.min(elapsed,data.op-1));
+                const canvas=surface.getCanvas();canvas.clear(ck.TRANSPARENT);animation.seekFrame(frame);
+                animation.render(canvas,ck.LTRBRect(0,0,640,640));surface.flush();
+                if(playing&&!reduced&&(loop||frame<data.op-1))raf=requestAnimationFrame(draw);
+            }
+            draw(start);
+        })().catch(e=>{if(!disposed){setError('Animation unavailable');(window.prototypeErrors||=[]).push(String(e))}});
+        return()=>{disposed=true;cancelAnimationFrame(raf);animation?.delete();surface?.delete()};
+    },[name,playing,loop]);
+    return <div className="motion" role="img" aria-label={name.replaceAll('-',' ')+' animation'}><canvas ref={canvasRef} width="640" height="640"></canvas>{error&&<span className="motion-error">{error}</span>}</div>
+}
+function Header({title,skip,onBack}){return <header className="phone-header"><div className="header-left">{onBack&&<button className="back" onClick={onBack} aria-label="Back">‹</button>}<h1>{title}</h1></div>{skip&&<button className="text-button" onClick={skip}>Skip</button>}</header>}
+function Primary({children,onClick,broom=false}){return <div className="cta-wrap"><button className="primary" onClick={onClick}>{broom&&<img src="assets/onboarding_ic_detail_broom.svg" alt=""/>}{children}</button></div>}
+function Metric({icon,label,percent,left,right}){return <section className="card metric"><div className="metric-top"><Icon name={icon}/><span>{label}</span><strong>{percent}%</strong></div><div className="track"><div style={{width:percent+'%'}}></div></div><div className="metric-foot"><span>{left}</span><span>{right}</span></div></section>}
+function Specs({title,icon,children}){return <section className="card spec"><div className="metric-top"><Icon name={icon}/><span>{title}</span></div>{children}</section>}
+function SpecRow({label,value}){return <div className="spec-row"><span>{label}</span><span>{value}</span></div>}
+// Taste redesign: existing React/CSS, original device values and callbacks preserved.
+function DeviceDetail({onContinue,onSkip}){return <section className="dd-page dd-vivid" aria-label="Device overview">
+    <Header title="Smart AI Cleaner" skip={onSkip}/>
+    <div className="dd-scroll">
+        <section className="dd-device" aria-label="Device and operating system">
+            <div className="dd-device-copy"><p className="dd-brand">MOTOROLA</p><h2><span>moto</span><span>e20</span></h2><div className="dd-os"><img src="assets/onboarding_ic_detail_android.svg" alt=""/><span>Android 11</span><span className="dd-build">REL</span></div></div>
+            <div className="dd-device-symbol"><img src="assets/device-phone-orange-3d.png" alt=""/></div>
+        </section>
+        <section className="dd-resources" aria-label="Resource usage">
+            <article className="dd-resource"><div className="dd-label"><img src="assets/onboarding_ic_detail_chip.svg" alt=""/><h3>RAM</h3></div><p className="dd-percent">63<span>%</span></p><div className="dd-meter" role="meter" aria-label="RAM used" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100"><span className="dd-fill-ram"></span></div><p className="dd-capacity"><strong>1.2 GB</strong><span>of 1.9 GB used</span></p></article>
+            <article className="dd-resource"><div className="dd-label"><img src="assets/onboarding_ic_detail_storage.svg" alt=""/><h3>Storage</h3></div><p className="dd-percent">36<span>%</span></p><div className="dd-meter" role="meter" aria-label="Storage used" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"><span className="dd-fill-storage"></span></div><p className="dd-capacity"><strong>9.0 GB</strong><span>of 25 GB used</span></p></article>
+        </section>
+        <section className="dd-battery" aria-label="Battery status"><div className="dd-battery-label"><img src="assets/onboarding_ic_detail_battery.svg" alt=""/><div><h3>Battery</h3><p>Charging</p></div></div><p className="dd-battery-value">99<span>%</span></p></section>
+        <div className="dd-hardware-grid"><section className="dd-hardware" aria-labelledby="dd-cpu-heading"><div className="dd-section-heading"><img src="assets/onboarding_ic_detail_chip.svg" alt=""/><h3 id="dd-cpu-heading">CPU</h3></div><dl className="dd-cpu"><div className="dd-model"><dt>CPU Model</dt><dd>ums9230_4h10_go</dd></div><div><dt>CPU Frequency</dt><dd>1612 <span>MHz</span></dd></div><div><dt>CPU Cores</dt><dd>8</dd></div></dl></section>
+        <section className="dd-hardware dd-screen" aria-labelledby="dd-screen-heading"><div className="dd-section-heading"><img src="assets/onboarding_ic_detail_screen.svg" alt=""/><h3 id="dd-screen-heading">Screen</h3></div><dl className="dd-screen-specs"><div className="dd-resolution"><dt>Screen resolution</dt><dd>720 × 1600</dd></div><div><dt>Screen DPI</dt><dd>280 <span>DPI</span></dd></div><div><dt>Screen refresh rate</dt><dd>60 <span>Hz</span></dd></div></dl></section></div>
+    </div>
+    <div className="dd-footer"><button className="dd-clean" onClick={onContinue}><img src="assets/onboarding_ic_detail_broom.svg" alt=""/><span>Clean Junk Files</span></button></div>
+</section>}
+
+function Scan({title,message,motion,progress,items,cleaned,playing}){return <><Header title={title}/><div className="scan-content"><Motion name={motion} playing={playing} loop={true}/>{cleaned!==undefined&&<div className="scan-value">{formatBytes(cleaned)}</div>}<div className="scan-number">{Math.floor(progress)}<span style={{fontSize:27}}>%</span></div><p className="scan-caption">{message}</p>{items!==undefined&&<p className="count">Items: {Math.floor(items)}</p>}</div><div className="scan-footer"><div className="track"><div style={{width:progress+'%'}}></div></div></div></>}
+function Check({checked,onClick,label}){return <button className="check-button" role="checkbox" aria-checked={checked} aria-label={label} onClick={onClick}><span className={'check-circle '+(checked?'checked':'')}>{checked?'✓':''}</span></button>}
+function JunkResults({groups,setGroups,total,onClean}){
+    const toggleGroup=i=>setGroups(groups.map((g,j)=>j===i?{...g,items:g.items.map(x=>({...x,selected:!g.items.every(x=>x.selected)}))}:g));
+    const toggleItem=(i,k)=>setGroups(groups.map((g,j)=>j===i?{...g,items:g.items.map((x,n)=>n===k?{...x,selected:!x.selected}:x)}:g));
+    return <><Header title="Junk Clean"/><div className="scroll-content"><section className="card result-hero"><Icon name="broom" size="medium"/><h2 aria-live="polite">{formatBytes(total)}</h2><p>Scanning completed—let’s get rid of that clutter!</p></section>
+        {groups.map((g,i)=><section className="card category" key={g.title}><div className="category-top"><button className="category-main" aria-expanded={g.expanded} onClick={()=>setGroups(groups.map((x,j)=>i===j?{...x,expanded:!x.expanded}:x))}><Icon name={g.icon}/><strong>{g.title}</strong><span className="category-size">{formatBytes(g.items.reduce((a,x)=>a+x.bytes,0))}</span><span className="chevron">{g.expanded?'⌃':'⌄'}</span></button><Check checked={g.items.length>0&&g.items.every(x=>x.selected)} onClick={()=>toggleGroup(i)} label={'Select '+g.title}/></div>
+        {g.expanded&&<div className="child-rows">{g.items.map((x,k)=><button className="child-row" key={x.name} aria-pressed={x.selected} onClick={()=>toggleItem(i,k)}><span>{x.name}</span><span className="category-size">{formatBytes(x.bytes)}</span><span className={'check-circle '+(x.selected?'checked':'')}>{x.selected?'✓':''}</span></button>)}</div>}</section>)}
+        </div><Primary onClick={onClean}>{groups.some(g=>g.items.some(x=>x.selected))?'Junk Clean':'Continue'}</Primary></>
+}
+function BatteryInfo({onCheck,playing}){return <><Header title="Battery Info"/><div className="scroll-content"><section className="battery-hero"><Motion name="battery-scan" playing={playing}/><h2>99%</h2><p>Estimated charging time: 8 min</p></section><div className="card battery-status"><Icon name="battery"/><span>Battery status</span><strong>Pending</strong></div><div className="battery-grid"><div className="card battery-tile"><span>Temperature</span><strong>31.2°C</strong></div><div className="card battery-tile"><span>Voltage</span><strong>4,180 mV</strong></div><div className="card battery-tile"><span>Battery type</span><strong>Li-ion</strong></div><div className="card battery-tile"><span>Power</span><strong>4,000 mAh</strong></div></div><p className="social"><Icon name="android"/><span><b>190,992+</b> users checked</span></p></div><Primary onClick={onCheck}>Check Now</Primary></>}
+// Taste: success has one focal point; original callbacks and recommendation order remain.
+function Complete({cleaned,fromBattery,onLeave,onFeature,playing}){
+    const result=formatBytes(cleaned),split=result.lastIndexOf(' ');
+    return <section className="cp-page" data-screen-label="Complete">
+        <Header title={fromBattery?'Battery Check':'Junk Clean'} onBack={onLeave}/>
+        <div className="cp-scroll">
+            <section className="cp-hero" aria-labelledby="cp-heading">
+                <div className="cp-art" aria-hidden="true"><span className="cp-orbit cp-orbit-one"></span><span className="cp-orbit cp-orbit-two"></span><span className="cp-spark cp-spark-one"></span><span className="cp-spark cp-spark-two"></span><Motion name="complete" playing={playing} loop={false}/></div>
+                <p className="cp-status">{fromBattery?'CHECK COMPLETE':'CLEANUP COMPLETE'}</p>
+                <h2 id="cp-heading">{fromBattery?'Looking good!':'Cleaned successfully!'}</h2>
+                {fromBattery?<><p className="cp-health">In good health</p><p className="cp-caption">Your battery is ready for the day.</p></>:<><p className="cp-result" aria-label={result+' of storage cleared'}><strong>{result.slice(0,split)}</strong><span>{result.slice(split+1)}</span></p><p className="cp-caption">of storage cleared. More room for you.</p></>}
+            </section>
+            <section className="cp-tools" aria-labelledby="cp-tools-heading">
+                <div className="cp-section-head"><h3 id="cp-tools-heading">Keep the good going</h3><span>MORE TOOLS</span></div>
+                <button className="cp-featured" onClick={()=>onFeature('RAM 状态')}>
+                    <div className="cp-tool-top"><span className="cp-tool-icon"><Icon name="ram"/></span><span className="cp-popularity"><b>98%</b> Choose</span></div>
+                    <div className="cp-featured-bottom"><div><h3>App Process</h3><p>One-tap close of redundant<br/>background processes.</p></div><span className="cp-arrow" aria-hidden="true">↗</span></div>
+                </button>
+                <div className="cp-tool-list">
+                    <button className="cp-tool-row" onClick={()=>onFeature('通知清理')}><span className="cp-tool-icon"><img src="assets/icon_notification.png" alt=""/></span><div><h3>Notification Blocker</h3><p>Fewer alerts. Fewer interruptions.</p></div><span className="cp-row-end"><small>76% Choose</small><span aria-hidden="true">›</span></span></button>
+                    <button className="cp-tool-row" onClick={()=>onFeature('电池信息')}><span className="cp-tool-icon"><Icon name="battery"/></span><div><h3>Battery Info</h3><p>Get to know your battery better.</p></div><span className="cp-row-end"><small>68% Choose</small><span aria-hidden="true">›</span></span></button>
+                </div>
+            </section>
+            <div className="ad-slot cp-ad">Sponsored · Native ad placement</div>
+        </div>
+    </section>
+}
+function Home({onClean,onNetworkTest}){return <div className="home-page"><h1>Smart AI Cleaner</h1><div className="home-notice"><img src="assets/icon_notification.png" alt=""/><span>Never Miss a Key Tip</span><span className="toggle on"></span></div><p className="home-storage">Storage: 9.0 GB / 25 GB</p><div className="home-gauge"><div>36%</div></div><button className="home-clean" onClick={onClean}>CLEAN UP</button><div className="home-three"><div className="home-tile"><img src="assets/icon_main_network_traffic.png" alt=""/>Network Traffic</div><div className="home-tile"><img src="assets/icon_duplicate_photo_cleaner_blue.png" alt=""/>Duplicate Photo Cleaner</div><div className="home-tile"><img src="assets/icon_app_manager.png" alt=""/>APP Manager</div></div><div className="home-two"><div className="home-tool"><img src="assets/ic_scissors.svg" alt=""/>Screenshot Cleaner</div><div className="home-tool"><img src="assets/icon_large_files_finish.png" alt=""/>Big File Cleaner</div></div><div className="home-tool"><img src="assets/icon_notification.png" alt=""/>Notification Cleaner<span>›</span></div><div className="home-tool"><img src="assets/icon_video_cleaner.png" alt=""/>Video Cleaner<span>›</span></div><div className="home-tool"><img src="assets/ic_ram_status.svg" alt=""/>RAM Status<span>›</span></div><div className="home-tool"><img src="assets/ic_device_scan.svg" alt=""/>Device Scan<span>›</span></div><div className="home-tool"><img src="assets/ic_battery_info.svg" alt=""/>Battery Info<span>›</span></div><button className="home-tool home-network-entry" onClick={onNetworkTest}><img src="assets/ic_network_test.svg" alt=""/>Network Test<span>›</span></button></div>}
+function OverlayGuide({onContinue,onSkip,playing}){return <><Header title="Desktop Quick Clean Dock" skip={onSkip}/><div className="scroll-content"><div className="guide-body"><Motion name="junk-clean" playing={playing}/><h2>Enable Overlay Permission</h2><p>Enjoy faster cleanup to wipe clutter &amp; free up space anywhere.</p><section className="card dock"><span><Icon name="broom"/>Junk Clean</span><span><Icon name="ram"/>RAM</span><span><Icon name="download"/>Network</span></section><p className="guide-caption">Appear on top · Smart AI Cleaner</p></div></div><Primary onClick={onContinue}>Continue</Primary></>}
+function PermissionSheet({type,onClose,onAllow,onDeny}){
+    const storage=type==='storage',notification=type==='notification';
+    return <div className="sheet-overlay"><section className="sheet" role="dialog" aria-modal="true" aria-label={storage?'Permission Request':notification?'Request for access':'Allow display over other apps'}><button className="sheet-close" onClick={onClose} aria-label="Close">×</button><Icon name={storage?'folder':notification?'screen':'phone'} size="medium"/><h2>{storage?'Permission Request':notification?'Request for access':'Allow display over other apps'}</h2><p>{storage?'To use this feature, file storage access is required.':notification?'To manage notifications conveniently with a single tap, access is required.':'Your floating widget cannot stay active. Enable “Display over other apps” permission to restore live RAM & speed tracking.'}</p><button className="primary" onClick={onAllow}>{storage?'Allow':notification?'Grant Access':'Fix Now'}</button>{!storage&&!notification&&<button className="secondary" onClick={onDeny}>Not Now</button>}</section></div>
+}
+function SystemSheet({kind,granted,setGranted,onDone}){return <div className="sheet-overlay"><section className="sheet system-sheet" role="dialog" aria-modal="true" aria-label="Android permission settings"><h2>{kind==='storage'?'All files access':kind==='notification'?'Notification access':'Display over other apps'}</h2><p>Smart AI Cleaner</p><div className="toggle-row"><span>{kind==='storage'?'Allow access to manage all files':kind==='notification'?'Allow notification access':'Allow display over other apps'}</span><button className={'toggle '+(granted?'on':'')} onClick={()=>setGranted(!granted)} role="switch" aria-checked={granted} aria-label="Allow access"></button></div><button className="primary" onClick={onDone}>Done</button></section></div>}
+function formatBytes(bytes){if(bytes===0)return '0 B';if(bytes<1024)return bytes+' B';if(bytes<1048576)return (bytes/1024).toFixed(0)+' kB';if(bytes<1073741824)return (bytes/1048576).toFixed(0)+' MB';return (bytes/1073741824).toFixed(2)+' GB'}
+Object.assign(window,{Icon,Motion,Header,Primary,DeviceDetail,Scan,JunkResults,BatteryInfo,Complete,Home,OverlayGuide,PermissionSheet,SystemSheet,formatBytes});

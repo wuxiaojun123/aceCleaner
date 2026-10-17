@@ -9,20 +9,22 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDeviceReportBinding
 import com.nice.aceclean.databinding.ItemDeviceScanCardBinding
 import com.nice.aceclean.util.DeviceToolsRepository
+import com.nice.aceclean.util.EventUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ ActivityDeviceReportBinding.inflate(it) }, R.layout.activity_device_report, R.string.device_scan) {
+class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ ActivityDeviceReportBinding.inflate(it) }, R.layout.activity_device_report, R.string.device_scan, EventUtils.CLICK_DEVICE_REPORT_BACK) {
 
     override val featureHeader get() = binding.featureHeader
 
     override fun initToolViews() {
-        binding.deviceOkButton.setOnClickListener { finish() }
+        binding.deviceOkButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_REPORT_OK) { finish() }
     }
 
     override fun initData() {

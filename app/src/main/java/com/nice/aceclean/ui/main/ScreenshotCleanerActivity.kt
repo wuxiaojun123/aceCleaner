@@ -20,11 +20,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.databinding.ItemScreenshotBinding
 import com.nice.aceclean.databinding.ItemScreenshotGroupHeaderBinding
-import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
 import kotlinx.coroutines.Dispatchers
@@ -73,23 +75,23 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
             layoutManager = manager
             adapter = this@ScreenshotCleanerActivity.adapter
         }
-        resultBinding.pictureBack.setOnClickListener { finish() }
-        resultBinding.pictureTabScreenshot.setOnClickListener {
+        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_BACK) { finish() }
+        resultBinding.pictureTabScreenshot.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_TAB) {
             showingScreenshots = true
             selected.clear()
             render()
         }
-        resultBinding.pictureTabOthers.setOnClickListener {
+        resultBinding.pictureTabOthers.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_OTHERS_TAB) {
             showingScreenshots = false
             selected.clear()
             render()
         }
-        resultBinding.pictureSelectAll.setOnClickListener {
+        resultBinding.pictureSelectAll.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_SELECT_ALL) {
             val files = visibleFiles()
             if ((it as CheckBox).isChecked) selected.addAll(files) else selected.clear()
             render()
         }
-        resultBinding.pictureClean.setOnClickListener { deleteSelected() }
+        resultBinding.pictureClean.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_CLEAN) { deleteSelected() }
         loadPictures()
     }
 
@@ -136,6 +138,8 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
         val files = selected.toList()
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
+            confirmEventName = EventUtils.CLICK_SCREENSHOTS_CONFIRM_DELETE,
+            cancelEventName = EventUtils.CLICK_SCREENSHOTS_CANCEL_DELETE,
             title = getString(R.string.delete_files_title),
             message = getString(
                 R.string.delete_files_message,
@@ -227,7 +231,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
                 summary.text = getString(R.string.files_and_size, header.files.size, DeviceStats.formatBytes(itemView.context, header.files.sumOf { it.sizeBytes }))
                 selectAll.setOnClickListener(null)
                 selectAll.isChecked = header.files.isNotEmpty() && selected.containsAll(header.files)
-                selectAll.setOnClickListener {
+                selectAll.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_GROUP_SELECT) {
                     if (selectAll.isChecked) selected.addAll(header.files) else selected.removeAll(header.files.toSet())
                     render()
                 }
@@ -246,7 +250,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
                 thumbnailCache.get(key)?.let(thumbnail::setImageBitmap) ?: loadThumbnail(file, key)
                 size.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
                 check.isChecked = file in selected
-                itemView.setOnClickListener {
+                itemView.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_SELECT) {
                     if (file in selected) selected.remove(file) else selected.add(file)
                     render()
                 }

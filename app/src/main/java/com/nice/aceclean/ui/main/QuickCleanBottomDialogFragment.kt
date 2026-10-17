@@ -5,14 +5,15 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.DialogQuickCleanBottomSheetBinding
+import com.nice.aceclean.util.EventUtils
 
 /** iOS-inspired bottom sheet shown before asking Android to add the Quick Settings tile. */
 class QuickCleanBottomDialogFragment : DialogFragment() {
@@ -20,15 +21,16 @@ class QuickCleanBottomDialogFragment : DialogFragment() {
     private var resultReported = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val binding = DialogQuickCleanBottomSheetBinding.inflate(layoutInflater)
         return Dialog(requireContext()).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.dialog_quick_clean_bottom_sheet)
+            setContentView(binding.root)
             setCanceledOnTouchOutside(true)
-            findViewById<View>(R.id.quick_tile_add).setOnClickListener {
+            binding.quickTileAdd.setTrackedClickListener(EventUtils.CLICK_QUICK_TILE_ADD) {
                 reportResult(addRequested = true)
                 dismiss()
             }
-            findViewById<View>(R.id.quick_tile_not_now).setOnClickListener {
+            binding.quickTileNotNow.setTrackedClickListener(EventUtils.CLICK_QUICK_TILE_LATER) {
                 reportResult(addRequested = false)
                 dismiss()
             }

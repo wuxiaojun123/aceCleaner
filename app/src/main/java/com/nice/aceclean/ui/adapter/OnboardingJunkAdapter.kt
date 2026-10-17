@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingItemFirstJunkCategoryBinding
 import com.nice.aceclean.databinding.OnboardingItemFirstJunkChildBinding
 import com.nice.aceclean.ui.onboarding.FirstRunJunkCategory
 import com.nice.aceclean.ui.onboarding.FirstRunJunkGroup
 import com.nice.aceclean.ui.onboarding.FirstRunJunkItem
 import com.nice.aceclean.ui.onboarding.FirstRunJunkResult
+import com.nice.aceclean.util.EventUtils
 
 internal class OnboardingJunkAdapter(
     private val result: FirstRunJunkResult,
@@ -54,11 +56,11 @@ internal class OnboardingJunkAdapter(
                     onChanged()
                 }
             }
-            binding.categoryHeader.setOnClickListener {
+            binding.categoryHeader.setTrackedClickListener(EventUtils.CLICK_FIRST_JUNK_EXPAND) {
                 group.expanded = !group.expanded
                 if (bindingAdapterPosition != RecyclerView.NO_POSITION) notifyItemChanged(bindingAdapterPosition)
             }
-            binding.categoryCheck.setOnClickListener {
+            binding.categoryCheck.setTrackedClickListener(EventUtils.CLICK_FIRST_JUNK_CATEGORY) {
                 val selected = !group.allSelected
                 group.items.forEach { it.selected = selected }
                 if (bindingAdapterPosition != RecyclerView.NO_POSITION) notifyItemChanged(bindingAdapterPosition)
@@ -78,7 +80,7 @@ internal class OnboardingJunkAdapter(
                 binding.itemName.text = item.name
                 binding.itemSize.text = Formatter.formatShortFileSize(binding.root.context, item.bytes)
                 check(binding.itemCheck, item.selected)
-                binding.root.setOnClickListener { item.selected = !item.selected; onChanged() }
+                binding.root.setTrackedClickListener(EventUtils.CLICK_FIRST_JUNK_ITEM) { item.selected = !item.selected; onChanged() }
             }
         }
     }

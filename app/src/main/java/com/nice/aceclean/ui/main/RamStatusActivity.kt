@@ -15,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import com.nice.aceclean.databinding.ItemRunningAppBinding
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityRamStatusBinding
+import com.nice.aceclean.databinding.ItemRunningAppBinding
 import com.nice.aceclean.permission.UsageAccessPermissionHelper
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceToolsRepository
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.RunningAppInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,7 +30,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ ActivityRamStatusBinding.inflate(it) }, R.layout.activity_ram_status, R.string.ram_status) {
+class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ ActivityRamStatusBinding.inflate(it) }, R.layout.activity_ram_status, R.string.ram_status, EventUtils.CLICK_RAM_BACK) {
     private val runningAppsAdapter = RunningAppsAdapter(::openAppSettings)
     private lateinit var usageAccessPermission: UsageAccessPermissionHelper
     private var resultShown = false
@@ -38,8 +40,8 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
 
     override fun initToolViews() {
         usageAccessPermission = UsageAccessPermissionHelper(this, ::refreshResult)
-        binding.ramUsageAllow.setOnClickListener { usageAccessPermission.request() }
-        binding.ramOkButton.setOnClickListener { finish() }
+        binding.ramUsageAllow.setTrackedClickListener(EventUtils.CLICK_RAM_ALLOW) { usageAccessPermission.request() }
+        binding.ramOkButton.setTrackedClickListener(EventUtils.CLICK_RAM_OK) { finish() }
         binding.ramAppList.apply {
             layoutManager = LinearLayoutManager(this@RamStatusActivity)
             adapter = runningAppsAdapter
@@ -124,8 +126,9 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
         IosActionSheetDialog.show(
             activity = this,
             title = getString(R.string.force_stop_title),
+            cancelEventName = EventUtils.CLICK_RAM_FORCE_STOP_CANCEL,
             message = getString(R.string.force_stop_explanation),
-            actions = listOf(IosActionSheetDialog.Action(getString(R.string.continue_text)) {
+            actions = listOf(IosActionSheetDialog.Action(getString(R.string.continue_text), eventName = EventUtils.CLICK_RAM_FORCE_STOP_CONTINUE) {
                 startActivity(
                     Intent(
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -162,7 +165,7 @@ private class RunningAppsAdapter(
         fun bind(app: RunningAppInfo, onCloseClick: (RunningAppInfo) -> Unit) {
             icon.setImageDrawable(itemView.context.packageManager.getApplicationIcon(app.applicationInfo))
             name.text = app.label
-            close.setOnClickListener { onCloseClick(app) }
+            close.setTrackedClickListener(EventUtils.CLICK_RAM_CLOSE_APP) { onCloseClick(app) }
         }
     }
 

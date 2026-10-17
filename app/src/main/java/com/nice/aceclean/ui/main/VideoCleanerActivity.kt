@@ -20,11 +20,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.databinding.ItemScreenshotBinding
 import com.nice.aceclean.databinding.ItemScreenshotGroupHeaderBinding
-import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
 import kotlinx.coroutines.Dispatchers
@@ -62,7 +64,7 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
     override fun initResultViews() {
         resultBinding.pictureTitle.setText(R.string.video_manage)
         resultBinding.pictureTabs.visibility = View.GONE
-        resultBinding.pictureBack.setOnClickListener { finish() }
+        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_VIDEOS_BACK) { finish() }
         adapter = VideoAdapter()
         val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -74,11 +76,11 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
             layoutManager = manager
             adapter = this@VideoCleanerActivity.adapter
         }
-        resultBinding.pictureSelectAll.setOnClickListener {
+        resultBinding.pictureSelectAll.setTrackedClickListener(EventUtils.CLICK_VIDEOS_SELECT_ALL) {
             if ((it as CheckBox).isChecked) selected.addAll(videos) else selected.clear()
             render()
         }
-        resultBinding.pictureClean.setOnClickListener { deleteSelected() }
+        resultBinding.pictureClean.setTrackedClickListener(EventUtils.CLICK_VIDEOS_CLEAN) { deleteSelected() }
         loadVideos()
     }
 
@@ -118,6 +120,8 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
         if (deleteConfirmationDialog?.isShowing == true) return
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
+            confirmEventName = EventUtils.CLICK_VIDEOS_CONFIRM_DELETE,
+            cancelEventName = EventUtils.CLICK_VIDEOS_CANCEL_DELETE,
             title = getString(R.string.delete_files_title),
             message = getString(
                 R.string.delete_files_message,
@@ -201,7 +205,7 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
                 summary.text = getString(R.string.files_and_size, header.files.size, DeviceStats.formatBytes(itemView.context, header.files.sumOf { it.sizeBytes }))
                 selectAll.setOnClickListener(null)
                 selectAll.isChecked = header.files.isNotEmpty() && selected.containsAll(header.files)
-                selectAll.setOnClickListener {
+                selectAll.setTrackedClickListener(EventUtils.CLICK_VIDEOS_GROUP_SELECT) {
                     if (selectAll.isChecked) selected.addAll(header.files) else selected.removeAll(header.files.toSet())
                     render()
                 }
@@ -220,7 +224,7 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
                 thumbnailCache.get(key)?.let(thumbnail::setImageBitmap) ?: loadThumbnail(file, key)
                 size.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
                 check.isChecked = file in selected
-                itemView.setOnClickListener {
+                itemView.setTrackedClickListener(EventUtils.CLICK_VIDEOS_SELECT) {
                     if (file in selected) selected.remove(file) else selected.add(file)
                     render()
                 }

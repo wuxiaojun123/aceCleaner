@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
 import com.nice.aceclean.ad.AppAdManager
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityFirstJunkCompleteBinding
 import com.nice.aceclean.databinding.OnboardingDialogFirstNotificationAccessBinding
 import com.nice.aceclean.databinding.OnboardingDialogOverlayPermissionRequiredBinding
@@ -25,10 +26,11 @@ import com.nice.aceclean.ui.main.BatteryInfoActivity as MainBatteryInfoActivity
 import com.nice.aceclean.ui.main.NotificationCleanerActivity
 import com.nice.aceclean.ui.main.RamStatusActivity
 import com.nice.aceclean.ui.viewmodel.FirstJunkCompleteViewModel
+import com.nice.aceclean.util.EventUtils
 import com.nice.library_ad_sdk.AdSdkManager
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirstJunkCompleteBinding>(
     { OnboardingActivityFirstJunkCompleteBinding.inflate(it) }, R.layout.onboarding_activity_first_junk_complete,
@@ -47,10 +49,10 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
         overlayPermission.restorePendingRequest()
         trackOnboardingAnimation(binding.finishImage)
         renderResult()
-        binding.backButton.setOnClickListener { leaveComplete() }
-        listOf(binding.appProcessCard, binding.appProcessButton).forEach { it.setOnClickListener { openFeature(RamStatusActivity::class.java) } }
-        listOf(binding.notificationBlockerCard, binding.notificationBlockerButton).forEach { it.setOnClickListener { openFeature(NotificationCleanerActivity::class.java) } }
-        listOf(binding.batteryInfoCard, binding.batteryInfoButton).forEach { it.setOnClickListener { openFeature(MainBatteryInfoActivity::class.java) } }
+        binding.backButton.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_BACK) { leaveComplete() }
+        listOf(binding.appProcessCard, binding.appProcessButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_RAM) { openFeature(RamStatusActivity::class.java) } }
+        listOf(binding.notificationBlockerCard, binding.notificationBlockerButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_NOTIFICATIONS) { openFeature(NotificationCleanerActivity::class.java) } }
+        listOf(binding.batteryInfoCard, binding.batteryInfoButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_BATTERY) { openFeature(MainBatteryInfoActivity::class.java) } }
         lifecycleScope.launch {
             AdSdkManager.loadAndShowNative(this@FirstJunkCompleteActivity, AppAdManager.ONBOARDING_NATIVE, binding.adContainer, this@FirstJunkCompleteActivity)
         }
@@ -87,8 +89,8 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
     private fun showNotificationDialog() {
         val dialogBinding = OnboardingDialogFirstNotificationAccessBinding.inflate(layoutInflater)
         showGuideDialog(dialogBinding)
-        dialogBinding.closeButton.setOnClickListener { dismissGuideDialog() }
-        dialogBinding.grantAccessButton.setOnClickListener { dismissGuideDialog(); notificationListener.request() }
+        dialogBinding.closeButton.setTrackedClickListener(EventUtils.CLICK_FIRST_NOTIFICATION_CLOSE) { dismissGuideDialog() }
+        dialogBinding.grantAccessButton.setTrackedClickListener(EventUtils.CLICK_FIRST_NOTIFICATION_ALLOW) { dismissGuideDialog(); notificationListener.request() }
     }
 
     private fun leaveComplete() {
@@ -96,8 +98,8 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
         if (Settings.canDrawOverlays(this)) return openHome()
         val dialogBinding = OnboardingDialogOverlayPermissionRequiredBinding.inflate(layoutInflater)
         showGuideDialog(dialogBinding)
-        dialogBinding.notNowButton.setOnClickListener { openHome() }
-        dialogBinding.fixNowButton.setOnClickListener {
+        dialogBinding.notNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_OVERLAY_LATER) { openHome() }
+        dialogBinding.fixNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_OVERLAY_FIX) {
             dismissGuideDialog()
             val opened = overlayPermission.request(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
             if (!opened) Toast.makeText(this, R.string.string_onboarding_overlay_permission_settings_unavailable, Toast.LENGTH_SHORT).show()

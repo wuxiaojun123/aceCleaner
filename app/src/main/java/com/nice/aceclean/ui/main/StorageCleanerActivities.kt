@@ -1,7 +1,7 @@
 package com.nice.aceclean.ui.main
 
-import androidx.lifecycle.lifecycleScope
 import android.view.LayoutInflater
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.FragmentMediaScanBinding
@@ -10,6 +10,7 @@ import com.nice.aceclean.permission.MediaReadPermissionHelper
 import com.nice.aceclean.permission.MediaReadType
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.MediaStoreRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,13 +64,31 @@ abstract class StorageCleanerActivity<B : ViewBinding>(
             title = getString(R.string.storage_permission_required),
             message = getString(R.string.storage_permission_explanation),
             actions = listOf(
-                IosActionSheetDialog.Action(getString(R.string.try_again), onClick = ::requestAccess),
+                IosActionSheetDialog.Action(
+                    getString(R.string.try_again),
+                    eventName = when (cleanerType) {
+                        StorageCleanerType.SCREENSHOT -> EventUtils.CLICK_SCREENSHOTS_PERMISSION_RETRY
+                        StorageCleanerType.BIG_FILE -> EventUtils.CLICK_LARGE_FILES_PERMISSION_RETRY
+                        StorageCleanerType.VIDEO -> EventUtils.CLICK_VIDEOS_PERMISSION_RETRY
+                    },
+                    onClick = ::requestAccess,
+                ),
                 IosActionSheetDialog.Action(
                     getString(R.string.open_app_settings),
+                    eventName = when (cleanerType) {
+                        StorageCleanerType.SCREENSHOT -> EventUtils.CLICK_SCREENSHOTS_PERMISSION_SETTINGS
+                        StorageCleanerType.BIG_FILE -> EventUtils.CLICK_LARGE_FILES_PERMISSION_SETTINGS
+                        StorageCleanerType.VIDEO -> EventUtils.CLICK_VIDEOS_PERMISSION_SETTINGS
+                    },
                     onClick = ::openPermissionSettings,
                 ),
             ),
             onCancel = ::finish,
+            cancelEventName = when (cleanerType) {
+                StorageCleanerType.SCREENSHOT -> EventUtils.CLICK_SCREENSHOTS_PERMISSION_CANCEL
+                StorageCleanerType.BIG_FILE -> EventUtils.CLICK_LARGE_FILES_PERMISSION_CANCEL
+                StorageCleanerType.VIDEO -> EventUtils.CLICK_VIDEOS_PERMISSION_CANCEL
+            },
         )
     }
 

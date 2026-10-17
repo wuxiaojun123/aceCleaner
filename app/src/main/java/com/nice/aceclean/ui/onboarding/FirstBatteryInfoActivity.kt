@@ -10,7 +10,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
 import com.nice.aceclean.ad.AppAdManager
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityBatteryInfoBinding
+import com.nice.aceclean.util.EventUtils
 import kotlinx.coroutines.launch
 
 /** Battery detail used by the first-run flow; the main feature keeps its own Activity. */
@@ -29,7 +31,7 @@ class FirstBatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatter
         binding.bottomActionContainer.isVisible = true
         trackOnboardingAnimation(binding.scanAnimation)
         renderBatteryInformation(registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)))
-        binding.checkNowButton.setOnClickListener { navigateTo(BatteryCheckScanActivity::class.java) }
+        binding.checkNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_BATTERY_CHECK) { navigateTo(BatteryCheckScanActivity::class.java) }
         buttonAnimation = OnboardingButtonAnimation(this, binding.checkNowButton, binding.checkNowButtonShine)
         lifecycleScope.launch {
             showAd(AppAdManager.ONBOARDING_ANALYSIS)

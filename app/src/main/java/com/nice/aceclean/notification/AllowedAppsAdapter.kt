@@ -3,14 +3,14 @@ package com.nice.aceclean.notification
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.widget.IosSwitchView
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.ItemAllowedAppBinding
+import com.nice.aceclean.util.EventUtils
 
 data class AllowedApp(val packageName: String, val appName: String)
 
@@ -20,17 +20,17 @@ class AllowedAppsAdapter(
 ) : ListAdapter<AllowedApp, AllowedAppsAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_allowed_app, parent, false),
+        ItemAllowedAppBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val icon = view.findViewById<ImageView>(R.id.allowed_app_icon)
-        private val fallback = view.findViewById<TextView>(R.id.allowed_app_icon_fallback)
-        private val name = view.findViewById<TextView>(R.id.allowed_app_name)
-        private val packageName = view.findViewById<TextView>(R.id.allowed_app_package)
-        private val allowSwitch = view.findViewById<IosSwitchView>(R.id.allowed_app_switch)
+    inner class ViewHolder(binding: ItemAllowedAppBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val icon = binding.allowedAppIcon
+        private val fallback = binding.allowedAppIconFallback
+        private val name = binding.allowedAppName
+        private val packageName = binding.allowedAppPackage
+        private val allowSwitch = binding.allowedAppSwitch
 
         fun bind(item: AllowedApp) {
             name.text = item.appName
@@ -46,10 +46,11 @@ class AllowedAppsAdapter(
             )
             allowSwitch.isChecked = isAllowed(item.packageName)
             allowSwitch.contentDescription = item.appName
+            allowSwitch.setTrackedClickListener(EventUtils.CLICK_ALLOWED_APPS_SWITCH)
             allowSwitch.setOnCheckedChangeListener { _, allowed ->
                 onAllowedChanged(item.packageName, allowed)
             }
-            itemView.setOnClickListener { allowSwitch.toggle() }
+            itemView.setTrackedClickListener(EventUtils.CLICK_ALLOWED_APPS_ROW) { allowSwitch.toggle() }
         }
     }
 

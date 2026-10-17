@@ -13,14 +13,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
-import com.nice.aceclean.databinding.FragmentCleanScanBinding
-import com.nice.aceclean.databinding.FragmentCleanResultBinding
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.cleanup.CleanupCategory
 import com.nice.aceclean.cleanup.CleanupViewModel
+import com.nice.aceclean.databinding.FragmentCleanResultBinding
+import com.nice.aceclean.databinding.FragmentCleanScanBinding
 import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -51,13 +53,15 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
             title = getString(R.string.storage_permission_required),
             message = getString(R.string.storage_permission_explanation),
             actions = listOf(
-                IosActionSheetDialog.Action(getString(R.string.try_again), onClick = ::requestStorageAccess),
+                IosActionSheetDialog.Action(getString(R.string.try_again), eventName = EventUtils.CLICK_CLEANUP_PERMISSION_RETRY, onClick = ::requestStorageAccess),
                 IosActionSheetDialog.Action(
                     getString(R.string.open_app_settings),
+                    eventName = EventUtils.CLICK_CLEANUP_PERMISSION_SETTINGS,
                     onClick = storagePermission::openAppSettings,
                 ),
             ),
             onCancel = ::finish,
+            cancelEventName = EventUtils.CLICK_CLEANUP_PERMISSION_CANCEL,
         )
     }
 
@@ -86,15 +90,15 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
         resultBinding = setActivityContent(FragmentCleanResultBinding.inflate(layoutInflater), R.layout.fragment_clean_result)
         selected.clear()
         selected.addAll(CleanupCategory.entries)
-        resultBinding.cleanResultBack.setOnClickListener { finish() }
+        resultBinding.cleanResultBack.setTrackedClickListener(EventUtils.CLICK_CLEANUP_BACK) { finish() }
         categoryViews().forEach { (category, row, check, size) -> bindCategory(row, size, check, category) }
-        resultBinding.cleanupMoreRow.setOnClickListener { openBigFileCleaner() }
-        resultBinding.removeButton.setOnClickListener { confirmDelete() }
-        resultBinding.cleanupRescan.setOnClickListener { startScan() }
-        resultBinding.cleanupFindLargeFiles.setOnClickListener { openBigFileCleaner() }
+        resultBinding.cleanupMoreRow.setTrackedClickListener(EventUtils.CLICK_CLEANUP_MORE) { openBigFileCleaner() }
+        resultBinding.removeButton.setTrackedClickListener(EventUtils.CLICK_CLEANUP_REMOVE) { confirmDelete() }
+        resultBinding.cleanupRescan.setTrackedClickListener(EventUtils.CLICK_CLEANUP_RESCAN) { startScan() }
+        resultBinding.cleanupFindLargeFiles.setTrackedClickListener(EventUtils.CLICK_CLEANUP_LARGE_FILES) { openBigFileCleaner() }
         resultBinding.cleanupSystemCache.apply {
             visibility = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) View.VISIBLE else View.GONE
-            setOnClickListener { openSystemCacheCleaner() }
+            setTrackedClickListener(EventUtils.CLICK_CLEANUP_SYSTEM_CACHE) { openSystemCacheCleaner() }
         }
         render()
     }
@@ -102,7 +106,7 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
     private fun openBigFileCleaner() = startActivity(Intent(this, BigFileCleanerActivity::class.java))
 
     private fun bindCategory(row: View, size: TextView, check: ImageView, category: CleanupCategory) {
-        row.setOnClickListener {
+        row.setTrackedClickListener(EventUtils.CLICK_CLEANUP_CATEGORY) {
             if (!selected.add(category)) selected.remove(category)
             render()
         }
@@ -159,7 +163,8 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
                 candidates.size,
                 DeviceStats.formatBytes(this, candidates.sumOf { it.sizeBytes }),
             ),
-            actions = listOf(IosActionSheetDialog.Action(getString(R.string.clean), onClick = ::deleteSelected)),
+            cancelEventName = EventUtils.CLICK_CLEANUP_CANCEL_DELETE,
+            actions = listOf(IosActionSheetDialog.Action(getString(R.string.clean), eventName = EventUtils.CLICK_CLEANUP_CONFIRM_DELETE, onClick = ::deleteSelected)),
         )
     }
 

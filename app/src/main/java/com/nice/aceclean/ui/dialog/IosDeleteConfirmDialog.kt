@@ -7,9 +7,11 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.DialogIosDeleteConfirmBinding
+import com.nice.aceclean.util.EventUtils
 
 object IosDeleteConfirmDialog {
 
@@ -22,10 +24,12 @@ object IosDeleteConfirmDialog {
         @ColorInt confirmColor: Int = Color.rgb(255, 59, 48),
         onConfirm: () -> Unit,
         onDismiss: () -> Unit = {},
+        confirmEventName: String = EventUtils.CLICK_DELETE_DIALOG_CONFIRM,
+        cancelEventName: String = EventUtils.CLICK_DELETE_DIALOG_CANCEL,
     ): Dialog {
-        val content = activity.layoutInflater.inflate(R.layout.dialog_ios_delete_confirm, null)
+        val binding = DialogIosDeleteConfirmBinding.inflate(activity.layoutInflater)
         val dialog = Dialog(activity).apply {
-            setContentView(content)
+            setContentView(binding.root)
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.apply {
@@ -34,19 +38,19 @@ object IosDeleteConfirmDialog {
                 attributes = attributes.apply { dimAmount = DIM_AMOUNT }
             }
         }
-        content.findViewById<TextView>(R.id.ios_dialog_title).text = title
-        content.findViewById<TextView>(R.id.ios_dialog_message).apply {
+        binding.iosDialogTitle.text = title
+        binding.iosDialogMessage.apply {
             visibility = if (message.isNullOrBlank()) View.GONE else View.VISIBLE
             text = message ?: ""
         }
-        content.findViewById<TextView>(R.id.ios_dialog_cancel).apply {
+        binding.iosDialogCancel.apply {
             text = cancelText
-            setOnClickListener { dialog.dismiss() }
+            setTrackedClickListener(cancelEventName) { dialog.dismiss() }
         }
-        content.findViewById<TextView>(R.id.ios_dialog_confirm).apply {
+        binding.iosDialogConfirm.apply {
             text = confirmText
             setTextColor(confirmColor)
-            setOnClickListener {
+            setTrackedClickListener(confirmEventName) {
                 dialog.dismiss()
                 onConfirm()
             }

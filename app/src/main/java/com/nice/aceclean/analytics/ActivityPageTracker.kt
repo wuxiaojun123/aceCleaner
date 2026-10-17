@@ -3,15 +3,15 @@ package com.nice.aceclean.analytics
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.cater.bi.e.Eve
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.util.EventUtils
 
 /** Reports each business Activity creation, including recreation, without tracking SDK screens. */
 internal object ActivityPageTracker : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is BaseActivity<*>) {
-            Eve.send("show_${activity.javaClass.simpleName}", emptyMap())
+            EventUtils.track(EventUtils.activityShowEvent(activity.javaClass))
         }
     }
 

@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityOverlayPermissionGuideBinding
 import com.nice.aceclean.ui.main.SplashActivity
+import com.nice.aceclean.util.EventUtils
 
 class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivityOverlayPermissionGuideBinding>(
     { OnboardingActivityOverlayPermissionGuideBinding.inflate(it) }, R.layout.onboarding_activity_overlay_permission_guide,
@@ -25,8 +27,8 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
     override fun initOnboardingViews() {
         trackOnboardingAnimation(binding.guideAnimation)
         overlayPermission.restorePendingRequest()
-        binding.skipButton.setOnClickListener { continueToSplash() }
-        binding.allowButton.setOnClickListener {
+        binding.skipButton.setTrackedClickListener(EventUtils.CLICK_OVERLAY_GUIDE_SKIP) { continueToSplash() }
+        binding.allowButton.setTrackedClickListener(EventUtils.CLICK_OVERLAY_GUIDE_ALLOW) {
             val opened = overlayPermission.request(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
             if (!opened) Toast.makeText(this, R.string.string_onboarding_overlay_permission_settings_unavailable, Toast.LENGTH_SHORT).show()
         }

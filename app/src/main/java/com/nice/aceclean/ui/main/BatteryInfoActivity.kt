@@ -13,14 +13,16 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityBatteryInfoBinding
 import com.nice.aceclean.databinding.ItemBatteryInfoCardBinding
 import com.nice.aceclean.util.BatterySnapshot
 import com.nice.aceclean.util.DeviceToolsRepository
+import com.nice.aceclean.util.EventUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ ActivityBatteryInfoBinding.inflate(it) }, R.layout.activity_battery_info, R.string.battery_info) {
+class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ ActivityBatteryInfoBinding.inflate(it) }, R.layout.activity_battery_info, R.string.battery_info, EventUtils.CLICK_BATTERY_BACK) {
 
     private var receiverRegistered = false
     private var scanComplete = false
@@ -36,7 +38,7 @@ class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ Act
     override val featureHeader get() = binding.featureHeader
 
     override fun initToolViews() {
-        binding.batteryGotItButton.setOnClickListener { finish() }
+        binding.batteryGotItButton.setTrackedClickListener(EventUtils.CLICK_BATTERY_GOT_IT) { finish() }
     }
 
     override fun initData() {

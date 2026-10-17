@@ -11,16 +11,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityAllowedAppsBinding
 import com.nice.aceclean.notification.AllowedApp
 import com.nice.aceclean.notification.AllowedAppsAdapter
 import com.nice.aceclean.notification.NotificationInterceptStore
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.util.EventUtils
+import java.text.Collator
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.Collator
-import java.util.Locale
 
 class AllowedAppsActivity : BaseActivity<ActivityAllowedAppsBinding>({ ActivityAllowedAppsBinding.inflate(it) }, R.layout.activity_allowed_apps) {
     private var allApps: List<AllowedApp> = emptyList()
@@ -37,14 +39,14 @@ class AllowedAppsActivity : BaseActivity<ActivityAllowedAppsBinding>({ ActivityA
     )
 
     override fun initViews() {
-        binding.allowedAppsBack.setOnClickListener { finish() }
+        binding.allowedAppsBack.setTrackedClickListener(EventUtils.CLICK_ALLOWED_APPS_BACK) { finish() }
         searchInput = binding.allowedAppsSearch
         appsRecyclerView = binding.allowedAppsList
         loadingIndicator = binding.allowedAppsLoading
         emptyView = binding.allowedAppsEmpty
         appsRecyclerView.layoutManager = LinearLayoutManager(this)
         appsRecyclerView.adapter = adapter
-        searchInput.setOnClickListener { showSearchKeyboard() }
+        searchInput.setTrackedClickListener(EventUtils.CLICK_ALLOWED_APPS_SEARCH) { showSearchKeyboard() }
         searchInput.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) showSearchKeyboard() }
         searchInput.doAfterTextChanged { filterApps(it?.toString().orEmpty()) }
         updateSelectedCount()

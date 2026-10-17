@@ -8,12 +8,14 @@ import androidx.core.view.doOnLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.FragmentHomeBinding
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
-import com.nice.aceclean.R
-import com.nice.aceclean.databinding.FragmentHomeBinding
 import com.nice.aceclean.ui.base.BaseFragment
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,56 +28,57 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
 
     override fun initViews() {
         setupPinnedTopBar()
-        binding.cleanUpButton.setOnClickListener {
+        binding.cleanUpButton.setTrackedClickListener(EventUtils.CLICK_HOME_CLEANUP) {
             (activity as? MainActivity)?.openCleanUp()
         }
-        binding.homePrimaryNetwork.root.setOnClickListener {
+        binding.homePrimaryNetwork.root.setTrackedClickListener(EventUtils.CLICK_HOME_NETWORK) {
             (activity as? MainActivity)?.openNetworkTraffic()
         }
-        binding.homeWideNotification.root.setOnClickListener {
+        binding.homeWideNotification.root.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATIONS) {
             (activity as? MainActivity)?.openNotificationCleaner()
         }
-        binding.homePrimaryAppManager.root.setOnClickListener {
+        binding.homePrimaryAppManager.root.setTrackedClickListener(EventUtils.CLICK_HOME_APPS) {
             (activity as? MainActivity)?.openAppManager()
         }
-        binding.homeSecondaryScreenshot.root.setOnClickListener {
+        binding.homeSecondaryScreenshot.root.setTrackedClickListener(EventUtils.CLICK_HOME_SCREENSHOTS) {
             (activity as? MainActivity)?.openScreenshotCleaner()
         }
-        binding.homeSecondaryLargeFile.root.setOnClickListener {
+        binding.homeSecondaryLargeFile.root.setTrackedClickListener(EventUtils.CLICK_HOME_LARGE_FILES) {
             (activity as? MainActivity)?.openBigFileCleaner()
         }
-        binding.homeWideVideo.root.setOnClickListener {
+        binding.homeWideVideo.root.setTrackedClickListener(EventUtils.CLICK_HOME_VIDEOS) {
             (activity as? MainActivity)?.openVideoCleaner()
         }
-        binding.homePrimaryDuplicate.root.setOnClickListener {
+        binding.homePrimaryDuplicate.root.setTrackedClickListener(EventUtils.CLICK_HOME_DUPLICATES) {
             (activity as? MainActivity)?.openDuplicatePhotoCleaner()
         }
-        binding.homeToolRam.root.setOnClickListener {
+        binding.homeToolRam.root.setTrackedClickListener(EventUtils.CLICK_HOME_RAM) {
             (activity as? MainActivity)?.openRamStatus()
         }
-        binding.homeToolDevice.root.setOnClickListener {
+        binding.homeToolDevice.root.setTrackedClickListener(EventUtils.CLICK_HOME_DEVICE) {
             (activity as? MainActivity)?.openDeviceScan()
         }
-        binding.homeToolBattery.root.setOnClickListener {
+        binding.homeToolBattery.root.setTrackedClickListener(EventUtils.CLICK_HOME_BATTERY) {
             (activity as? MainActivity)?.openBatteryInfo()
         }
-        binding.homeToolNetworkTest.root.setOnClickListener {
+        binding.homeToolNetworkTest.root.setTrackedClickListener(EventUtils.CLICK_HOME_SPEED_TEST) {
             (activity as? MainActivity)?.openNetworkTest()
         }
 
-        binding.languageButton.setOnClickListener {
+        binding.languageButton.setTrackedClickListener(EventUtils.CLICK_HOME_LANGUAGE) {
             (activity as? MainActivity)?.openLanguage()
         }
-        binding.pinnedLanguageButton.setOnClickListener {
+        binding.pinnedLanguageButton.setTrackedClickListener(EventUtils.CLICK_HOME_PINNED_LANGUAGE) {
             (activity as? MainActivity)?.openLanguage()
         }
 
-        binding.settingsButton.setOnClickListener {
+        binding.settingsButton.setTrackedClickListener(EventUtils.CLICK_HOME_SETTINGS) {
             startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${requireContext().packageName}")))
         }
-        binding.notificationCard.setOnClickListener {
+        binding.notificationCard.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATION_TIP) {
             (activity as? MainActivity)?.openNotificationCleaner()
         }
+        binding.notificationSwitch.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATION_SWITCH)
         binding.notificationSwitch.setOnCheckedChangeListener { _, _ ->
             if (!syncingNotificationSwitch) (activity as? MainActivity)?.openNotificationCleaner()
         }

@@ -4,14 +4,16 @@ import android.content.Intent
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityLanguageBinding
 import com.nice.aceclean.language.LanguageAdapter
 import com.nice.aceclean.language.LanguageItem
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.LocaleHelper
+import java.util.Locale
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 class LanguageActivity : BaseActivity<ActivityLanguageBinding>({ ActivityLanguageBinding.inflate(it) }, R.layout.activity_language) {
 
@@ -133,7 +135,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>({ ActivityLanguag
 
     override fun initViews() {
         binding.featureHeader.featureTitle.setText(R.string.language_title)
-        binding.featureHeader.featureBack.setOnClickListener { finish() }
+        binding.featureHeader.featureBack.setTrackedClickListener(EventUtils.CLICK_LANGUAGE_BACK) { finish() }
         setupLanguageList()
     }
 

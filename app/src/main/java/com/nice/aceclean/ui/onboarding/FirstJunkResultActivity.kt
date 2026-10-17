@@ -3,8 +3,10 @@ package com.nice.aceclean.ui.onboarding
 import android.text.format.Formatter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityFirstJunkResultBinding
 import com.nice.aceclean.ui.adapter.OnboardingJunkAdapter
+import com.nice.aceclean.util.EventUtils
 
 class FirstJunkResultActivity : BaseOnboardingActivity<OnboardingActivityFirstJunkResultBinding>(
     { OnboardingActivityFirstJunkResultBinding.inflate(it) }, R.layout.onboarding_activity_first_junk_result,
@@ -17,7 +19,7 @@ class FirstJunkResultActivity : BaseOnboardingActivity<OnboardingActivityFirstJu
         binding.categoryContainer.layoutManager = LinearLayoutManager(this)
         binding.categoryContainer.adapter = OnboardingJunkAdapter(result) { updateTotal(result) }
         updateTotal(result)
-        binding.cleanButton.setOnClickListener {
+        binding.cleanButton.setTrackedClickListener(EventUtils.CLICK_FIRST_JUNK_CLEAN) {
             if (hasSelectedItems(result)) navigateTo(FirstJunkCleaningActivity::class.java)
             else navigateTo(FirstJunkCompleteActivity.createIntent(this, cleanedBytes = 0L))
         }

@@ -30,18 +30,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.FragmentBigFileCleanerBinding
 import com.nice.aceclean.databinding.ItemBigFileBinding
 import com.nice.aceclean.databinding.ItemBigFileFilterOptionBinding
 import com.nice.aceclean.databinding.PopupBigFileFilterBinding
-import com.nice.aceclean.databinding.FragmentBigFileCleanerBinding
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
+import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBinding>(
     StorageCleanerType.BIG_FILE,
@@ -93,11 +95,11 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
             layoutManager = LinearLayoutManager(this@BigFileCleanerActivity)
             adapter = this@BigFileCleanerActivity.adapter
         }
-        resultBinding.largeBack.setOnClickListener { finish() }
-        resultBinding.largeTypeFilter.setOnClickListener { showFilterDropdown(FilterKind.TYPE) }
-        resultBinding.largeSizeFilter.setOnClickListener { showFilterDropdown(FilterKind.SIZE) }
-        resultBinding.largeTimeFilter.setOnClickListener { showFilterDropdown(FilterKind.TIME) }
-        resultBinding.largeClean.setOnClickListener { deleteSelected() }
+        resultBinding.largeBack.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_BACK) { finish() }
+        resultBinding.largeTypeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_TYPE) { showFilterDropdown(FilterKind.TYPE) }
+        resultBinding.largeSizeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_SIZE) { showFilterDropdown(FilterKind.SIZE) }
+        resultBinding.largeTimeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_TIME) { showFilterDropdown(FilterKind.TIME) }
+        resultBinding.largeClean.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_CLEAN) { deleteSelected() }
         loadFiles()
     }
 
@@ -193,7 +195,7 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
                     setTypeface(typeface, if (isSelected) Typeface.BOLD else Typeface.NORMAL)
                 }
                 row.filterOptionCheck.visibility = if (isSelected) View.VISIBLE else View.INVISIBLE
-                row.root.setOnClickListener {
+                row.root.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_FILTER_OPTION) {
                     if (!isSelected) {
                         when (kind) {
                             FilterKind.TYPE -> fileType = FileType.entries[index]
@@ -209,10 +211,10 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
             }
         }
 
-        popupType.setOnClickListener { renderOptions(FilterKind.TYPE) }
-        popupSize.setOnClickListener { renderOptions(FilterKind.SIZE) }
-        popupTime.setOnClickListener { renderOptions(FilterKind.TIME) }
-        host.setOnClickListener { popup.dismiss() }
+        popupType.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_POPUP_TYPE) { renderOptions(FilterKind.TYPE) }
+        popupSize.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_POPUP_SIZE) { renderOptions(FilterKind.SIZE) }
+        popupTime.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_POPUP_TIME) { renderOptions(FilterKind.TIME) }
+        host.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_POPUP_CLOSE) { popup.dismiss() }
         popup.setOnDismissListener { if (filterPopup === popup) filterPopup = null }
 
         val anchor = resultBinding.largeFilterBar
@@ -279,6 +281,8 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
         val files = selected.toList()
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
+            confirmEventName = EventUtils.CLICK_LARGE_FILES_CONFIRM_DELETE,
+            cancelEventName = EventUtils.CLICK_LARGE_FILES_CANCEL_DELETE,
             title = getString(R.string.delete_files_title),
             message = getString(
                 R.string.delete_files_message,
@@ -404,7 +408,7 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
             binding.largeFileSize.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
             binding.largeFileIcon.setImageResource(fileIcon(file))
             binding.largeFileCheck.isChecked = file in selected
-            itemView.setOnClickListener {
+            itemView.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_SELECT) {
                 if (!selected.add(file)) selected.remove(file)
                 bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }?.let(adapter::notifyItemChanged)
                 updateCleanButton()

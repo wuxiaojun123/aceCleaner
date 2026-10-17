@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDuplicatePhotoCleanerBinding
 import com.nice.aceclean.permission.MediaReadPermissionHelper
 import com.nice.aceclean.permission.MediaReadType
@@ -27,6 +28,7 @@ import com.nice.aceclean.similarphoto.SimilarPhotosAdapter
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.ui.widget.IosSwitchView
+import com.nice.aceclean.util.EventUtils
 import kotlinx.coroutines.launch
 
 class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBinding>({ ActivityDuplicatePhotoCleanerBinding.inflate(it) }, R.layout.activity_duplicate_photo_cleaner) {
@@ -50,7 +52,7 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     }
 
     override fun initViews() {
-        binding.duplicateBack.setOnClickListener { finish() }
+        binding.duplicateBack.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_BACK) { finish() }
         keepBestSwitch = binding.duplicateKeepBestSwitch
         keepBestSwitch.isChecked = true
         keepBestSwitch.setTrackOnColor(ContextCompat.getColor(this, R.color.color_FF42B8FF))
@@ -71,10 +73,11 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
             adapter = this@SimilarPhotoCleanerActivity.adapter
             addItemDecoration(GridSpacingDecoration(resources.getDimensionPixelSize(R.dimen.dup_grid_spacing)))
         }
+        keepBestSwitch.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_KEEP_BEST)
         keepBestSwitch.setOnCheckedChangeListener { _, enabled ->
             if (!syncingSwitch) adapter.setKeepBestSelection(enabled)
         }
-        binding.duplicateDelete.setOnClickListener { confirmDelete() }
+        binding.duplicateDelete.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_DELETE) { confirmDelete() }
     }
 
     override fun initData() {
@@ -138,6 +141,8 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
         if (deleteConfirmationDialog?.isShowing == true) return
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
+            confirmEventName = EventUtils.CLICK_DUPLICATES_CONFIRM_DELETE,
+            cancelEventName = EventUtils.CLICK_DUPLICATES_CANCEL_DELETE,
             title = getString(R.string.dup_delete_confirm_title),
             message = getString(
                 R.string.dup_delete_confirm_message,

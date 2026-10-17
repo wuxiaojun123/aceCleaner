@@ -1,16 +1,18 @@
 package com.nice.aceclean.ui.main
 
-import android.view.View
 import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentPermissionGateBinding
 import com.nice.aceclean.permission.NotificationListenerPermissionHelper
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
 import com.nice.aceclean.permission.UsageAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.util.EventUtils
 
 enum class FeatureType { NETWORK_TRAFFIC, NOTIFICATION_CLEANER, APP_MANAGER }
 
@@ -37,7 +39,12 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
         binding.permissionImage.setImageResource(config.image)
         binding.permissionTitle.setText(config.title)
         binding.permissionDescription.setText(config.description)
-        binding.permissionBack.setOnClickListener { finish() }
+        val (backEvent, allowEvent) = when (featureType) {
+            FeatureType.NETWORK_TRAFFIC -> EventUtils.CLICK_NETWORK_PERMISSION_BACK to EventUtils.CLICK_NETWORK_PERMISSION_ALLOW
+            FeatureType.NOTIFICATION_CLEANER -> EventUtils.CLICK_NOTIFICATIONS_PERMISSION_BACK to EventUtils.CLICK_NOTIFICATIONS_PERMISSION_ALLOW
+            FeatureType.APP_MANAGER -> EventUtils.CLICK_APPS_PERMISSION_BACK to EventUtils.CLICK_APPS_PERMISSION_ALLOW
+        }
+        binding.permissionBack.setTrackedClickListener(backEvent) { finish() }
         val requestPermission: () -> Unit = when (featureType.specialPermission) {
             SpecialPermission.NOTIFICATION_LISTENER -> {
                 NotificationListenerPermissionHelper(this, ::showFeature).also { permissionHelper = it }
@@ -48,7 +55,7 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
                     .let { helper -> { helper.request() } }
             }
         }
-        binding.permissionAllow.setOnClickListener {
+        binding.permissionAllow.setTrackedClickListener(allowEvent) {
             requestPermission()
         }
     }

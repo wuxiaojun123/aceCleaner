@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.viewbinding.ViewBinding
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ItemDeviceInfoRowBinding
 import com.nice.aceclean.databinding.LayoutFeatureHeaderBinding
 import com.nice.aceclean.ui.base.BaseActivity
@@ -14,11 +15,12 @@ abstract class DeviceToolActivity<B : ViewBinding>(
     inflateBinding: (LayoutInflater) -> B,
     @param:LayoutRes layoutRes: Int,
     @param:StringRes private val titleRes: Int,
+    private val backClickEvent: String,
 ) : BaseActivity<B>(inflateBinding, layoutRes) {
 
     final override fun initViews() {
         featureHeader.featureTitle.setText(titleRes)
-        featureHeader.featureBack.setOnClickListener { finish() }
+        featureHeader.featureBack.setTrackedClickListener(backClickEvent) { finish() }
         initToolViews()
     }
 

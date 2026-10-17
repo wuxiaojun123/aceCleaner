@@ -11,11 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDeviceScanBinding
-import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.adapter.DeviceScanStep
 import com.nice.aceclean.ui.adapter.DeviceScanStepAdapter
+import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,7 +38,7 @@ class DeviceScanActivity : BaseActivity<ActivityDeviceScanBinding>({ ActivityDev
         stepsView.adapter = adapter
         stepsView.itemAnimator = null
 
-        startButton.setOnClickListener {
+        startButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_SCAN_START) {
             markComplete(this)
             startActivity(Intent(this, MainActivity::class.java))
             finish()

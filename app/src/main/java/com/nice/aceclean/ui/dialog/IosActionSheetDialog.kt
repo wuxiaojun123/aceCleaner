@@ -12,7 +12,9 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.DialogIosActionSheetBinding
+import com.nice.aceclean.util.EventUtils
 
 /** Reusable iOS-style action sheet for non-destructive confirmations and choices. */
 object IosActionSheetDialog {
@@ -20,6 +22,7 @@ object IosActionSheetDialog {
     data class Action(
         val text: CharSequence,
         @ColorInt val color: Int = IOS_BLUE,
+        val eventName: String = EventUtils.CLICK_ACTION_SHEET_ACTION,
         val onClick: () -> Unit,
     )
 
@@ -30,11 +33,12 @@ object IosActionSheetDialog {
         actions: List<Action>,
         cancelText: CharSequence = activity.getString(android.R.string.cancel),
         onCancel: () -> Unit = {},
+        cancelEventName: String = EventUtils.CLICK_ACTION_SHEET_CANCEL,
     ): Dialog {
         require(actions.isNotEmpty()) { "An action sheet requires at least one action." }
-        val content = activity.layoutInflater.inflate(R.layout.dialog_ios_action_sheet, null)
+        val binding = DialogIosActionSheetBinding.inflate(activity.layoutInflater)
         val dialog = Dialog(activity).apply {
-            setContentView(content)
+            setContentView(binding.root)
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.apply {
@@ -44,12 +48,12 @@ object IosActionSheetDialog {
                 attributes = attributes.apply { dimAmount = DIM_AMOUNT }
             }
         }
-        content.findViewById<TextView>(R.id.ios_action_sheet_title).text = title
-        content.findViewById<TextView>(R.id.ios_action_sheet_message).apply {
+        binding.iosActionSheetTitle.text = title
+        binding.iosActionSheetMessage.apply {
             visibility = if (message.isNullOrBlank()) View.GONE else View.VISIBLE
             text = message ?: ""
         }
-        val actionContainer = content.findViewById<LinearLayout>(R.id.ios_action_sheet_actions)
+        val actionContainer = binding.iosActionSheetActions
         actions.forEachIndexed { index, action ->
             if (index > 0) addDivider(actionContainer)
             actionContainer.addView(createActionView(activity, action) {
@@ -57,9 +61,9 @@ object IosActionSheetDialog {
                 action.onClick()
             })
         }
-        content.findViewById<TextView>(R.id.ios_action_sheet_cancel).apply {
+        binding.iosActionSheetCancel.apply {
             text = cancelText
-            setOnClickListener {
+            setTrackedClickListener(cancelEventName) {
                 dialog.dismiss()
                 onCancel()
             }
@@ -81,7 +85,7 @@ object IosActionSheetDialog {
             text = action.text
             setTextColor(action.color)
             textSize = 17f
-            setOnClickListener { onClick() }
+            setTrackedClickListener(action.eventName) { onClick() }
         }
 
     private fun addDivider(container: LinearLayout) {

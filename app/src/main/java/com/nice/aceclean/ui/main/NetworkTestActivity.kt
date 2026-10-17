@@ -9,7 +9,9 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityNetworkTestBinding
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.NetworkSpeedTest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,7 +20,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ ActivityNetworkTestBinding.inflate(it) }, R.layout.activity_network_test, R.string.network_test) {
+class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ ActivityNetworkTestBinding.inflate(it) }, R.layout.activity_network_test, R.string.network_test, EventUtils.CLICK_SPEED_TEST_BACK) {
 
     private var testJob: Job? = null
     private var liveSpeedJob: Job? = null
@@ -36,7 +38,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
                 marginStart = (52 * resources.displayMetrics.density).toInt()
             }
         }
-        binding.networkTestButton.setOnClickListener { startTest() }
+        binding.networkTestButton.setTrackedClickListener(EventUtils.CLICK_SPEED_TEST_START) { startTest() }
     }
 
     override fun initData() {

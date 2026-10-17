@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import com.nice.aceclean.databinding.ItemNetworkAppBinding
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentNetworkTrafficBinding
+import com.nice.aceclean.databinding.ItemNetworkAppBinding
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.NetworkUsageRepository
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +30,7 @@ class NetworkTrafficActivity : PermissionFeatureActivity<FragmentNetworkTrafficB
     private val appAdapter = NetworkAppAdapter()
 
     override fun initFeatureViews() {
-        featureBinding.networkBack.setOnClickListener { finish() }
+        featureBinding.networkBack.setTrackedClickListener(EventUtils.CLICK_NETWORK_BACK) { finish() }
         featureBinding.networkAppList.apply {
             layoutManager = LinearLayoutManager(this@NetworkTrafficActivity)
             adapter = appAdapter

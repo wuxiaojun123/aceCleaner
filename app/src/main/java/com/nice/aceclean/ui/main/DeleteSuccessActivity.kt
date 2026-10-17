@@ -13,10 +13,12 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDeleteSuccessBinding
 import com.nice.aceclean.databinding.ItemDeleteSuccessFeatureBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 
 /** Shared completion screen displayed after files or apps have actually been removed. */
 class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
@@ -66,8 +68,8 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
             Feature.entries.filterNot { it == current },
             ::openFeature,
         )
-        binding.deleteSuccessBack.setOnClickListener { returnToHome() }
-        binding.deleteSuccessTryNow.setOnClickListener { openFeature(recommended) }
+        binding.deleteSuccessBack.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_BACK) { returnToHome() }
+        binding.deleteSuccessTryNow.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_TRY) { openFeature(recommended) }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() = returnToHome()
         })
@@ -155,7 +157,7 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
             holder.binding.featureIcon.setImageResource(feature.iconRes)
             holder.binding.featureTitle.setText(feature.titleRes)
             holder.binding.featureDescription.setText(feature.descriptionRes)
-            holder.binding.root.setOnClickListener { onClick(feature) }
+            holder.binding.root.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_FEATURE) { onClick(feature) }
         }
 
         override fun getItemCount(): Int = features.size

@@ -2,20 +2,21 @@ package com.nice.aceclean.ui.main
 
 import android.content.Intent
 import android.provider.Settings
-import android.view.View
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnLayout
-import androidx.core.widget.NestedScrollView
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentNotificationCleanerBinding
 import com.nice.aceclean.databinding.ItemNotificationTopAppBinding
 import com.nice.aceclean.notification.AppIconLoader
@@ -24,14 +25,15 @@ import com.nice.aceclean.notification.InterceptedNotificationStore
 import com.nice.aceclean.notification.NotificationAppStats
 import com.nice.aceclean.notification.NotificationInterceptStore
 import com.nice.aceclean.notification.NotificationStatsStore
+import com.nice.aceclean.util.EventUtils
+import java.text.NumberFormat
+import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import java.text.NumberFormat
-import kotlin.coroutines.resume
 
 class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificationCleanerBinding>(
     FeatureType.NOTIFICATION_CLEANER,
@@ -53,11 +55,12 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = this@NotificationCleanerActivity.adapter
         }
-        featureBinding.notificationBack.setOnClickListener { finish() }
-        featureBinding.notificationPinnedBack.setOnClickListener { finish() }
-        featureBinding.notificationWhitelistEntry.setOnClickListener {
+        featureBinding.notificationBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_BACK) { finish() }
+        featureBinding.notificationPinnedBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_PINNED_BACK) { finish() }
+        featureBinding.notificationWhitelistEntry.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_WHITELIST) {
             startActivity(Intent(this, AllowedAppsActivity::class.java))
         }
+        featureBinding.notificationInterceptSwitch.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_SWITCH)
         featureBinding.notificationInterceptSwitch.apply {
             setTrackOnColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.notification_manager_amber))
             setOnCheckedChangeListener { _, checked ->
@@ -65,7 +68,7 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
                 renderStats()
             }
         }
-        featureBinding.notificationCleanAll.setOnClickListener { clearInterceptedNotifications() }
+        featureBinding.notificationCleanAll.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_CLEAR) { clearInterceptedNotifications() }
         observeInterceptedNotifications()
         lifecycleScope.launch(Dispatchers.IO) {
             InterceptedNotificationStore.discardExpired(this@NotificationCleanerActivity)
@@ -228,7 +231,7 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
                 )
                 binding.appName.text = app.appName
                 binding.appCount.text = getString(R.string.notif_count_fmt, app.count)
-                binding.root.setOnClickListener {
+                binding.root.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_APP) {
                     startActivity(
                         Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                             .putExtra(Settings.EXTRA_APP_PACKAGE, app.packageName),

@@ -9,6 +9,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
+import com.nice.aceclean.databinding.ItemLanguageBinding
+import com.nice.aceclean.util.EventUtils
 import java.util.Locale
 
 data class LanguageItem(
@@ -27,8 +30,7 @@ class LanguageAdapter(
     private var interactionsEnabled = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguageViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_language, parent, false)
-        return LanguageViewHolder(view)
+        return LanguageViewHolder(ItemLanguageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: LanguageViewHolder, position: Int) {
@@ -58,10 +60,10 @@ class LanguageAdapter(
         interactionsEnabled = enabled
     }
 
-    inner class LanguageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val languageIcon: ImageView = itemView.findViewById(R.id.language_icon)
-        private val languageName: TextView = itemView.findViewById(R.id.language_name)
-        private val selectedIndicator: View = itemView.findViewById(R.id.selected_indicator)
+    inner class LanguageViewHolder(binding: ItemLanguageBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val languageIcon: ImageView = binding.languageIcon
+        private val languageName: TextView = binding.languageName
+        private val selectedIndicator: View = binding.selectedIndicator
 
         fun bind(item: LanguageItem, animateSelection: Boolean) {
             val selected = item.locale.toLanguageTag() == selectedTag
@@ -78,8 +80,8 @@ class LanguageAdapter(
             itemView.setBackgroundResource(
                 if (selected) R.drawable.bg_language_row_selected else R.drawable.bg_language_row,
             )
-            itemView.setOnClickListener {
-                if (interactionsEnabled) onLanguageSelected(item)
+            itemView.setTrackedClickListener(EventUtils.CLICK_LANGUAGE_SELECT, canHandleClick = { interactionsEnabled }) {
+                onLanguageSelected(item)
             }
             if (selected && animateSelection) playSelectionAnimation()
         }

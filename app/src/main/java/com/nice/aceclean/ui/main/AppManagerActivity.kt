@@ -17,17 +17,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
+import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentAppManagerBinding
 import com.nice.aceclean.databinding.ItemAppManagerBinding
 import com.nice.aceclean.util.DeviceStats
+import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.NetworkSpeedSampler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     FeatureType.APP_MANAGER,
@@ -57,14 +59,14 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     }
 
     override fun initFeatureViews() {
-        featureBinding.appManagerBack.setOnClickListener { finish() }
+        featureBinding.appManagerBack.setTrackedClickListener(EventUtils.CLICK_APPS_BACK) { finish() }
         featureBinding.appManagerList.apply {
             layoutManager = LinearLayoutManager(this@AppManagerActivity)
             adapter = appAdapter
             setHasFixedSize(true)
         }
         bindSortControls()
-        featureBinding.appManagerUninstall.setOnClickListener {
+        featureBinding.appManagerUninstall.setTrackedClickListener(EventUtils.CLICK_APPS_UNINSTALL) {
             val selectedApps = appAdapter.selectedApps()
             if (selectedApps.isEmpty()) {
                 Toast.makeText(this, R.string.select_apps_first, Toast.LENGTH_SHORT).show()
@@ -105,7 +107,13 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
             R.id.app_manager_sort_size to SortMode.SIZE,
             R.id.app_manager_sort_last_used to SortMode.LAST_USED,
         ).forEach { (viewId, mode) ->
-            sortControl(viewId).setOnClickListener {
+            val sortEvent = when (mode) {
+                SortMode.NAME -> EventUtils.CLICK_APPS_SORT_NAME
+                SortMode.INSTALLATION -> EventUtils.CLICK_APPS_SORT_INSTALLED
+                SortMode.SIZE -> EventUtils.CLICK_APPS_SORT_SIZE
+                SortMode.LAST_USED -> EventUtils.CLICK_APPS_SORT_LAST_USED
+            }
+            sortControl(viewId).setTrackedClickListener(sortEvent) {
                 if (sortMode == mode) {
                     sortOrder = sortOrder.toggle()
                 } else {
@@ -293,7 +301,7 @@ private class ManagedAppAdapter(
             appItemRoot.setBackgroundResource(
                 if (selected) R.drawable.bg_app_manager_item_selected else R.drawable.bg_home_card,
             )
-            appItemRoot.setOnClickListener {
+            appItemRoot.setTrackedClickListener(EventUtils.CLICK_APPS_SELECT) {
                 if (!selectedPackages.add(app.packageName)) selectedPackages.remove(app.packageName)
                 bindingAdapterPosition
                     .takeIf { it != RecyclerView.NO_POSITION }
