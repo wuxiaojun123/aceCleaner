@@ -1,5 +1,6 @@
 package com.nice.aceclean.ui.main
 
+import androidx.activity.viewModels
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
@@ -9,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,33 +19,27 @@ import com.nice.aceclean.R
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityRamStatusBinding
-import com.nice.aceclean.databinding.FragmentPermissionGateBinding
 import com.nice.aceclean.databinding.ItemRunningAppBinding
-import com.nice.aceclean.permission.UsageAccessPermissionHelper
 import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.RunningAppInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ ActivityRamStatusBinding.inflate(it) }, R.layout.activity_ram_status, R.string.ram_status, EventUtils.CLICK_RAM_BACK) {
     private val runningAppsAdapter = RunningAppsAdapter(::openAppSettings)
-    private lateinit var usageAccessPermission: UsageAccessPermissionHelper
+    private val handoff: FeatureResultViewModel by viewModels()
+    private var firstResume = true
     private var resultShown = false
-    private var showingPermissionGate = false
-    private var scanJob: Job? = null
     private var refreshJob: Job? = null
 
     override val featureHeader get() = binding.featureHeader
 
     override fun initToolViews() {
-        usageAccessPermission = UsageAccessPermissionHelper(this, ::onUsageAccessGranted)
-        binding.ramUsageAllow.setTrackedClickListener(EventUtils.CLICK_RAM_ALLOW) { usageAccessPermission.request() }
+        val result = scanResult(handoff, ScanFeature.RAM) as? FeatureScanResult.Ram ?: return
         binding.ramOkButton.setTrackedClickListener(EventUtils.CLICK_RAM_OK) { finish() }
         binding.ramAppList.apply {
             layoutManager = LinearLayoutManager(this@RamStatusActivity)
@@ -62,102 +56,44 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
                 }
             })
         }
-        if (!usageAccessPermission.isGranted()) showPermissionGate()
-    }
-
-    override fun initData() {
-        if (showingPermissionGate || resultShown || scanJob?.isActive == true) return
-        binding.ramScanRing.playAnimation()
-        binding.ramScanAnimation.playAnimation()
-        scanJob = lifecycleScope.launch {
-            val appsDeferred = async(Dispatchers.IO) {
-                DeviceToolsRepository.runningApps(this@RamStatusActivity)
-            }
-            for (progress in 1..100) {
-                binding.ramScanPercent.text =
-                    getString(R.string.percentage_value, progress)
-                delay(SCAN_STEP_MILLIS)
-            }
-            val apps = appsDeferred.await()
-            renderMemory()
-            renderRunningApps(apps)
-            if (showingPermissionGate) return@launch
-            binding.ramScanRing.cancelAnimation()
-            binding.ramScanAnimation.cancelAnimation()
-            binding.ramScanContainer.visibility = View.GONE
-            binding.ramResultContainer.visibility = View.VISIBLE
-            resultShown = true
-        }
+        renderMemory(result.memory)
+        renderRunningApps(result.apps)
+        binding.ramScanRing.cancelAnimation()
+        binding.ramScanAnimation.cancelAnimation()
+        binding.ramScanContainer.visibility = View.GONE
+        binding.ramResultContainer.visibility = View.VISIBLE
+        resultShown = true
     }
 
     override fun onResume() {
         super.onResume()
-        when {
-            !usageAccessPermission.isGranted() -> showPermissionGate()
-            showingPermissionGate -> onUsageAccessGranted()
-            resultShown -> refreshResult()
-        }
-    }
-
-    private fun showPermissionGate() {
-        if (showingPermissionGate) return
-        showingPermissionGate = true
-        scanJob?.cancel()
-        refreshJob?.cancel()
-        binding.ramScanRing.cancelAnimation()
-        binding.ramScanAnimation.cancelAnimation()
-        val permissionBinding = FragmentPermissionGateBinding.inflate(layoutInflater)
-        permissionBinding.permissionToolbarTitle.setText(R.string.ram_status)
-        permissionBinding.permissionImage.setImageResource(R.drawable.image_app_manager_permission)
-        permissionBinding.permissionTitle.setText(R.string.string_ram_allow_usage_access)
-        permissionBinding.permissionDescription.setText(R.string.string_ram_usage_access_description)
-        permissionBinding.permissionBack.setTrackedClickListener(EventUtils.CLICK_RAM_BACK) { finish() }
-        permissionBinding.permissionAllow.setTrackedClickListener(EventUtils.CLICK_RAM_ALLOW) {
-            usageAccessPermission.request()
-        }
-        setActivityContent(permissionBinding, R.layout.fragment_permission_gate)
-    }
-
-    private fun onUsageAccessGranted() {
-        if (isFinishing || isDestroyed || !usageAccessPermission.isGranted()) return
-        if (showingPermissionGate) {
-            showingPermissionGate = false
-            // Reuse the root's original SystemBarInsets listener without capturing inset margins twice.
-            setContentView(binding.root)
-            ViewCompat.requestApplyInsets(binding.root)
-        }
-        if (resultShown) refreshResult() else initData()
+        if (!resultShown) return
+        if (!ScanFeature.RAM.hasPermission(this)) {
+            startActivity(ScanFeature.RAM.scanIntent(this))
+            finish()
+        } else if (firstResume) firstResume = false else refreshResult()
     }
 
     private fun refreshResult() {
-        if (!resultShown || showingPermissionGate) return
+        if (!resultShown) return
         refreshJob?.cancel()
         refreshJob = lifecycleScope.launch {
             val apps = withContext(Dispatchers.IO) {
                 DeviceToolsRepository.runningApps(this@RamStatusActivity)
             }
-            renderMemory()
+            val memory = DeviceToolsRepository.memorySnapshot(this@RamStatusActivity)
+            handoff.update(FeatureScanResult.Ram(memory, apps))
+            renderMemory(memory)
             renderRunningApps(apps)
         }
     }
 
-    override fun onDestroy() {
-        usageAccessPermission.close()
-        super.onDestroy()
-    }
-
-    private fun renderMemory() {
-        val memory = DeviceToolsRepository.memorySnapshot(this)
+    private fun renderMemory(memory: com.nice.aceclean.util.MemorySnapshot) {
         val availablePercent = (100 - memory.usedPercent).coerceIn(0, 100)
         binding.ramPercent.text = getString(R.string.percentage_value, availablePercent)
     }
 
     private fun renderRunningApps(apps: List<RunningAppInfo>) {
-        val hasUsageAccess = usageAccessPermission.isGranted()
-        if (!hasUsageAccess) {
-            showPermissionGate()
-            return
-        }
         binding.ramUsagePermission.visibility = View.GONE
         binding.ramEmptyMessage.visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
         binding.ramRunningSummary.text = if (apps.isEmpty()) {
@@ -186,9 +122,6 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
         )
     }
 
-    private companion object {
-        const val SCAN_STEP_MILLIS = 30L
-    }
 }
 
 private class RunningAppsAdapter(

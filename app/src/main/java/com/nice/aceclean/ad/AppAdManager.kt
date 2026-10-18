@@ -36,10 +36,10 @@ object AppAdManager {
     /** 清理插屏6，用于新手设备详情跳过。 */
     const val INTERSTITIAL_6 = "3006"
 
-    /** 清理插屏7，用于首次开屏。 */
+    /** 清理插屏7，尚未绑定业务场景 */
     const val INTERSTITIAL_7 = "3007"
 
-    /** 清理插屏8，尚未绑定业务场景。 */
+    /** 首页功能真实扫描完成。 */
     const val INTERSTITIAL_8 = "3008"
 
     /** 清理插屏9，尚未绑定业务场景。 */
@@ -54,6 +54,9 @@ object AppAdManager {
     /** 清理插屏12，尚未绑定业务场景。 */
     const val INTERSTITIAL_12 = "3012"
 
+    const val FEATURE_SCAN_COMPLETE = INTERSTITIAL_8
+    const val NETWORK_TEST_COMPLETE = INTERSTITIAL_8
+
     const val COLD_START = INTERSTITIAL_1
     const val HOT_START = INTERSTITIAL_2
     // New-user scenes use this app's configured AdMob placements in spaces.json.
@@ -61,7 +64,6 @@ object AppAdManager {
     const val ONBOARDING_ANALYSIS = INTERSTITIAL_4
     const val ONBOARDING_FINISH = INTERSTITIAL_5
     const val ONBOARDING_SKIP = INTERSTITIAL_6
-    const val FIRST_START = INTERSTITIAL_7
     const val ONBOARDING_NATIVE = NATIVE_1
     const val LOAD_TIMEOUT_MS = 15_000L
 

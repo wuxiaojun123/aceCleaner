@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:src="@drawable/image_home_not_clean_bg" android:scaleType="centerCrop"
+        android:contentDescription="@null" android:tag="system_bar_background" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:orientation="vertical" android:paddingHorizontal="24dp">
+        <FrameLayout android:layout_width="match_parent" android:layout_height="56dp">
+            <ImageButton android:id="@+id/scan_back" android:layout_width="48dp" android:layout_height="48dp"
+                android:layout_gravity="center_vertical" android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back" android:padding="10dp" android:contentDescription="@string/go_back" />
+            <TextView android:id="@+id/scan_title" android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:layout_gravity="center" android:gravity="center" android:textSize="18sp" android:textStyle="bold"
+                android:textColor="@color/black" />
+        </FrameLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+            android:orientation="vertical" android:gravity="center" android:paddingBottom="56dp">
+            <com.airbnb.lottie.LottieAnimationView android:id="@+id/scan_animation"
+                android:layout_width="300dp" android:layout_height="300dp"
+                android:importantForAccessibility="no" app:lottie_loop="true" />
+            <TextView android:id="@+id/scan_status" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" android:gravity="center" android:text="@string/scanning"
+                android:textSize="22sp" android:textStyle="bold" android:textColor="@color/black" />
+            <TextView android:id="@+id/scan_detail" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:gravity="center" android:textSize="16sp" android:textColor="@color/black" />
+            <TextView android:id="@+id/scan_retry" android:layout_width="match_parent" android:layout_height="56dp"
+                android:layout_marginTop="24dp" android:gravity="center" android:text="@string/try_again"
+                android:background="@drawable/bg_feature_button" android:textColor="@color/white"
+                android:clickable="true" android:focusable="true" android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

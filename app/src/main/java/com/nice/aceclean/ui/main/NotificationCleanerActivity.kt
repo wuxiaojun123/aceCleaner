@@ -1,5 +1,7 @@
 package com.nice.aceclean.ui.main
 
+import androidx.activity.viewModels
+import com.nice.aceclean.ui.base.BaseActivity
 import android.content.Intent
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -35,8 +37,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificationCleanerBinding>(
-    FeatureType.NOTIFICATION_CLEANER,
+class NotificationCleanerActivity : BaseActivity<FragmentNotificationCleanerBinding>(
     { FragmentNotificationCleanerBinding.inflate(it) },
     R.layout.fragment_notification_cleaner,
 ) {
@@ -45,44 +46,53 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
     private val topAppsAdapter = TopAppsAdapter()
     private var isClearing = false
 
-    override fun initFeatureViews() {
+    private val handoff: FeatureResultViewModel by viewModels()
+    private var initialized = false
+    private var firstResume = true
+
+    override fun initViews() {
+        val result = scanResult(handoff, ScanFeature.NOTIFICATIONS) as? FeatureScanResult.Notifications ?: return
+        initialized = true
         setupPinnedTopBar()
-        featureBinding.notificationTopApps.apply {
+        binding.notificationTopApps.apply {
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = topAppsAdapter
         }
-        featureBinding.interceptedNotificationsList.apply {
+        binding.interceptedNotificationsList.apply {
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = this@NotificationCleanerActivity.adapter
         }
-        featureBinding.notificationBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_BACK) { finish() }
-        featureBinding.notificationPinnedBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_PINNED_BACK) { finish() }
-        featureBinding.notificationWhitelistEntry.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_WHITELIST) {
+        binding.notificationBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_BACK) { finish() }
+        binding.notificationPinnedBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_PINNED_BACK) { finish() }
+        binding.notificationWhitelistEntry.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_WHITELIST) {
             startActivity(Intent(this, AllowedAppsActivity::class.java))
         }
-        featureBinding.notificationInterceptSwitch.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_SWITCH)
-        featureBinding.notificationInterceptSwitch.apply {
+        binding.notificationInterceptSwitch.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_SWITCH)
+        binding.notificationInterceptSwitch.apply {
             setTrackOnColor(ContextCompat.getColor(this@NotificationCleanerActivity, R.color.notification_manager_amber))
             setOnCheckedChangeListener { _, checked ->
                 NotificationInterceptStore.setEnabled(this@NotificationCleanerActivity, checked)
                 renderStats()
             }
         }
-        featureBinding.notificationCleanAll.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_CLEAR) { clearInterceptedNotifications() }
+        binding.notificationCleanAll.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_CLEAR) { clearInterceptedNotifications() }
+        renderStats(result.stats)
+        adapter.submitList(result.items)
         observeInterceptedNotifications()
-        lifecycleScope.launch(Dispatchers.IO) {
-            InterceptedNotificationStore.discardExpired(this@NotificationCleanerActivity)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        if (isFeatureShown) renderStats()
+        if (!initialized) return
+        if (!ScanFeature.NOTIFICATIONS.hasPermission(this)) {
+            startActivity(ScanFeature.NOTIFICATIONS.scanIntent(this))
+            finish()
+        } else if (firstResume) firstResume = false else renderStats()
     }
 
-    private fun renderStats() {
+    private fun renderStats(snapshot: com.nice.aceclean.notification.NotificationStatsSnapshot = NotificationStatsStore.load(this)) {
         val intercepting = NotificationInterceptStore.isEnabled(this)
-        featureBinding.notificationInterceptSwitch.apply {
+        binding.notificationInterceptSwitch.apply {
             if (isChecked != intercepting) {
                 setOnCheckedChangeListener(null)
                 isChecked = intercepting
@@ -92,13 +102,12 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
                 }
             }
         }
-        featureBinding.notificationInterceptedToday.text =
+        binding.notificationInterceptedToday.text =
             numberFormatter.format(NotificationInterceptStore.interceptedToday(this))
-        featureBinding.notificationWhitelistCount.text =
+        binding.notificationWhitelistCount.text =
             NotificationInterceptStore.whitelist(this).size.toString()
 
-        val snapshot = NotificationStatsStore.load(this)
-        featureBinding.notificationBadgeValue.text =
+        binding.notificationBadgeValue.text =
             if (snapshot.totalToday > 99) getString(R.string.notif_badge) else snapshot.totalToday.toString()
         renderAppList(snapshot.topApps)
     }
@@ -110,13 +119,13 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
                     if (isClearing) return@collect
                     adapter.submitList(items)
                     val hasItems = items.isNotEmpty()
-                    featureBinding.interceptedNotificationsList.isVisible = hasItems
-                    featureBinding.interceptedNotificationsEmpty.isVisible = !hasItems
-                    featureBinding.notificationCleanAll.apply {
+                    binding.interceptedNotificationsList.isVisible = hasItems
+                    binding.interceptedNotificationsEmpty.isVisible = !hasItems
+                    binding.notificationCleanAll.apply {
                         isEnabled = hasItems
                         alpha = if (hasItems) 1f else 0.45f
                     }
-                    featureBinding.notificationInterceptedToday.text =
+                    binding.notificationInterceptedToday.text =
                         numberFormatter.format(NotificationInterceptStore.interceptedToday(this@NotificationCleanerActivity))
                 }
             }
@@ -127,8 +136,8 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
         if (isClearing || adapter.itemCount == 0) return
         val clearedCount = adapter.itemCount
         isClearing = true
-        featureBinding.notificationCleanAll.isEnabled = false
-        featureBinding.interceptedNotificationsEmpty.isVisible = false
+        binding.notificationCleanAll.isEnabled = false
+        binding.interceptedNotificationsEmpty.isVisible = false
         val cutoff = System.currentTimeMillis()
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
@@ -144,7 +153,7 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
     }
 
     private suspend fun animateNotificationsOut() {
-        val recyclerView = featureBinding.interceptedNotificationsList
+        val recyclerView = binding.interceptedNotificationsList
         val previousAnimator = recyclerView.itemAnimator
         recyclerView.itemAnimator = null
         recyclerView.scrollToPosition(0)
@@ -176,23 +185,23 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
     }
 
     private fun setupPinnedTopBar() {
-        featureBinding.notificationScrollView.setOnScrollChangeListener(
+        binding.notificationScrollView.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
                 updatePinnedTopBar(scrollY)
             },
         )
-        featureBinding.notificationScrollView.doOnLayout {
-            updatePinnedTopBar(featureBinding.notificationScrollView.scrollY)
+        binding.notificationScrollView.doOnLayout {
+            updatePinnedTopBar(binding.notificationScrollView.scrollY)
         }
     }
 
     private fun updatePinnedTopBar(scrollY: Int) {
-        val showDistance = (featureBinding.notificationHeader.bottom +
-            featureBinding.notificationScrollView.paddingTop).coerceAtLeast(1)
+        val showDistance = (binding.notificationHeader.bottom +
+            binding.notificationScrollView.paddingTop).coerceAtLeast(1)
         val alpha = (scrollY.toFloat() / showDistance).coerceIn(0f, 1f)
-        featureBinding.notificationPinnedTopBar.alpha = alpha
-        featureBinding.notificationPinnedTopBar.isVisible = alpha > 0f
-        featureBinding.notificationHeader.importantForAccessibility = if (alpha >= 1f) {
+        binding.notificationPinnedTopBar.alpha = alpha
+        binding.notificationPinnedTopBar.isVisible = alpha > 0f
+        binding.notificationHeader.importantForAccessibility = if (alpha >= 1f) {
             View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         } else {
             View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
@@ -202,8 +211,8 @@ class NotificationCleanerActivity : PermissionFeatureActivity<FragmentNotificati
     private fun renderAppList(apps: List<NotificationAppStats>) {
         val visibleApps = apps.filter { it.packageName != packageName }
         topAppsAdapter.submitList(visibleApps)
-        featureBinding.notificationTopApps.isVisible = visibleApps.isNotEmpty()
-        featureBinding.notificationTopAppsEmpty.isVisible = visibleApps.isEmpty()
+        binding.notificationTopApps.isVisible = visibleApps.isNotEmpty()
+        binding.notificationTopAppsEmpty.isVisible = visibleApps.isEmpty()
     }
 
     private inner class TopAppsAdapter : RecyclerView.Adapter<TopAppsAdapter.Holder>() {

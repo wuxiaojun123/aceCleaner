@@ -121,6 +121,8 @@
             android:name=".ui.onboarding.FirstJunkCompleteActivity"
             android:exported="false"
             android:theme="@style/Theme.AceClean.Onboarding" />
+        <activity android:name=".ui.main.FeatureScanActivity" android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.FeatureScanPermissionActivity" android:exported="false" android:screenOrientation="portrait" />
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.main.MainActivity"

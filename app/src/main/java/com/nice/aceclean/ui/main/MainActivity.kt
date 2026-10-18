@@ -66,27 +66,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         }
     }
 
-    fun openCleanUp() = startActivity(Intent(this, CleanUpActivity::class.java))
+    fun openCleanUp() = startActivity(ScanFeature.CLEAN_UP.scanIntent(this))
 
-    fun openNetworkTraffic() = startActivity(Intent(this, NetworkTrafficActivity::class.java))
+    fun openNetworkTraffic() = startActivity(ScanFeature.NETWORK_TRAFFIC.scanIntent(this))
 
-    fun openNotificationCleaner() = startActivity(Intent(this, NotificationCleanerActivity::class.java))
+    fun openNotificationCleaner() = startActivity(ScanFeature.NOTIFICATIONS.scanIntent(this))
 
-    fun openAppManager() = startActivity(Intent(this, AppManagerActivity::class.java))
+    fun openAppManager() = startActivity(ScanFeature.APP_MANAGER.scanIntent(this))
 
-    fun openScreenshotCleaner() = startActivity(Intent(this, ScreenshotCleanerActivity::class.java))
+    fun openScreenshotCleaner() = startActivity(ScanFeature.SCREENSHOT.scanIntent(this))
 
-    fun openBigFileCleaner() = startActivity(Intent(this, BigFileCleanerActivity::class.java))
+    fun openBigFileCleaner() = startActivity(ScanFeature.BIG_FILE.scanIntent(this))
 
-    fun openVideoCleaner() = startActivity(Intent(this, VideoCleanerActivity::class.java))
+    fun openVideoCleaner() = startActivity(ScanFeature.VIDEO.scanIntent(this))
 
-    fun openDuplicatePhotoCleaner() = startActivity(Intent(this, SimilarPhotoCleanerActivity::class.java))
+    fun openDuplicatePhotoCleaner() = startActivity(ScanFeature.DUPLICATE_PHOTO.scanIntent(this))
 
-    fun openRamStatus() = startActivity(Intent(this, RamStatusActivity::class.java))
+    fun openRamStatus() = startActivity(ScanFeature.RAM.scanIntent(this))
 
-    fun openDeviceScan() = startActivity(Intent(this, DeviceReportActivity::class.java))
+    fun openDeviceScan() = startActivity(ScanFeature.DEVICE.scanIntent(this))
 
-    fun openBatteryInfo() = startActivity(Intent(this, BatteryInfoActivity::class.java))
+    fun openBatteryInfo() = startActivity(ScanFeature.BATTERY.scanIntent(this))
 
     fun openNetworkTest() = startActivity(Intent(this, NetworkTestActivity::class.java))
 

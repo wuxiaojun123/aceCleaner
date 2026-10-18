@@ -92,12 +92,17 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
             render()
         }
         resultBinding.pictureClean.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_CLEAN) { deleteSelected() }
-        loadPictures()
+        val scan = initialScanResult as FeatureScanResult.Screenshots
+        screenshots = scan.screenshots
+        others = scan.others
+        if (screenshots.isEmpty()) showingScreenshots = false
+        render()
     }
 
     private fun loadPictures() {
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) { MediaStoreRepository.pictures(this@ScreenshotCleanerActivity) }
+            updateScanResult(FeatureScanResult.Screenshots(result.first, result.second))
             screenshots = result.first
             others = result.second
             if (screenshots.isEmpty()) showingScreenshots = false

@@ -1,7 +1,7 @@
 package com.nice.aceclean.ui.main
 
-import android.content.Intent
 import android.os.Build
+import android.content.Intent
 import android.os.storage.StorageManager
 import android.provider.Settings
 import android.view.View
@@ -10,29 +10,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.cleanup.CleanupCategory
 import com.nice.aceclean.cleanup.CleanupViewModel
 import com.nice.aceclean.databinding.FragmentCleanResultBinding
-import com.nice.aceclean.databinding.FragmentCleanScanBinding
-import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
 import com.nice.aceclean.ui.base.BaseActivity
-import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.EventUtils
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
-class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanScanBinding.inflate(it) }, R.layout.fragment_clean_scan) {
-    private lateinit var resultBinding: FragmentCleanResultBinding
+class CleanUpActivity : BaseActivity<FragmentCleanResultBinding>({ FragmentCleanResultBinding.inflate(it) }, R.layout.fragment_clean_result) {
+    private val resultBinding get() = binding
     private val viewModel: CleanupViewModel by viewModels()
     private val selected = CleanupCategory.entries.toMutableSet()
-    private var scanJob: Job? = null
-    private var progressJob: Job? = null
     private var isDeleting = false
     private val cleaningLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         isDeleting = false
@@ -43,57 +33,19 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
         }
     }
 
-    private val storagePermission = AllFilesAccessPermissionHelper(
-        activity = this,
-        onGranted = ::startScan,
-        onDenied = ::showPermissionRequired,
-    )
+    private val handoff: FeatureResultViewModel by viewModels()
 
     override fun initViews() {
-        if (storagePermission.isGranted()) startScan() else storagePermission.request()
-    }
-
-    private fun requestStorageAccess() {
-        storagePermission.request()
-    }
-
-    private fun showPermissionRequired() {
-        IosActionSheetDialog.show(
-            activity = this,
-            title = getString(R.string.storage_permission_required),
-            message = getString(R.string.storage_permission_explanation),
-            actions = listOf(
-                IosActionSheetDialog.Action(getString(R.string.try_again), eventName = EventUtils.CLICK_CLEANUP_PERMISSION_RETRY, onClick = ::requestStorageAccess),
-                IosActionSheetDialog.Action(
-                    getString(R.string.open_app_settings),
-                    eventName = EventUtils.CLICK_CLEANUP_PERMISSION_SETTINGS,
-                    onClick = storagePermission::openAppSettings,
-                ),
-            ),
-            onCancel = ::finish,
-            cancelEventName = EventUtils.CLICK_CLEANUP_PERMISSION_CANCEL,
-        )
+        if (viewModel.scanResult == null) {
+            val result = scanResult(handoff, ScanFeature.CLEAN_UP) as? FeatureScanResult.Cleanup ?: return
+            viewModel.restoreScan(result.value)
+        }
+        showCleanResult()
     }
 
     private fun startScan() {
-        scanJob?.cancel()
-        progressJob?.cancel()
-        val scanBinding = setActivityContent(FragmentCleanScanBinding.inflate(layoutInflater), R.layout.fragment_clean_scan)
-        val progressText = scanBinding.scanPercentage
-        progressText.text = getString(R.string.scanned_files_progress, 0)
-        progressJob = lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.scanProgress.collect { progress ->
-                    progressText.text = getString(R.string.scanned_files_progress, progress.scannedFiles)
-                }
-            }
-        }
-        scanJob = lifecycleScope.launch {
-            viewModel.scan()
-            progressJob?.cancel()
-            progressJob = null
-            showCleanResult()
-        }
+        startActivity(ScanFeature.CLEAN_UP.scanIntent(this))
+        finish()
     }
 
     private fun showCleanResult() {
@@ -102,7 +54,6 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
             finish()
             return
         }
-        resultBinding = setActivityContent(FragmentCleanResultBinding.inflate(layoutInflater), R.layout.fragment_clean_result)
         selected.clear()
         selected.addAll(CleanupCategory.entries)
         resultBinding.cleanResultBack.setTrackedClickListener(EventUtils.CLICK_CLEANUP_BACK) { finish() }
@@ -196,7 +147,6 @@ class CleanUpActivity : BaseActivity<FragmentCleanScanBinding>({ FragmentCleanSc
     )
 
     override fun onDestroy() {
-        storagePermission.close()
         super.onDestroy()
     }
 }

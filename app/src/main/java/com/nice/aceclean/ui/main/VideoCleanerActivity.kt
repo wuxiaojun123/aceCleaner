@@ -81,12 +81,14 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
             render()
         }
         resultBinding.pictureClean.setTrackedClickListener(EventUtils.CLICK_VIDEOS_CLEAN) { deleteSelected() }
-        loadVideos()
+        videos = (initialScanResult as FeatureScanResult.Files).files
+        render()
     }
 
     private fun loadVideos() {
         lifecycleScope.launch {
             videos = withContext(Dispatchers.IO) { MediaStoreRepository.videos(this@VideoCleanerActivity) }
+            updateScanResult(FeatureScanResult.Files(ScanFeature.VIDEO, videos))
             selected.clear()
             render()
         }

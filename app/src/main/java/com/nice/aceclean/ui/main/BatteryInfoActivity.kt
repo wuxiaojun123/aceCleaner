@@ -1,17 +1,15 @@
 package com.nice.aceclean.ui.main
 
+import androidx.activity.viewModels
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityBatteryInfoBinding
@@ -19,8 +17,6 @@ import com.nice.aceclean.databinding.ItemBatteryInfoCardBinding
 import com.nice.aceclean.util.BatterySnapshot
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.EventUtils
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ ActivityBatteryInfoBinding.inflate(it) }, R.layout.activity_battery_info, R.string.battery_info, EventUtils.CLICK_BATTERY_BACK) {
 
@@ -37,33 +33,22 @@ class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ Act
 
     override val featureHeader get() = binding.featureHeader
 
-    override fun initToolViews() {
-        binding.batteryGotItButton.setTrackedClickListener(EventUtils.CLICK_BATTERY_GOT_IT) { finish() }
-    }
+    private val handoff: FeatureResultViewModel by viewModels()
 
-    override fun initData() {
-        lifecycleScope.launch {
-            for (progress in 1..100) {
-                binding.batteryScanPercent.text =
-                    getString(R.string.percentage_value, progress)
-                delay(BATTERY_SCAN_STEP_MILLIS)
-            }
-            val battery = latestBattery ?: registerReceiver(
-                null,
-                IntentFilter(Intent.ACTION_BATTERY_CHANGED),
-            )?.let { DeviceToolsRepository.batterySnapshot(this@BatteryInfoActivity, it) }
-            scanComplete = true
-            battery?.let(::renderBattery)
-            binding.batteryScanBackground.cancelAnimation()
-            binding.batteryScanAnimation.cancelAnimation()
-            binding.batteryScanContainer.visibility = View.GONE
-            binding.batteryResultContainer.visibility = View.VISIBLE
-        }
+    override fun initToolViews() {
+        val result = scanResult(handoff, ScanFeature.BATTERY) as? FeatureScanResult.Battery ?: return
+        binding.batteryGotItButton.setTrackedClickListener(EventUtils.CLICK_BATTERY_GOT_IT) { finish() }
+        scanComplete = true
+        renderBattery(result.value)
+        binding.batteryScanBackground.cancelAnimation()
+        binding.batteryScanAnimation.cancelAnimation()
+        binding.batteryScanContainer.visibility = View.GONE
+        binding.batteryResultContainer.visibility = View.VISIBLE
     }
 
     override fun onStart() {
         super.onStart()
-        if (!receiverRegistered) {
+        if (scanComplete && !receiverRegistered) {
             ContextCompat.registerReceiver(
                 this,
                 batteryReceiver,
@@ -175,7 +160,4 @@ class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ Act
         return getString(R.string.duration_hours_minutes, totalMinutes / 60L, totalMinutes % 60L)
     }
 
-    private companion object {
-        const val BATTERY_SCAN_STEP_MILLIS = 30L
-    }
 }

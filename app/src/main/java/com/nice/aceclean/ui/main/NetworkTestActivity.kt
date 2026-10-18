@@ -8,6 +8,12 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
+import com.nice.aceclean.ad.AppAdManager
+import com.nice.aceclean.ad.HotStartManager
+import com.nice.aceclean.util.LogUtils
+import com.nice.library_ad_sdk.AdSdkManager
+import kotlinx.coroutines.CancellationException
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityNetworkTestBinding
@@ -57,6 +63,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
             binding.networkTestStatus.setText(R.string.network_unavailable)
             return
         }
+        AdSdkManager.preloadAsync(applicationContext, AppAdManager.NETWORK_TEST_COMPLETE)
         resetResults()
         startLiveSpeedUpdates()
         testJob = lifecycleScope.launch {
@@ -65,7 +72,8 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
             val progress = binding.networkTestProgress
             button.isEnabled = false
             button.setText(R.string.testing)
-            runCatching {
+            try {
+                LogUtils.d("test_start", TAG)
                 status.setText(R.string.network_test_connecting)
                 showTestStage(0)
                 progress.animateTo(12)
@@ -93,14 +101,45 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
                 binding.networkResultsHint.setText(R.string.string_network_results_complete)
                 liveSpeedJob?.cancel()
                 progress.animateTo(100, ::showSuccessAnimation)
-            }.onFailure {
-                liveSpeedJob?.cancel()
+                LogUtils.d("test_complete ping=$ping download=$download upload=$upload", TAG)
+                showCompletionAd()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                LogUtils.w("test_failed", TAG, error)
                 progress.animateTo(0)
                 status.setText(R.string.network_test_failed)
                 showTestStage(-1)
+            } finally {
+                liveSpeedJob?.cancel()
+                button.isEnabled = true
+                button.setText(R.string.test_again)
             }
-            button.isEnabled = true
-            button.setText(R.string.test_again)
+        }
+    }
+
+    /** Wait for the completion ad on this screen; failures leave the measured results visible. */
+    private suspend fun showCompletionAd() {
+        try {
+            LogUtils.d("test_ad_attempt placement=${AppAdManager.NETWORK_TEST_COMPLETE}", TAG)
+            val loaded = AdSdkManager.preload(applicationContext, AppAdManager.NETWORK_TEST_COMPLETE)
+            if (!loaded) {
+                LogUtils.d("test_ad_finished loaded=false shown=false", TAG)
+                return
+            }
+            lifecycle.withResumed { }
+            val previousSkip = HotStartManager.skipNextHotStart
+            HotStartManager.markSkipNextHotStart()
+            try {
+                val shown = AppAdManager.showLoaded(this, AppAdManager.NETWORK_TEST_COMPLETE)
+                LogUtils.d("test_ad_finished loaded=true shown=$shown", TAG)
+            } finally {
+                HotStartManager.skipNextHotStart = previousSkip
+            }
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            LogUtils.w("test_ad_failed", TAG, error)
         }
     }
 
@@ -167,6 +206,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
     }
 
     private companion object {
+        const val TAG = "NetworkTest"
         const val LIVE_SPEED_REFRESH_MILLIS = 1_000L
     }
 }

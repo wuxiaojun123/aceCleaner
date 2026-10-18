@@ -13,6 +13,11 @@ class CleanupViewModel(application: Application) : AndroidViewModel(application)
     private val _scanProgress = MutableStateFlow(CleanupScanStats())
     val scanProgress: StateFlow<CleanupScanStats> = _scanProgress.asStateFlow()
 
+    fun restoreScan(result: CleanupScanResult) {
+        scanResult = result
+        _scanProgress.value = result.stats
+    }
+
     suspend fun scan(): CleanupScanResult {
         _scanProgress.value = CleanupScanStats()
         return CleanupRepository.scan(getApplication()) { progress ->

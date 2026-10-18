@@ -1,11 +1,12 @@
 package com.nice.aceclean.ui.main
 
+import androidx.activity.viewModels
+import com.nice.aceclean.ui.base.BaseActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -14,61 +15,40 @@ import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentNetworkTrafficBinding
 import com.nice.aceclean.databinding.ItemNetworkAppBinding
+import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.EventUtils
-import com.nice.aceclean.util.InstalledAppInfo
-import com.nice.aceclean.util.NetworkUsageRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class NetworkTrafficActivity : PermissionFeatureActivity<FragmentNetworkTrafficBinding>(
-    FeatureType.NETWORK_TRAFFIC,
+class NetworkTrafficActivity : BaseActivity<FragmentNetworkTrafficBinding>(
     { FragmentNetworkTrafficBinding.inflate(it) },
     R.layout.fragment_network_traffic,
 ) {
     private val appAdapter = NetworkAppAdapter()
 
-    override fun initFeatureViews() {
-        featureBinding.networkBack.setTrackedClickListener(EventUtils.CLICK_NETWORK_BACK) { finish() }
-        featureBinding.networkAppList.apply {
+    private val handoff: FeatureResultViewModel by viewModels()
+
+    override fun initViews() {
+        val result = scanResult(handoff, ScanFeature.NETWORK_TRAFFIC) as? FeatureScanResult.Traffic ?: return
+        binding.networkBack.setTrackedClickListener(EventUtils.CLICK_NETWORK_BACK) { finish() }
+        binding.networkAppList.apply {
             layoutManager = LinearLayoutManager(this@NetworkTrafficActivity)
             adapter = appAdapter
         }
-        loadTraffic()
-    }
-
-    private fun loadTraffic() {
-        lifecycleScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                val usage = NetworkUsageRepository.currentMonth(this@NetworkTrafficActivity)
-                val apps = DeviceStats.launchableApps(this@NetworkTrafficActivity)
-                    .map { app -> app.copy(rxBytes = usage.bytesByUid[app.applicationInfo.uid] ?: 0L, txBytes = 0L) }
-                    .filter { it.rxBytes > 0L }
-                    .sortedByDescending { it.rxBytes }
-                    .take(8)
-                usage to apps
-            }
-            if (isFinishing || isDestroyed) return@launch
-            val (usage, apps) = result
-
-            featureBinding.networkTotal.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.totalBytes)
-            featureBinding.networkMobile.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.mobileBytes)
-            featureBinding.networkWifi.text = DeviceStats.formatBytes(this@NetworkTrafficActivity, usage.wifiBytes)
-            renderDailyBars(usage.dailyBytes)
-            featureBinding.networkAppEmpty.visibility = if (apps.isEmpty()) View.VISIBLE else View.GONE
-            featureBinding.networkAppList.visibility = if (apps.isEmpty()) View.GONE else View.VISIBLE
-            appAdapter.submitList(apps) {
-                featureBinding.networkContent.visibility = View.VISIBLE
-            }
-        }
+        val usage = result.usage
+        binding.networkTotal.text = DeviceStats.formatBytes(this, usage.totalBytes)
+        binding.networkMobile.text = DeviceStats.formatBytes(this, usage.mobileBytes)
+        binding.networkWifi.text = DeviceStats.formatBytes(this, usage.wifiBytes)
+        renderDailyBars(usage.dailyBytes)
+        binding.networkAppEmpty.visibility = if (result.apps.isEmpty()) View.VISIBLE else View.GONE
+        binding.networkAppList.visibility = if (result.apps.isEmpty()) View.GONE else View.VISIBLE
+        appAdapter.submitList(result.apps) { binding.networkContent.visibility = View.VISIBLE }
     }
 
     private fun renderDailyBars(dailyBytes: List<Long>) {
         val bars = listOf(
-            featureBinding.networkDay1, featureBinding.networkDay2, featureBinding.networkDay3,
-            featureBinding.networkDay4, featureBinding.networkDay5, featureBinding.networkDay6,
-            featureBinding.networkDay7,
+            binding.networkDay1, binding.networkDay2, binding.networkDay3,
+            binding.networkDay4, binding.networkDay5, binding.networkDay6,
+            binding.networkDay7,
         )
         val maximum = dailyBytes.maxOrNull()?.coerceAtLeast(1L) ?: 1L
         val minimumHeight = (8 * resources.displayMetrics.density).toInt()

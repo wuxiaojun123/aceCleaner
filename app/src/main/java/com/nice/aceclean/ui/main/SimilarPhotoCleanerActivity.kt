@@ -1,5 +1,6 @@
 package com.nice.aceclean.ui.main
 
+import androidx.activity.viewModels
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -18,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDuplicatePhotoCleanerBinding
-import com.nice.aceclean.permission.MediaReadPermissionHelper
-import com.nice.aceclean.permission.MediaReadType
 import com.nice.aceclean.similarphoto.SimilarPhotoCluster
 import com.nice.aceclean.similarphoto.SimilarPhotoItem
 import com.nice.aceclean.similarphoto.SimilarPhotoRow
@@ -39,12 +38,7 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     private var pendingDeleteItems = emptyList<SimilarPhotoItem>()
     private var deleteConfirmationDialog: Dialog? = null
 
-    private val photoPermission = MediaReadPermissionHelper(
-        activity = this,
-        type = MediaReadType.IMAGES,
-        onGranted = ::loadPhotos,
-        onDenied = ::showPermissionEmptyState,
-    )
+    private val handoff: FeatureResultViewModel by viewModels()
 
     private val deleteLauncher = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) onPhotosDeleted(pendingDeleteItems)
@@ -52,6 +46,7 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     }
 
     override fun initViews() {
+        val result = scanResult(handoff, ScanFeature.DUPLICATE_PHOTO) as? FeatureScanResult.Photos ?: return
         binding.duplicateBack.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_BACK) { finish() }
         keepBestSwitch = binding.duplicateKeepBestSwitch
         keepBestSwitch.isChecked = true
@@ -78,17 +73,8 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
             if (!syncingSwitch) adapter.setKeepBestSelection(enabled)
         }
         binding.duplicateDelete.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_DELETE) { confirmDelete() }
+        renderClusters(result.clusters)
     }
-
-    override fun initData() {
-        if (hasPhotoAccess()) loadPhotos() else requestPhotoAccess()
-    }
-
-    private fun requestPhotoAccess() {
-        photoPermission.request()
-    }
-
-    private fun hasPhotoAccess(): Boolean = photoPermission.isGranted()
 
     private fun loadPhotos() {
         showLoading(true)
@@ -96,14 +82,19 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
             val clusters = runCatching { SimilarPhotoScanner.scan(this@SimilarPhotoCleanerActivity) }
                 .onFailure { Toast.makeText(this@SimilarPhotoCleanerActivity, R.string.dup_scan_failed, Toast.LENGTH_SHORT).show() }
                 .getOrDefault(emptyList())
-            val rows = buildRows(clusters)
-            adapter.submit(rows)
-            showLoading(false)
-            showEmpty(rows.isEmpty())
-            keepBestSwitch.isEnabled = rows.isNotEmpty()
-            keepBestSwitch.alpha = if (rows.isEmpty()) 0.5f else 1f
-            updateSelection(adapter.selectedItems())
+            renderClusters(clusters)
         }
+    }
+
+    private fun renderClusters(clusters: List<SimilarPhotoCluster>) {
+        handoff.update(FeatureScanResult.Photos(clusters))
+        val rows = buildRows(clusters)
+        adapter.submit(rows)
+        showLoading(false)
+        showEmpty(rows.isEmpty())
+        keepBestSwitch.isEnabled = rows.isNotEmpty()
+        keepBestSwitch.alpha = if (rows.isEmpty()) 0.5f else 1f
+        updateSelection(adapter.selectedItems())
     }
 
     private fun buildRows(clusters: List<SimilarPhotoCluster>): List<SimilarPhotoRow> = buildList {
@@ -204,14 +195,6 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
         binding.duplicatePhotoList.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    private fun showPermissionEmptyState() {
-        showLoading(false)
-        showEmpty(true)
-        keepBestSwitch.isEnabled = false
-        keepBestSwitch.alpha = 0.5f
-        binding.duplicateEmptyDescription.setText(R.string.storage_permission_required)
-    }
-
     private inner class GridSpacingDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, child: View, parent: RecyclerView, state: RecyclerView.State) {
             val position = parent.getChildAdapterPosition(child)
@@ -231,7 +214,6 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     override fun onDestroy() {
         deleteConfirmationDialog?.dismiss()
         deleteConfirmationDialog = null
-        photoPermission.close()
         super.onDestroy()
     }
 

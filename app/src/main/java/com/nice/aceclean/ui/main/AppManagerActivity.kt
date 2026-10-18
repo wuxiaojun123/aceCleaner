@@ -7,6 +7,8 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.icu.util.Calendar
 import android.net.Uri
+import androidx.activity.viewModels
+import com.nice.aceclean.ui.base.BaseActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
-    FeatureType.APP_MANAGER,
+class AppManagerActivity : BaseActivity<FragmentAppManagerBinding>(
     { FragmentAppManagerBinding.inflate(it) },
     R.layout.fragment_app_manager,
 ) {
@@ -58,15 +59,18 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
         }
     }
 
-    override fun initFeatureViews() {
-        featureBinding.appManagerBack.setTrackedClickListener(EventUtils.CLICK_APPS_BACK) { finish() }
-        featureBinding.appManagerList.apply {
+    private val handoff: FeatureResultViewModel by viewModels()
+
+    override fun initViews() {
+        val result = scanResult(handoff, ScanFeature.APP_MANAGER) as? FeatureScanResult.Apps ?: return
+        binding.appManagerBack.setTrackedClickListener(EventUtils.CLICK_APPS_BACK) { finish() }
+        binding.appManagerList.apply {
             layoutManager = LinearLayoutManager(this@AppManagerActivity)
             adapter = appAdapter
             setHasFixedSize(true)
         }
         bindSortControls()
-        featureBinding.appManagerUninstall.setTrackedClickListener(EventUtils.CLICK_APPS_UNINSTALL) {
+        binding.appManagerUninstall.setTrackedClickListener(EventUtils.CLICK_APPS_UNINSTALL) {
             val selectedApps = appAdapter.selectedApps()
             if (selectedApps.isEmpty()) {
                 Toast.makeText(this, R.string.select_apps_first, Toast.LENGTH_SHORT).show()
@@ -77,14 +81,16 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
                 uninstallNext()
             }
         }
-        loadApps()
+        apps = result.apps
+        updateButton(0)
+        renderApps()
     }
 
     private fun loadApps() {
-        if (!isFeatureShown) return
         lifecycleScope.launch {
             val loadedApps = withContext(Dispatchers.IO) { DeviceStats.launchableApps(this@AppManagerActivity) }
             if (isFinishing || isDestroyed) return@launch
+            handoff.update(FeatureScanResult.Apps(loadedApps))
             apps = loadedApps
             appAdapter.clearSelection()
             updateButton(0)
@@ -93,10 +99,10 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     }
 
     private fun sortControl(id: Int): TextView = when (id) {
-        R.id.app_manager_sort_name -> featureBinding.appManagerSortName
-        R.id.app_manager_sort_installation -> featureBinding.appManagerSortInstallation
-        R.id.app_manager_sort_size -> featureBinding.appManagerSortSize
-        R.id.app_manager_sort_last_used -> featureBinding.appManagerSortLastUsed
+        R.id.app_manager_sort_name -> binding.appManagerSortName
+        R.id.app_manager_sort_installation -> binding.appManagerSortInstallation
+        R.id.app_manager_sort_size -> binding.appManagerSortSize
+        R.id.app_manager_sort_last_used -> binding.appManagerSortLastUsed
         else -> error("Unknown sort control: $id")
     }
 
@@ -127,7 +133,6 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     }
 
     private fun renderApps() {
-        if (!isFeatureShown) return
         updateSortControls()
         appAdapter.submitList(sortedApps())
     }
@@ -197,8 +202,7 @@ class AppManagerActivity : PermissionFeatureActivity<FragmentAppManagerBinding>(
     }
 
     private fun updateButton(selectedCount: Int = appAdapter.selectedApps().size) {
-        if (!isFeatureShown) return
-        featureBinding.appManagerUninstall.text = if (selectedCount == 0) {
+        binding.appManagerUninstall.text = if (selectedCount == 0) {
             getString(R.string.uninstall)
         } else {
             getString(R.string.uninstall_count, selectedCount)

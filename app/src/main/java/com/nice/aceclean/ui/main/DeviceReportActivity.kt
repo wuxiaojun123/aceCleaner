@@ -1,49 +1,31 @@
 package com.nice.aceclean.ui.main
 
-import android.view.LayoutInflater
+import androidx.activity.viewModels
 import android.view.View
 import android.widget.GridLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.ActivityDeviceReportBinding
 import com.nice.aceclean.databinding.ItemDeviceScanCardBinding
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.EventUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ ActivityDeviceReportBinding.inflate(it) }, R.layout.activity_device_report, R.string.device_scan, EventUtils.CLICK_DEVICE_REPORT_BACK) {
 
     override val featureHeader get() = binding.featureHeader
 
-    override fun initToolViews() {
-        binding.deviceOkButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_REPORT_OK) { finish() }
-    }
+    private val handoff: FeatureResultViewModel by viewModels()
 
-    override fun initData() {
-        lifecycleScope.launch {
-            val reportDeferred = async(Dispatchers.Default) {
-                DeviceToolsRepository.deviceReport(this@DeviceReportActivity)
-            }
-            for (value in 1..100) {
-                binding.deviceScanPercent.text =
-                    getString(R.string.percentage_value, value)
-                delay(DEVICE_SCAN_STEP_MILLIS)
-            }
-            val report = reportDeferred.await()
-            renderReport(report)
-            binding.deviceScanRing.cancelAnimation()
-            binding.deviceScanAnimation.cancelAnimation()
-            binding.deviceScanContainer.visibility = View.GONE
-            binding.deviceResultContainer.visibility = View.VISIBLE
-        }
+    override fun initToolViews() {
+        val result = scanResult(handoff, ScanFeature.DEVICE) as? FeatureScanResult.Device ?: return
+        binding.deviceOkButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_REPORT_OK) { finish() }
+        renderReport(result.report)
+        binding.deviceScanRing.cancelAnimation()
+        binding.deviceScanAnimation.cancelAnimation()
+        binding.deviceScanContainer.visibility = View.GONE
+        binding.deviceResultContainer.visibility = View.VISIBLE
     }
 
     private fun renderReport(report: com.nice.aceclean.util.DeviceReport) {
@@ -115,7 +97,4 @@ class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ A
         grid.addView(card.root)
     }
 
-    private companion object {
-        const val DEVICE_SCAN_STEP_MILLIS = 30L
-    }
 }

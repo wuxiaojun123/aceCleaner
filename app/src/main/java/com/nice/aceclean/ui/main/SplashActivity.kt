@@ -94,7 +94,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         val prefs = getSharedPreferences("onboarding", MODE_PRIVATE)
         if (OnboardingState.get(this) != OnboardingStep.COMPLETED && !prefs.getBoolean("first_splash_consumed", false)) {
             prefs.edit().putBoolean("first_splash_consumed", true).apply()
-            return AppAdManager.FIRST_START
+            return AppAdManager.COLD_START
         }
         return AppAdManager.COLD_START
     }

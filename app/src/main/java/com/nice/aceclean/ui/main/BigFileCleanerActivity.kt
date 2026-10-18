@@ -100,12 +100,14 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
         resultBinding.largeSizeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_SIZE) { showFilterDropdown(FilterKind.SIZE) }
         resultBinding.largeTimeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_TIME) { showFilterDropdown(FilterKind.TIME) }
         resultBinding.largeClean.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_CLEAN) { deleteSelected() }
-        loadFiles()
+        allFiles = (initialScanResult as FeatureScanResult.Files).files
+        render()
     }
 
     private fun loadFiles() {
         lifecycleScope.launch {
             allFiles = withContext(Dispatchers.IO) { MediaStoreRepository.largeFiles(this@BigFileCleanerActivity) }
+            updateScanResult(FeatureScanResult.Files(ScanFeature.BIG_FILE, allFiles))
             selected.clear()
             render()
         }
