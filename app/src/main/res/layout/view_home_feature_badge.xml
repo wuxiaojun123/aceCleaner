@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:importantForAccessibility="noHideDescendants">
+
+    <ImageView
+        android:id="@+id/permission_warning"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_home_permission_warning"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/unused_dot"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_home_unused_dot"
+        android:visibility="gone" />
+</FrameLayout>

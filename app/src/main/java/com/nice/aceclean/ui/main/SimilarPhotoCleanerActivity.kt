@@ -46,8 +46,9 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     }
 
     override fun initViews() {
+        enableBackInterstitial()
         val result = scanResult(handoff, ScanFeature.DUPLICATE_PHOTO) as? FeatureScanResult.Photos ?: return
-        binding.duplicateBack.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_BACK) { finish() }
+        binding.duplicateBack.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_BACK) { finishWithBackInterstitial() }
         keepBestSwitch = binding.duplicateKeepBestSwitch
         keepBestSwitch.isChecked = true
         keepBestSwitch.setTrackOnColor(ContextCompat.getColor(this, R.color.color_FF42B8FF))

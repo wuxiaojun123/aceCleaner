@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.view.animation.DecelerateInterpolator
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -40,9 +39,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     }
 
     override fun initViews() {
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() = Unit
-        })
+        disableSystemBack()
         // 暂停首次启动的悬浮窗引导，直接显示原有 Splash 页面。
         // 恢复此入口时，同时恢复 OnboardingStep.NOT_STARTED 的 OVERLAY 路由。
         // if (OnboardingState.get(this) == OnboardingStep.NOT_STARTED) {

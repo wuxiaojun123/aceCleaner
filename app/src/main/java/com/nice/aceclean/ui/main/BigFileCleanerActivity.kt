@@ -95,7 +95,7 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
             layoutManager = LinearLayoutManager(this@BigFileCleanerActivity)
             adapter = this@BigFileCleanerActivity.adapter
         }
-        resultBinding.largeBack.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_BACK) { finish() }
+        resultBinding.largeBack.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_BACK) { finishWithBackInterstitial() }
         resultBinding.largeTypeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_TYPE) { showFilterDropdown(FilterKind.TYPE) }
         resultBinding.largeSizeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_SIZE) { showFilterDropdown(FilterKind.SIZE) }
         resultBinding.largeTimeFilter.setTrackedClickListener(EventUtils.CLICK_LARGE_FILES_TIME) { showFilterDropdown(FilterKind.TIME) }

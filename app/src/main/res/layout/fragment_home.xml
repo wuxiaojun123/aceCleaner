@@ -135,22 +135,38 @@
                         android:textStyle="bold" />
                 </FrameLayout>
 
-                <com.nice.aceclean.ui.widget.ShimmerShakeButton
-                    android:id="@+id/clean_up_button"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="48dp"
-                    android:background="@drawable/bg_home_clean_button"
-                    android:clickable="true"
-                    android:elevation="5dp"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:text="@string/clean_up"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <com.nice.aceclean.ui.widget.ShimmerShakeButton
+                        android:id="@+id/clean_up_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_home_clean_button"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="@string/clean_up"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <include
+                        android:id="@+id/clean_up_badge"
+                        android:elevation="6dp"
+                        layout="@layout/view_home_feature_badge"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

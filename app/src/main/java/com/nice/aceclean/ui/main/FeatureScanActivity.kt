@@ -3,7 +3,6 @@ package com.nice.aceclean.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -34,6 +33,7 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
     }
 
     override fun initViews() {
+        disableSystemBack()
         val target = feature ?: return finish()
         val restored = savedStateRegistry.consumeRestoredStateForKey("feature_scan")
         if (restored?.getBoolean("permission_requested") == true) model.permissionRequested = true
@@ -52,9 +52,6 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
                 lifecycleScope.launch { completeScan(target, result) }
             } else checkPermission()
         }
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { if (!transitionRunning) finish() }
-        })
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 model.state.collect { state ->

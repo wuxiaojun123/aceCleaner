@@ -62,8 +62,9 @@ class AppManagerActivity : BaseActivity<FragmentAppManagerBinding>(
     private val handoff: FeatureResultViewModel by viewModels()
 
     override fun initViews() {
+        enableBackInterstitial()
         val result = scanResult(handoff, ScanFeature.APP_MANAGER) as? FeatureScanResult.Apps ?: return
-        binding.appManagerBack.setTrackedClickListener(EventUtils.CLICK_APPS_BACK) { finish() }
+        binding.appManagerBack.setTrackedClickListener(EventUtils.CLICK_APPS_BACK) { finishWithBackInterstitial() }
         binding.appManagerList.apply {
             layoutManager = LinearLayoutManager(this@AppManagerActivity)
             adapter = appAdapter

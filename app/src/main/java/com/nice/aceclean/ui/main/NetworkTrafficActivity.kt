@@ -28,8 +28,9 @@ class NetworkTrafficActivity : BaseActivity<FragmentNetworkTrafficBinding>(
     private val handoff: FeatureResultViewModel by viewModels()
 
     override fun initViews() {
+        enableBackInterstitial()
         val result = scanResult(handoff, ScanFeature.NETWORK_TRAFFIC) as? FeatureScanResult.Traffic ?: return
-        binding.networkBack.setTrackedClickListener(EventUtils.CLICK_NETWORK_BACK) { finish() }
+        binding.networkBack.setTrackedClickListener(EventUtils.CLICK_NETWORK_BACK) { finishWithBackInterstitial() }
         binding.networkAppList.apply {
             layoutManager = LinearLayoutManager(this@NetworkTrafficActivity)
             adapter = appAdapter

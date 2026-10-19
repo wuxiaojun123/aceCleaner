@@ -51,6 +51,7 @@ class NotificationCleanerActivity : BaseActivity<FragmentNotificationCleanerBind
     private var firstResume = true
 
     override fun initViews() {
+        enableBackInterstitial()
         val result = scanResult(handoff, ScanFeature.NOTIFICATIONS) as? FeatureScanResult.Notifications ?: return
         initialized = true
         setupPinnedTopBar()
@@ -62,8 +63,8 @@ class NotificationCleanerActivity : BaseActivity<FragmentNotificationCleanerBind
             layoutManager = LinearLayoutManager(this@NotificationCleanerActivity)
             adapter = this@NotificationCleanerActivity.adapter
         }
-        binding.notificationBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_BACK) { finish() }
-        binding.notificationPinnedBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_PINNED_BACK) { finish() }
+        binding.notificationBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_BACK) { finishWithBackInterstitial() }
+        binding.notificationPinnedBack.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_PINNED_BACK) { finishWithBackInterstitial() }
         binding.notificationWhitelistEntry.setTrackedClickListener(EventUtils.CLICK_NOTIFICATIONS_WHITELIST) {
             startActivity(Intent(this, AllowedAppsActivity::class.java))
         }

@@ -45,7 +45,7 @@ object AppAdManager {
     /** 清理成功页进入展示，未展示成功时用于返回补展示。 */
     const val INTERSTITIAL_9 = "3009"
 
-    /** 清理插屏10，尚未绑定业务场景。 */
+    /** 首页功能页返回插屏。 */
     const val INTERSTITIAL_10 = "3010"
 
     /** 清理插屏11，尚未绑定业务场景。 */
@@ -58,6 +58,7 @@ object AppAdManager {
 
     const val FEATURE_SCAN_COMPLETE = INTERSTITIAL_8
     const val NETWORK_TEST_COMPLETE = INTERSTITIAL_8
+    const val FEATURE_BACK = INTERSTITIAL_10
 
     const val COLD_START = INTERSTITIAL_1
     const val HOT_START = INTERSTITIAL_2

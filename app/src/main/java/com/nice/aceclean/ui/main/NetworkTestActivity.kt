@@ -120,6 +120,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
 
     /** Wait for the completion ad on this screen; failures leave the measured results visible. */
     private suspend fun showCompletionAd() {
+        if (isBackExitPending) return
         try {
             LogUtils.d("test_ad_attempt placement=${AppAdManager.NETWORK_TEST_COMPLETE}", TAG)
             val loaded = AdSdkManager.preload(applicationContext, AppAdManager.NETWORK_TEST_COMPLETE)
@@ -128,6 +129,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
                 return
             }
             lifecycle.withResumed { }
+            if (isBackExitPending || isFinishing || isDestroyed) return
             val previousSkip = HotStartManager.skipNextHotStart
             HotStartManager.markSkipNextHotStart()
             try {

@@ -36,6 +36,7 @@ class CleanUpActivity : BaseActivity<FragmentCleanResultBinding>({ FragmentClean
     private val handoff: FeatureResultViewModel by viewModels()
 
     override fun initViews() {
+        enableBackInterstitial()
         if (viewModel.scanResult == null) {
             val result = scanResult(handoff, ScanFeature.CLEAN_UP) as? FeatureScanResult.Cleanup ?: return
             viewModel.restoreScan(result.value)
@@ -56,7 +57,7 @@ class CleanUpActivity : BaseActivity<FragmentCleanResultBinding>({ FragmentClean
         }
         selected.clear()
         selected.addAll(CleanupCategory.entries)
-        resultBinding.cleanResultBack.setTrackedClickListener(EventUtils.CLICK_CLEANUP_BACK) { finish() }
+        resultBinding.cleanResultBack.setTrackedClickListener(EventUtils.CLICK_CLEANUP_BACK) { finishWithBackInterstitial() }
         categoryViews().forEach { (category, row, check, size) -> bindCategory(row, size, check, category) }
         resultBinding.cleanupMoreRow.setTrackedClickListener(EventUtils.CLICK_CLEANUP_MORE) { openBigFileCleaner() }
         resultBinding.removeButton.setTrackedClickListener(EventUtils.CLICK_CLEANUP_REMOVE) { deleteSelected() }

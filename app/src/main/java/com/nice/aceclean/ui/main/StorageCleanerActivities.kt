@@ -25,6 +25,7 @@ abstract class StorageCleanerActivity<B : ViewBinding>(
     }
 
     final override fun initViews() {
+        enableBackInterstitial()
         initialScanResult = scanResult(handoff, feature) ?: return
         isResultShown = true
         initResultViews()

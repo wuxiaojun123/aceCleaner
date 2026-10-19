@@ -75,7 +75,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
             layoutManager = manager
             adapter = this@ScreenshotCleanerActivity.adapter
         }
-        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_BACK) { finish() }
+        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_BACK) { finishWithBackInterstitial() }
         resultBinding.pictureTabScreenshot.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_TAB) {
             showingScreenshots = true
             selected.clear()

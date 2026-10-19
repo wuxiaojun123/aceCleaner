@@ -481,4 +481,6 @@
     <string name="string_junk_cleaning_failed">Could not clean the selected files. Please scan and try again.</string>
     <string name="string_feature_scan_complete">Scan complete</string>
     <string name="string_feature_scan_failed">Unable to complete the scan. Please try again.</string>
+    <string name="string_home_permission_required">Permission required</string>
+    <string name="string_home_unused_today">Not used today</string>
 </resources>

@@ -122,6 +122,7 @@ internal fun androidx.activity.ComponentActivity.scanResult(
         finish()
         return null
     } else {
+        FeatureUsageStore.markUsed(this, feature)
         com.nice.aceclean.util.LogUtils.d("scan_result_reused feature=$feature", "FeatureScan")
     }
     return result

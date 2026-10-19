@@ -10,6 +10,7 @@ import com.nice.aceclean.R
 import com.nice.aceclean.databinding.ActivityMainBinding
 import com.nice.aceclean.service.StickyNotificationService
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.fragment.HomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }, R.layout.activity_main) {
 

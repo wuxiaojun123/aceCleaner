@@ -19,8 +19,9 @@ abstract class DeviceToolActivity<B : ViewBinding>(
 ) : BaseActivity<B>(inflateBinding, layoutRes) {
 
     final override fun initViews() {
+        enableBackInterstitial()
         featureHeader.featureTitle.setText(titleRes)
-        featureHeader.featureBack.setTrackedClickListener(backClickEvent) { finish() }
+        featureHeader.featureBack.setTrackedClickListener(backClickEvent) { finishWithBackInterstitial() }
         initToolViews()
     }
 

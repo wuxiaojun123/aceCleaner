@@ -64,7 +64,7 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
     override fun initResultViews() {
         resultBinding.pictureTitle.setText(R.string.video_manage)
         resultBinding.pictureTabs.visibility = View.GONE
-        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_VIDEOS_BACK) { finish() }
+        resultBinding.pictureBack.setTrackedClickListener(EventUtils.CLICK_VIDEOS_BACK) { finishWithBackInterstitial() }
         adapter = VideoAdapter()
         val manager = GridLayoutManager(this, COLUMN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
