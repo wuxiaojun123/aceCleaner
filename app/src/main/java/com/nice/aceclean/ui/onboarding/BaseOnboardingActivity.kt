@@ -19,6 +19,7 @@ import com.nice.aceclean.R
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.main.MainActivity
+import com.nice.aceclean.ui.widget.WobbleBackgroundTextView
 import com.nice.aceclean.util.LogUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
@@ -35,12 +36,28 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
     private var animator: ValueAnimator? = null
     private var guideDialog: Dialog? = null
     private val animations = mutableListOf<LottieAnimationView>()
+    private val wobbleButtons = mutableListOf<WobbleBackgroundTextView>()
 
     override val navigationBarColorRes: Int = R.color.color_FFFAF9F7
 
     /** Register explicit binding views; pause motion while ads or settings cover the page. */
     protected fun trackOnboardingAnimation(view: LottieAnimationView) {
         animations += view
+    }
+
+    protected fun trackOnboardingAnimation(view: WobbleBackgroundTextView) {
+        wobbleButtons += view
+        view.setWobbleEnabled(lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        wobbleButtons.forEach { it.setWobbleEnabled(true) }
+    }
+
+    override fun onPause() {
+        wobbleButtons.forEach { it.setWobbleEnabled(false) }
+        super.onPause()
     }
 
     override fun onStart() {
@@ -155,6 +172,8 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
         stopProgress()
         animations.forEach { it.cancelAnimation() }
         animations.clear()
+        wobbleButtons.forEach { it.stopWobble() }
+        wobbleButtons.clear()
         dismissGuideDialog()
         super.onDestroy()
     }

@@ -110,6 +110,8 @@ abstract class BaseActivity<B : ViewBinding>(
     }
 
     final override fun onCreate(savedInstanceState: Bundle?) {
+        // Consume notification routing before ProcessLifecycleOwner can launch a hot-start splash.
+        HotStartManager.handleNotificationEntry(intent)
         val navigationBarColor = ContextCompat.getColor(this, navigationBarColorRes)
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),

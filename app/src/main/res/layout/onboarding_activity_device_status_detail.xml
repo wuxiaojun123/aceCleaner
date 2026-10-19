@@ -705,21 +705,25 @@
         </androidx.core.widget.NestedScrollView>
 
         <FrameLayout
-            android:id="@+id/continueButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/onboarding_bg_device_vivid_action"
-            android:clickable="true"
-            android:clipToOutline="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
             android:minHeight="54dp">
+            <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
+                android:id="@+id/continueButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/onboarding_bg_device_vivid_action"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:contentDescription="@string/string_onboarding_device_status_clean_junk_files" />
 
             <LinearLayout
+                android:importantForAccessibility="noHideDescendants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -746,15 +750,6 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
-
-            <View
-                android:id="@+id/continueButtonShine"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="start|center_vertical"
-                android:background="@drawable/onboarding_bg_quick_scan_shine"
-                android:rotation="-20"
-                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

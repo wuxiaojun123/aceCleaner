@@ -172,10 +172,9 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <FrameLayout
+    <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
         android:background="@drawable/onboarding_bg_detail_action"
         android:clickable="true"
-        android:clipToOutline="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:id="@+id/allowButton"
@@ -186,11 +185,7 @@
         android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:text="@string/continue_text"
-            style="@style/OnboardingActionText" />
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/OnboardingActionText"
+        android:text="@string/continue_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,6 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
     { OnboardingActivityDeviceStatusDetailBinding.inflate(it) }, R.layout.onboarding_activity_device_status_detail,
 ) {
     internal override val onboardingStep = OnboardingStep.DEVICE_DETAIL
-    private var buttonAnimation: OnboardingButtonAnimation? = null
     private val storageSettings = OnboardingSettingsPermission(this, { StorageAccess.hasBroadAccess(this) }, ::afterStoragePermission)
     private val legacyStorage = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         afterStoragePermission(StorageAccess.hasBroadAccess(this))
@@ -39,7 +38,7 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
             binding.continueButton.isEnabled = false
             lifecycleScope.launch { showAd(AppAdManager.ONBOARDING_SKIP); openHome() }
         }
-        buttonAnimation = OnboardingButtonAnimation(this, binding.continueButton, binding.continueButtonShine)
+        trackOnboardingAnimation(binding.continueButton)
     }
 
     private fun showStorageDialog() {
@@ -60,7 +59,6 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
 
     override fun onDestroy() {
         storageSettings.close()
-        buttonAnimation?.close()
         super.onDestroy()
     }
 }

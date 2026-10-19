@@ -5,6 +5,8 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.view.animation.DecelerateInterpolator
 import android.content.pm.PackageManager
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -33,6 +35,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     override val navigationBarColorRes: Int = R.color.color_FFFAF9F7
     private var splashAnimator: ValueAnimator? = null
     private var navigating = false
+    private val notificationDestination: NotificationDestination?
+        get() = NotificationDestination.from(intent.getStringExtra(EXTRA_NOTIFICATION_DESTINATION))
     private val permissionResult = CompletableDeferred<Unit>()
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         permissionResult.complete(Unit)
@@ -67,8 +71,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         }
         lifecycleScope.launch {
             val preload = async {
-                if (adsConfigured) AppAdManager.preload(this@SplashActivity, placement)
-                else { delay(SPLASH_DURATION_MS); false }
+                try {
+                    if (adsConfigured) AppAdManager.preload(this@SplashActivity, placement)
+                    else { delay(SPLASH_DURATION_MS); false }
+                } catch (error: CancellationException) {
+                    throw error
+                } catch (error: Exception) {
+                    LogUtils.w(tag = "SplashActivity", msg = "Startup ad load failed for $placement", throwable = error)
+                    false
+                }
             }
             permissionResult.await()
             val loaded = preload.await()
@@ -87,6 +98,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     }
 
     private fun startupPlacement(): String {
+        if (notificationDestination != null) return AppAdManager.HOT_START
         if (intent.getBooleanExtra(EXTRA_HOT_START, false)) return AppAdManager.HOT_START
         val prefs = getSharedPreferences("onboarding", MODE_PRIVATE)
         if (OnboardingState.get(this) != OnboardingStep.COMPLETED && !prefs.getBoolean("first_splash_consumed", false)) {
@@ -104,6 +116,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     private fun openNextScreen() {
         if (navigating || isFinishing || isDestroyed) return
         navigating = true
+        notificationDestination?.let { destination ->
+            val home = Intent(this, MainActivity::class.java).addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP,
+            )
+            val feature = destination.feature
+            if (feature == null) startActivity(home)
+            else startActivities(arrayOf(home, feature.scanIntent(this)))
+            LogUtils.d(tag = "SplashActivity", msg = "Notification destination opened: $destination")
+            finish()
+            return
+        }
         val next = OnboardingState.get(this).restored(intent.getBooleanExtra(EXTRA_HOT_START, false))
         val target = OnboardingNavigator.intent(this, next)
         startActivity(target)
@@ -121,6 +144,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     companion object {
         const val EXTRA_HOT_START = "extra_hot_start"
         const val EXTRA_FROM_ONBOARDING = "extra_from_onboarding"
+        private const val EXTRA_NOTIFICATION_DESTINATION = "notification_destination"
         private const val SPLASH_DURATION_MS = 1_450L
+
+        internal fun notificationIntent(context: Context, destination: NotificationDestination): Intent =
+            Intent(context, SplashActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(HotStartManager.EXTRA_NOTIFICATION_ENTRY, true)
+                putExtra(EXTRA_NOTIFICATION_DESTINATION, destination.name)
+            }
     }
 }

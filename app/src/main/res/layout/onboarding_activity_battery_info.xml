@@ -29,11 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <FrameLayout
-        android:background="@drawable/onboarding_bg_detail_action"
-        android:clickable="true"
-        android:clipToOutline="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
         android:id="@+id/bottomActionContainer"
         android:layout_height="56dp"
         android:layout_marginBottom="12dp"
@@ -43,20 +38,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <TextView
+        <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
             android:id="@+id/checkNowButton"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:background="@drawable/onboarding_bg_detail_action"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:text="@string/string_onboarding_battery_info_check_now"
             style="@style/OnboardingActionText" />
-        <View
-            android:background="@drawable/onboarding_bg_quick_scan_shine"
-            android:id="@+id/checkNowButtonShine"
-            android:layout_gravity="start|center_vertical"
-            android:layout_height="match_parent"
-            android:layout_width="100dp"
-            android:rotation="-20"
-            android:visibility="gone" />
     </FrameLayout>
     <androidx.core.widget.NestedScrollView
         android:clipToPadding="false"

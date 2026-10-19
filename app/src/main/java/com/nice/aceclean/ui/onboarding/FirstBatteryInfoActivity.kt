@@ -20,7 +20,6 @@ class FirstBatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatter
     { OnboardingActivityBatteryInfoBinding.inflate(it) }, R.layout.onboarding_activity_battery_info,
 ) {
     internal override val onboardingStep = OnboardingStep.BATTERY_DETAIL
-    private var buttonAnimation: OnboardingButtonAnimation? = null
     private var receiverRegistered = false
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) = renderBatteryInformation(intent)
@@ -32,7 +31,7 @@ class FirstBatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatter
         trackOnboardingAnimation(binding.scanAnimation)
         renderBatteryInformation(registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)))
         binding.checkNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_BATTERY_CHECK) { navigateTo(BatteryCheckScanActivity::class.java) }
-        buttonAnimation = OnboardingButtonAnimation(this, binding.checkNowButton, binding.checkNowButtonShine)
+        trackOnboardingAnimation(binding.checkNowButton)
         lifecycleScope.launch {
             showAd(AppAdManager.ONBOARDING_ANALYSIS)
         }
@@ -85,8 +84,4 @@ class FirstBatteryInfoActivity : BaseOnboardingActivity<OnboardingActivityBatter
         super.onStop()
     }
 
-    override fun onDestroy() {
-        buttonAnimation?.close()
-        super.onDestroy()
-    }
 }

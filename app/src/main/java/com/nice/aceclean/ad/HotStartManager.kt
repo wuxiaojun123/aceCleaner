@@ -14,6 +14,8 @@ import com.nice.aceclean.util.LogUtils
  */
 object HotStartManager : DefaultLifecycleObserver {
 
+    const val EXTRA_NOTIFICATION_ENTRY = "notification_entry"
+
     private const val TAG = "HotStartManager"
     private const val HOT_START_THRESHOLD_MS = 300L
 
@@ -30,6 +32,15 @@ object HotStartManager : DefaultLifecycleObserver {
     /** Call before opening a system or external page whose return is not a real hot start. */
     fun markSkipNextHotStart() {
         skipNextHotStart = true
+    }
+
+    /** Notification navigation already owns this foreground entry; preserve its destination. */
+    fun handleNotificationEntry(intent: Intent) {
+        if (!intent.getBooleanExtra(EXTRA_NOTIFICATION_ENTRY, false)) return
+        intent.removeExtra(EXTRA_NOTIFICATION_ENTRY)
+        // Clear only the pending background transition, so this cannot skip a later hot start.
+        backgroundTimestamp = 0L
+        LogUtils.d(tag = TAG, msg = "Notification entry keeps its requested destination")
     }
 
     fun markHotStartAdFinished() {

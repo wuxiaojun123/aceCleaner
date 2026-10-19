@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="WobbleBackgroundTextView">
+        <attr name="wobbleAmplitude" format="dimension" />
+        <attr name="wobbleSkew" format="float" />
+        <attr name="wobbleDuration" format="integer" />
+        <attr name="wobblePauseDuration" format="integer" />
+        <attr name="wobbleEnabled" format="boolean" />
+        <attr name="wobbleDrawable" format="reference|color" />
+    </declare-styleable>
     <!-- Colors and sizing are deliberately exposed so product themes can restyle the gauge in XML. -->
     <declare-styleable name="SpeedTestGaugeView">
         <attr name="gaugeProgressColor" format="color" />

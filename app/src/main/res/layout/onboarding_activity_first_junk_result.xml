@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@id/resultHeader"
         tools:listitem="@layout/onboarding_item_first_junk_category" />
 
-    <FrameLayout
+    <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
         android:id="@+id/cleanButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -94,31 +94,15 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/onboarding_bg_detail_action"
         android:clickable="true"
-        android:clipToOutline="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/cleanButtonText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/string_onboarding_first_junk_title"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
-
-        <View
-            android:id="@+id/cleanButtonShine"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start|center_vertical"
-            android:background="@drawable/onboarding_bg_first_junk_result_shine"
-            android:rotation="-20"
-            android:visibility="gone" />
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/string_onboarding_first_junk_title"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

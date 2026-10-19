@@ -16,12 +16,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
-import com.nice.aceclean.ui.main.BatteryInfoActivity
-import com.nice.aceclean.ui.main.CleanUpActivity
-import com.nice.aceclean.ui.main.MainActivity
-import com.nice.aceclean.ui.main.NetworkTrafficActivity
-import com.nice.aceclean.ui.main.RamStatusActivity
-import com.nice.aceclean.ui.main.ScreenshotCleanerActivity
+import com.nice.aceclean.ui.main.NotificationDestination
+import com.nice.aceclean.ui.main.SplashActivity
 import com.nice.aceclean.util.LocaleHelper
 import com.nice.aceclean.util.NetworkSpeedSampler
 import kotlinx.coroutines.CoroutineScope
@@ -102,7 +98,7 @@ class StickyNotificationService : Service() {
             .setColor(ContextCompat.getColor(this, R.color.notification_sticky_background))
             .setColorized(true)
             .setCustomContentView(smallViews)
-            .setContentIntent(activityPendingIntent(MainActivity::class.java, REQUEST_HOME))
+            .setContentIntent(activityPendingIntent(NotificationDestination.HOME, REQUEST_HOME))
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
@@ -129,44 +125,39 @@ class StickyNotificationService : Service() {
 
             setOnClickPendingIntent(
                 R.id.notification_screenshot,
-                activityPendingIntent(ScreenshotCleanerActivity::class.java, REQUEST_SCREENSHOT),
+                activityPendingIntent(NotificationDestination.SCREENSHOT, REQUEST_SCREENSHOT),
             )
             setOnClickPendingIntent(
                 R.id.notification_clean_up,
-                activityPendingIntent(CleanUpActivity::class.java, REQUEST_CLEAN_UP),
+                activityPendingIntent(NotificationDestination.CLEAN_UP, REQUEST_CLEAN_UP),
             )
             setOnClickPendingIntent(
                 R.id.notification_ram,
-                activityPendingIntent(RamStatusActivity::class.java, REQUEST_RAM),
+                activityPendingIntent(NotificationDestination.RAM, REQUEST_RAM),
             )
             setOnClickPendingIntent(
                 R.id.notification_battery,
-                activityPendingIntent(BatteryInfoActivity::class.java, REQUEST_BATTERY),
+                activityPendingIntent(NotificationDestination.BATTERY, REQUEST_BATTERY),
             )
             setOnClickPendingIntent(
                 R.id.notification_network_speed,
-                activityPendingIntent(NetworkTrafficActivity::class.java, REQUEST_NETWORK),
+                activityPendingIntent(NotificationDestination.NETWORK, REQUEST_NETWORK),
             )
             if (layoutId == R.layout.layout_notification_sticky_big) {
                 setOnClickPendingIntent(
                     R.id.notification_clean_cache,
-                    activityPendingIntent(CleanUpActivity::class.java, REQUEST_CLEAN_CACHE),
+                    activityPendingIntent(NotificationDestination.CLEAN_UP, REQUEST_CLEAN_CACHE),
                 )
             }
         }
 
-    private fun activityPendingIntent(target: Class<*>, requestCode: Int): PendingIntent {
-        val intent = Intent(this, target).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                Intent.FLAG_ACTIVITY_SINGLE_TOP
-        }
-        return PendingIntent.getActivity(
+    private fun activityPendingIntent(destination: NotificationDestination, requestCode: Int): PendingIntent =
+        PendingIntent.getActivity(
             this,
             requestCode,
-            intent,
+            SplashActivity.notificationIntent(this, destination),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-    }
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return

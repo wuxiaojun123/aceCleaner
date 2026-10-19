@@ -25,6 +25,7 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
     }
 
     override fun initOnboardingViews() {
+        trackOnboardingAnimation(binding.allowButton)
         trackOnboardingAnimation(binding.guideAnimation)
         overlayPermission.restorePendingRequest()
         binding.skipButton.setTrackedClickListener(EventUtils.CLICK_OVERLAY_GUIDE_SKIP) { continueToSplash() }
