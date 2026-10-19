@@ -107,7 +107,11 @@ object AdSdkManager {
     }
 
     /** Shows an already preloaded ad and waits until it is closed. */
-    suspend fun showLoaded(activity: FragmentActivity, placement: String): Boolean {
+    suspend fun showLoaded(
+        activity: FragmentActivity,
+        placement: String,
+        onShown: (() -> Unit)? = null,
+    ): Boolean {
         if (activity.isFinishing || activity.isDestroyed || !Adm.isAdReady(placement)) {
             return false
         }
@@ -129,7 +133,7 @@ object AdSdkManager {
                 null,
                 activity,
                 object : AdShowCallback {
-                    override fun onSuccess(placementName: String, ad: AdBase) = Unit
+                    override fun onSuccess(placementName: String, ad: AdBase) { onShown?.invoke() }
 
                     override fun onFailure(placementName: String, error: AdErrorC) {
                         LogUtils.w(tag = TAG, msg = "Ad show failed for $placementName: ${error.message}")

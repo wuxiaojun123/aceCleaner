@@ -2,6 +2,16 @@ package com.nice.aceclean.ui.main
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
+import com.nice.aceclean.ad.AppAdManager
+import com.nice.aceclean.ad.HotStartManager
+import com.nice.aceclean.util.LogUtils
+import com.nice.library_ad_sdk.AdSdkManager
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -26,7 +36,26 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
     R.layout.activity_delete_success,
 ) {
 
+    private lateinit var adGate: DeleteSuccessAdGate
+    private var adJob: Job? = null
+    private var presentingAd = false
+
     override fun initViews() {
+        val restored = savedStateRegistry.consumeRestoredStateForKey(AD_STATE)
+        adGate = DeleteSuccessAdGate(
+            entryAttempted = restored?.getBoolean("entry_attempted") ?: false,
+            shown = restored?.getBoolean("shown") ?: false,
+            backAttempted = restored?.getBoolean("back_attempted") ?: false,
+            backRequested = restored?.getBoolean("back_requested") ?: false,
+        )
+        savedStateRegistry.registerSavedStateProvider(AD_STATE) {
+            Bundle().apply {
+                putBoolean("entry_attempted", adGate.entryAttempted)
+                putBoolean("shown", adGate.shown)
+                putBoolean("back_attempted", adGate.backAttempted)
+                putBoolean("back_requested", adGate.backRequested)
+            }
+        }
         val current = Feature.fromSource(intent.getStringExtra(EXTRA_SOURCE))
         val recommended = current.recommended
         val removedCount = intent.getIntExtra(EXTRA_REMOVED_COUNT, 0).coerceAtLeast(0)
@@ -68,19 +97,75 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
             Feature.entries.filterNot { it == current },
             ::openFeature,
         )
-        binding.deleteSuccessBack.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_BACK) { returnToHome() }
+        binding.deleteSuccessBack.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_BACK) { handleBack() }
         binding.deleteSuccessTryNow.setTrackedClickListener(EventUtils.CLICK_DELETE_SUCCESS_TRY) { openFeature(recommended) }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() = returnToHome()
+            override fun handleOnBackPressed() = handleBack()
         })
     }
 
+    override fun initData() {
+        executeAdAction(adGate.onEnter())
+    }
+
+    private fun handleBack() {
+        executeAdAction(adGate.onBack())
+    }
+
+    private fun executeAdAction(action: DeleteSuccessAdGate.Action) {
+        when (action) {
+            DeleteSuccessAdGate.Action.NONE -> Unit
+            DeleteSuccessAdGate.Action.RETURN_HOME -> returnToHome()
+            DeleteSuccessAdGate.Action.SHOW_ENTRY, DeleteSuccessAdGate.Action.SHOW_BACK -> {
+                adJob = lifecycleScope.launch {
+                    val trigger = if (action == DeleteSuccessAdGate.Action.SHOW_ENTRY) "entry" else "back"
+                    attemptCompletionAd(trigger)
+                    executeAdAction(adGate.onAttemptFinished())
+                }
+            }
+        }
+    }
+
+    private suspend fun attemptCompletionAd(trigger: String) {
+        try {
+            LogUtils.d("ad_attempt trigger=$trigger placement=${AppAdManager.DELETE_SUCCESS}", TAG)
+            val loaded = AdSdkManager.preload(applicationContext, AppAdManager.DELETE_SUCCESS)
+            if (!loaded) {
+                LogUtils.d("ad_finished trigger=$trigger loaded=false shown=false", TAG)
+                return
+            }
+            lifecycle.withResumed { }
+            if (isFinishing || isDestroyed || adGate.finished) return
+            val previousSkip = HotStartManager.skipNextHotStart
+            HotStartManager.markSkipNextHotStart()
+            presentingAd = true
+            try {
+                val closed = AppAdManager.showLoaded(this, AppAdManager.DELETE_SUCCESS) {
+                    adGate.onShown()
+                    LogUtils.d("ad_shown trigger=$trigger", TAG)
+                }
+                LogUtils.d("ad_finished trigger=$trigger closed=$closed shown=${adGate.shown}", TAG)
+            } finally {
+                presentingAd = false
+                HotStartManager.skipNextHotStart = previousSkip
+            }
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            LogUtils.w("ad_failed trigger=$trigger", TAG, error)
+        }
+    }
+
     private fun openFeature(feature: Feature) {
+        if (presentingAd || adGate.backRequested || adGate.finished) return
+        adGate.leaveForFeature()
+        adJob?.cancel()
         startActivity(Intent(this, feature.destination))
         finish()
     }
 
     private fun returnToHome() {
+        LogUtils.d("return_home shown=${adGate.shown} backAttempted=${adGate.backAttempted}", TAG)
         startActivity(
             Intent(this, MainActivity::class.java).addFlags(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP,
@@ -166,6 +251,8 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
     }
 
     companion object {
+        private const val TAG = "DeleteSuccessAd"
+        private const val AD_STATE = "delete_success_ad"
         private const val EXTRA_REMOVED_COUNT = "removed_count"
         private const val EXTRA_FREED_BYTES = "freed_bytes"
         private const val EXTRA_FEATURE_ICON = "feature_icon"

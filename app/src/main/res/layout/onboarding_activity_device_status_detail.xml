@@ -129,10 +129,6 @@
                                 android:textColor="@color/white"
                                 android:textFontWeight="650"
                                 android:textSize="42dp"
-                                app:autoSizeMaxTextSize="48sp"
-                                app:autoSizeMinTextSize="22sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:targetApi="28"
                                 tools:text="moto&#10;e20" />
                         </LinearLayout>
@@ -232,10 +228,6 @@
                             android:layout_marginTop="10dp"
                             android:fontFeatureSettings="tnum"
                             android:maxLines="1"
-                            app:autoSizeMaxTextSize="43sp"
-                            app:autoSizeMinTextSize="24sp"
-                            app:autoSizeStepGranularity="1sp"
-                            app:autoSizeTextType="uniform"
                             tools:text="@string/string_device_detail_preview_ram" />
 
                         <ProgressBar
@@ -266,10 +258,6 @@
                                 android:layout_weight="1"
                                 android:maxLines="1"
                                 android:textSize="13sp"
-                                app:autoSizeMaxTextSize="13sp"
-                                app:autoSizeMinTextSize="11sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:text="1.2 GB" />
                         </LinearLayout>
 
@@ -296,10 +284,6 @@
                                 android:layout_weight="1"
                                 android:maxLines="1"
                                 android:textSize="10sp"
-                                app:autoSizeMaxTextSize="10sp"
-                                app:autoSizeMinTextSize="9sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:text="1.9 GB" />
                         </LinearLayout>
                     </LinearLayout>
@@ -349,10 +333,6 @@
                             android:layout_marginTop="10dp"
                             android:fontFeatureSettings="tnum"
                             android:maxLines="1"
-                            app:autoSizeMaxTextSize="43sp"
-                            app:autoSizeMinTextSize="24sp"
-                            app:autoSizeStepGranularity="1sp"
-                            app:autoSizeTextType="uniform"
                             tools:text="@string/string_device_detail_preview_storage" />
 
                         <ProgressBar
@@ -383,10 +363,6 @@
                                 android:layout_weight="1"
                                 android:maxLines="1"
                                 android:textSize="13sp"
-                                app:autoSizeMaxTextSize="13sp"
-                                app:autoSizeMinTextSize="11sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:text="9.0 GB" />
                         </LinearLayout>
 
@@ -413,10 +389,6 @@
                                 android:layout_weight="1"
                                 android:maxLines="1"
                                 android:textSize="10sp"
-                                app:autoSizeMaxTextSize="10sp"
-                                app:autoSizeMinTextSize="9sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:text="25 GB" />
                         </LinearLayout>
                     </LinearLayout>
@@ -677,10 +649,6 @@
                                 android:fontFeatureSettings="tnum"
                                 android:maxLines="1"
                                 android:textSize="20sp"
-                                app:autoSizeMaxTextSize="20sp"
-                                app:autoSizeMinTextSize="16sp"
-                                app:autoSizeStepGranularity="1sp"
-                                app:autoSizeTextType="uniform"
                                 tools:text="720 × 1600" />
                         </LinearLayout>
 

@@ -42,7 +42,7 @@ object AppAdManager {
     /** 首页功能真实扫描完成。 */
     const val INTERSTITIAL_8 = "3008"
 
-    /** 清理插屏9，尚未绑定业务场景。 */
+    /** 清理成功页进入展示，未展示成功时用于返回补展示。 */
     const val INTERSTITIAL_9 = "3009"
 
     /** 清理插屏10，尚未绑定业务场景。 */
@@ -53,6 +53,8 @@ object AppAdManager {
 
     /** 清理插屏12，尚未绑定业务场景。 */
     const val INTERSTITIAL_12 = "3012"
+
+    const val DELETE_SUCCESS = INTERSTITIAL_9
 
     const val FEATURE_SCAN_COMPLETE = INTERSTITIAL_8
     const val NETWORK_TEST_COMPLETE = INTERSTITIAL_8
@@ -80,6 +82,9 @@ object AppAdManager {
     suspend fun preload(activity: FragmentActivity, placement: String): Boolean =
         AdSdkManager.preload(activity, placement, LOAD_TIMEOUT_MS)
 
-    suspend fun showLoaded(activity: FragmentActivity, placement: String): Boolean =
-        AdSdkManager.showLoaded(activity, placement)
+    suspend fun showLoaded(
+        activity: FragmentActivity,
+        placement: String,
+        onShown: (() -> Unit)? = null,
+    ): Boolean = AdSdkManager.showLoaded(activity, placement, onShown)
 }

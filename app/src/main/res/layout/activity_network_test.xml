@@ -93,11 +93,7 @@
                                     android:maxLines="1"
                                     android:text="@string/string_network_zero"
                                     android:textColor="@color/color_FF252A31"
-                                    android:textSize="62sp"
-                                    app:autoSizeMaxTextSize="62sp"
-                                    app:autoSizeMinTextSize="24sp"
-                                    app:autoSizeStepGranularity="1sp"
-                                    app:autoSizeTextType="uniform" />
+                                    android:textSize="62sp" />
                                 <TextView
                                     android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
@@ -233,11 +229,7 @@
                             android:maxLines="1"
                             android:text="@string/string_network_number_placeholder"
                             android:textColor="@color/color_FF252A31"
-                            android:textSize="25sp"
-                            app:autoSizeMaxTextSize="25sp"
-                            app:autoSizeMinTextSize="14sp"
-                            app:autoSizeStepGranularity="1sp"
-                            app:autoSizeTextType="uniform" />
+                            android:textSize="25sp" />
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
@@ -280,11 +272,7 @@
                             android:maxLines="1"
                             android:text="@string/string_network_number_placeholder"
                             android:textColor="@color/color_FF252A31"
-                            android:textSize="25sp"
-                            app:autoSizeMaxTextSize="25sp"
-                            app:autoSizeMinTextSize="14sp"
-                            app:autoSizeStepGranularity="1sp"
-                            app:autoSizeTextType="uniform" />
+                            android:textSize="25sp" />
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
@@ -327,11 +315,7 @@
                             android:maxLines="1"
                             android:text="@string/string_network_number_placeholder"
                             android:textColor="@color/color_FF252A31"
-                            android:textSize="25sp"
-                            app:autoSizeMaxTextSize="25sp"
-                            app:autoSizeMinTextSize="14sp"
-                            app:autoSizeStepGranularity="1sp"
-                            app:autoSizeTextType="uniform" />
+                            android:textSize="25sp" />
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"

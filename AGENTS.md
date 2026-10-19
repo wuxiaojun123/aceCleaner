@@ -1,5 +1,6 @@
 # 项目规则
 
+- 不要使用 `autoSizeMaxTextSize`、`autoSizeMinTextSize` 和 `autoSizeStepGranularity` 属性，包括 `app:`、`android:` 命名空间以及 style 中的配置。文本字号使用明确的 `textSize`；移除已有的这三个属性时，同时移除对应的 `autoSizeTextType="uniform"`，避免继续按默认范围自动缩放。
 - 日志打印统一使用 `LogUtils`，不要直接使用 `android.util.Log`、`println` 或 `System.out` 打印日志。
 - 对于展示数量不固定的应用、文件或扫描结果列表，使用带适配器和 ViewHolder 的 `RecyclerView`。不要在 `ScrollView` 内反复向 `LinearLayout` 添加列表项。
 - 在 Android Activity、Fragment、Dialog 和 `RecyclerView` 的 ViewHolder 中，使用生成的 ViewBinding 类访问布局视图。不要为应用布局中的视图新增 `findViewById` 调用，也不要使用封装了 `findViewById` 的方法（例如 `BaseActivity.view()`）。修改仍然通过视图 ID 直接查找视图的页面时，应将该页面迁移到 ViewBinding。
