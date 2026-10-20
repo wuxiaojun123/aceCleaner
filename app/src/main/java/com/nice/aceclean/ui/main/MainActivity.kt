@@ -7,10 +7,12 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import com.nice.aceclean.R
+import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.databinding.ActivityMainBinding
 import com.nice.aceclean.service.StickyNotificationService
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.ui.fragment.HomeFragment
+import com.nice.library_ad_sdk.AdSdkManager
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }, R.layout.activity_main) {
 
@@ -25,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
     }
 
     override fun initViews() {
+        AdSdkManager.preloadAsync(applicationContext, AppAdManager.FEATURE_SCAN_COMPLETE)
         if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_container, HomeFragment())

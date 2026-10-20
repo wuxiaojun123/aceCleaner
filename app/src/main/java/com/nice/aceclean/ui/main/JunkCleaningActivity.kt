@@ -9,11 +9,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
+import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.cleanup.CleanupCandidate
 import com.nice.aceclean.cleanup.JunkCleaningViewModel
 import com.nice.aceclean.databinding.ActivityJunkCleaningBinding
 import com.nice.aceclean.ui.base.BaseActivity
 import com.nice.aceclean.util.DeviceStats
+import com.nice.library_ad_sdk.AdSdkManager
 import kotlinx.coroutines.launch
 
 /** 垃圾清理过程页：循环播放吸尘器动画，真实清理完成后进入成功引导。 */
@@ -25,6 +27,7 @@ class JunkCleaningActivity : BaseActivity<ActivityJunkCleaningBinding>(
     override val navigationBarColorRes = R.color.color_FFFAF9F7
 
     override fun initViews() {
+        AdSdkManager.preloadAsync(applicationContext, AppAdManager.DELETE_SUCCESS)
         // 清理期间防止返回造成用户重复提交同一批文件。
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() = Unit
