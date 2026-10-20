@@ -1,201 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/color_FFFAF9F7"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFAF9F7">
+
     <TextView
-        android:gravity="center_vertical"
         android:id="@+id/titleView"
+        style="@style/OnboardingPageTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
         android:minHeight="48dp"
         android:text="@string/battery_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/OnboardingPageTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:contentDescription="@string/go_back"
         android:id="@+id/backButton"
-        android:layout_height="48dp"
         android:layout_width="44dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/go_back"
         android:src="@drawable/onboarding_ic_first_complete_back"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/bottomActionContainer"
-        android:layout_height="56dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
             android:id="@+id/checkNowButton"
-            android:layout_height="match_parent"
+            style="@style/OnboardingActionText"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/onboarding_bg_detail_action"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/string_onboarding_battery_info_check_now"
-            style="@style/OnboardingActionText" />
+            app:wobbleAmplitude="10dp"
+            app:wobbleDrawable="@drawable/onboarding_bg_detail_action"
+            app:wobbleDuration="200"
+            app:wobblePauseDuration="900"
+            app:wobbleSkew="0.1"
+            />
     </FrameLayout>
+
     <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:fillViewport="true"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/bottomActionContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleView">
+
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="8dp">
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
             <com.airbnb.lottie.LottieAnimationView
-                android:contentDescription="@null"
                 android:id="@+id/scanAnimation"
-                android:importantForAccessibility="no"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="190dp"
                 android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/onboarding_orange_battery_scan" />
+
             <TextView
-                android:gravity="center"
                 android:id="@+id/batteryPercent"
-                android:layout_height="wrap_content"
+                style="@style/OnboardingScanPercent"
                 android:layout_width="match_parent"
-                android:text="@string/string_onboarding_literal_3"
-                android:textSize="42sp"
-                style="@style/OnboardingScanPercent" />
-            <TextView
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="@string/string_onboarding_literal_3"
+                android:textSize="42sp" />
+
+            <TextView
                 android:id="@+id/batteryEstimate"
+                style="@style/OnboardingBody"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:layout_width="match_parent"
-                android:text="@string/string_onboarding_battery_estimated_calculating"
-                style="@style/OnboardingBody" />
+                android:gravity="center"
+                android:text="@string/string_onboarding_battery_estimated_calculating" />
+
             <LinearLayout
-                android:background="@drawable/onboarding_bg_device_status_card"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
+                android:background="@drawable/onboarding_bg_device_status_card"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="12dp">
+
                 <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:background="@drawable/onboarding_bg_detail_icon"
                     android:contentDescription="@null"
-                    android:layout_height="34dp"
-                    android:layout_width="34dp"
                     android:padding="6dp"
                     android:src="@drawable/onboarding_ic_detail_battery" />
+
                 <TextView
+                    style="@style/OnboardingBody"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:text="@string/string_onboarding_battery_status_label"
-                    style="@style/OnboardingBody" />
+                    android:text="@string/string_onboarding_battery_status_label" />
+
                 <TextView
                     android:id="@+id/batteryStatusValue"
+                    style="@style/OnboardingBody"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_width="wrap_content"
-                    android:text="@string/string_onboarding_literal_2"
-                    style="@style/OnboardingBody" />
+                    android:text="@string/string_onboarding_literal_2" />
             </LinearLayout>
+
             <LinearLayout
-                android:baselineAligned="false"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
+
                 <include
                     android:id="@+id/temperatureCard"
+                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    layout="@layout/onboarding_item_battery_info_metric" />
+                    android:layout_weight="1" />
+
                 <include
                     android:id="@+id/voltageCard"
+                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    layout="@layout/onboarding_item_battery_info_metric" />
+                    android:layout_weight="1" />
             </LinearLayout>
+
             <LinearLayout
-                android:baselineAligned="false"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
+
                 <include
                     android:id="@+id/typeCard"
+                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    layout="@layout/onboarding_item_battery_info_metric" />
+                    android:layout_weight="1" />
+
                 <include
                     android:id="@+id/powerCard"
+                    layout="@layout/onboarding_item_battery_info_metric"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    layout="@layout/onboarding_item_battery_info_metric" />
+                    android:layout_weight="1" />
             </LinearLayout>
+
             <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/onboarding_bg_detail_icon"
                     android:contentDescription="@null"
-                    android:layout_height="28dp"
-                    android:layout_width="28dp"
                     android:padding="6dp"
                     android:src="@drawable/onboarding_ic_detail_android" />
+
                 <TextView
                     android:id="@+id/checkedUserCount"
+                    style="@style/DeviceDetailTitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_width="wrap_content"
                     android:text="@string/string_onboarding_battery_checked_user_count"
-                    android:textSize="12sp"
-                    style="@style/DeviceDetailTitle" />
+                    android:textSize="12sp" />
+
                 <TextView
                     android:id="@+id/checkedTodayText"
+                    style="@style/OnboardingBody"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:layout_width="wrap_content"
                     android:text="@string/string_onboarding_battery_users_checked_today"
-                    android:textSize="12sp"
-                    style="@style/OnboardingBody" />
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -1,191 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/color_FFFAF9F7"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFAF9F7">
+
     <LinearLayout
-        android:gravity="center_vertical"
         android:id="@+id/guideHeader"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_width="0dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingEnd="16dp"
         android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:gravity="center_vertical"
             android:id="@+id/pageNameText"
+            style="@style/OnboardingPageTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:gravity="center_vertical"
             android:minHeight="48dp"
             android:text="@string/string_onboarding_overlay_permission_page_name"
-            android:textSize="19sp"
-            style="@style/OnboardingPageTitle" />
+            android:textSize="19sp" />
+
         <TextView
+            android:id="@+id/skipButton"
+            style="@style/OnboardingBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:id="@+id/skipButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:minHeight="48dp"
             android:minWidth="48dp"
+            android:minHeight="48dp"
             android:text="@string/string_onboarding_overlay_permission_skip"
-            android:textColor="@color/color_FFFF6B2C"
-            style="@style/OnboardingBody" />
+            android:textColor="@color/color_FFFF6B2C" />
     </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
-        android:fillViewport="true"
-        android:layout_height="0dp"
         android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/allowButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideHeader">
+
         <LinearLayout
-            android:gravity="center"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="20dp">
+
             <com.airbnb.lottie.LottieAnimationView
-                android:contentDescription="@null"
                 android:id="@+id/guideAnimation"
-                android:importantForAccessibility="no"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="210dp"
                 android:layout_width="210dp"
+                android:layout_height="210dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/onboarding_orange_junk_clean" />
+
             <TextView
-                android:gravity="center"
                 android:id="@+id/titleText"
+                style="@style/OnboardingSectionTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:text="@string/string_onboarding_overlay_permission_title"
-                style="@style/OnboardingSectionTitle" />
-            <TextView
                 android:gravity="center"
+                android:text="@string/string_onboarding_overlay_permission_title" />
+
+            <TextView
+                style="@style/OnboardingBody"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
+                android:gravity="center"
                 android:lineSpacingExtra="3dp"
-                android:text="@string/string_onboarding_overlay_description_simple"
-                style="@style/OnboardingBody" />
+                android:text="@string/string_onboarding_overlay_description_simple" />
+
             <LinearLayout
-                android:background="@drawable/onboarding_bg_device_status_card"
                 android:id="@+id/permissionPreviewCard"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_width="match_parent"
+                android:background="@drawable/onboarding_bg_device_status_card"
                 android:orientation="vertical"
                 android:padding="16dp">
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal">
+
                     <LinearLayout
-                        android:gravity="center"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
                             android:background="@drawable/onboarding_bg_detail_icon"
                             android:contentDescription="@null"
-                            android:layout_height="34dp"
-                            android:layout_width="34dp"
                             android:padding="6dp"
                             android:src="@drawable/onboarding_ic_detail_broom"
                             android:tint="@color/color_FFFF6B2C" />
+
                         <TextView
-                            android:gravity="center"
+                            style="@style/OnboardingBody"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:text="@string/string_onboarding_first_junk_title"
-                            android:textSize="11sp"
-                            style="@style/OnboardingBody" />
+                            android:textSize="11sp" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:gravity="center"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
                             android:background="@drawable/onboarding_bg_detail_icon"
                             android:contentDescription="@null"
-                            android:layout_height="34dp"
-                            android:layout_width="34dp"
                             android:padding="6dp"
                             android:src="@drawable/onboarding_ic_detail_chip" />
+
                         <TextView
-                            android:gravity="center"
+                            style="@style/OnboardingBody"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:text="@string/ram"
-                            android:textSize="11sp"
-                            style="@style/OnboardingBody" />
+                            android:textSize="11sp" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:gravity="center"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
                             android:background="@drawable/onboarding_bg_detail_icon"
                             android:contentDescription="@null"
-                            android:layout_height="34dp"
-                            android:layout_width="34dp"
                             android:padding="6dp"
                             android:src="@drawable/onboarding_ic_junk_download" />
+
                         <TextView
-                            android:gravity="center"
+                            style="@style/OnboardingBody"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:text="@string/network_traffic"
-                            android:textSize="11sp"
-                            style="@style/OnboardingBody" />
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <TextView
-                    android:gravity="center"
+                    style="@style/OnboardingBody"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
+                    android:gravity="center"
                     android:text="@string/string_onboarding_overlay_permission_appear_on_top"
-                    android:textSize="12sp"
-                    style="@style/OnboardingBody" />
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.nice.aceclean.ui.widget.WobbleBackgroundTextView
+        android:id="@+id/allowButton"
+        style="@style/OnboardingActionText"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/onboarding_bg_detail_action"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:id="@+id/allowButton"
-        android:layout_height="56dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_width="0dp"
+        android:text="@string/continue_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/OnboardingActionText"
-        android:text="@string/continue_text" />
+        app:wobbleAmplitude="10dp"
+        app:wobbleDrawable="@drawable/onboarding_bg_detail_action"
+        app:wobbleDuration="200"
+        app:wobblePauseDuration="900"
+        app:wobbleSkew="0.1"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

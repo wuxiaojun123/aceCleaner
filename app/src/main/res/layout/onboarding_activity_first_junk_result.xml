@@ -95,14 +95,21 @@
         android:background="@drawable/onboarding_bg_detail_action"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:fontFamily="sans-serif-medium"
+        android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="@string/string_onboarding_first_junk_title"
         android:textColor="@color/white"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:wobbleAmplitude="10dp"
+        app:wobbleDrawable="@drawable/onboarding_bg_detail_action"
+        app:wobbleDuration="200"
+        app:wobblePauseDuration="900"
+        app:wobbleSkew="0.1"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
