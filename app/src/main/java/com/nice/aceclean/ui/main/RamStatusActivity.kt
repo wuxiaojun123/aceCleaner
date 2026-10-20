@@ -49,7 +49,7 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
 
     override fun initToolViews() {
         val result = scanResult(handoff, ScanFeature.RAM) as? FeatureScanResult.Ram ?: return
-        binding.ramOkButton.setTrackedClickListener(EventUtils.CLICK_RAM_OK) { finish() }
+        binding.ramOkButton.setTrackedClickListener(EventUtils.CLICK_RAM_OK) { finishWithBackInterstitial() }
         binding.ramAppList.apply {
             layoutManager = LinearLayoutManager(this@RamStatusActivity)
             adapter = runningAppsAdapter

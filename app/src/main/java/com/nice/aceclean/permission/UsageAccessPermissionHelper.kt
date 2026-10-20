@@ -10,6 +10,7 @@ class UsageAccessPermissionHelper(
 ) : AutoCloseable {
     private val poller = SettingsPermissionPoller(
         activity = activity,
+        analytics = PermissionRequestAnalytics(activity, PermissionRequestAnalytics.Type.USAGE_ACCESS),
         isGranted = { SpecialPermissionAccess.isGranted(it, SpecialPermission.USAGE_ACCESS) },
         onGranted = onGranted,
     )

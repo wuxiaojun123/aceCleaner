@@ -11,13 +11,16 @@ class AllFilesAccessPermissionHelper(
     private val onGranted: () -> Unit,
     private val onDenied: () -> Unit,
 ) : AutoCloseable {
+    private val analytics = PermissionRequestAnalytics(activity, PermissionRequestAnalytics.Type.STORAGE)
     private val runtimeLauncher = activity.registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
     ) {
+        analytics.result(isGranted())
         if (isGranted()) onGranted() else onDenied()
     }
     private val poller = SettingsPermissionPoller(
         activity = activity,
+        analytics = analytics,
         isGranted = { StorageAccess.hasBroadAccess(it) },
         onGranted = onGranted,
         onDenied = onDenied,
@@ -35,6 +38,7 @@ class AllFilesAccessPermissionHelper(
             )
             if (!opened) onDenied()
         } else {
+            analytics.requested()
             runtimeLauncher.launch(StorageAccess.legacyPermissions())
         }
     }

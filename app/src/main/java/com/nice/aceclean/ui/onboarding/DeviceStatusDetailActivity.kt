@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.PermissionRequestAnalytics
 import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityDeviceStatusDetailBinding
@@ -20,8 +21,10 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
     { OnboardingActivityDeviceStatusDetailBinding.inflate(it) }, R.layout.onboarding_activity_device_status_detail,
 ) {
     internal override val onboardingStep = OnboardingStep.DEVICE_DETAIL
-    private val storageSettings = OnboardingSettingsPermission(this, { StorageAccess.hasBroadAccess(this) }, ::afterStoragePermission)
+    private val storageAnalytics = PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.STORAGE)
+    private val storageSettings = OnboardingSettingsPermission(this, storageAnalytics, { StorageAccess.hasBroadAccess(this) }, ::afterStoragePermission)
     private val legacyStorage = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        storageAnalytics.result(StorageAccess.hasBroadAccess(this))
         afterStoragePermission(StorageAccess.hasBroadAccess(this))
     }
 
@@ -50,7 +53,10 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
             dismissGuideDialog()
             if (Build.VERSION.SDK_INT >= 30) storageSettings.request(
                 StorageAccess.broadAccessSettingsIntent(this), Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION),
-            ) else legacyStorage.launch(StorageAccess.legacyPermissions())
+            ) else {
+                storageAnalytics.requested()
+                legacyStorage.launch(StorageAccess.legacyPermissions())
+            }
         }
     }
 

@@ -17,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.PermissionRequestAnalytics
 import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityFirstJunkCompleteBinding
@@ -43,7 +44,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
         dismissGuideDialog()
         openFeature(NotificationCleanerActivity::class.java)
     }
-    private val overlayPermission = OnboardingSettingsPermission(this, { Settings.canDrawOverlays(this) }) { openHome() }
+    private val overlayPermission = OnboardingSettingsPermission(this, PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.OVERLAY), { Settings.canDrawOverlays(this) }) { openHome() }
 
     override fun initOnboardingViews() {
         FirstRunJunkSession.result = null

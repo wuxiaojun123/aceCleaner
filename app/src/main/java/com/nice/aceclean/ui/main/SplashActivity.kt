@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.PermissionRequestAnalytics
 import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.databinding.ActivitySplashBinding
@@ -38,7 +39,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     private val notificationDestination: NotificationDestination?
         get() = NotificationDestination.from(intent.getStringExtra(EXTRA_NOTIFICATION_DESTINATION))
     private val permissionResult = CompletableDeferred<Unit>()
-    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+    private val notificationAnalytics = PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.POST_NOTIFICATIONS)
+    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        notificationAnalytics.result(granted)
         permissionResult.complete(Unit)
     }
 
@@ -59,6 +62,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         HotStartManager.markSplashAdStarted()
         if (!intent.getBooleanExtra(EXTRA_FROM_ONBOARDING, false) && Build.VERSION.SDK_INT >= 33 &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            notificationAnalytics.requested()
             notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
         } else permissionResult.complete(Unit)
         val placement = startupPlacement()

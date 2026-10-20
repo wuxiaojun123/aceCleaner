@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.nice.aceclean.R
+import com.nice.aceclean.permission.PermissionRequestAnalytics
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.OnboardingActivityOverlayPermissionGuideBinding
 import com.nice.aceclean.ui.main.SplashActivity
@@ -19,8 +20,11 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
     { OnboardingActivityOverlayPermissionGuideBinding.inflate(it) }, R.layout.onboarding_activity_overlay_permission_guide,
 ) {
     internal override val onboardingStep = OnboardingStep.OVERLAY
-    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
-    private val overlayPermission = OnboardingSettingsPermission(this, { Settings.canDrawOverlays(this) }) {
+    private val notificationAnalytics = PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.POST_NOTIFICATIONS)
+    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        notificationAnalytics.result(granted)
+    }
+    private val overlayPermission = OnboardingSettingsPermission(this, PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.OVERLAY), { Settings.canDrawOverlays(this) }) {
         continueToSplash()
     }
 
@@ -34,6 +38,7 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
             if (!opened) Toast.makeText(this, R.string.string_onboarding_overlay_permission_settings_unavailable, Toast.LENGTH_SHORT).show()
         }
         if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            notificationAnalytics.requested()
             notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }

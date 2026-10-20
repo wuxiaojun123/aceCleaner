@@ -18,3 +18,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Local image-compression cache, original backups and process lock
+.tinypng-cache.json
+.tinypng-backups/
+.tinypng.lock
+__pycache__/

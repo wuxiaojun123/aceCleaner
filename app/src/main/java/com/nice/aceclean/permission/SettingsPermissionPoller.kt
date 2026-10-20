@@ -6,6 +6,8 @@ import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.util.LogUtils
@@ -18,6 +20,7 @@ import kotlinx.coroutines.launch
 /** Checks grants behind Settings and brings the permission flow forward as soon as access is enabled. */
 internal class SettingsPermissionPoller(
     private val activity: FragmentActivity,
+    private val analytics: PermissionRequestAnalytics,
     private val isGranted: (FragmentActivity) -> Boolean,
     private val onGranted: () -> Unit,
     private val onDenied: () -> Unit = {},
@@ -30,6 +33,21 @@ internal class SettingsPermissionPoller(
     private val launcher = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         // Settings result codes do not describe permission state. Also handles returns after polling times out.
         complete(bringToFront = false)
+    }
+
+    private val grantObserver = object : DefaultLifecycleObserver {
+        override fun onStart(owner: LifecycleOwner) {
+            // Catch grants on return before page onResume code can finish the permission Activity.
+            // The analytics state also survives a destroyed/recreated Settings caller.
+            if (analytics.isPending() && isGranted(activity)) {
+                pending = true
+                complete(bringToFront = false)
+            }
+        }
+    }
+
+    init {
+        activity.lifecycle.addObserver(grantObserver)
     }
 
     fun restorePendingRequest() {
@@ -46,6 +64,7 @@ internal class SettingsPermissionPoller(
             return true
         }
         pendingExtra?.let { activity.intent.putExtra(it, true) }
+        analytics.requested()
         val previousSkip = HotStartManager.skipNextHotStart
         HotStartManager.markSkipNextHotStart()
         val opened = intents.any { intent ->
@@ -60,6 +79,7 @@ internal class SettingsPermissionPoller(
                 scheduleStorageTips()
             }
         } else {
+            analytics.result(false)
             pending = false
             pendingExtra?.let(activity.intent::removeExtra)
             HotStartManager.skipNextHotStart = previousSkip
@@ -106,6 +126,7 @@ internal class SettingsPermissionPoller(
     private fun complete(bringToFront: Boolean) {
         if (!pending || activity.isFinishing || activity.isDestroyed) return
         val granted = isGranted(activity)
+        analytics.result(granted)
         pending = false
         dismissStorageTips()
         pendingExtra?.let(activity.intent::removeExtra)
@@ -129,6 +150,7 @@ internal class SettingsPermissionPoller(
     }
 
     override fun close() {
+        activity.lifecycle.removeObserver(grantObserver)
         pending = false
         dismissStorageTips()
         pollingJob?.cancel()

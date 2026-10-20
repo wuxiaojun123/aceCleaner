@@ -8,6 +8,7 @@ class NotificationListenerPermissionHelper(
 ) : AutoCloseable {
     private val poller = SettingsPermissionPoller(
         activity = activity,
+        analytics = PermissionRequestAnalytics(activity, PermissionRequestAnalytics.Type.NOTIFICATION_LISTENER),
         isGranted = { SpecialPermissionAccess.isGranted(it, SpecialPermission.NOTIFICATION_LISTENER) },
         onGranted = onGranted,
     )

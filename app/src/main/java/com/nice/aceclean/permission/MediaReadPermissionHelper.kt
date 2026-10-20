@@ -15,13 +15,17 @@ class MediaReadPermissionHelper(
     private val onGranted: () -> Unit,
     private val onDenied: () -> Unit,
 ) : AutoCloseable {
+    private val analytics = PermissionRequestAnalytics(activity,
+        if (type == MediaReadType.VIDEO) PermissionRequestAnalytics.Type.VIDEO else PermissionRequestAnalytics.Type.IMAGES)
     private val launcher = activity.registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
     ) {
+        analytics.result(isGranted())
         if (isGranted()) onGranted() else onDenied()
     }
     private val settingsPoller = SettingsPermissionPoller(
         activity = activity,
+        analytics = analytics,
         isGranted = { isGranted() },
         onGranted = onGranted,
         onDenied = onDenied,
@@ -45,6 +49,7 @@ class MediaReadPermissionHelper(
             onGranted()
             return
         }
+        analytics.requested()
         launcher.launch(buildList {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 add(if (type == MediaReadType.VIDEO) Manifest.permission.READ_MEDIA_VIDEO else Manifest.permission.READ_MEDIA_IMAGES)

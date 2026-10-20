@@ -20,7 +20,7 @@ class DeviceReportActivity : DeviceToolActivity<ActivityDeviceReportBinding>({ A
 
     override fun initToolViews() {
         val result = scanResult(handoff, ScanFeature.DEVICE) as? FeatureScanResult.Device ?: return
-        binding.deviceOkButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_REPORT_OK) { finish() }
+        binding.deviceOkButton.setTrackedClickListener(EventUtils.CLICK_DEVICE_REPORT_OK) { finishWithBackInterstitial() }
         renderReport(result.report)
         binding.deviceScanRing.cancelAnimation()
         binding.deviceScanAnimation.cancelAnimation()

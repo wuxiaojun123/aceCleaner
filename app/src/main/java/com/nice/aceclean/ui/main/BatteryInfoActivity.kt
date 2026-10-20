@@ -37,7 +37,7 @@ class BatteryInfoActivity : DeviceToolActivity<ActivityBatteryInfoBinding>({ Act
 
     override fun initToolViews() {
         val result = scanResult(handoff, ScanFeature.BATTERY) as? FeatureScanResult.Battery ?: return
-        binding.batteryGotItButton.setTrackedClickListener(EventUtils.CLICK_BATTERY_GOT_IT) { finish() }
+        binding.batteryGotItButton.setTrackedClickListener(EventUtils.CLICK_BATTERY_GOT_IT) { finishWithBackInterstitial() }
         scanComplete = true
         renderBattery(result.value)
         binding.batteryScanBackground.cancelAnimation()
