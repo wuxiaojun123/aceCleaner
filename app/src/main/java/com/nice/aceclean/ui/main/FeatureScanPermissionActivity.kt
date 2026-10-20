@@ -16,8 +16,10 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
 ) {
     private val feature get() = ScanFeature.from(intent)
     private val storage = AllFilesAccessPermissionHelper(this, ::finishGranted, {})
-    private val photos = MediaReadPermissionHelper(this, MediaReadType.IMAGES, ::finishGranted, ::showPhotoSettings)
-    private val videos = MediaReadPermissionHelper(this, MediaReadType.VIDEO, ::finishGranted, ::showVideoSettings)
+    private val photos =
+        MediaReadPermissionHelper(this, MediaReadType.IMAGES, ::finishGranted, ::showPhotoSettings)
+    private val videos =
+        MediaReadPermissionHelper(this, MediaReadType.VIDEO, ::finishGranted, ::showVideoSettings)
     private val notifications = NotificationListenerPermissionHelper(this, ::finishGranted)
     private val usage = UsageAccessPermissionHelper(this, ::finishGranted)
 
@@ -26,22 +28,28 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
         binding.permissionToolbarTitle.setText(target.title)
         val isTraffic = target == ScanFeature.NETWORK_TRAFFIC
         val isUsage = target.permission == ScanPermission.USAGE
-        binding.permissionImage.setImageResource(when (target) {
-            ScanFeature.NETWORK_TRAFFIC -> R.drawable.image_network_traffic_permission
-            ScanFeature.APP_MANAGER -> R.drawable.image_app_manager_permission
-            ScanFeature.NOTIFICATIONS -> R.drawable.notification_grant
-            else -> if (isUsage) R.drawable.image_app_manager_permission else R.drawable.onboarding_image_permission_storage
-        })
-        binding.permissionTitle.setText(if (isUsage) {
-            if (isTraffic) R.string.network_traffic_permission_title else if (target == ScanFeature.RAM) R.string.string_ram_allow_usage_access else R.string.app_manager_permission_title
-        } else if (target == ScanFeature.NOTIFICATIONS) R.string.notification_permission_title
-        else R.string.storage_permission_required)
-        binding.permissionDescription.setText(if (isUsage) {
-            if (isTraffic) R.string.network_traffic_permission_text else if (target == ScanFeature.RAM) R.string.string_ram_usage_access_description else R.string.app_manager_permission_text
-        } else if (target == ScanFeature.NOTIFICATIONS) R.string.notification_permission_text
-        else R.string.storage_permission_explanation)
+        binding.permissionImage.setImageResource(
+            when (target) {
+                ScanFeature.NETWORK_TRAFFIC -> R.drawable.image_network_traffic_permission
+                ScanFeature.APP_MANAGER -> R.drawable.image_app_manager_permission
+                ScanFeature.NOTIFICATIONS -> R.drawable.notification_grant
+                else -> if (isUsage) R.drawable.image_app_manager_permission else R.drawable.onboarding_image_permission_storage
+            }
+        )
+        binding.permissionTitle.setText(
+            if (isUsage) {
+                if (isTraffic) R.string.network_traffic_permission_title else if (target == ScanFeature.RAM) R.string.string_ram_allow_usage_access else R.string.app_manager_permission_title
+            } else if (target == ScanFeature.NOTIFICATIONS) R.string.notification_permission_title
+            else R.string.storage_permission_required
+        )
+        binding.permissionDescription.setText(
+            if (isUsage) {
+                if (isTraffic) R.string.network_traffic_permission_text else if (target == ScanFeature.RAM) R.string.string_ram_usage_access_description else R.string.app_manager_permission_text
+            } else if (target == ScanFeature.NOTIFICATIONS) R.string.notification_permission_text
+            else R.string.storage_permission_explanation
+        )
         binding.permissionBack.setOnClickListener { finish() }
-        binding.permissionAllow.setOnClickListener {
+        binding.permissionAllow.root.setOnClickListener {
             when (target.permission) {
                 ScanPermission.STORAGE -> storage.request()
                 ScanPermission.IMAGES -> photos.request()
@@ -54,18 +62,27 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
     }
 
     private fun showPhotoSettings() {
-        binding.permissionAllow.setText(R.string.open_app_settings)
-        binding.permissionAllow.setOnClickListener { photos.openAppSettings() }
+        binding.permissionAllow.root.setText(R.string.open_app_settings)
+        binding.permissionAllow.root.setOnClickListener { photos.openAppSettings() }
     }
 
     private fun showVideoSettings() {
-        binding.permissionAllow.setText(R.string.open_app_settings)
-        binding.permissionAllow.setOnClickListener { videos.openAppSettings() }
+        binding.permissionAllow.root.setText(R.string.open_app_settings)
+        binding.permissionAllow.root.setOnClickListener { videos.openAppSettings() }
     }
 
     override fun onResume() {
         super.onResume()
-        if (feature?.hasPermission(this) == true) finishGranted()
+        if (feature?.hasPermission(this) == true) {
+            finishGranted()
+            return
+        }
+        binding.permissionAllow.root.setAnimationEnabled(!isFinishing)
+    }
+
+    override fun onPause() {
+        binding.permissionAllow.root.setAnimationEnabled(false)
+        super.onPause()
     }
 
     private fun finishGranted() {

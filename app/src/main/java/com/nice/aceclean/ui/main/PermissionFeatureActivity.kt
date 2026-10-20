@@ -67,7 +67,7 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
                     .let { helper -> { helper.request() } }
             }
         }
-        binding.permissionAllow.setTrackedClickListener(allowEvent) {
+        binding.permissionAllow.root.setTrackedClickListener(allowEvent) {
             requestPermission()
         }
     }
