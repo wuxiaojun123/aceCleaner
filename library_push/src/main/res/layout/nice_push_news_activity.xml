@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/readerRoot" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/color_FFFFFFFF">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp" android:gravity="center_vertical" android:background="@color/color_FFF2F7FF" android:paddingEnd="16dp">
+        <Button android:id="@+id/back" android:layout_width="wrap_content" android:layout_height="48dp" android:text="@string/string_push_back" android:textSize="14sp" />
+        <TextView android:id="@+id/title" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/string_push_news_reader" android:textColor="@color/color_FF183153" android:textSize="16sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end" />
+    </LinearLayout>
+    <ProgressBar android:id="@+id/progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="3dp" android:max="100" android:contentDescription="@string/string_push_news_loading" />
+    <LinearLayout android:id="@+id/errorPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="24dp" android:orientation="vertical" android:gravity="center" android:visibility="gone">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/string_push_news_error" android:textColor="@color/color_FF183153" android:textSize="16sp" />
+        <Button android:id="@+id/retry" android:layout_width="wrap_content" android:layout_height="48dp" android:text="@string/string_push_retry" android:textSize="14sp" />
+    </LinearLayout>
+    <WebView android:id="@+id/web" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+</LinearLayout>

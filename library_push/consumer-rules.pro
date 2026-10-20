@@ -1,0 +1,1 @@
+-keep class com.nice.library_push.triggers.PushTimerWorker { public <init>(android.content.Context, androidx.work.WorkerParameters); }

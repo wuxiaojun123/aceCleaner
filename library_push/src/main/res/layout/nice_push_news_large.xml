@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/nice_push_root" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/nice_push_news_background" android:padding="10dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingEnd="32dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:baselineAligned="false">
+            <ImageView android:id="@+id/nice_push_image" android:layout_width="88dp" android:layout_height="88dp" android:src="@drawable/nice_push_news_placeholder" android:background="@drawable/nice_push_news_image_background" android:scaleType="centerCrop" android:contentDescription="@string/nice_push_image" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="10dp" android:orientation="vertical">
+                <TextView android:id="@+id/nice_push_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp" android:textColor="@color/color_FF183153" android:maxLines="2" android:ellipsize="end" android:textStyle="bold" />
+                <TextView android:id="@+id/nice_push_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:textColor="@color/color_FF59708B" android:maxLines="1" android:ellipsize="end" />
+                <TextView android:id="@+id/nice_push_date" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:textColor="@color/color_FF59708B" android:maxLines="1" android:ellipsize="end" />
+                <TextView android:id="@+id/nice_push_body" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="13sp" android:textColor="@color/color_FF183153" android:maxLines="3" android:ellipsize="end" android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:id="@+id/nice_push_button" android:layout_width="match_parent" android:layout_height="36dp" android:layout_marginTop="8dp" android:background="@drawable/nice_push_action_background" android:gravity="center" android:textColor="@color/color_FFFFFFFF" android:textSize="13sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end" />
+    </LinearLayout>
+    <TextView android:id="@+id/nice_push_close" android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="top|end" android:gravity="center" android:text="@string/string_push_close_symbol" android:textSize="22sp" android:textColor="@color/color_FF59708B" android:contentDescription="@string/nice_push_close" />
+</FrameLayout>

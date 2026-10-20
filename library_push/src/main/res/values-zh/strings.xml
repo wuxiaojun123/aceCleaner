@@ -1,0 +1,31 @@
+<resources>
+    <string name="nice_push_close">关闭</string>
+    <string name="nice_push_image">通知图片</string>
+    <string name="nice_push_updates">消息通知</string>
+    <string name="nice_push_stay_channel">快捷入口</string>
+    <string name="nice_push_file_update">文档更新</string>
+    <string name="nice_push_file_changed">文档发生变化</string>
+    <string name="nice_push_file_new">发现新文档</string>
+    <string name="nice_push_file_removed">文档已删除</string>
+    <string name="nice_push_screenshot_saved">已保存截图</string>
+    <string name="nice_push_news">新闻</string>
+    <string name="nice_push_web">打开网页</string>
+    <string name="nice_push_video">视频</string>
+    <string name="nice_push_social">社交消息</string>
+    <string name="nice_push_open">打开</string>
+    <string name="nice_push_read">阅读</string>
+    <string name="nice_push_view">查看</string>
+    <string name="nice_push_watch">观看</string>
+    <string name="string_push_calendar_today">今天</string>
+    <string name="string_push_calendar_summary">查看今天的日期与每日概览</string>
+    <string name="string_push_calendar_action">查看今日</string>
+    <string name="string_push_weather_action">查看天气</string>
+    <string name="string_push_news_label">最新资讯</string>
+    <string name="string_push_news_read">阅读详情</string>
+    <string name="string_push_close_symbol">×</string>
+    <string name="string_push_back">返回</string>
+    <string name="string_push_news_loading">正在加载文章…</string>
+    <string name="string_push_news_error">文章加载失败，请重试。</string>
+    <string name="string_push_retry">重试</string>
+    <string name="string_push_news_reader">资讯</string>
+</resources>

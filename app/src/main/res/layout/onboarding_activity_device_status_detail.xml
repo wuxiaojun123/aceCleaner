@@ -720,7 +720,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:contentDescription="@string/string_onboarding_device_status_clean_junk_files" />
+                android:contentDescription="@string/string_onboarding_device_status_clean_junk_files"
+                app:wobbleAmplitude="10dp"
+                app:wobbleDrawable="@drawable/onboarding_bg_device_vivid_action"
+                app:wobbleDuration="200"
+                app:wobblePauseDuration="900"
+                app:wobbleSkew="0.1"
+                />
 
             <LinearLayout
                 android:importantForAccessibility="noHideDescendants"

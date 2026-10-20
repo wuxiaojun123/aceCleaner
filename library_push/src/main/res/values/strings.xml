@@ -1,0 +1,32 @@
+<resources>
+    <string name="nice_push_close">Close</string>
+    <string name="nice_push_image">Notification image</string>
+    <string name="nice_push_updates">Updates</string>
+    <string name="nice_push_stay_channel">Quick access</string>
+    <string name="nice_push_file_update">Document update</string>
+    <string name="nice_push_file_changed">A document changed</string>
+    <string name="nice_push_file_new">New document</string>
+    <string name="nice_push_file_removed">Document removed</string>
+    <string name="nice_push_screenshot_saved">Screenshot saved</string>
+    <string name="nice_push_news">News</string>
+    <string name="nice_push_web">Open page</string>
+    <string name="nice_push_video">Video</string>
+    <string name="nice_push_social">Social</string>
+    <string name="nice_push_open">Open</string>
+    <string name="nice_push_read">Read</string>
+    <string name="nice_push_view">View</string>
+    <string name="nice_push_watch">Watch</string>
+    <string name="string_push_calendar_today">TODAY</string>
+    <string name="string_push_calendar_summary">Your daily overview is ready</string>
+    <string name="string_push_calendar_action">View today</string>
+    <string name="string_push_weather_action">View weather</string>
+    <string name="string_push_news_label">Latest news</string>
+    <string name="string_push_news_read">Read story</string>
+    <string name="string_push_close_symbol">×</string>
+    <string name="string_push_back">Back</string>
+    <string name="string_push_news_loading">Loading article…</string>
+    <string name="string_push_news_error">This article could not be loaded. Please try again.</string>
+    <string name="string_push_retry">Retry</string>
+    <string name="string_push_news_reader">News</string>
+    <string name="string_push_stay_description" translatable="false">Displays a shortcut notification started by the app.</string>
+</resources>

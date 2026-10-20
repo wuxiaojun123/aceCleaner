@@ -1,0 +1,39 @@
+{
+  "globalDailyLimit": 3,
+  "globalIntervalMillis": 60000,
+  "scenes": {
+    "ul": {
+      "sts": 1,
+      "cd": 21600,
+      "dcm": 2,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "ta": {
+      "sts": 1,
+      "cd": 21600,
+      "dcm": 2,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "app": {
+      "sts": 1,
+      "cd": 3600,
+      "dcm": 2,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    }
+  }
+}
