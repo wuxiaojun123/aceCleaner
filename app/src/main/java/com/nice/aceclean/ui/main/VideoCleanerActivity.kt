@@ -52,6 +52,11 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
     private var pendingDeleteCount = 0
     private var pendingDeleteBytes = 0L
     private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        if (pendingDeleteCount > 0) {
+            EventUtils.track(if (result.resultCode == Activity.RESULT_OK) {
+                EventUtils.CLICK_VIDEOS_CONFIRM_DELETE
+            } else EventUtils.CLICK_VIDEOS_CANCEL_DELETE)
+        }
         if (result.resultCode == Activity.RESULT_OK) {
             showDeleteResult(pendingDeleteCount, pendingDeleteBytes, 0)
             selected.clear()
@@ -115,11 +120,16 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
     }
 
     private fun deleteSelected() {
+        if (pendingDeleteCount > 0 || deleteConfirmationDialog?.isShowing == true) return
         if (selected.isEmpty()) {
             Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        if (deleteConfirmationDialog?.isShowing == true) return
+        val files = selected.toList()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            performDelete(files)
+            return
+        }
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
             confirmEventName = EventUtils.CLICK_VIDEOS_CONFIRM_DELETE,
@@ -127,21 +137,26 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
             title = getString(R.string.delete_files_title),
             message = getString(
                 R.string.delete_files_message,
-                selected.size,
-                DeviceStats.formatBytes(this, selected.sumOf { it.sizeBytes }),
+                files.size,
+                DeviceStats.formatBytes(this, files.sumOf { it.sizeBytes }),
             ),
-            onConfirm = ::performDelete,
+            onConfirm = { performDelete(files) },
             onDismiss = { deleteConfirmationDialog = null },
         )
     }
 
-    private fun performDelete() {
-        val files = selected.toList()
+    private fun performDelete(files: List<MediaFileInfo>) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             pendingDeleteCount = files.size
             pendingDeleteBytes = files.sumOf { it.sizeBytes }
-            val request = MediaStore.createDeleteRequest(contentResolver, selected.map { it.uri })
-            deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
+            runCatching {
+                val request = MediaStore.createDeleteRequest(contentResolver, files.map { it.uri })
+                deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
+            }.onFailure {
+                pendingDeleteCount = 0
+                pendingDeleteBytes = 0L
+                Toast.makeText(this, R.string.dup_delete_failed, Toast.LENGTH_SHORT).show()
+            }
         } else {
             val deleted = files.filter { runCatching { contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
             showDeleteResult(deleted.size, deleted.sumOf { it.sizeBytes }, files.size - deleted.size)

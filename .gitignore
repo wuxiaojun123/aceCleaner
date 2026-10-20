@@ -24,3 +24,4 @@ local.properties
 .tinypng-backups/
 .tinypng.lock
 __pycache__/
+.tinypng-web/

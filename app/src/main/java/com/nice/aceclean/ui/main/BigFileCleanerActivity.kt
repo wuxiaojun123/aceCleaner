@@ -40,6 +40,7 @@ import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.MediaFileInfo
 import com.nice.aceclean.util.MediaStoreRepository
+import com.nice.aceclean.util.LogUtils
 import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -71,22 +72,26 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
     private var deleteConfirmationDialog: Dialog? = null
 
     private var pendingMediaFiles = emptyList<MediaFileInfo>()
-    private var pendingDirectDeletedCount = 0
-    private var pendingDirectDeletedBytes = 0L
-    private var pendingFailedCount = 0
+    private var pendingDirectFiles = emptyList<MediaFileInfo>()
     private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-        var deletedCount = pendingDirectDeletedCount
-        var deletedBytes = pendingDirectDeletedBytes
+        val mediaFiles = pendingMediaFiles
+        val directFiles = pendingDirectFiles
+        clearPendingDelete()
+        if (mediaFiles.isEmpty()) return@registerForActivityResult
         if (result.resultCode == Activity.RESULT_OK) {
-            deletedCount += pendingMediaFiles.size
-            deletedBytes += pendingMediaFiles.sumOf { it.sizeBytes }
-        }
-        if (deletedCount > 0 || pendingFailedCount > 0) {
-            showDeleteResult(deletedCount, deletedBytes, pendingFailedCount)
+            EventUtils.track(EventUtils.CLICK_LARGE_FILES_CONFIRM_DELETE)
+            // Non-media files in a mixed selection are deleted only after the user approves.
+            val directlyDeleted = deleteDirectly(directFiles)
+            showDeleteResult(
+                mediaFiles.size + directlyDeleted.size,
+                mediaFiles.sumOf { it.sizeBytes } + directlyDeleted.sumOf { it.sizeBytes },
+                directFiles.size - directlyDeleted.size,
+            )
             selected.clear()
             loadFiles()
+        } else {
+            EventUtils.track(EventUtils.CLICK_LARGE_FILES_CANCEL_DELETE)
         }
-        clearPendingDelete()
     }
 
     override fun initResultViews() {
@@ -275,12 +280,16 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
     private fun deleteSelected() {
+        if (pendingMediaFiles.isNotEmpty() || deleteConfirmationDialog?.isShowing == true) return
         if (selected.isEmpty()) {
             Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        if (deleteConfirmationDialog?.isShowing == true) return
         val files = selected.toList()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && files.any { mediaDeleteUriFor(it) != null }) {
+            performDelete(files)
+            return
+        }
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
             confirmEventName = EventUtils.CLICK_LARGE_FILES_CONFIRM_DELETE,
@@ -308,14 +317,12 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
     }
 
     private fun deleteOnAndroidRAndAbove(files: List<MediaFileInfo>) {
-        val mediaFiles = files.filter { mediaDeleteUriFor(it) != null }
+        val (mediaFiles, directFiles) = files.partition { mediaDeleteUriFor(it) != null }
         val mediaDeleteUris = mediaFiles.mapNotNull(::mediaDeleteUriFor)
-        val directFiles = files.filter { mediaDeleteUriFor(it) == null }
-        val directlyDeleted = deleteDirectly(directFiles)
-        val directFailedCount = directFiles.size - directlyDeleted.size
 
         if (mediaDeleteUris.isEmpty()) {
-            showDeleteResult(directlyDeleted.size, directlyDeleted.sumOf { it.sizeBytes }, directFailedCount)
+            val directlyDeleted = deleteDirectly(directFiles)
+            showDeleteResult(directlyDeleted.size, directlyDeleted.sumOf { it.sizeBytes }, directFiles.size - directlyDeleted.size)
             selected.clear()
             loadFiles()
             return
@@ -323,18 +330,13 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
 
         runCatching {
             pendingMediaFiles = mediaFiles
-            pendingDirectDeletedCount = directlyDeleted.size
-            pendingDirectDeletedBytes = directlyDeleted.sumOf { it.sizeBytes }
-            pendingFailedCount = directFailedCount
+            pendingDirectFiles = directFiles
             val request = MediaStore.createDeleteRequest(contentResolver, mediaDeleteUris)
             deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
         }.onFailure {
             clearPendingDelete()
-            val fallbackDeleted = deleteDirectly(mediaFiles)
-            val allDeleted = directlyDeleted + fallbackDeleted
-            showDeleteResult(allDeleted.size, allDeleted.sumOf { it.sizeBytes }, files.size - allDeleted.size)
-            selected.clear()
-            loadFiles()
+            LogUtils.w(tag = "BigFileCleaner", msg = "Unable to request media deletion", throwable = it)
+            Toast.makeText(this, R.string.dup_delete_failed, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -359,9 +361,7 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
 
     private fun clearPendingDelete() {
         pendingMediaFiles = emptyList()
-        pendingDirectDeletedCount = 0
-        pendingDirectDeletedBytes = 0L
-        pendingFailedCount = 0
+        pendingDirectFiles = emptyList()
     }
 
     private fun showDeleteResult(deleted: Int, bytes: Long, failed: Int) {

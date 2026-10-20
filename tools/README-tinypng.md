@@ -1,3 +1,46 @@
+# 不用 API Key：TinyPNG 网页版方式
+
+使用 `tinypng_web.py`，复制到其他项目时同时复制 `tinypng.py`（共用本地校验与备份工具）。两个脚本均仅依赖 Python 标准库。
+
+网页版上传由你在浏览器中操作。当前 TinyPNG 拒绝自动化浏览器上传，因此脚本负责批次准备和下载结果导入，不绕过网站限制。
+
+```sh
+# 预览
+python3 tools/tinypng_web.py app/src/main/res
+
+# 打开开关：生成每批最多 20 张、单张 <= 5 MB 的上传目录
+python3 tools/tinypng_web.py app/src/main/res --apply
+```
+
+打开命令输出的 `.tinypng-web/uploads/时间戳/`，将每个 `batch-XX` 目录中的图片手动拖入 https://tinypng.com/ 。保持 “Convert my images automatically” 关闭，每批完成后点击 **Download all** 保存 ZIP。内容相同的原图只上传一次。
+
+下载后回到项目根目录：
+
+```sh
+# 先校验并预览匹配结果
+python3 tools/tinypng_web.py --import-zip "$HOME/Downloads/tinified.zip"
+
+# 确认执行：备份原图，再替换更小的图片
+python3 tools/tinypng_web.py --import-zip "$HOME/Downloads/tinified.zip" --apply
+
+# 也可以一次导入多个批次的 ZIP
+python3 tools/tinypng_web.py --import-zip path/batch1.zip --import-zip path/batch2.zip --apply
+```
+
+脚本顶部 `ENABLED = False` 是总开关，`--apply` 可临时开启，`--dry-run` 始终强制预览。
+
+- 保留原目录、文件名、图片格式和像素尺寸；只替换体积更小的结果。
+- 原图备份保存在 `.tinypng-backups/web-时间戳/`。
+- 下载结果按准备时的文件清单映射，重复图片会同步替换各自的原路径。
+- 上传后如果原图被修改，导入会停止，避免覆盖新改动。
+- 重复导入同一个 ZIP 会跳过已处理文件；下次准备批次也跳过内容未变的已压缩图片。
+- `.tinypng-web/` 保存映射清单、批次和缓存，不要在导入完成前删除或移动。
+- 向其他项目复制时，请把 `.tinypng-web/`、`.tinypng-backups/`、`.tinypng.lock`、`.tinypng-cache.json` 加入其 `.gitignore`。
+
+以下为可选的官方 API 版本说明，只有采用 API 版本才需要 Key。
+
+---
+
 # TinyPNG 批量压缩脚本
 
 `tinypng.py` 是独立脚本，仅依赖 Python 3.8+ 标准库。复制这个文件到其他项目即可使用，不依赖 Android、Gradle 或第三方 Python 包。所有相对路径均以**执行命令时所在目录**为准。

@@ -54,6 +54,11 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
     private var pendingDeleteCount = 0
     private var pendingDeleteBytes = 0L
     private val deleteLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        if (pendingDeleteCount > 0) {
+            EventUtils.track(if (result.resultCode == Activity.RESULT_OK) {
+                EventUtils.CLICK_SCREENSHOTS_CONFIRM_DELETE
+            } else EventUtils.CLICK_SCREENSHOTS_CANCEL_DELETE)
+        }
         if (result.resultCode == Activity.RESULT_OK) {
             showDeleteResult(pendingDeleteCount, pendingDeleteBytes, 0)
             selected.clear()
@@ -136,12 +141,16 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
     }
 
     private fun deleteSelected() {
+        if (pendingDeleteCount > 0 || deleteConfirmationDialog?.isShowing == true) return
         if (selected.isEmpty()) {
             Toast.makeText(this, R.string.no_files_select, Toast.LENGTH_SHORT).show()
             return
         }
-        if (deleteConfirmationDialog?.isShowing == true) return
         val files = selected.toList()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            performDelete(files)
+            return
+        }
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
             confirmEventName = EventUtils.CLICK_SCREENSHOTS_CONFIRM_DELETE,
