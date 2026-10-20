@@ -2,12 +2,14 @@ package com.nice.aceclean.permission
 
 import android.content.Intent
 import android.os.SystemClock
+import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.util.LogUtils
+import com.nice.aceclean.ui.main.DefaultLauncherTipsActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -22,6 +24,8 @@ internal class SettingsPermissionPoller(
     private val pendingExtra: String? = null,
 ) : AutoCloseable {
     private var pollingJob: Job? = null
+    private var tipsJob: Job? = null
+    private var ownsStorageTips = false
     private var pending = false
     private val launcher = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         // Settings result codes do not describe permission state. Also handles returns after polling times out.
@@ -51,12 +55,35 @@ internal class SettingsPermissionPoller(
         }
         if (opened) {
             startPolling()
+            if (intents.any { it.action == Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION ||
+                    it.action == Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION }) {
+                scheduleStorageTips()
+            }
         } else {
             pending = false
             pendingExtra?.let(activity.intent::removeExtra)
             HotStartManager.skipNextHotStart = previousSkip
         }
         return opened
+    }
+
+    private fun scheduleStorageTips() {
+        tipsJob?.cancel()
+        tipsJob = activity.lifecycleScope.launch {
+            delay(350L)
+            if (!pending || isGranted(activity) || activity.isFinishing || activity.isDestroyed ||
+                activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) return@launch
+            runCatching { DefaultLauncherTipsActivity.start(activity) }
+                .onSuccess { ownsStorageTips = true }
+                .onFailure { LogUtils.w(tag = TAG, msg = "Unable to show storage tips", throwable = it) }
+        }
+    }
+
+    private fun dismissStorageTips() {
+        tipsJob?.cancel()
+        tipsJob = null
+        if (ownsStorageTips) DefaultLauncherTipsActivity.dismiss()
+        ownsStorageTips = false
     }
 
     private fun startPolling() {
@@ -80,6 +107,7 @@ internal class SettingsPermissionPoller(
         if (!pending || activity.isFinishing || activity.isDestroyed) return
         val granted = isGranted(activity)
         pending = false
+        dismissStorageTips()
         pendingExtra?.let(activity.intent::removeExtra)
         pollingJob?.cancel()
         pollingJob = null
@@ -102,6 +130,7 @@ internal class SettingsPermissionPoller(
 
     override fun close() {
         pending = false
+        dismissStorageTips()
         pollingJob?.cancel()
         pollingJob = null
     }

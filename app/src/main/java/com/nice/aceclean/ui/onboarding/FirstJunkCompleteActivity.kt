@@ -103,6 +103,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
 
     private fun showNotificationDialog() {
         val dialogBinding = OnboardingDialogFirstNotificationAccessBinding.inflate(layoutInflater)
+        dialogBinding.grantAccessButton.setShakeTarget(dialogBinding.actionContainer)
         showGuideDialog(dialogBinding)
         dialogBinding.closeButton.setTrackedClickListener(EventUtils.CLICK_FIRST_NOTIFICATION_CLOSE) { dismissGuideDialog() }
         dialogBinding.grantAccessButton.setTrackedClickListener(EventUtils.CLICK_FIRST_NOTIFICATION_ALLOW) { dismissGuideDialog(); notificationListener.request() }
@@ -112,6 +113,7 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
         notificationPrompt?.cancel()
         if (Settings.canDrawOverlays(this)) return openHome()
         val dialogBinding = OnboardingDialogOverlayPermissionRequiredBinding.inflate(layoutInflater)
+        dialogBinding.fixNowButton.setShakeTarget(dialogBinding.actionContainer)
         showGuideDialog(dialogBinding)
         dialogBinding.notNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_OVERLAY_LATER) { openHome() }
         dialogBinding.fixNowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_OVERLAY_FIX) {

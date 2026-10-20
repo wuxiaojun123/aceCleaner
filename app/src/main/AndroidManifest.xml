@@ -72,6 +72,14 @@
         </service>
 
         <activity
+            android:name=".ui.main.DefaultLauncherTipsActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AceClean.SettingsTips" />
+
+        <activity
             android:screenOrientation="portrait"
             android:name=".ui.onboarding.OverlayPermissionGuideActivity"
             android:exported="false"

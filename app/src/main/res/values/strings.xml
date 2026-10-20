@@ -483,4 +483,6 @@
     <string name="string_feature_scan_failed">Unable to complete the scan. Please try again.</string>
     <string name="string_home_permission_required">Permission required</string>
     <string name="string_home_unused_today">Not used today</string>
+    <string name="string_stop_app_tips"><![CDATA[Tap the "<font color="#FF0000">Force stop</font>" button to close the app.]]></string>
+    <string name="string_feature_scan_estimated_progress">Estimated progress</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.nice.aceclean.ui.main
 
 import android.app.Activity
+import android.view.View
 import com.nice.aceclean.R
 import com.nice.aceclean.databinding.FragmentPermissionGateBinding
 import com.nice.aceclean.permission.AllFilesAccessPermissionHelper
@@ -28,14 +29,19 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
         binding.permissionToolbarTitle.setText(target.title)
         val isTraffic = target == ScanFeature.NETWORK_TRAFFIC
         val isUsage = target.permission == ScanPermission.USAGE
-        binding.permissionImage.setImageResource(
-            when (target) {
-                ScanFeature.NETWORK_TRAFFIC -> R.drawable.image_network_traffic_permission
-                ScanFeature.APP_MANAGER -> R.drawable.image_app_manager_permission
-                ScanFeature.NOTIFICATIONS -> R.drawable.notification_grant
-                else -> if (isUsage) R.drawable.image_app_manager_permission else R.drawable.onboarding_image_permission_storage
-            }
-        )
+        if (target == ScanFeature.NOTIFICATIONS) {
+            binding.permissionImage.visibility = View.GONE
+            binding.permissionAnimation.visibility = View.VISIBLE
+            binding.permissionAnimation.setAnimation(R.raw.scan_notice)
+        } else {
+            binding.permissionImage.setImageResource(
+                when (target) {
+                    ScanFeature.NETWORK_TRAFFIC -> R.drawable.image_network_traffic_permission
+                    ScanFeature.APP_MANAGER -> R.drawable.image_app_manager_permission
+                    else -> if (isUsage) R.drawable.image_app_manager_permission else R.drawable.onboarding_image_permission_storage
+                }
+            )
+        }
         binding.permissionTitle.setText(
             if (isUsage) {
                 if (isTraffic) R.string.network_traffic_permission_title else if (target == ScanFeature.RAM) R.string.string_ram_allow_usage_access else R.string.app_manager_permission_title
@@ -78,9 +84,13 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
             return
         }
         binding.permissionAllow.root.setAnimationEnabled(!isFinishing)
+        if (!isFinishing && feature == ScanFeature.NOTIFICATIONS) {
+            binding.permissionAnimation.resumeAnimation()
+        }
     }
 
     override fun onPause() {
+        binding.permissionAnimation.pauseAnimation()
         binding.permissionAllow.root.setAnimationEnabled(false)
         super.onPause()
     }
@@ -92,6 +102,7 @@ class FeatureScanPermissionActivity : BaseActivity<FragmentPermissionGateBinding
     }
 
     override fun onDestroy() {
+        binding.permissionAnimation.cancelAnimation()
         storage.close()
         photos.close()
         videos.close()

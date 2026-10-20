@@ -43,6 +43,7 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
 
     private fun showStorageDialog() {
         val dialogBinding = OnboardingDialogFirstStorageAccessBinding.inflate(layoutInflater)
+        dialogBinding.allowButton.setShakeTarget(dialogBinding.actionContainer)
         showGuideDialog(dialogBinding)
         dialogBinding.closeButton.setTrackedClickListener(EventUtils.CLICK_FIRST_STORAGE_CLOSE) { dismissGuideDialog(); afterStoragePermission(false) }
         dialogBinding.allowButton.setTrackedClickListener(EventUtils.CLICK_FIRST_STORAGE_ALLOW) {

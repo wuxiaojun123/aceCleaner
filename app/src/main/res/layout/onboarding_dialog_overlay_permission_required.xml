@@ -11,6 +11,8 @@
         android:overScrollMode="never"
         android:scrollbars="none">
         <LinearLayout
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -68,9 +70,12 @@
                     android:textSize="13sp" />
             </LinearLayout>
             <FrameLayout
+                android:id="@+id/actionContainer"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent">
-                <TextView
+                <com.nice.aceclean.ui.widget.ShimmerShakeButton
                     style="@style/OnboardingCompleteHeading"
                     android:background="@drawable/onboarding_bg_permission_action"
                     android:clickable="true"

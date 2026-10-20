@@ -78,7 +78,9 @@ object AdSdkManager {
     /** Starts a best-effort preload without blocking the caller. */
     fun preloadAsync(context: Context, placement: String) {
         AdServer.scope.launch {
-            preload(context, placement)
+            LogUtils.d(tag = TAG, msg = "Ad preload started placement=$placement")
+            val loaded = preload(context, placement)
+            LogUtils.d(tag = TAG, msg = "Ad preload finished placement=$placement loaded=$loaded state=${Adm.getAdState(placement)}")
         }
     }
 
@@ -112,7 +114,12 @@ object AdSdkManager {
         placement: String,
         onShown: (() -> Unit)? = null,
     ): Boolean {
-        if (activity.isFinishing || activity.isDestroyed || !Adm.isAdReady(placement)) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            LogUtils.d(tag = TAG, msg = "Ad show skipped placement=$placement reason=activity_unavailable")
+            return false
+        }
+        if (!Adm.isAdReady(placement)) {
+            LogUtils.d(tag = TAG, msg = "Ad show skipped placement=$placement reason=not_ready state=${Adm.getAdState(placement)}")
             return false
         }
 
@@ -133,7 +140,10 @@ object AdSdkManager {
                 null,
                 activity,
                 object : AdShowCallback {
-                    override fun onSuccess(placementName: String, ad: AdBase) { onShown?.invoke() }
+                    override fun onSuccess(placementName: String, ad: AdBase) {
+                        LogUtils.d(tag = TAG, msg = "Ad shown placement=$placementName")
+                        onShown?.invoke()
+                    }
 
                     override fun onFailure(placementName: String, error: AdErrorC) {
                         LogUtils.w(tag = TAG, msg = "Ad show failed for $placementName: ${error.message}")
@@ -143,6 +153,7 @@ object AdSdkManager {
                     override fun onClicked(placementName: String, ad: AdBase) = Unit
 
                     override fun onClosed(placementName: String, ad: AdBase) {
+                        LogUtils.d(tag = TAG, msg = "Ad closed placement=$placementName")
                         complete(true)
                     }
 

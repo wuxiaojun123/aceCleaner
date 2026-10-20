@@ -14,6 +14,7 @@ import com.nice.aceclean.ad.AppAdManager
 import com.nice.aceclean.ad.HotStartManager
 import com.nice.aceclean.databinding.ActivityFeatureScanBinding
 import com.nice.aceclean.ui.base.BaseActivity
+import com.nice.aceclean.ui.viewmodel.FeatureScanViewModel
 import com.nice.aceclean.util.LogUtils
 import com.nice.library_ad_sdk.AdSdkManager
 import kotlinx.coroutines.CancellationException
@@ -25,23 +26,29 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
     private val model: FeatureScanViewModel by viewModels()
     private val feature get() = ScanFeature.from(intent)
     private var transitionRunning = false
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        model.permissionRequested = false
-        if (result.resultCode == Activity.RESULT_OK && feature?.hasPermission(this) == true) {
-            beginScan()
-        } else finish()
-    }
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            model.permissionRequested = false
+            if (result.resultCode == Activity.RESULT_OK && feature?.hasPermission(this) == true) {
+                beginScan()
+            } else finish()
+        }
 
     override fun initViews() {
         disableSystemBack()
         val target = feature ?: return finish()
+        AdSdkManager.preloadAsync(applicationContext, AppAdManager.FEATURE_SCAN_COMPLETE)
         val restored = savedStateRegistry.consumeRestoredStateForKey("feature_scan")
         if (restored?.getBoolean("permission_requested") == true) model.permissionRequested = true
         savedStateRegistry.registerSavedStateProvider("feature_scan") {
-            android.os.Bundle().apply { putBoolean("permission_requested", model.permissionRequested) }
+            android.os.Bundle()
+                .apply { putBoolean("permission_requested", model.permissionRequested) }
         }
         binding.scanTitle.setText(target.title)
         binding.scanAnimation.setAnimation(target.animation)
+        binding.scanProgressValue.text =
+            getString(R.string.percentage_value, model.state.value.progress)
+        binding.scanProgressBar.progress = model.state.value.progress
         binding.scanBack.setOnClickListener { if (!transitionRunning) finish() }
         binding.scanRetry.setOnClickListener {
             binding.scanRetry.visibility = View.GONE
@@ -55,7 +62,11 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 model.state.collect { state ->
-                    state.files?.let { binding.scanDetail.text = getString(R.string.scanned_files_progress, it) }
+                    binding.scanProgressValue.text =
+                        getString(R.string.percentage_value, state.progress)
+                    binding.scanProgressBar.progress = state.progress
+                    binding.scanDetail.text =
+                        state.files?.let { getString(R.string.scanned_files_progress, it) }
                     if (state.failed) {
                         binding.scanAnimation.pauseAnimation()
                         binding.scanStatus.setText(R.string.string_feature_scan_failed)
@@ -75,20 +86,23 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
         if (target.hasPermission(this)) beginScan()
         else if (!model.permissionRequested) {
             model.permissionRequested = true
-            permissionLauncher.launch(Intent(this, FeatureScanPermissionActivity::class.java)
-                .putExtra(ScanFeature.EXTRA_FEATURE, target.name))
+            permissionLauncher.launch(
+                Intent(this, FeatureScanPermissionActivity::class.java)
+                    .putExtra(ScanFeature.EXTRA_FEATURE, target.name)
+            )
         }
     }
 
     private fun beginScan() {
         val target = feature ?: return
         binding.scanAnimation.playAnimation()
-        AdSdkManager.preloadAsync(applicationContext, AppAdManager.FEATURE_SCAN_COMPLETE)
         model.scan(target)
     }
 
     private suspend fun completeScan(target: ScanFeature, result: FeatureScanResult) {
         transitionRunning = true
+        binding.scanProgressValue.text = getString(R.string.percentage_value, 100)
+        binding.scanProgressBar.progress = 100
         binding.scanStatus.setText(R.string.string_feature_scan_complete)
         binding.scanAnimation.pauseAnimation()
         try {
@@ -98,29 +112,35 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
             }
             if (!model.adAttempted) {
                 model.adAttempted = true
-                LogUtils.d("scan_ad_attempt feature=$target placement=${AppAdManager.FEATURE_SCAN_COMPLETE}", "FeatureScan")
-                val loaded = AdSdkManager.preload(applicationContext, AppAdManager.FEATURE_SCAN_COMPLETE)
+                LogUtils.d(
+                    "scan_ad_attempt feature=$target placement=${AppAdManager.FEATURE_SCAN_COMPLETE}",
+                    "FeatureScan"
+                )
                 lifecycle.withResumed { }
                 var shown = false
-                if (loaded) {
-                    val previousSkip = HotStartManager.skipNextHotStart
-                    HotStartManager.markSkipNextHotStart()
-                    try {
-                        shown = AppAdManager.showLoaded(this, AppAdManager.FEATURE_SCAN_COMPLETE)
-                    } catch (error: CancellationException) {
-                        throw error
-                    } catch (error: Exception) {
-                        LogUtils.w("scan_ad_failed feature=$target", "FeatureScan", error)
-                    } finally {
-                        HotStartManager.skipNextHotStart = previousSkip
-                    }
+                val previousSkip = HotStartManager.skipNextHotStart
+                HotStartManager.markSkipNextHotStart()
+                try {
+                    // Never wait for loading here: an unavailable ad must not delay navigation.
+                    shown = AppAdManager.showLoaded(this, AppAdManager.FEATURE_SCAN_COMPLETE)
+                } catch (error: CancellationException) {
+                    throw error
+                } catch (error: Exception) {
+                    LogUtils.w("scan_ad_failed feature=$target", "FeatureScan", error)
+                } finally {
+                    HotStartManager.skipNextHotStart = previousSkip
                 }
-                LogUtils.d("scan_ad_finished feature=$target loaded=$loaded shown=$shown", "FeatureScan")
+                LogUtils.d("scan_ad_finished feature=$target shown=$shown", "FeatureScan")
             }
             lifecycle.withResumed {
                 if (!model.navigated && !isFinishing && !isDestroyed) {
                     val id = FeatureScanResults.put(result)
-                    startActivity(Intent(this, target.destination).putExtra(ScanFeature.EXTRA_RESULT, id))
+                    startActivity(
+                        Intent(
+                            this,
+                            target.destination
+                        ).putExtra(ScanFeature.EXTRA_RESULT, id)
+                    )
                     model.navigated = true
                     LogUtils.d("scan_result_open feature=$target", "FeatureScan")
                     finish()
@@ -142,6 +162,7 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
         super.onStart()
         if (!model.state.value.failed && model.state.value.result == null) binding.scanAnimation.resumeAnimation()
     }
+
     override fun onStop() {
         binding.scanAnimation.pauseAnimation()
         super.onStop()

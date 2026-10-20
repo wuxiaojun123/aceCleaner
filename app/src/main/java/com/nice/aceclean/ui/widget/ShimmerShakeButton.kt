@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -13,6 +14,8 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.Shader
 import android.util.AttributeSet
+import android.os.Build
+import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 
 /** A lightweight CTA animation: shimmer first, then a short horizontal shake every five seconds. */
@@ -28,23 +31,46 @@ class ShimmerShakeButton @JvmOverloads constructor(
     private val cornerRadius = 30f * resources.displayMetrics.density
     private var shimmerProgress = START_PROGRESS
     private var runningAnimator: AnimatorSet? = null
+    private var shakeTarget: View = this
 
     private val nextCycle = Runnable { startCycle() }
 
+    /** Dialogs move the button's overlaid label and arrow together with its background. */
+    fun setShakeTarget(target: View) {
+        if (shakeTarget === target) return
+        stopCycle()
+        shakeTarget = target
+        scheduleNext(INITIAL_DELAY_MS)
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        removeCallbacks(nextCycle)
-        postDelayed(nextCycle, INITIAL_DELAY_MS)
+        scheduleNext(INITIAL_DELAY_MS)
     }
 
     override fun onDetachedFromWindow() {
+        stopCycle()
+        super.onDetachedFromWindow()
+    }
+
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        if (hasWindowFocus) scheduleNext(INITIAL_DELAY_MS) else stopCycle()
+    }
+
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        if (visibility == VISIBLE) scheduleNext(INITIAL_DELAY_MS) else stopCycle()
+    }
+
+    private fun stopCycle() {
         runningAnimator?.removeAllListeners()
         runningAnimator?.cancel()
         runningAnimator = null
         removeCallbacks(nextCycle)
-        translationX = 0f
+        shakeTarget.translationX = 0f
         shimmerProgress = START_PROGRESS
-        super.onDetachedFromWindow()
+        invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -78,16 +104,13 @@ class ShimmerShakeButton @JvmOverloads constructor(
     }
 
     private fun startCycle() {
-        if (!isAttachedToWindow || !isShown) {
-            scheduleNext(CYCLE_MS)
-            return
-        }
+        if (!canAnimate() || runningAnimator != null) return
         val distance = SHAKE_DISTANCE_DP * resources.displayMetrics.density
         val shimmer = ObjectAnimator.ofFloat(this, "shimmerProgress", START_PROGRESS, END_PROGRESS).apply {
             duration = SHIMMER_DURATION_MS
         }
         val shake = ObjectAnimator.ofFloat(
-            this,
+            shakeTarget,
             TRANSLATION_X,
             0f,
             -distance,
@@ -116,8 +139,11 @@ class ShimmerShakeButton @JvmOverloads constructor(
 
     private fun scheduleNext(delayMs: Long) {
         removeCallbacks(nextCycle)
-        if (isAttachedToWindow) postDelayed(nextCycle, delayMs)
+        if (canAnimate() && runningAnimator == null) postDelayed(nextCycle, delayMs)
     }
+
+    private fun canAnimate(): Boolean = isAttachedToWindow && isShown && hasWindowFocus() &&
+        (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled())
 
     private companion object {
         const val INITIAL_DELAY_MS = 800L

@@ -1,6 +1,7 @@
 package com.nice.aceclean.ui.main
 
 import androidx.activity.viewModels
+import androidx.activity.result.contract.ActivityResultContracts
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -24,8 +26,10 @@ import com.nice.aceclean.ui.dialog.IosActionSheetDialog
 import com.nice.aceclean.util.DeviceToolsRepository
 import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.RunningAppInfo
+import com.nice.aceclean.util.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,6 +39,11 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
     private var firstResume = true
     private var resultShown = false
     private var refreshJob: Job? = null
+    private var stopAppTipsJob: Job? = null
+    private val appSettingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        stopAppTipsJob?.cancel()
+        DefaultLauncherTipsActivity.dismiss()
+    }
 
     override val featureHeader get() = binding.featureHeader
 
@@ -112,12 +121,23 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
             message = getString(R.string.force_stop_explanation),
             actions = listOf(IosActionSheetDialog.Action(getString(R.string.continue_text), eventName = EventUtils.CLICK_RAM_FORCE_STOP_CONTINUE) {
                 HotStartManager.markSkipNextHotStart()
-                startActivity(
-                    Intent(
+                runCatching {
+                    appSettingsLauncher.launch(Intent(
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         Uri.parse("package:${app.packageName}"),
-                    ),
-                )
+                    ))
+                }.onSuccess {
+                    stopAppTipsJob?.cancel()
+                    stopAppTipsJob = lifecycleScope.launch {
+                        delay(350L)
+                        if (isFinishing || isDestroyed ||
+                            lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) return@launch
+                        runCatching { DefaultLauncherTipsActivity.startForStopApp(this@RamStatusActivity) }
+                            .onFailure { LogUtils.w(tag = "RamStatus", msg = "Unable to show stop app tips", throwable = it) }
+                    }
+                }.onFailure {
+                    LogUtils.w(tag = "RamStatus", msg = "Unable to open app settings", throwable = it)
+                }
             }),
         )
     }
