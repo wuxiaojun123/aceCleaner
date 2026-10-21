@@ -6,12 +6,10 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
-import android.provider.MediaStore
 import android.text.format.Formatter
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -35,14 +33,20 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var keepBestSwitch: IosSwitchView
     private var syncingSwitch = false
-    private var pendingDeleteItems = emptyList<SimilarPhotoItem>()
+    private var cleaningInProgress = false
     private var deleteConfirmationDialog: Dialog? = null
 
     private val handoff: FeatureResultViewModel by viewModels()
 
-    private val deleteLauncher = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) onPhotosDeleted(pendingDeleteItems)
-        pendingDeleteItems = emptyList()
+    private val cleaningLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        cleaningInProgress = false
+        when (result.resultCode) {
+            Activity.RESULT_OK -> finish()
+            JunkCleaningActivity.RESULT_RESCAN -> {
+                SimilarPhotoScanner.invalidateCache()
+                loadPhotos()
+            }
+        }
     }
 
     override fun initViews() {
@@ -129,8 +133,13 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
 
     private fun confirmDelete() {
         val selected = adapter.selectedItems()
-        if (selected.isEmpty()) return
+        if (selected.isEmpty() || cleaningInProgress) return
         if (deleteConfirmationDialog?.isShowing == true) return
+        // Android 11+ confirms deletion in the system media permission sheet.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            startCleaning(selected)
+            return
+        }
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
             confirmEventName = EventUtils.CLICK_DUPLICATES_CONFIRM_DELETE,
@@ -142,49 +151,28 @@ class SimilarPhotoCleanerActivity : BaseActivity<ActivityDuplicatePhotoCleanerBi
                 Formatter.formatFileSize(this, selected.sumOf { it.sizeBytes }),
             ),
             confirmText = getString(R.string.dup_delete),
-            onConfirm = { delete(selected) },
+            onConfirm = { startCleaning(selected) },
             onDismiss = { deleteConfirmationDialog = null },
         )
     }
 
-    private fun delete(items: List<SimilarPhotoItem>) {
-        val uris = items.map { it.uri }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            runCatching {
-                pendingDeleteItems = items
-                val request = MediaStore.createDeleteRequest(contentResolver, uris)
-                deleteLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
-            }.onFailure {
-                pendingDeleteItems = emptyList()
-                Toast.makeText(this, R.string.dup_delete_failed, Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            val deleted = items.filter { runCatching { contentResolver.delete(it.uri, null, null) > 0 }.getOrDefault(false) }
-            onPhotosDeleted(deleted)
-            if (deleted.size != items.size) Toast.makeText(this, R.string.dup_delete_failed, Toast.LENGTH_SHORT).show()
+    private fun startCleaning(items: List<SimilarPhotoItem>) {
+        if (cleaningInProgress) return
+        cleaningInProgress = true
+        runCatching {
+            cleaningLauncher.launch(JunkCleaningActivity.createSimilarPhotosIntent(this, items))
+        }.onFailure {
+            cleaningInProgress = false
+            Toast.makeText(this, R.string.dup_delete_failed, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun onPhotosDeleted(items: List<SimilarPhotoItem>) {
-        if (items.isEmpty()) return
-        DeleteSuccessActivity.show(
-            context = this,
-            removedCount = items.size,
-            freedBytes = items.sumOf { it.sizeBytes },
-            featureIcon = R.drawable.icon_duplicate_photo_cleaner,
-            source = DeleteSuccessActivity.SOURCE_DUPLICATE,
-        )
-        SimilarPhotoScanner.invalidateCache()
-        loadPhotos()
     }
 
     private fun openPhoto(item: SimilarPhotoItem) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(item.uri, "image/*")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
-        runCatching { startActivity(intent) }
-            .onFailure { Toast.makeText(this, R.string.dup_preview_unavailable, Toast.LENGTH_SHORT).show() }
+        val photos = (handoff.read(intent) as? FeatureScanResult.Photos)
+            ?.clusters?.firstOrNull { cluster -> cluster.items.any { it.item.id == item.id } }
+            ?.items?.map { it.item }.orEmpty()
+        val index = photos.indexOfFirst { it.id == item.id }
+        if (index >= 0) PhotoViewerActivity.start(this, photos, index)
     }
 
     private fun showLoading(show: Boolean) {

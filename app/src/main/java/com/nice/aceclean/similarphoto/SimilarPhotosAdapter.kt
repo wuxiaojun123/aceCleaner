@@ -102,6 +102,7 @@ class SimilarPhotosAdapter(
         private val unchecked = binding.similarPhotoUnchecked
         private val checked = binding.similarPhotoChecked
         private val border = binding.similarPhotoBorder
+        private val selection = binding.similarPhotoSelection
         private var loadJob: Job? = null
 
         fun bind(row: SimilarPhotoRow.Photo) {
@@ -115,8 +116,13 @@ class SimilarPhotosAdapter(
             unchecked.visibility = if (row.selected) View.GONE else View.VISIBLE
             checked.visibility = if (row.selected) View.VISIBLE else View.GONE
             border.visibility = if (row.selected) View.VISIBLE else View.GONE
-            unchecked.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_SELECT) { toggle(row.item.id) }
-            checked.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_DESELECT) { toggle(row.item.id) }
+            selection.isSelected = row.selected
+            selection.contentDescription = itemView.context.getString(
+                if (row.selected) R.string.string_photo_deselect else R.string.string_photo_select,
+            )
+            selection.setTrackedClickListener(
+                if (row.selected) EventUtils.CLICK_DUPLICATES_DESELECT else EventUtils.CLICK_DUPLICATES_SELECT,
+            ) { toggle(row.item.id) }
             thumbnail.setTrackedClickListener(EventUtils.CLICK_DUPLICATES_PREVIEW) { onPhotoOpen(row.item) }
         }
 

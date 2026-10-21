@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">आज इस्तेमाल नहीं हुआ</string>
     <string name="string_stop_app_tips">ऐप बंद करने के लिए “&lt;font color=\"#FF0000\"&gt;बलपूर्वक रोकें&lt;/font&gt;” बटन पर टैप करें।</string>
     <string name="string_feature_scan_estimated_progress">अनुमानित प्रगति</string>
+    <string name="string_similar_photos_cleaning">चुनी गई फ़ोटो मिटाई जा रही हैं…</string>
+    <string name="string_photo_select">फ़ोटो चुनें</string>
+    <string name="string_photo_deselect">फ़ोटो का चयन हटाएँ</string>
+    <string name="string_photo_load_failed">फ़ोटो लोड नहीं हो सकी</string>
 </resources>

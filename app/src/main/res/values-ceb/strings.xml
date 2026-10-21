@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">Wala pa gamita karong adlawa</string>
     <string name="string_stop_app_tips">I-tap ang “&lt;font color=\"#FF0000\"&gt;Pugsa og hunong&lt;/font&gt;” aron masirad-an ang app.</string>
     <string name="string_feature_scan_estimated_progress">Gibanabanang pag-uswag</string>
+    <string name="string_similar_photos_cleaning">Gipapas ang mga gipiling litrato…</string>
+    <string name="string_photo_select">Pilia ang litrato</string>
+    <string name="string_photo_deselect">Tangtanga ang pagpili sa litrato</string>
+    <string name="string_photo_load_failed">Dili ma-load ang litrato</string>
 </resources>

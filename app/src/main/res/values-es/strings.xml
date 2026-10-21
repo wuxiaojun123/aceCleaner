@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">No usado hoy</string>
     <string name="string_stop_app_tips">Toca «&lt;font color=\"#FF0000\"&gt;Forzar detención&lt;/font&gt;» para cerrar la aplicación.</string>
     <string name="string_feature_scan_estimated_progress">Progreso estimado</string>
+    <string name="string_similar_photos_cleaning">Eliminando las fotos seleccionadas…</string>
+    <string name="string_photo_select">Seleccionar foto</string>
+    <string name="string_photo_deselect">Deseleccionar foto</string>
+    <string name="string_photo_load_failed">No se pudo cargar la foto</string>
 </resources>

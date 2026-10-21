@@ -509,4 +509,10 @@
     <string name="string_report_size_gigabytes" translatable="false">%1$.2f GB</string>
     <string name="string_report_size_megabytes" translatable="false">%1$.0f MB</string>
     <string name="string_result_with_detail" translatable="false">%1$s\n%2$s</string>
+    <string name="string_similar_photos_cleaning">Deleting selected photos…</string>
+    <string name="string_photo_select">Select photo</string>
+    <string name="string_photo_deselect">Deselect photo</string>
+    <string name="string_photo_load_failed">Could not load photo</string>
+    <string name="string_photo_viewer_counter" translatable="false">%1$d / %2$d</string>
+    <string name="string_photo_viewer_info" translatable="false">%1$s · %2$s</string>
 </resources>

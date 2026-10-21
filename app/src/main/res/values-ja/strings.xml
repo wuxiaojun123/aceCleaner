@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">今日は未使用</string>
     <string name="string_stop_app_tips">「&lt;font color=\"#FF0000\"&gt;強制停止&lt;/font&gt;」ボタンをタップしてアプリを終了してください。</string>
     <string name="string_feature_scan_estimated_progress">推定進捗</string>
+    <string name="string_similar_photos_cleaning">選択した写真を削除中…</string>
+    <string name="string_photo_select">写真を選択</string>
+    <string name="string_photo_deselect">写真の選択を解除</string>
+    <string name="string_photo_load_failed">写真を読み込めませんでした</string>
 </resources>

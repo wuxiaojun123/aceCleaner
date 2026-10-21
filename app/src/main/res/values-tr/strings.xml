@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">Bugün kullanılmadı</string>
     <string name="string_stop_app_tips">Uygulamayı kapatmak için “&lt;font color=\"#FF0000\"&gt;Zorla durdur&lt;/font&gt;” düğmesine dokunun.</string>
     <string name="string_feature_scan_estimated_progress">Tahmini ilerleme</string>
+    <string name="string_similar_photos_cleaning">Seçilen fotoğraflar siliniyor…</string>
+    <string name="string_photo_select">Fotoğrafı seç</string>
+    <string name="string_photo_deselect">Fotoğraf seçimini kaldır</string>
+    <string name="string_photo_load_failed">Fotoğraf yüklenemedi</string>
 </resources>

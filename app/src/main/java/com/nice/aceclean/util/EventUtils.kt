@@ -416,6 +416,8 @@ object EventUtils {
     /** 相似照片列表：点击缩略图预览照片。 */
     const val CLICK_DUPLICATES_PREVIEW = "click_duplicates_preview"
 
+    const val CLICK_PHOTO_VIEWER_BACK = "click_photo_viewer_back"
+
     // 快捷清理引导弹窗
 
     /** 快捷清理引导弹窗：点击添加快捷开关。 */

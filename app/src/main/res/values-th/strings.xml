@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">ยังไม่ได้ใช้วันนี้</string>
     <string name="string_stop_app_tips">แตะ “&lt;font color=\"#FF0000\"&gt;บังคับหยุด&lt;/font&gt;” เพื่อปิดแอป</string>
     <string name="string_feature_scan_estimated_progress">ความคืบหน้าโดยประมาณ</string>
+    <string name="string_similar_photos_cleaning">กำลังลบรูปภาพที่เลือก…</string>
+    <string name="string_photo_select">เลือกรูปภาพ</string>
+    <string name="string_photo_deselect">ยกเลิกการเลือกรูปภาพ</string>
+    <string name="string_photo_load_failed">โหลดรูปภาพไม่ได้</string>
 </resources>

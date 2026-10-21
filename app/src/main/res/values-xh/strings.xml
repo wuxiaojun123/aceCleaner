@@ -445,4 +445,8 @@
     <string name="string_home_unused_today">Ayikasetyenziswa namhlanje</string>
     <string name="string_stop_app_tips">Cofa iqhosha elithi “&lt;font color=\"#FF0000\"&gt;Nyanzela ukuyeka&lt;/font&gt;” ukuvala i-app.</string>
     <string name="string_feature_scan_estimated_progress">Inkqubela eqikelelweyo</string>
+    <string name="string_similar_photos_cleaning">Kucinywa iifoto ezikhethiweyo…</string>
+    <string name="string_photo_select">Khetha ifoto</string>
+    <string name="string_photo_deselect">Susa ukhetho lwefoto</string>
+    <string name="string_photo_load_failed">Ayikwazanga ukulayisha ifoto</string>
 </resources>

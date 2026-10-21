@@ -187,6 +187,11 @@
             android:exported="false"
             android:theme="@style/Theme.AceClean" />
         <activity
+            android:name=".ui.main.PhotoViewerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AceClean.PhotoViewer" />
+        <activity
             android:screenOrientation="portrait"
             android:name=".ui.main.ScreenshotCleanerActivity"
             android:exported="false"
