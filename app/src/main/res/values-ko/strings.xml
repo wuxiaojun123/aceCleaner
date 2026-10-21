@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">로드 중...%1$d%%</string>
     <string name="agree_to_battery">계속하면 다음에 동의하는 것입니다</string>
-    <string name="app_guide_tips">"참고: 첫 스캔은 정크 파일을 찾고 휴대전화 데이터를 분석하므로 더 오래 걸릴 수 있습니다."</string>
+    <string name="app_guide_tips">"참고:\n첫 스캔은 정크 파일을 찾고 휴대전화 데이터를 분석하므로 더 오래 걸릴 수 있습니다."</string>
     <string name="guide_complete">완료</string>
     <string name="guide_density">화면 밀도</string>
     <string name="guide_device">기기</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">사용 중인 저장공간</string>
     <string name="guide_system">시스템 OS 버전</string>
     <string name="privacy_policy">개인정보 처리방침</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">중요한 팁을 놓치지 마세요</string>
     <string name="clean_up">정리</string>
     <string name="quick_clean_tile_label">빠른 정리</string>
@@ -40,46 +37,37 @@
     <string name="network_test">네트워크 테스트</string>
     <string name="feature_coming_soon">이 기능은 곧 제공됩니다</string>
     <string name="settings">설정</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">배터리</string>
     <string name="notification_clean_up">정리</string>
     <string name="clean_cache_now">지금 캐시 정리</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">대용량 파일</string>
     <string name="home_photos">유사</string>
     <string name="home_empty">빈 항목</string>
     <string name="home_notifications">알림</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">언어</string>
+    <string name="language_title">언어</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">스캔 중...</string>
     <string name="scanned_files_progress">스캔한 파일: %1$d</string>
     <string name="clean_scan_summary">스캔한 파일: %1$d · 확인한 폴더: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">공간을 차지하는 대용량 파일 찾기</string>
     <string name="clean_success_screenshot_hint">더 이상 필요 없는 스크린샷 삭제</string>
     <string name="clean_success_duplicate_hint">유사 사진을 정리해 공간 확보</string>
+    <string name="string_delete_success_space_freed">%1$s 확보</string>
+    <string name="string_delete_success_continue_with">%1$s 기능을 계속 사용하여 추가로 최적화하세요.</string>
+    <string name="string_delete_success_more_tools">다른 정리 도구</string>
+    <string name="string_delete_success_video_hint">공간을 차지하는 동영상 확인</string>
     <string name="done">완료</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">선택됨</string>
     <string name="remove_selected_size">%1$s 삭제</string>
     <string name="clean_confirm_title">선택한 파일을 정리할까요?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">알림 서비스 연결 중</string>
     <string name="notif_title">알림</string>
     <string name="notif_subtitle">알림을 정리하고 방해 요소 줄이기</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">알림을 깔끔하게 관리</string>
     <string name="notif_hero_subtitle">알림 출처를 확인하고 앱별로 그룹화하세요</string>
     <string name="notif_intercept_title">알림 차단</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">차단된 알림을 지웠습니다</string>
     <string name="uninstall_count">제거 (%1$d)</string>
     <string name="uninstall_cancelled">제거 취소됨</string>
+    <string name="string_delete_success_apps_uninstalled">앱 %1$d개 제거됨</string>
     <string name="apps_found">앱 %1$d개</string>
     <string name="apps_found_initial">앱 0개</string>
     <string name="picture">사진</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6개월</string>
     <string name="one_year">1년</string>
     <string name="all_time">전체 기간</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">사진 스캔 중...</string>
     <string name="scanning_large_files">대용량 파일 스캔 중...</string>
     <string name="scanning_video">동영상 스캔 중...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">해상도</string>
     <string name="link_speed">링크 속도</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s픽셀</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">기기</string>
     <string name="android_version">Android 버전</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">모바일 데이터</string>
     <string name="connection_ethernet">이더넷</string>
     <string name="connection_other">기타</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">비슷한 사진</string>
+    <string name="dup_subtitle">이 기기에서 찾은 사진</string>
+    <string name="dup_keep_best_title">가장 좋은 사진 유지</string>
+    <string name="dup_keep_best_subtitle">각 그룹의 가장 좋은 사진을 남기고 나머지는 삭제하세요</string>
+    <string name="dup_best_photo">최고</string>
+    <string name="dup_cluster_title">중복 그룹 %1$d</string>
+    <string name="dup_cluster_count">사진 %1$d장</string>
+    <string name="dup_none_selected">0장 선택됨</string>
+    <string name="dup_selected_count">%1$d장 선택됨</string>
+    <string name="dup_action_note">체크 표시를 눌러 선택하세요</string>
+    <string name="dup_selected_size">%1$s 선택됨</string>
+    <string name="dup_delete">선택 항목 삭제</string>
+    <string name="dup_delete_confirm_title">정리하시겠어요?</string>
+    <string name="dup_delete_confirm_message">선택: 사진 %1$d장\n전체 크기: %2$s</string>
+    <string name="dup_deleted">사진 %1$d장을 삭제했습니다</string>
+    <string name="dup_delete_failed">일부 사진을 삭제하지 못했습니다</string>
+    <string name="dup_loading">비슷한 사진 검색 중…</string>
+    <string name="dup_scan_failed">사진을 검사할 수 없습니다</string>
+    <string name="dup_empty_title">비슷한 사진을 찾지 못했습니다</string>
+    <string name="dup_empty_desc">사진 보관함이 깔끔합니다</string>
+    <string name="dup_preview_unavailable">사진을 볼 수 있는 앱이 없습니다</string>
     <string name="app_manager_installed">설치됨: %1$s</string>
     <string name="app_manager_last_used">마지막 사용: %1$s</string>
     <string name="app_manager_last_used_today">오늘</string>
     <string name="app_manager_last_used_unknown">알 수 없음</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">홈 화면 빠른 정리 패널</string>
+    <string name="string_onboarding_overlay_permission_skip">건너뛰기</string>
+    <string name="string_onboarding_overlay_permission_title">다른 앱 위에 표시 권한 허용</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">맨 위에 표시</string>
+    <string name="string_onboarding_overlay_permission_function">기능</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">RAM 모니터링 및 최적화</string>
+    <string name="string_onboarding_overlay_permission_feature_network">네트워크 모니터링 및 최적화</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">스마트 불필요한 파일 정리</string>
+    <string name="string_onboarding_device_status_scan_title">기기 상태</string>
+    <string name="string_onboarding_device_status_scan_content_description">기기 상태 검사 애니메이션</string>
+    <string name="string_onboarding_device_status_scan_message">기기 정보 검사 중…</string>
+    <string name="string_onboarding_device_status_used">사용 중:</string>
+    <string name="string_onboarding_device_status_total">전체:</string>
+    <string name="string_onboarding_device_status_battery_status">상태:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">CPU 모델</string>
+    <string name="string_onboarding_device_status_cpu_frequency">CPU 주파수</string>
+    <string name="string_onboarding_device_status_cpu_cores">CPU 코어</string>
+    <string name="string_onboarding_first_device_screen">화면</string>
+    <string name="string_onboarding_device_status_screen_dpi">화면 DPI</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">화면 새로고침 빈도</string>
+    <string name="string_onboarding_device_status_clean_junk_files">불필요한 파일 정리</string>
+    <string name="string_onboarding_battery_info_checking">배터리 정보 확인 중…</string>
+    <string name="string_onboarding_battery_estimated_calculating">남은 시간 계산 중</string>
+    <string name="string_onboarding_battery_status_label">배터리 상태</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">명의 사용자가 확인했어요 ✨</string>
+    <string name="string_onboarding_battery_info_check_now">지금 확인</string>
+    <string name="string_onboarding_battery_check_title">배터리 검사</string>
+    <string name="string_onboarding_first_junk_title">불필요한 파일 정리</string>
+    <string name="string_onboarding_first_junk_scan_animation">불필요한 파일 검사 애니메이션</string>
+    <string name="string_onboarding_first_junk_scanning">불필요한 파일 검사 중…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">항목: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">검사 완료! 불필요한 파일을 정리해 보세요.</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">불필요한 파일 정리 애니메이션</string>
+    <string name="string_onboarding_first_junk_cleaning">불필요한 파일 정리 중…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">98%가 선택</string>
+    <string name="string_onboarding_first_complete_app_process">앱 프로세스</string>
+    <string name="string_onboarding_first_complete_app_process_description">불필요한 백그라운드 프로세스를 한 번에 종료하세요!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">76%가 선택</string>
+    <string name="string_onboarding_first_complete_notification_blocker">알림 차단</string>
+    <string name="string_onboarding_first_complete_notification_description">불필요한 알림을 걸러내고 방해 요소를 한 번에 차단하세요!</string>
+    <string name="string_onboarding_first_complete_organize">정리</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">68%가 선택</string>
+    <string name="string_onboarding_first_complete_battery_description">실시간 배터리 용량과 전력 소비 순위를 확인하세요!</string>
+    <string name="string_onboarding_first_complete_view_details">자세히 보기</string>
+    <string name="string_onboarding_first_storage_access_title">권한 요청</string>
+    <string name="string_onboarding_first_storage_access_description">이 기능에는 파일 저장공간 접근 권한이 필요합니다.</string>
+    <string name="string_onboarding_first_storage_access_allow">허용</string>
+    <string name="string_onboarding_first_notification_access_title">접근 권한 요청</string>
+    <string name="string_onboarding_first_notification_access_description">알림을 한 번에 관리하려면 접근 권한이 필요합니다.</string>
+    <string name="string_onboarding_first_notification_access_grant">접근 허용</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">설정 &gt; 다른 앱 위에 표시</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">다른 앱 위에 표시 허용</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  모니터링 비활성</string>
+    <string name="string_onboarding_overlay_permission_back_description">플로팅 위젯이 RAM과 속도를 실시간으로 추적할 수 있도록 다른 앱 위에 표시 권한을 허용하세요.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">나중에</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ 지금 해결</string>
+    <string name="string_onboarding_first_junk_expand">펼치기</string>
+    <string name="string_onboarding_splash_welcome">환영합니다</string>
+    <string name="string_onboarding_splash_intro">불필요한 파일을 정리하고 공간을 확보하여 휴대폰을 빠르게 유지하세요.</string>
+    <string name="string_onboarding_splash_preparing">시작 준비 중…</string>
+    <string name="string_onboarding_first_junk_cache">불필요한 캐시</string>
+    <string name="string_onboarding_first_junk_system_cache">시스템 캐시</string>
+    <string name="string_onboarding_first_junk_thumbnails">미리보기 이미지</string>
+    <string name="string_onboarding_first_junk_downloads">다운로드</string>
+    <string name="string_onboarding_first_junk_apks">APK 파일</string>
+    <string name="string_onboarding_first_junk_empty_folders">빈 폴더</string>
+    <string name="string_onboarding_first_junk_clean_now_size">지금 정리 · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">정리 완료!</string>
+    <string name="string_onboarding_first_junk_complete_description">저장공간 %1$s를 확보했습니다.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">배터리 상태가 좋습니다!</string>
+    <string name="string_onboarding_first_junk_back_home">홈으로 돌아가기</string>
+    <string name="string_onboarding_battery_check_scan_title">기기 검사</string>
+    <string name="string_onboarding_battery_check_scan_message">기기 확인 중…</string>
+    <string name="string_onboarding_battery_home_placeholder">배터리 상태 확인</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">완충</string>
+    <string name="string_onboarding_battery_home_remaining">남은 시간</string>
+    <string name="string_onboarding_battery_estimated_charging">완충까지 %1$s</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s 남음</string>
+    <string name="string_onboarding_battery_fully_charge_time">완충까지 걸리는 시간:</string>
+    <string name="string_onboarding_battery_remaining_time">예상 남은 시간:</string>
+    <string name="string_onboarding_battery_status_pending">대기 중</string>
+    <string name="string_onboarding_battery_power_label">전력</string>
+    <string name="string_onboarding_battery_health_overheat">과열</string>
+    <string name="string_onboarding_battery_health_over_voltage">과전압</string>
+    <string name="string_onboarding_battery_health_failure">알 수 없는 오류</string>
+    <string name="string_onboarding_overlay_permission_description">어디서나 1초 만에 불필요한 파일을 지우고\n공간을 확보하는 3배 빠른 정리</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">다른 앱 위에 표시 권한 설정을 열 수 없습니다.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">다른 앱 위에 표시 활성화</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">앱 캐시</string>
+    <string name="string_onboarding_ad_junk">불필요한 광고 파일</string>
+    <string name="string_onboarding_memory_cache">메모리 캐시</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d시간 %2$d분</string>
+    <string name="string_onboarding_duration_minutes">%1$d분</string>
+    <string name="string_onboarding_fix_now">지금 해결</string>
+    <string name="string_onboarding_overlay_description_simple">어디서나 불필요한 파일을 더 빠르게 정리하고 공간을 확보하세요.</string>
+    <string name="string_ram_usage_access_description">최근 사용한 앱을 보려면 사용 정보 접근을 허용하세요. Android는 백그라운드 프로세스 접근을 제한합니다.</string>
+    <string name="string_ram_allow_usage_access">사용 정보 접근 허용</string>
+    <string name="string_ram_recent_apps_count">최근 사용한 앱 %1$d개</string>
+    <string name="string_ram_usage_access_required">사용 정보 접근 권한 필요</string>
+    <string name="string_ram_no_recent_apps">최근 사용한 앱을 찾지 못했습니다</string>
     <string name="string_network_overline">한눈에 보는 네트워크</string>
     <string name="string_network_intro">연결 상태를 빠르게 확인하세요.</string>
     <string name="string_network_results_hint">테스트가 진행되면 결과가 표시됩니다.</string>
     <string name="string_network_results_complete">결과는 테스트 중의 연결 상태를 나타냅니다.</string>
     <string name="string_network_download">다운로드</string>
     <string name="string_network_upload">업로드</string>
-    <string name="string_network_complete_title">테스트 완료</string>
     <string name="string_network_step_ping">1  핑</string>
     <string name="string_network_step_download">2  다운로드</string>
     <string name="string_network_step_upload">3  업로드</string>
+    <string name="string_network_complete_title">테스트 완료</string>
+    <string name="string_onboarding_complete_status">정리 완료</string>
+    <string name="string_onboarding_complete_check_status">검사 완료</string>
+    <string name="string_onboarding_complete_tools_title">좋은 상태를 유지하세요</string>
+    <string name="string_onboarding_complete_tools_label">더 많은 도구</string>
+    <string name="string_onboarding_complete_result">%1$s\n저장공간을 확보했습니다. 더 여유롭게 사용하세요.</string>
+    <string name="string_onboarding_complete_battery_title">좋습니다!</string>
+    <string name="string_onboarding_complete_battery_result">양호한 상태\n배터리가 하루를 시작할 준비를 마쳤습니다.</string>
+    <string name="string_onboarding_complete_process_description">불필요한 백그라운드 프로세스를\n한 번에 종료하세요.</string>
+    <string name="string_onboarding_complete_notification_description">알림도 방해도 더 적게.</string>
+    <string name="string_onboarding_complete_battery_description">배터리를 더 자세히 알아보세요.</string>
+    <string name="string_junk_cleaning_session_expired">정리하기 전에 다시 검사하세요.</string>
+    <string name="string_junk_cleaning_failed">선택한 파일을 정리하지 못했습니다. 다시 검사한 후 시도하세요.</string>
+    <string name="string_feature_scan_complete">스캔 완료</string>
+    <string name="string_feature_scan_failed">검사를 완료할 수 없습니다. 다시 시도하세요.</string>
+    <string name="string_home_permission_required">권한 필요</string>
+    <string name="string_home_unused_today">오늘 사용하지 않음</string>
+    <string name="string_stop_app_tips">앱을 종료하려면 “&lt;font color=\"#FF0000\"&gt;강제 종료&lt;/font&gt;” 버튼을 누르세요.</string>
+    <string name="string_feature_scan_estimated_progress">예상 진행률</string>
 </resources>

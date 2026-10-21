@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Memuatkan...%1$d%%</string>
     <string name="agree_to_battery">Dengan meneruskan, anda bersetuju dengan</string>
-    <string name="app_guide_tips">"Sila ambil perhatian: Imbasan awal mungkin mengambil masa lebih lama kerana ia mencari fail sampah dan menganalisis data telefon anda."</string>
+    <string name="app_guide_tips">"Sila ambil perhatian:\nImbasan awal mungkin mengambil masa lebih lama kerana ia mencari fail sampah dan menganalisis data telefon anda."</string>
     <string name="guide_complete">Selesai</string>
     <string name="guide_density">Ketumpatan Skrin</string>
     <string name="guide_device">Peranti</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">Storan digunakan</string>
     <string name="guide_system">Versi OS sistem</string>
     <string name="privacy_policy">Dasar Privasi</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Jangan Terlepas Petua Penting</string>
     <string name="clean_up">BERSIHKAN</string>
     <string name="quick_clean_tile_label">Pembersihan Pantas</string>
@@ -40,46 +37,37 @@
     <string name="network_test">Ujian Rangkaian</string>
     <string name="feature_coming_soon">Ciri ini akan datang tidak lama lagi</string>
     <string name="settings">Tetapan</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">Bateri</string>
     <string name="notification_clean_up">Bersihkan</string>
     <string name="clean_cache_now">Bersihkan Cache Sekarang</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Fail Besar</string>
     <string name="home_photos">Serupa</string>
     <string name="home_empty">Kosong</string>
     <string name="home_notifications">Pemberitahuan</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">Bahasa</string>
+    <string name="language_title">Bahasa</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Mengimbas...</string>
     <string name="scanned_files_progress">Fail diimbas: %1$d</string>
     <string name="clean_scan_summary">Fail diimbas: %1$d · Folder diperiksa: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">Cari fail besar yang menggunakan ruang</string>
     <string name="clean_success_screenshot_hint">Padam tangkapan skrin yang tidak diperlukan lagi</string>
     <string name="clean_success_duplicate_hint">Kosongkan ruang daripada foto serupa</string>
+    <string name="string_delete_success_space_freed">%1$s dikosongkan</string>
+    <string name="string_delete_success_continue_with">Terus gunakan %1$s untuk pengoptimuman lanjut.</string>
+    <string name="string_delete_success_more_tools">Alat pembersihan lain</string>
+    <string name="string_delete_success_video_hint">Semak video yang menggunakan ruang</string>
     <string name="done">Selesai</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Dipilih</string>
     <string name="remove_selected_size">Buang %1$s</string>
     <string name="clean_confirm_title">Bersihkan fail yang dipilih?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">Perkhidmatan pemberitahuan sedang disambungkan</string>
     <string name="notif_title">Pemberitahuan</string>
     <string name="notif_subtitle">Urus kekusutan dan kurangkan gangguan</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">Pastikan pemberitahuan anda kemas</string>
     <string name="notif_hero_subtitle">Lihat sumber pemberitahuan dan kumpulkannya mengikut aplikasi</string>
     <string name="notif_intercept_title">Sekat pemberitahuan</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">Pemberitahuan yang disekat telah dikosongkan</string>
     <string name="uninstall_count">Nyahpasang (%1$d)</string>
     <string name="uninstall_cancelled">Nyahpasang dibatalkan</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d aplikasi dinyahpasang</string>
     <string name="apps_found">%1$d aplikasi</string>
     <string name="apps_found_initial">0 aplikasi</string>
     <string name="picture">Gambar</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 bulan</string>
     <string name="one_year">1 tahun</string>
     <string name="all_time">Sepanjang masa</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Mengimbas gambar...</string>
     <string name="scanning_large_files">Mengimbas Fail Besar...</string>
     <string name="scanning_video">Mengimbas video...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">Resolusi</string>
     <string name="link_speed">Kelajuan Pautan</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s piksel</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">Peranti</string>
     <string name="android_version">Versi Android</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">Data mudah alih</string>
     <string name="connection_ethernet">Ethernet</string>
     <string name="connection_other">Lain-lain</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">Foto serupa</string>
+    <string name="dup_subtitle">Foto yang ditemui pada peranti ini</string>
+    <string name="dup_keep_best_title">Simpan foto terbaik</string>
+    <string name="dup_keep_best_subtitle">Simpan foto terbaik dalam setiap kumpulan dan padam yang lain</string>
+    <string name="dup_best_photo">Terbaik</string>
+    <string name="dup_cluster_title">Kumpulan pendua %1$d</string>
+    <string name="dup_cluster_count">%1$d foto</string>
+    <string name="dup_none_selected">0 dipilih</string>
+    <string name="dup_selected_count">%1$d dipilih</string>
+    <string name="dup_action_note">Ketik tanda semak untuk memilih</string>
+    <string name="dup_selected_size">%1$s dipilih</string>
+    <string name="dup_delete">Padam yang dipilih</string>
+    <string name="dup_delete_confirm_title">Pasti mahu membersihkan?</string>
+    <string name="dup_delete_confirm_message">Dipilih: %1$d foto\nJumlah saiz: %2$s</string>
+    <string name="dup_deleted">%1$d foto berjaya dipadamkan</string>
+    <string name="dup_delete_failed">Sesetengah foto tidak dapat dipadamkan</string>
+    <string name="dup_loading">Mengimbas foto serupa…</string>
+    <string name="dup_scan_failed">Tidak dapat mengimbas foto</string>
+    <string name="dup_empty_title">Tiada foto serupa ditemui</string>
+    <string name="dup_empty_desc">Pustaka foto anda kemas</string>
+    <string name="dup_preview_unavailable">Tiada aplikasi pemapar foto tersedia</string>
     <string name="app_manager_installed">Dipasang: %1$s</string>
     <string name="app_manager_last_used">Terakhir Digunakan: %1$s</string>
     <string name="app_manager_last_used_today">Hari ini</string>
     <string name="app_manager_last_used_unknown">tidak diketahui</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">Panel pembersihan pantas skrin utama</string>
+    <string name="string_onboarding_overlay_permission_skip">Langkau</string>
+    <string name="string_onboarding_overlay_permission_title">Dayakan kebenaran tindanan</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">Papar di atas</string>
+    <string name="string_onboarding_overlay_permission_function">Fungsi</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">Pemantau dan pengoptimum RAM</string>
+    <string name="string_onboarding_overlay_permission_feature_network">Pemantau dan pengoptimum rangkaian</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">Pembersihan fail sarap pintar</string>
+    <string name="string_onboarding_device_status_scan_title">Status peranti</string>
+    <string name="string_onboarding_device_status_scan_content_description">Animasi pengimbasan status peranti</string>
+    <string name="string_onboarding_device_status_scan_message">Mengimbas maklumat peranti…</string>
+    <string name="string_onboarding_device_status_used">Digunakan:</string>
+    <string name="string_onboarding_device_status_total">Jumlah:</string>
+    <string name="string_onboarding_device_status_battery_status">Status:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">Model CPU</string>
+    <string name="string_onboarding_device_status_cpu_frequency">Frekuensi CPU</string>
+    <string name="string_onboarding_device_status_cpu_cores">Teras CPU</string>
+    <string name="string_onboarding_first_device_screen">Skrin</string>
+    <string name="string_onboarding_device_status_screen_dpi">DPI skrin</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">Kadar segar semula skrin</string>
+    <string name="string_onboarding_device_status_clean_junk_files">Bersihkan fail sarap</string>
+    <string name="string_onboarding_battery_info_checking">Menyemak maklumat bateri…</string>
+    <string name="string_onboarding_battery_estimated_calculating">Mengira masa yang tinggal</string>
+    <string name="string_onboarding_battery_status_label">Status bateri</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">pengguna telah menyemak ✨</string>
+    <string name="string_onboarding_battery_info_check_now">Semak sekarang</string>
+    <string name="string_onboarding_battery_check_title">Pemeriksaan bateri</string>
+    <string name="string_onboarding_first_junk_title">Pembersihan sarap</string>
+    <string name="string_onboarding_first_junk_scan_animation">Animasi pengimbasan fail sarap</string>
+    <string name="string_onboarding_first_junk_scanning">Mengimbas fail sarap…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">Item: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">Imbasan selesai! Mari bersihkan fail yang tidak diperlukan.</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">Animasi pembersihan sarap</string>
+    <string name="string_onboarding_first_junk_cleaning">Membersihkan fail sarap…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">Dipilih oleh 98%</string>
+    <string name="string_onboarding_first_complete_app_process">Proses aplikasi</string>
+    <string name="string_onboarding_first_complete_app_process_description">Tutup proses latar belakang yang tidak diperlukan dengan satu ketikan!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">Dipilih oleh 76%</string>
+    <string name="string_onboarding_first_complete_notification_blocker">Penyekat pemberitahuan</string>
+    <string name="string_onboarding_first_complete_notification_description">Tapis amaran tidak berguna dan sekat gangguan serentak!</string>
+    <string name="string_onboarding_first_complete_organize">Susun</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">Dipilih oleh 68%</string>
+    <string name="string_onboarding_first_complete_battery_description">Semak kapasiti bateri dan kedudukan penggunaan kuasa dalam masa nyata!</string>
+    <string name="string_onboarding_first_complete_view_details">Lihat butiran</string>
+    <string name="string_onboarding_first_storage_access_title">Permintaan kebenaran</string>
+    <string name="string_onboarding_first_storage_access_description">Ciri ini memerlukan akses storan fail.</string>
+    <string name="string_onboarding_first_storage_access_allow">Benarkan</string>
+    <string name="string_onboarding_first_notification_access_title">Permintaan akses</string>
+    <string name="string_onboarding_first_notification_access_description">Akses diperlukan untuk mengurus pemberitahuan dengan satu ketikan.</string>
+    <string name="string_onboarding_first_notification_access_grant">Berikan akses</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">Tetapan &gt; Papar di atas aplikasi lain</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">Benarkan paparan di atas aplikasi lain</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  Pemantauan tidak aktif</string>
+    <string name="string_onboarding_overlay_permission_back_description">Dayakan “Papar di atas aplikasi lain” supaya widget terapung dapat memantau semula RAM dan kelajuan secara langsung.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">Bukan sekarang</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ Baiki sekarang</string>
+    <string name="string_onboarding_first_junk_expand">Kembangkan</string>
+    <string name="string_onboarding_splash_welcome">Selamat datang ke</string>
+    <string name="string_onboarding_splash_intro">Bersihkan fail sarap, kosongkan ruang dan pastikan telefon sentiasa pantas.</string>
+    <string name="string_onboarding_splash_preparing">Bersedia untuk bermula…</string>
+    <string name="string_onboarding_first_junk_cache">Sarap cache</string>
+    <string name="string_onboarding_first_junk_system_cache">Cache sistem</string>
+    <string name="string_onboarding_first_junk_thumbnails">Lakaran kecil</string>
+    <string name="string_onboarding_first_junk_downloads">Muat turun</string>
+    <string name="string_onboarding_first_junk_apks">Fail APK</string>
+    <string name="string_onboarding_first_junk_empty_folders">Folder kosong</string>
+    <string name="string_onboarding_first_junk_clean_now_size">Bersihkan sekarang · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">Berjaya dibersihkan!</string>
+    <string name="string_onboarding_first_junk_complete_description">Ruang storan sebanyak %1$s berjaya dikosongkan.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">Bateri anda dalam keadaan baik!</string>
+    <string name="string_onboarding_first_junk_back_home">Kembali ke halaman utama</string>
+    <string name="string_onboarding_battery_check_scan_title">Pemeriksaan peranti</string>
+    <string name="string_onboarding_battery_check_scan_message">Menyemak peranti anda…</string>
+    <string name="string_onboarding_battery_home_placeholder">Semak status bateri</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">Penuh</string>
+    <string name="string_onboarding_battery_home_remaining">Berbaki</string>
+    <string name="string_onboarding_battery_estimated_charging">%1$s sehingga penuh</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s berbaki</string>
+    <string name="string_onboarding_battery_fully_charge_time">Masa sehingga cas penuh:</string>
+    <string name="string_onboarding_battery_remaining_time">Anggaran masa berbaki:</string>
+    <string name="string_onboarding_battery_status_pending">Menunggu</string>
+    <string name="string_onboarding_battery_power_label">Kuasa</string>
+    <string name="string_onboarding_battery_health_overheat">Terlalu panas</string>
+    <string name="string_onboarding_battery_health_over_voltage">Voltan berlebihan</string>
+    <string name="string_onboarding_battery_health_failure">Kegagalan tidak diketahui</string>
+    <string name="string_onboarding_overlay_permission_description">Bersihkan 3 kali lebih pantas dan kosongkan\nruang dalam 1 saat di mana-mana sahaja</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">Tidak dapat membuka tetapan kebenaran tindanan.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">Dayakan paparan di atas aplikasi lain</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">Cache aplikasi</string>
+    <string name="string_onboarding_ad_junk">Sarap iklan</string>
+    <string name="string_onboarding_memory_cache">Cache memori</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d j %2$d min</string>
+    <string name="string_onboarding_duration_minutes">%1$d min</string>
+    <string name="string_onboarding_fix_now">Baiki sekarang</string>
+    <string name="string_onboarding_overlay_description_simple">Bersihkan sarap lebih pantas dan kosongkan ruang di mana-mana sahaja.</string>
+    <string name="string_ram_usage_access_description">Benarkan akses penggunaan untuk melihat aplikasi terkini. Android mengehadkan akses kepada proses latar belakang.</string>
+    <string name="string_ram_allow_usage_access">Benarkan akses penggunaan</string>
+    <string name="string_ram_recent_apps_count">%1$d aplikasi digunakan baru-baru ini</string>
+    <string name="string_ram_usage_access_required">Akses penggunaan diperlukan</string>
+    <string name="string_ram_no_recent_apps">Tiada aplikasi yang digunakan baru-baru ini ditemui</string>
     <string name="string_network_overline">RANGKAIAN ANDA SEKILAS PANDANG</string>
     <string name="string_network_intro">Semakan pantas sambungan anda.</string>
     <string name="string_network_results_hint">Keputusan akan muncul semasa ujian.</string>
     <string name="string_network_results_complete">Keputusan mencerminkan sambungan anda semasa ujian.</string>
     <string name="string_network_download">Muat turun</string>
     <string name="string_network_upload">Muat naik</string>
-    <string name="string_network_complete_title">Ujian selesai</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  Muat turun</string>
     <string name="string_network_step_upload">3  Muat naik</string>
+    <string name="string_network_complete_title">Ujian selesai</string>
+    <string name="string_onboarding_complete_status">PEMBERSIHAN SELESAI</string>
+    <string name="string_onboarding_complete_check_status">PEMERIKSAAN SELESAI</string>
+    <string name="string_onboarding_complete_tools_title">Kekalkan keadaan yang baik</string>
+    <string name="string_onboarding_complete_tools_label">ALAT LAIN</string>
+    <string name="string_onboarding_complete_result">%1$s\nruang dikosongkan. Lebih banyak ruang untuk anda.</string>
+    <string name="string_onboarding_complete_battery_title">Semuanya baik!</string>
+    <string name="string_onboarding_complete_battery_result">Dalam keadaan baik\nBateri anda sedia untuk hari ini.</string>
+    <string name="string_onboarding_complete_process_description">Tutup proses latar belakang\nyang tidak diperlukan dengan satu ketikan.</string>
+    <string name="string_onboarding_complete_notification_description">Kurang amaran. Kurang gangguan.</string>
+    <string name="string_onboarding_complete_battery_description">Kenali bateri anda dengan lebih baik.</string>
+    <string name="string_junk_cleaning_session_expired">Imbas semula sebelum membersihkan.</string>
+    <string name="string_junk_cleaning_failed">Tidak dapat membersihkan fail yang dipilih. Imbas semula dan cuba lagi.</string>
+    <string name="string_feature_scan_complete">Imbasan selesai</string>
+    <string name="string_feature_scan_failed">Tidak dapat melengkapkan imbasan. Cuba lagi.</string>
+    <string name="string_home_permission_required">Kebenaran diperlukan</string>
+    <string name="string_home_unused_today">Belum digunakan hari ini</string>
+    <string name="string_stop_app_tips">Ketik butang “&lt;font color=\"#FF0000\"&gt;Henti paksa&lt;/font&gt;” untuk menutup aplikasi.</string>
+    <string name="string_feature_scan_estimated_progress">Anggaran kemajuan</string>
 </resources>

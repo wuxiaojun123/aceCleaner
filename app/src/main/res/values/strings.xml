@@ -314,6 +314,7 @@
     <string name="density_value" translatable="false">%1$d dpi</string>
     <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
     <string name="version_value" translatable="false">V%1$s</string>
+
     <string name="dup_title">Similar Photos</string>
     <string name="dup_subtitle">Photos found on this device</string>
     <string name="dup_keep_best_title">Keep best shots</string>
@@ -501,11 +502,11 @@
     <string name="string_zero" translatable="false">0</string>
     <string name="string_app_icon_fallback" translatable="false">?</string>
     <string name="string_value_unavailable" translatable="false">-</string>
-    <string name="string_size_bytes">%1$d B</string>
-    <string name="string_size_kilobytes">%1$.1f KB</string>
-    <string name="string_size_megabytes">%1$.1f MB</string>
-    <string name="string_size_gigabytes">%1$.1f GB</string>
-    <string name="string_report_size_gigabytes">%1$.2f GB</string>
-    <string name="string_report_size_megabytes">%1$.0f MB</string>
-    <string name="string_result_with_detail">%1$s\n%2$s</string>
+    <string name="string_size_bytes"  translatable="false">%1$d B</string>
+    <string name="string_size_kilobytes" translatable="false">%1$.1f KB</string>
+    <string name="string_size_megabytes" translatable="false">%1$.1f MB</string>
+    <string name="string_size_gigabytes" translatable="false">%1$.1f GB</string>
+    <string name="string_report_size_gigabytes" translatable="false">%1$.2f GB</string>
+    <string name="string_report_size_megabytes" translatable="false">%1$.0f MB</string>
+    <string name="string_result_with_detail" translatable="false">%1$s\n%2$s</string>
 </resources>

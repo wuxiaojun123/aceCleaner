@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">読み込み中...%1$d%%</string>
     <string name="agree_to_battery">続行すると、以下に同意したものとみなされます</string>
-    <string name="app_guide_tips">"ご注意ください：初回スキャンは不要ファイルを検索し、端末のデータを分析するため、時間がかかる場合があります。"</string>
+    <string name="app_guide_tips">"ご注意ください：\n初回スキャンは不要ファイルを検索し、端末のデータを分析するため、時間がかかる場合があります。"</string>
     <string name="guide_complete">完了</string>
     <string name="guide_density">画面密度</string>
     <string name="guide_device">デバイス</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">使用済みストレージ</string>
     <string name="guide_system">OSバージョン</string>
     <string name="privacy_policy">プライバシーポリシー</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">重要なヒントを見逃さない</string>
     <string name="clean_up">クリーンアップ</string>
     <string name="quick_clean_tile_label">クイッククリーン</string>
@@ -40,46 +37,37 @@
     <string name="network_test">ネットワークテスト</string>
     <string name="feature_coming_soon">この機能は近日公開予定です</string>
     <string name="settings">設定</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">バッテリー</string>
     <string name="notification_clean_up">クリーンアップ</string>
     <string name="clean_cache_now">今すぐキャッシュを削除</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">大容量ファイル</string>
     <string name="home_photos">類似</string>
     <string name="home_empty">空ファイル</string>
     <string name="home_notifications">通知</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">言語</string>
+    <string name="language_title">言語</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">スキャン中...</string>
     <string name="scanned_files_progress">スキャン済みファイル: %1$d</string>
     <string name="clean_scan_summary">スキャン済みファイル: %1$d · 確認済みフォルダ: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">容量を占有している大きなファイルを探す</string>
     <string name="clean_success_screenshot_hint">不要なスクリーンショットを削除</string>
     <string name="clean_success_duplicate_hint">類似写真を整理して容量を確保</string>
+    <string name="string_delete_success_space_freed">%1$sを解放</string>
+    <string name="string_delete_success_continue_with">%1$sを引き続き使って、さらに最適化しましょう。</string>
+    <string name="string_delete_success_more_tools">その他のクリーンアップツール</string>
+    <string name="string_delete_success_video_hint">容量を使用している動画を確認</string>
     <string name="done">完了</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">選択済み</string>
     <string name="remove_selected_size">%1$sを削除</string>
     <string name="clean_confirm_title">選択したファイルを削除しますか？</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">通知サービスに接続中</string>
     <string name="notif_title">通知</string>
     <string name="notif_subtitle">通知を整理して気が散るのを減らす</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">通知をすっきり整理</string>
     <string name="notif_hero_subtitle">通知元を確認し、アプリごとにまとめます</string>
     <string name="notif_intercept_title">通知をブロック</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">ブロックした通知を消去しました</string>
     <string name="uninstall_count">アンインストール (%1$d)</string>
     <string name="uninstall_cancelled">アンインストールをキャンセルしました</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d個のアプリをアンインストール</string>
     <string name="apps_found">%1$d個のアプリ</string>
     <string name="apps_found_initial">0個のアプリ</string>
     <string name="picture">画像</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6か月</string>
     <string name="one_year">1年</string>
     <string name="all_time">全期間</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">画像をスキャン中...</string>
     <string name="scanning_large_files">大容量ファイルをスキャン中...</string>
     <string name="scanning_video">動画をスキャン中...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">解像度</string>
     <string name="link_speed">リンク速度</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$sピクセル</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">デバイス</string>
     <string name="android_version">Androidバージョン</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">モバイルデータ</string>
     <string name="connection_ethernet">イーサネット</string>
     <string name="connection_other">その他</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">類似写真</string>
+    <string name="dup_subtitle">この端末で見つかった写真</string>
+    <string name="dup_keep_best_title">ベストショットを残す</string>
+    <string name="dup_keep_best_subtitle">各グループの最良の写真を残し、残りを削除</string>
+    <string name="dup_best_photo">ベスト</string>
+    <string name="dup_cluster_title">重複グループ %1$d</string>
+    <string name="dup_cluster_count">%1$d枚の写真</string>
+    <string name="dup_none_selected">0枚選択中</string>
+    <string name="dup_selected_count">%1$d枚選択中</string>
+    <string name="dup_action_note">チェックマークをタップして選択</string>
+    <string name="dup_selected_size">%1$sを選択中</string>
+    <string name="dup_delete">選択した写真を削除</string>
+    <string name="dup_delete_confirm_title">削除しますか？</string>
+    <string name="dup_delete_confirm_message">選択：%1$d枚の写真\n合計サイズ：%2$s</string>
+    <string name="dup_deleted">%1$d枚の写真を削除しました</string>
+    <string name="dup_delete_failed">一部の写真を削除できませんでした</string>
+    <string name="dup_loading">類似写真をスキャン中…</string>
+    <string name="dup_scan_failed">写真をスキャンできません</string>
+    <string name="dup_empty_title">類似写真は見つかりませんでした</string>
+    <string name="dup_empty_desc">写真ライブラリは整理されています</string>
+    <string name="dup_preview_unavailable">写真を表示できるアプリがありません</string>
     <string name="app_manager_installed">インストール済み: %1$s</string>
     <string name="app_manager_last_used">最終使用: %1$s</string>
     <string name="app_manager_last_used_today">今日</string>
     <string name="app_manager_last_used_unknown">不明</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">ホーム画面のクイッククリーンドック</string>
+    <string name="string_onboarding_overlay_permission_skip">スキップ</string>
+    <string name="string_onboarding_overlay_permission_title">他のアプリの上に表示を許可</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">最前面に表示</string>
+    <string name="string_onboarding_overlay_permission_function">機能</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">RAMモニターと最適化</string>
+    <string name="string_onboarding_overlay_permission_feature_network">ネットワーク監視と最適化</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">スマート不要ファイル削除</string>
+    <string name="string_onboarding_device_status_scan_title">端末の状態</string>
+    <string name="string_onboarding_device_status_scan_content_description">端末状態のスキャンアニメーション</string>
+    <string name="string_onboarding_device_status_scan_message">端末情報をスキャン中…</string>
+    <string name="string_onboarding_device_status_used">使用済み：</string>
+    <string name="string_onboarding_device_status_total">合計：</string>
+    <string name="string_onboarding_device_status_battery_status">状態：</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">CPUモデル</string>
+    <string name="string_onboarding_device_status_cpu_frequency">CPU周波数</string>
+    <string name="string_onboarding_device_status_cpu_cores">CPUコア数</string>
+    <string name="string_onboarding_first_device_screen">画面</string>
+    <string name="string_onboarding_device_status_screen_dpi">画面DPI</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">画面のリフレッシュレート</string>
+    <string name="string_onboarding_device_status_clean_junk_files">不要ファイルを削除</string>
+    <string name="string_onboarding_battery_info_checking">バッテリー情報を確認中…</string>
+    <string name="string_onboarding_battery_estimated_calculating">残り時間を計算中</string>
+    <string name="string_onboarding_battery_status_label">バッテリーの状態</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">人が確認済み ✨</string>
+    <string name="string_onboarding_battery_info_check_now">今すぐ確認</string>
+    <string name="string_onboarding_battery_check_title">バッテリーチェック</string>
+    <string name="string_onboarding_first_junk_title">不要ファイルの削除</string>
+    <string name="string_onboarding_first_junk_scan_animation">不要ファイルのスキャンアニメーション</string>
+    <string name="string_onboarding_first_junk_scanning">不要ファイルをスキャン中…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">項目：0</string>
+    <string name="string_onboarding_first_junk_scan_complete">スキャン完了。不要なファイルを片付けましょう！</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">不要ファイル削除のアニメーション</string>
+    <string name="string_onboarding_first_junk_cleaning">不要ファイルを削除中…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">98%が選択</string>
+    <string name="string_onboarding_first_complete_app_process">アプリのプロセス</string>
+    <string name="string_onboarding_first_complete_app_process_description">不要なバックグラウンドプロセスをワンタップで終了！</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">76%が選択</string>
+    <string name="string_onboarding_first_complete_notification_blocker">通知ブロッカー</string>
+    <string name="string_onboarding_first_complete_notification_description">不要な通知を賢く選別し、まとめてブロック！</string>
+    <string name="string_onboarding_first_complete_organize">整理</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">68%が選択</string>
+    <string name="string_onboarding_first_complete_battery_description">バッテリー容量と消費電力ランキングをリアルタイムで確認！</string>
+    <string name="string_onboarding_first_complete_view_details">詳細を表示</string>
+    <string name="string_onboarding_first_storage_access_title">権限のリクエスト</string>
+    <string name="string_onboarding_first_storage_access_description">この機能にはファイルストレージへのアクセス権限が必要です。</string>
+    <string name="string_onboarding_first_storage_access_allow">許可</string>
+    <string name="string_onboarding_first_notification_access_title">アクセスのリクエスト</string>
+    <string name="string_onboarding_first_notification_access_description">通知をワンタップで管理するには、アクセス権限が必要です。</string>
+    <string name="string_onboarding_first_notification_access_grant">アクセスを許可</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">設定 &gt; 他のアプリの上に表示</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">他のアプリの上に表示を許可</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  監視が停止しています</string>
+    <string name="string_onboarding_overlay_permission_back_description">フローティングウィジェットを動作させるには、「他のアプリの上に表示」を許可してRAMと通信速度のリアルタイム監視を再開してください。</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">今はしない</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ 今すぐ修正</string>
+    <string name="string_onboarding_first_junk_expand">展開</string>
+    <string name="string_onboarding_splash_welcome">ようこそ</string>
+    <string name="string_onboarding_splash_intro">不要ファイルを削除して空き容量を増やし、スマートフォンを快適に保ちましょう。</string>
+    <string name="string_onboarding_splash_preparing">起動準備中…</string>
+    <string name="string_onboarding_first_junk_cache">不要なキャッシュ</string>
+    <string name="string_onboarding_first_junk_system_cache">システムキャッシュ</string>
+    <string name="string_onboarding_first_junk_thumbnails">サムネイル</string>
+    <string name="string_onboarding_first_junk_downloads">ダウンロード</string>
+    <string name="string_onboarding_first_junk_apks">APKファイル</string>
+    <string name="string_onboarding_first_junk_empty_folders">空のフォルダ</string>
+    <string name="string_onboarding_first_junk_clean_now_size">今すぐ削除 · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">削除しました！</string>
+    <string name="string_onboarding_first_junk_complete_description">%1$sの空き容量を確保しました。</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">バッテリーは良好な状態です！</string>
+    <string name="string_onboarding_first_junk_back_home">ホームに戻る</string>
+    <string name="string_onboarding_battery_check_scan_title">端末チェック</string>
+    <string name="string_onboarding_battery_check_scan_message">端末を確認中…</string>
+    <string name="string_onboarding_battery_home_placeholder">バッテリーの状態を確認</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">満充電</string>
+    <string name="string_onboarding_battery_home_remaining">残り</string>
+    <string name="string_onboarding_battery_estimated_charging">満充電まで%1$s</string>
+    <string name="string_onboarding_battery_estimated_remaining">残り%1$s</string>
+    <string name="string_onboarding_battery_fully_charge_time">満充電までの時間：</string>
+    <string name="string_onboarding_battery_remaining_time">推定残り時間：</string>
+    <string name="string_onboarding_battery_status_pending">確認待ち</string>
+    <string name="string_onboarding_battery_power_label">電力</string>
+    <string name="string_onboarding_battery_health_overheat">過熱</string>
+    <string name="string_onboarding_battery_health_over_voltage">過電圧</string>
+    <string name="string_onboarding_battery_health_failure">不明なエラー</string>
+    <string name="string_onboarding_overlay_permission_description">どこでも1秒で不要ファイルを削除して\n空き容量を確保する、3倍速いクリーンアップ</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">他のアプリの上に表示する権限の設定を開けません。</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">他のアプリの上に表示を有効にする</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">アプリのキャッシュ</string>
+    <string name="string_onboarding_ad_junk">広告の不要ファイル</string>
+    <string name="string_onboarding_memory_cache">メモリキャッシュ</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d時間%2$d分</string>
+    <string name="string_onboarding_duration_minutes">%1$d分</string>
+    <string name="string_onboarding_fix_now">今すぐ修正</string>
+    <string name="string_onboarding_overlay_description_simple">どこでもすばやく不要ファイルを削除して空き容量を確保。</string>
+    <string name="string_ram_usage_access_description">最近使ったアプリを表示するには使用状況へのアクセスを許可してください。Androidはバックグラウンドプロセスへのアクセスを制限しています。</string>
+    <string name="string_ram_allow_usage_access">使用状況へのアクセスを許可</string>
+    <string name="string_ram_recent_apps_count">最近使ったアプリ：%1$d個</string>
+    <string name="string_ram_usage_access_required">使用状況へのアクセスが必要です</string>
+    <string name="string_ram_no_recent_apps">最近使ったアプリは見つかりませんでした</string>
     <string name="string_network_overline">ネットワークをひと目で確認</string>
     <string name="string_network_intro">接続状況をすばやく確認します。</string>
     <string name="string_network_results_hint">テスト中に結果が表示されます。</string>
     <string name="string_network_results_complete">結果はテスト中の接続状況を示しています。</string>
     <string name="string_network_download">ダウンロード</string>
     <string name="string_network_upload">アップロード</string>
-    <string name="string_network_complete_title">テスト完了</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  ダウンロード</string>
     <string name="string_network_step_upload">3  アップロード</string>
+    <string name="string_network_complete_title">テスト完了</string>
+    <string name="string_onboarding_complete_status">クリーンアップ完了</string>
+    <string name="string_onboarding_complete_check_status">チェック完了</string>
+    <string name="string_onboarding_complete_tools_title">快適な状態を保ちましょう</string>
+    <string name="string_onboarding_complete_tools_label">その他のツール</string>
+    <string name="string_onboarding_complete_result">%1$s\nの空き容量を確保しました。もっと保存できます。</string>
+    <string name="string_onboarding_complete_battery_title">良好です！</string>
+    <string name="string_onboarding_complete_battery_result">良好な状態\nバッテリーはいつでも使えます。</string>
+    <string name="string_onboarding_complete_process_description">不要なバックグラウンドプロセスを\nワンタップで終了。</string>
+    <string name="string_onboarding_complete_notification_description">通知も、中断も、少なく。</string>
+    <string name="string_onboarding_complete_battery_description">バッテリーをもっと詳しく確認。</string>
+    <string name="string_junk_cleaning_session_expired">削除する前にもう一度スキャンしてください。</string>
+    <string name="string_junk_cleaning_failed">選択したファイルを削除できませんでした。再スキャンしてやり直してください。</string>
+    <string name="string_feature_scan_complete">スキャン完了</string>
+    <string name="string_feature_scan_failed">スキャンを完了できませんでした。もう一度お試しください。</string>
+    <string name="string_home_permission_required">権限が必要です</string>
+    <string name="string_home_unused_today">今日は未使用</string>
+    <string name="string_stop_app_tips">「&lt;font color=\"#FF0000\"&gt;強制停止&lt;/font&gt;」ボタンをタップしてアプリを終了してください。</string>
+    <string name="string_feature_scan_estimated_progress">推定進捗</string>
 </resources>

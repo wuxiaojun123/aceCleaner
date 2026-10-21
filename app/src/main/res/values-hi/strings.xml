@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">लोड हो रहा है...%1$d%%</string>
     <string name="agree_to_battery">जारी रखने पर आप सहमत होते हैं</string>
-    <string name="app_guide_tips">"कृपया ध्यान दें: पहली स्कैनिंग में अधिक समय लग सकता है क्योंकि यह जंक फ़ाइलें खोजती है और आपके फ़ोन के डेटा का विश्लेषण करती है।"</string>
+    <string name="app_guide_tips">"कृपया ध्यान दें:\nपहली स्कैनिंग में अधिक समय लग सकता है क्योंकि यह जंक फ़ाइलें खोजती है और आपके फ़ोन के डेटा का विश्लेषण करती है।"</string>
     <string name="guide_complete">पूर्ण</string>
     <string name="guide_density">स्क्रीन घनत्व</string>
     <string name="guide_device">डिवाइस</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">उपयोग किया गया स्टोरेज</string>
     <string name="guide_system">सिस्टम OS संस्करण</string>
     <string name="privacy_policy">गोपनीयता नीति</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">कोई महत्वपूर्ण सुझाव न चूकें</string>
     <string name="clean_up">साफ़ करें</string>
     <string name="quick_clean_tile_label">त्वरित सफ़ाई</string>
@@ -40,46 +37,37 @@
     <string name="network_test">नेटवर्क टेस्ट</string>
     <string name="feature_coming_soon">यह सुविधा जल्द आ रही है</string>
     <string name="settings">सेटिंग्स</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">बैटरी</string>
     <string name="notification_clean_up">साफ़ करें</string>
     <string name="clean_cache_now">कैश अभी साफ़ करें</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">बड़ी फ़ाइलें</string>
     <string name="home_photos">समान</string>
     <string name="home_empty">खाली</string>
     <string name="home_notifications">नोटिफिकेशन</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">भाषा</string>
+    <string name="language_title">भाषा</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">स्कैन हो रहा है...</string>
     <string name="scanned_files_progress">स्कैन की गई फ़ाइलें: %1$d</string>
     <string name="clean_scan_summary">स्कैन की गई फ़ाइलें: %1$d · जाँचे गए फ़ोल्डर: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">जगह घेरने वाली बड़ी फ़ाइलें खोजें</string>
     <string name="clean_success_screenshot_hint">वे स्क्रीनशॉट हटाएँ जिनकी अब ज़रूरत नहीं है</string>
     <string name="clean_success_duplicate_hint">समान फ़ोटो से जगह खाली करें</string>
+    <string name="string_delete_success_space_freed">%1$s जगह खाली की गई</string>
+    <string name="string_delete_success_continue_with">और बेहतर अनुकूलन के लिए %1$s का इस्तेमाल जारी रखें।</string>
+    <string name="string_delete_success_more_tools">सफ़ाई के और टूल</string>
+    <string name="string_delete_success_video_hint">जगह घेरने वाले वीडियो देखें</string>
     <string name="done">हो गया</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">चयनित</string>
     <string name="remove_selected_size">%1$s हटाएँ</string>
     <string name="clean_confirm_title">चयनित फ़ाइलें साफ़ करें?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">नोटिफिकेशन सेवा कनेक्ट हो रही है</string>
     <string name="notif_title">नोटिफिकेशन</string>
     <string name="notif_subtitle">अव्यवस्था प्रबंधित करें और ध्यान भटकना कम करें</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">अपने नोटिफिकेशन व्यवस्थित रखें</string>
     <string name="notif_hero_subtitle">देखें नोटिफिकेशन कहाँ से आते हैं और उन्हें ऐप के अनुसार समूहित करें</string>
     <string name="notif_intercept_title">नोटिफिकेशन ब्लॉक करें</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">ब्लॉक किए गए नोटिफिकेशन साफ़ कर दिए गए हैं</string>
     <string name="uninstall_count">अनइंस्टॉल (%1$d)</string>
     <string name="uninstall_cancelled">अनइंस्टॉल रद्द किया गया</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d ऐप अनइंस्टॉल किए गए</string>
     <string name="apps_found">%1$d ऐप</string>
     <string name="apps_found_initial">0 ऐप</string>
     <string name="picture">तस्वीर</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 महीने</string>
     <string name="one_year">1 वर्ष</string>
     <string name="all_time">सभी समय</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">तस्वीरें स्कैन हो रही हैं...</string>
     <string name="scanning_large_files">बड़ी फ़ाइलें स्कैन हो रही हैं...</string>
     <string name="scanning_video">वीडियो स्कैन हो रहा है...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">रिज़ॉल्यूशन</string>
     <string name="link_speed">लिंक गति</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s पिक्सेल</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">डिवाइस</string>
     <string name="android_version">Android संस्करण</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">मोबाइल डेटा</string>
     <string name="connection_ethernet">ईथरनेट</string>
     <string name="connection_other">अन्य</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">मिलती-जुलती फ़ोटो</string>
+    <string name="dup_subtitle">इस डिवाइस पर मिली फ़ोटो</string>
+    <string name="dup_keep_best_title">सबसे अच्छी फ़ोटो रखें</string>
+    <string name="dup_keep_best_subtitle">हर समूह की सबसे अच्छी फ़ोटो रखें और बाकी हटा दें</string>
+    <string name="dup_best_photo">सबसे अच्छी</string>
+    <string name="dup_cluster_title">डुप्लीकेट समूह %1$d</string>
+    <string name="dup_cluster_count">%1$d फ़ोटो</string>
+    <string name="dup_none_selected">0 चुनी गईं</string>
+    <string name="dup_selected_count">%1$d चुनी गईं</string>
+    <string name="dup_action_note">चुनने के लिए सही के निशान पर टैप करें</string>
+    <string name="dup_selected_size">%1$s चुना गया</string>
+    <string name="dup_delete">चुनी गई फ़ोटो मिटाएँ</string>
+    <string name="dup_delete_confirm_title">क्या वाकई साफ़ करना है?</string>
+    <string name="dup_delete_confirm_message">चुनी गईं: %1$d फ़ोटो\nकुल आकार: %2$s</string>
+    <string name="dup_deleted">%1$d फ़ोटो सफलतापूर्वक मिटाई गईं</string>
+    <string name="dup_delete_failed">कुछ फ़ोटो नहीं मिटाई जा सकीं</string>
+    <string name="dup_loading">मिलती-जुलती फ़ोटो खोजी जा रही हैं…</string>
+    <string name="dup_scan_failed">फ़ोटो स्कैन नहीं हो सकीं</string>
+    <string name="dup_empty_title">मिलती-जुलती फ़ोटो नहीं मिलीं</string>
+    <string name="dup_empty_desc">आपकी फ़ोटो लाइब्रेरी व्यवस्थित है</string>
+    <string name="dup_preview_unavailable">फ़ोटो देखने वाला कोई ऐप उपलब्ध नहीं है</string>
     <string name="app_manager_installed">इंस्टॉल किया गया: %1$s</string>
     <string name="app_manager_last_used">अंतिम उपयोग: %1$s</string>
     <string name="app_manager_last_used_today">आज</string>
     <string name="app_manager_last_used_unknown">अज्ञात</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">होम स्क्रीन का तेज़ सफ़ाई पैनल</string>
+    <string name="string_onboarding_overlay_permission_skip">छोड़ें</string>
+    <string name="string_onboarding_overlay_permission_title">अन्य ऐप के ऊपर दिखाने की अनुमति चालू करें</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">सबसे ऊपर दिखाएँ</string>
+    <string name="string_onboarding_overlay_permission_function">फ़ंक्शन</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">RAM की निगरानी और अनुकूलन</string>
+    <string name="string_onboarding_overlay_permission_feature_network">नेटवर्क की निगरानी और अनुकूलन</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">बेकार फ़ाइलों की स्मार्ट सफ़ाई</string>
+    <string name="string_onboarding_device_status_scan_title">डिवाइस की स्थिति</string>
+    <string name="string_onboarding_device_status_scan_content_description">डिवाइस की स्थिति स्कैन करने का ऐनिमेशन</string>
+    <string name="string_onboarding_device_status_scan_message">डिवाइस की जानकारी स्कैन हो रही है…</string>
+    <string name="string_onboarding_device_status_used">इस्तेमाल:</string>
+    <string name="string_onboarding_device_status_total">कुल:</string>
+    <string name="string_onboarding_device_status_battery_status">स्थिति:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">CPU मॉडल</string>
+    <string name="string_onboarding_device_status_cpu_frequency">CPU फ़्रीक्वेंसी</string>
+    <string name="string_onboarding_device_status_cpu_cores">CPU कोर</string>
+    <string name="string_onboarding_first_device_screen">स्क्रीन</string>
+    <string name="string_onboarding_device_status_screen_dpi">स्क्रीन DPI</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">स्क्रीन की रीफ़्रेश दर</string>
+    <string name="string_onboarding_device_status_clean_junk_files">बेकार फ़ाइलें साफ़ करें</string>
+    <string name="string_onboarding_battery_info_checking">बैटरी की जानकारी जाँची जा रही है…</string>
+    <string name="string_onboarding_battery_estimated_calculating">बचा हुआ समय गिना जा रहा है</string>
+    <string name="string_onboarding_battery_status_label">बैटरी की स्थिति</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">उपयोगकर्ता जाँच कर चुके हैं ✨</string>
+    <string name="string_onboarding_battery_info_check_now">अभी जाँचें</string>
+    <string name="string_onboarding_battery_check_title">बैटरी की जाँच</string>
+    <string name="string_onboarding_first_junk_title">बेकार फ़ाइलों की सफ़ाई</string>
+    <string name="string_onboarding_first_junk_scan_animation">बेकार फ़ाइलें स्कैन करने का ऐनिमेशन</string>
+    <string name="string_onboarding_first_junk_scanning">बेकार फ़ाइलें स्कैन हो रही हैं…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">आइटम: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">स्कैन पूरा हुआ। अब बेकार फ़ाइलें हटाएँ!</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">बेकार फ़ाइलें साफ़ करने का ऐनिमेशन</string>
+    <string name="string_onboarding_first_junk_cleaning">बेकार फ़ाइलें साफ़ हो रही हैं…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">98% की पसंद</string>
+    <string name="string_onboarding_first_complete_app_process">ऐप प्रक्रियाएँ</string>
+    <string name="string_onboarding_first_complete_app_process_description">बैकग्राउंड की अनावश्यक प्रक्रियाएँ एक टैप में बंद करें!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">76% की पसंद</string>
+    <string name="string_onboarding_first_complete_notification_blocker">सूचना अवरोधक</string>
+    <string name="string_onboarding_first_complete_notification_description">बेकार सूचनाएँ छाँटें और रुकावटें एक साथ रोकें!</string>
+    <string name="string_onboarding_first_complete_organize">व्यवस्थित करें</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">68% की पसंद</string>
+    <string name="string_onboarding_first_complete_battery_description">बैटरी की क्षमता और बिजली खपत की रैंकिंग रीयल टाइम में देखें!</string>
+    <string name="string_onboarding_first_complete_view_details">विवरण देखें</string>
+    <string name="string_onboarding_first_storage_access_title">अनुमति का अनुरोध</string>
+    <string name="string_onboarding_first_storage_access_description">इस फ़ीचर के लिए फ़ाइल स्टोरेज का ऐक्सेस चाहिए।</string>
+    <string name="string_onboarding_first_storage_access_allow">अनुमति दें</string>
+    <string name="string_onboarding_first_notification_access_title">ऐक्सेस का अनुरोध</string>
+    <string name="string_onboarding_first_notification_access_description">सूचनाएँ एक टैप में सँभालने के लिए ऐक्सेस चाहिए।</string>
+    <string name="string_onboarding_first_notification_access_grant">ऐक्सेस दें</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">सेटिंग &gt; अन्य ऐप के ऊपर दिखाएँ</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">अन्य ऐप के ऊपर दिखाने की अनुमति दें</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  निगरानी बंद है</string>
+    <string name="string_onboarding_overlay_permission_back_description">फ़्लोटिंग विजेट से RAM और गति की लाइव निगरानी फिर शुरू करने के लिए अन्य ऐप के ऊपर दिखाने की अनुमति चालू करें।</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">अभी नहीं</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ अभी ठीक करें</string>
+    <string name="string_onboarding_first_junk_expand">बड़ा करें</string>
+    <string name="string_onboarding_splash_welcome">आपका स्वागत है</string>
+    <string name="string_onboarding_splash_intro">बेकार फ़ाइलें साफ़ करें, जगह खाली करें और फ़ोन की गति बनाए रखें।</string>
+    <string name="string_onboarding_splash_preparing">शुरू करने की तैयारी हो रही है…</string>
+    <string name="string_onboarding_first_junk_cache">बेकार कैश</string>
+    <string name="string_onboarding_first_junk_system_cache">सिस्टम कैश</string>
+    <string name="string_onboarding_first_junk_thumbnails">थंबनेल</string>
+    <string name="string_onboarding_first_junk_downloads">डाउनलोड</string>
+    <string name="string_onboarding_first_junk_apks">APK फ़ाइलें</string>
+    <string name="string_onboarding_first_junk_empty_folders">खाली फ़ोल्डर</string>
+    <string name="string_onboarding_first_junk_clean_now_size">अभी साफ़ करें · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">सफ़ाई पूरी हुई!</string>
+    <string name="string_onboarding_first_junk_complete_description">%1$s स्टोरेज सफलतापूर्वक खाली किया गया।</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">आपकी बैटरी अच्छी स्थिति में है!</string>
+    <string name="string_onboarding_first_junk_back_home">होम पर लौटें</string>
+    <string name="string_onboarding_battery_check_scan_title">डिवाइस की जाँच</string>
+    <string name="string_onboarding_battery_check_scan_message">आपके डिवाइस की जाँच हो रही है…</string>
+    <string name="string_onboarding_battery_home_placeholder">बैटरी की स्थिति जाँचें</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">पूरी</string>
+    <string name="string_onboarding_battery_home_remaining">बाकी</string>
+    <string name="string_onboarding_battery_estimated_charging">पूरा चार्ज होने में %1$s</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s बाकी</string>
+    <string name="string_onboarding_battery_fully_charge_time">पूरा चार्ज होने में समय:</string>
+    <string name="string_onboarding_battery_remaining_time">अनुमानित बचा हुआ समय:</string>
+    <string name="string_onboarding_battery_status_pending">लंबित</string>
+    <string name="string_onboarding_battery_power_label">पावर</string>
+    <string name="string_onboarding_battery_health_overheat">अधिक गर्म</string>
+    <string name="string_onboarding_battery_health_over_voltage">अधिक वोल्टेज</string>
+    <string name="string_onboarding_battery_health_failure">अज्ञात खराबी</string>
+    <string name="string_onboarding_overlay_permission_description">कहीं भी 1 सेकंड में बेकार फ़ाइलें हटाएँ और\nजगह खाली करें, 3 गुना तेज़ सफ़ाई के साथ</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">अन्य ऐप के ऊपर दिखाने की अनुमति वाली सेटिंग नहीं खुल सकी।</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">अन्य ऐप के ऊपर दिखाना चालू करें</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">ऐप कैश</string>
+    <string name="string_onboarding_ad_junk">विज्ञापनों की बेकार फ़ाइलें</string>
+    <string name="string_onboarding_memory_cache">मेमोरी कैश</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d घंटे %2$d मिनट</string>
+    <string name="string_onboarding_duration_minutes">%1$d मिनट</string>
+    <string name="string_onboarding_fix_now">अभी ठीक करें</string>
+    <string name="string_onboarding_overlay_description_simple">कहीं भी बेकार फ़ाइलें तेज़ी से साफ़ करें और जगह खाली करें।</string>
+    <string name="string_ram_usage_access_description">हाल में इस्तेमाल हुए ऐप देखने के लिए इस्तेमाल की जानकारी का ऐक्सेस दें। Android बैकग्राउंड प्रक्रियाओं का ऐक्सेस सीमित करता है।</string>
+    <string name="string_ram_allow_usage_access">इस्तेमाल की जानकारी का ऐक्सेस दें</string>
+    <string name="string_ram_recent_apps_count">हाल में इस्तेमाल हुए %1$d ऐप</string>
+    <string name="string_ram_usage_access_required">इस्तेमाल की जानकारी का ऐक्सेस चाहिए</string>
+    <string name="string_ram_no_recent_apps">हाल में इस्तेमाल हुए ऐप नहीं मिले</string>
     <string name="string_network_overline">एक नज़र में आपका नेटवर्क</string>
     <string name="string_network_intro">अपने कनेक्शन की त्वरित जाँच करें।</string>
     <string name="string_network_results_hint">जाँच के दौरान परिणाम यहाँ दिखाई देंगे।</string>
     <string name="string_network_results_complete">परिणाम जाँच के दौरान आपके कनेक्शन की स्थिति दिखाते हैं।</string>
     <string name="string_network_download">डाउनलोड</string>
     <string name="string_network_upload">अपलोड</string>
-    <string name="string_network_complete_title">जाँच पूरी हुई</string>
     <string name="string_network_step_ping">1  पिंग</string>
     <string name="string_network_step_download">2  डाउनलोड</string>
     <string name="string_network_step_upload">3  अपलोड</string>
+    <string name="string_network_complete_title">जाँच पूरी हुई</string>
+    <string name="string_onboarding_complete_status">सफ़ाई पूरी हुई</string>
+    <string name="string_onboarding_complete_check_status">जाँच पूरी हुई</string>
+    <string name="string_onboarding_complete_tools_title">अच्छी स्थिति बनाए रखें</string>
+    <string name="string_onboarding_complete_tools_label">और टूल</string>
+    <string name="string_onboarding_complete_result">%1$s\nस्टोरेज खाली हुआ। अब आपके लिए ज़्यादा जगह।</string>
+    <string name="string_onboarding_complete_battery_title">सब अच्छा है!</string>
+    <string name="string_onboarding_complete_battery_result">अच्छी स्थिति में\nआपकी बैटरी दिन भर के लिए तैयार है।</string>
+    <string name="string_onboarding_complete_process_description">बैकग्राउंड की अनावश्यक प्रक्रियाएँ\nएक टैप में बंद करें।</string>
+    <string name="string_onboarding_complete_notification_description">कम सूचनाएँ। कम रुकावटें।</string>
+    <string name="string_onboarding_complete_battery_description">अपनी बैटरी को बेहतर जानें।</string>
+    <string name="string_junk_cleaning_session_expired">सफ़ाई से पहले दोबारा स्कैन करें।</string>
+    <string name="string_junk_cleaning_failed">चुनी गई फ़ाइलें साफ़ नहीं हो सकीं। दोबारा स्कैन करके फिर कोशिश करें।</string>
+    <string name="string_feature_scan_complete">स्कैन पूर्ण</string>
+    <string name="string_feature_scan_failed">स्कैन पूरा नहीं हो सका। फिर कोशिश करें।</string>
+    <string name="string_home_permission_required">अनुमति चाहिए</string>
+    <string name="string_home_unused_today">आज इस्तेमाल नहीं हुआ</string>
+    <string name="string_stop_app_tips">ऐप बंद करने के लिए “&lt;font color=\"#FF0000\"&gt;बलपूर्वक रोकें&lt;/font&gt;” बटन पर टैप करें।</string>
+    <string name="string_feature_scan_estimated_progress">अनुमानित प्रगति</string>
 </resources>

@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Cargando...%1$d%%</string>
     <string name="agree_to_battery">Al continuar, aceptas</string>
     <string name="app_guide_tips">"Nota: El análisis inicial puede tardar más porque busca archivos basura y analiza los datos de tu teléfono.\n"</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">Almacenamiento usado</string>
     <string name="guide_system">Versión del sistema operativo</string>
     <string name="privacy_policy">Política de privacidad</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">No te pierdas ningún consejo importante</string>
     <string name="clean_up">LIMPIAR</string>
     <string name="quick_clean_tile_label">Limpieza rápida</string>
@@ -40,46 +37,37 @@
     <string name="network_test">Prueba de red</string>
     <string name="feature_coming_soon">Esta función estará disponible pronto</string>
     <string name="settings">Ajustes</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">Batería</string>
     <string name="notification_clean_up">Limpiar</string>
     <string name="clean_cache_now">Limpiar caché ahora</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Archivos grandes</string>
     <string name="home_photos">Similares</string>
     <string name="home_empty">Vacíos</string>
     <string name="home_notifications">Notificaciones</string>
-    <string name="more_indicator" translatable="false">›››</string>
     <string name="language_entry_content_description">Idioma</string>
     <string name="language_title">Idioma</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Analizando...</string>
     <string name="scanned_files_progress">Archivos analizados: %1$d</string>
     <string name="clean_scan_summary">Archivos analizados: %1$d · Carpetas comprobadas: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">Encuentra archivos grandes que ocupan espacio</string>
     <string name="clean_success_screenshot_hint">Borra capturas que ya no necesitas</string>
     <string name="clean_success_duplicate_hint">Libera espacio con fotos similares</string>
+    <string name="string_delete_success_space_freed">%1$s liberados</string>
+    <string name="string_delete_success_continue_with">Sigue usando %1$s para optimizar aún más tu dispositivo.</string>
+    <string name="string_delete_success_more_tools">Más herramientas de limpieza</string>
+    <string name="string_delete_success_video_hint">Revisa los vídeos que ocupan espacio</string>
     <string name="done">Listo</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Seleccionado</string>
     <string name="remove_selected_size">Eliminar %1$s</string>
     <string name="clean_confirm_title">¿Limpiar los archivos seleccionados?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">El servicio de notificaciones se está conectando</string>
     <string name="notif_title">Notificaciones</string>
     <string name="notif_subtitle">Gestiona el desorden y reduce las distracciones</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">Mantén tus notificaciones ordenadas</string>
     <string name="notif_hero_subtitle">Mira de dónde vienen las notificaciones y agrúpalas por app</string>
     <string name="notif_intercept_title">Bloquear notificaciones</string>
@@ -181,8 +169,9 @@
     <string name="notif_clear_success_subtitle">Se han borrado las notificaciones bloqueadas</string>
     <string name="uninstall_count">Desinstalar (%1$d)</string>
     <string name="uninstall_cancelled">Desinstalación cancelada</string>
-    <string name="apps_found">%1$d apps</string>
-    <string name="apps_found_initial">0 apps</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d aplicaciones desinstaladas</string>
+    <string name="apps_found">%1$d aplicaciones</string>
+    <string name="apps_found_initial">0 aplicaciones</string>
     <string name="picture">Imagen</string>
     <string name="screenshot">Captura de pantalla</string>
     <string name="others">Otros</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 meses</string>
     <string name="one_year">1 año</string>
     <string name="all_time">Todo el tiempo</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Analizando imágenes...</string>
     <string name="scanning_large_files">Analizando archivos grandes...</string>
     <string name="scanning_video">Analizando vídeos...</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">Datos móviles</string>
     <string name="connection_ethernet">Ethernet</string>
     <string name="connection_other">Otro</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">Fotos similares</string>
+    <string name="dup_subtitle">Fotos encontradas en este dispositivo</string>
+    <string name="dup_keep_best_title">Conservar las mejores tomas</string>
+    <string name="dup_keep_best_subtitle">Conserva la mejor foto de cada grupo y elimina el resto</string>
+    <string name="dup_best_photo">Mejor</string>
+    <string name="dup_cluster_title">Grupo de duplicados %1$d</string>
+    <string name="dup_cluster_count">%1$d fotos</string>
+    <string name="dup_none_selected">0 seleccionadas</string>
+    <string name="dup_selected_count">%1$d seleccionadas</string>
+    <string name="dup_action_note">Toca las marcas para seleccionar</string>
+    <string name="dup_selected_size">%1$s seleccionados</string>
+    <string name="dup_delete">Eliminar selección</string>
+    <string name="dup_delete_confirm_title">¿Confirmas la limpieza?</string>
+    <string name="dup_delete_confirm_message">Selección: %1$d fotos\nTamaño total: %2$s</string>
+    <string name="dup_deleted">%1$d fotos eliminadas correctamente</string>
+    <string name="dup_delete_failed">No se pudieron eliminar algunas fotos</string>
+    <string name="dup_loading">Buscando fotos similares…</string>
+    <string name="dup_scan_failed">No se pueden analizar las fotos</string>
+    <string name="dup_empty_title">No se encontraron fotos similares</string>
+    <string name="dup_empty_desc">Tu biblioteca de fotos está organizada</string>
+    <string name="dup_preview_unavailable">No hay ninguna aplicación para ver fotos</string>
     <string name="app_manager_installed">Instalada: %1$s</string>
     <string name="app_manager_last_used">Último uso: %1$s</string>
     <string name="app_manager_last_used_today">Hoy</string>
     <string name="app_manager_last_used_unknown">desconocido</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">Panel de limpieza rápida de la pantalla de inicio</string>
+    <string name="string_onboarding_overlay_permission_skip">Omitir</string>
+    <string name="string_onboarding_overlay_permission_title">Activar permiso de superposición</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">Mostrar encima</string>
+    <string name="string_onboarding_overlay_permission_function">Función</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">Monitor y optimizador de RAM</string>
+    <string name="string_onboarding_overlay_permission_feature_network">Monitor y optimizador de red</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">Limpieza inteligente de archivos basura</string>
+    <string name="string_onboarding_device_status_scan_title">Estado del dispositivo</string>
+    <string name="string_onboarding_device_status_scan_content_description">Animación del análisis del estado del dispositivo</string>
+    <string name="string_onboarding_device_status_scan_message">Analizando la información del dispositivo…</string>
+    <string name="string_onboarding_device_status_used">Usado:</string>
+    <string name="string_onboarding_device_status_total">Total:</string>
+    <string name="string_onboarding_device_status_battery_status">Estado:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">Modelo de CPU</string>
+    <string name="string_onboarding_device_status_cpu_frequency">Frecuencia de CPU</string>
+    <string name="string_onboarding_device_status_cpu_cores">Núcleos de CPU</string>
+    <string name="string_onboarding_first_device_screen">Pantalla</string>
+    <string name="string_onboarding_device_status_screen_dpi">DPI de pantalla</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">Frecuencia de actualización de pantalla</string>
+    <string name="string_onboarding_device_status_clean_junk_files">Limpiar archivos basura</string>
+    <string name="string_onboarding_battery_info_checking">Comprobando la información de la batería…</string>
+    <string name="string_onboarding_battery_estimated_calculating">Calculando el tiempo restante</string>
+    <string name="string_onboarding_battery_status_label">Estado de la batería</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">usuarios lo han comprobado ✨</string>
+    <string name="string_onboarding_battery_info_check_now">Comprobar ahora</string>
+    <string name="string_onboarding_battery_check_title">Comprobación de batería</string>
+    <string name="string_onboarding_first_junk_title">Limpieza de archivos basura</string>
+    <string name="string_onboarding_first_junk_scan_animation">Animación del análisis de archivos basura</string>
+    <string name="string_onboarding_first_junk_scanning">Buscando archivos basura…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">Elementos: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">¡Análisis completado! Es hora de eliminar lo que sobra.</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">Animación de limpieza de archivos basura</string>
+    <string name="string_onboarding_first_junk_cleaning">Limpiando archivos basura…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">Elegido por el 98%</string>
+    <string name="string_onboarding_first_complete_app_process">Procesos de aplicaciones</string>
+    <string name="string_onboarding_first_complete_app_process_description">¡Cierra procesos innecesarios en segundo plano con un toque!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">Elegido por el 76%</string>
+    <string name="string_onboarding_first_complete_notification_blocker">Bloqueador de notificaciones</string>
+    <string name="string_onboarding_first_complete_notification_description">¡Filtra alertas inútiles y bloquea interrupciones en grupo!</string>
+    <string name="string_onboarding_first_complete_organize">Organizar</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">Elegido por el 68%</string>
+    <string name="string_onboarding_first_complete_battery_description">¡Consulta la capacidad de batería y la clasificación de consumo en tiempo real!</string>
+    <string name="string_onboarding_first_complete_view_details">Ver detalles</string>
+    <string name="string_onboarding_first_storage_access_title">Solicitud de permiso</string>
+    <string name="string_onboarding_first_storage_access_description">Esta función necesita acceso al almacenamiento de archivos.</string>
+    <string name="string_onboarding_first_storage_access_allow">Permitir</string>
+    <string name="string_onboarding_first_notification_access_title">Solicitud de acceso</string>
+    <string name="string_onboarding_first_notification_access_description">Se necesita acceso para gestionar las notificaciones con un toque.</string>
+    <string name="string_onboarding_first_notification_access_grant">Conceder acceso</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">Ajustes &gt; Mostrar sobre otras aplicaciones</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">Permitir mostrar sobre otras aplicaciones</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  Monitor inactivo</string>
+    <string name="string_onboarding_overlay_permission_back_description">Activa «Mostrar sobre otras aplicaciones» para que el widget flotante vuelva a mostrar la RAM y la velocidad en tiempo real.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">Ahora no</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ Solucionar ahora</string>
+    <string name="string_onboarding_first_junk_expand">Expandir</string>
+    <string name="string_onboarding_splash_welcome">Te damos la bienvenida a</string>
+    <string name="string_onboarding_splash_intro">Elimina archivos basura, libera espacio y mantén tu teléfono rápido.</string>
+    <string name="string_onboarding_splash_preparing">Preparando el inicio…</string>
+    <string name="string_onboarding_first_junk_cache">Basura de caché</string>
+    <string name="string_onboarding_first_junk_system_cache">Caché del sistema</string>
+    <string name="string_onboarding_first_junk_thumbnails">Miniaturas</string>
+    <string name="string_onboarding_first_junk_downloads">Descargas</string>
+    <string name="string_onboarding_first_junk_apks">Archivos APK</string>
+    <string name="string_onboarding_first_junk_empty_folders">Carpetas vacías</string>
+    <string name="string_onboarding_first_junk_clean_now_size">Limpiar ahora · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">¡Limpieza completada!</string>
+    <string name="string_onboarding_first_junk_complete_description">Se han liberado %1$s de almacenamiento.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">¡Tu batería está en buen estado!</string>
+    <string name="string_onboarding_first_junk_back_home">Volver al inicio</string>
+    <string name="string_onboarding_battery_check_scan_title">Comprobación del dispositivo</string>
+    <string name="string_onboarding_battery_check_scan_message">Comprobando tu dispositivo…</string>
+    <string name="string_onboarding_battery_home_placeholder">Comprobar el estado de la batería</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">Completa</string>
+    <string name="string_onboarding_battery_home_remaining">Restante</string>
+    <string name="string_onboarding_battery_estimated_charging">%1$s hasta la carga completa</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s restantes</string>
+    <string name="string_onboarding_battery_fully_charge_time">Tiempo hasta la carga completa:</string>
+    <string name="string_onboarding_battery_remaining_time">Tiempo restante estimado:</string>
+    <string name="string_onboarding_battery_status_pending">Pendiente</string>
+    <string name="string_onboarding_battery_power_label">Potencia</string>
+    <string name="string_onboarding_battery_health_overheat">Sobrecalentada</string>
+    <string name="string_onboarding_battery_health_over_voltage">Sobretensión</string>
+    <string name="string_onboarding_battery_health_failure">Fallo no especificado</string>
+    <string name="string_onboarding_overlay_permission_description">Limpia 3 veces más rápido y libera\nespacio en 1 segundo, estés donde estés</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">No se pueden abrir los ajustes del permiso de superposición.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">Activar la visualización sobre otras aplicaciones</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">Caché de aplicaciones</string>
+    <string name="string_onboarding_ad_junk">Basura publicitaria</string>
+    <string name="string_onboarding_memory_cache">Caché de memoria</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d h %2$d min</string>
+    <string name="string_onboarding_duration_minutes">%1$d min</string>
+    <string name="string_onboarding_fix_now">Solucionar ahora</string>
+    <string name="string_onboarding_overlay_description_simple">Elimina archivos basura más rápido y libera espacio en cualquier lugar.</string>
+    <string name="string_ram_usage_access_description">Permite el acceso de uso para ver las aplicaciones recientes. Android limita el acceso a los procesos en segundo plano.</string>
+    <string name="string_ram_allow_usage_access">Permitir acceso de uso</string>
+    <string name="string_ram_recent_apps_count">%1$d aplicaciones usadas recientemente</string>
+    <string name="string_ram_usage_access_required">Se necesita acceso de uso</string>
+    <string name="string_ram_no_recent_apps">No se encontraron aplicaciones usadas recientemente</string>
     <string name="string_network_overline">TU RED, DE UN VISTAZO</string>
     <string name="string_network_intro">Una prueba rápida de tu conexión.</string>
     <string name="string_network_results_hint">Los resultados aparecerán durante la prueba.</string>
     <string name="string_network_results_complete">Los resultados reflejan tu conexión durante la prueba.</string>
     <string name="string_network_download">Descarga</string>
     <string name="string_network_upload">Subida</string>
-    <string name="string_network_complete_title">Prueba completada</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  Descarga</string>
     <string name="string_network_step_upload">3  Subida</string>
+    <string name="string_network_complete_title">Prueba completada</string>
+    <string name="string_onboarding_complete_status">LIMPIEZA COMPLETADA</string>
+    <string name="string_onboarding_complete_check_status">COMPROBACIÓN COMPLETADA</string>
+    <string name="string_onboarding_complete_tools_title">Sigue así</string>
+    <string name="string_onboarding_complete_tools_label">MÁS HERRAMIENTAS</string>
+    <string name="string_onboarding_complete_result">%1$s\nde espacio liberado. Más sitio para ti.</string>
+    <string name="string_onboarding_complete_battery_title">¡Todo va bien!</string>
+    <string name="string_onboarding_complete_battery_result">En buen estado\nTu batería está lista para el día.</string>
+    <string name="string_onboarding_complete_process_description">Cierra procesos innecesarios\nen segundo plano con un toque.</string>
+    <string name="string_onboarding_complete_notification_description">Menos alertas. Menos interrupciones.</string>
+    <string name="string_onboarding_complete_battery_description">Conoce mejor tu batería.</string>
+    <string name="string_junk_cleaning_session_expired">Vuelve a analizar antes de limpiar.</string>
+    <string name="string_junk_cleaning_failed">No se pudieron limpiar los archivos seleccionados. Vuelve a analizar e inténtalo de nuevo.</string>
+    <string name="string_feature_scan_complete">Análisis completado</string>
+    <string name="string_feature_scan_failed">No se pudo completar el análisis. Inténtalo de nuevo.</string>
+    <string name="string_home_permission_required">Se necesita permiso</string>
+    <string name="string_home_unused_today">No usado hoy</string>
+    <string name="string_stop_app_tips">Toca «&lt;font color=\"#FF0000\"&gt;Forzar detención&lt;/font&gt;» para cerrar la aplicación.</string>
+    <string name="string_feature_scan_estimated_progress">Progreso estimado</string>
 </resources>

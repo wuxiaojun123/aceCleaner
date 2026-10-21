@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">جارٍ التحميل...%1$d%%</string>
     <string name="agree_to_battery">بالمتابعة، فإنك توافق على</string>
-    <string name="app_guide_tips">"يرجى ملاحظة: قد يستغرق الفحص الأول وقتًا أطول لأنه يبحث عن الملفات غير الضرورية ويحلل بيانات هاتفك."</string>
+    <string name="app_guide_tips">"يرجى ملاحظة:\nقد يستغرق الفحص الأول وقتًا أطول لأنه يبحث عن الملفات غير الضرورية ويحلل بيانات هاتفك."</string>
     <string name="guide_complete">اكتمل</string>
     <string name="guide_density">كثافة الشاشة</string>
     <string name="guide_device">الجهاز</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">مساحة التخزين المستخدمة</string>
     <string name="guide_system">إصدار نظام التشغيل</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">لا تفوّت نصيحة مهمة</string>
     <string name="clean_up">تنظيف</string>
     <string name="quick_clean_tile_label">تنظيف سريع</string>
@@ -40,46 +37,37 @@
     <string name="network_test">اختبار الشبكة</string>
     <string name="feature_coming_soon">هذه الميزة قادمة قريبًا</string>
     <string name="settings">الإعدادات</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">البطارية</string>
     <string name="notification_clean_up">تنظيف</string>
     <string name="clean_cache_now">مسح ذاكرة التخزين المؤقت الآن</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">ملفات كبيرة</string>
     <string name="home_photos">متشابهة</string>
     <string name="home_empty">فارغة</string>
     <string name="home_notifications">الإشعارات</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">اللغة</string>
+    <string name="language_title">اللغة</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">جارٍ الفحص...</string>
     <string name="scanned_files_progress">الملفات المفحوصة: %1$d</string>
     <string name="clean_scan_summary">الملفات المفحوصة: %1$d · المجلدات التي تم فحصها: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">اعثر على الملفات الكبيرة التي تشغل مساحة</string>
     <string name="clean_success_screenshot_hint">احذف لقطات الشاشة التي لم تعد بحاجة إليها</string>
     <string name="clean_success_duplicate_hint">حرر مساحة من الصور المتشابهة</string>
+    <string name="string_delete_success_space_freed">تم إخلاء %1$s</string>
+    <string name="string_delete_success_continue_with">واصل استخدام %1$s لإجراء المزيد من التحسينات.</string>
+    <string name="string_delete_success_more_tools">المزيد من أدوات التنظيف</string>
+    <string name="string_delete_success_video_hint">راجع الفيديوهات التي تشغل مساحة</string>
     <string name="done">تم</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">محدد</string>
     <string name="remove_selected_size">إزالة %1$s</string>
     <string name="clean_confirm_title">تنظيف الملفات المحددة؟</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">جارٍ الاتصال بخدمة الإشعارات</string>
     <string name="notif_title">الإشعارات</string>
     <string name="notif_subtitle">نظّم الفوضى وقلّل المشتتات</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">حافظ على ترتيب إشعاراتك</string>
     <string name="notif_hero_subtitle">اعرف مصدر الإشعارات واجمعها حسب التطبيق</string>
     <string name="notif_intercept_title">حظر الإشعارات</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">تم مسح الإشعارات المحظورة</string>
     <string name="uninstall_count">إلغاء التثبيت (%1$d)</string>
     <string name="uninstall_cancelled">تم إلغاء إلغاء التثبيت</string>
+    <string name="string_delete_success_apps_uninstalled">تم إلغاء تثبيت %1$d من التطبيقات</string>
     <string name="apps_found">%1$d تطبيق</string>
     <string name="apps_found_initial">0 تطبيق</string>
     <string name="picture">صورة</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 أشهر</string>
     <string name="one_year">سنة واحدة</string>
     <string name="all_time">كل الوقت</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">جارٍ فحص الصور...</string>
     <string name="scanning_large_files">جارٍ فحص الملفات الكبيرة...</string>
     <string name="scanning_video">جارٍ فحص الفيديو...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">الدقة</string>
     <string name="link_speed">سرعة الاتصال</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s بكسل</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">الجهاز</string>
     <string name="android_version">إصدار Android</string>
@@ -292,58 +280,169 @@
     <string name="network_connection_value">الاتصال: %1$s</string>
     <string name="connection_wifi">Wi-Fi</string>
     <string name="connection_mobile">بيانات الجوال</string>
-    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_ethernet">إيثرنت</string>
     <string name="connection_other">أخرى</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">صور متشابهة</string>
+    <string name="dup_subtitle">الصور الموجودة على هذا الجهاز</string>
+    <string name="dup_keep_best_title">الاحتفاظ بأفضل اللقطات</string>
+    <string name="dup_keep_best_subtitle">احتفظ بأفضل صورة في كل مجموعة واحذف البقية</string>
+    <string name="dup_best_photo">الأفضل</string>
+    <string name="dup_cluster_title">مجموعة الصور المكررة %1$d</string>
+    <string name="dup_cluster_count">%1$d من الصور</string>
+    <string name="dup_none_selected">لم يتم تحديد أي صورة</string>
+    <string name="dup_selected_count">تم تحديد %1$d</string>
+    <string name="dup_action_note">اضغط على علامات الاختيار للتحديد</string>
+    <string name="dup_selected_size">تم تحديد %1$s</string>
+    <string name="dup_delete">حذف المحدد</string>
+    <string name="dup_delete_confirm_title">هل تريد التنظيف بالتأكيد؟</string>
+    <string name="dup_delete_confirm_message">المحدد: %1$d من الصور\nالحجم الإجمالي: %2$s</string>
+    <string name="dup_deleted">تم حذف %1$d من الصور بنجاح</string>
+    <string name="dup_delete_failed">تعذر حذف بعض الصور</string>
+    <string name="dup_loading">جارٍ البحث عن صور متشابهة…</string>
+    <string name="dup_scan_failed">تعذر فحص الصور</string>
+    <string name="dup_empty_title">لم يتم العثور على صور متشابهة</string>
+    <string name="dup_empty_desc">مكتبة صورك مرتبة</string>
+    <string name="dup_preview_unavailable">لا يوجد تطبيق متاح لعرض الصور</string>
     <string name="app_manager_installed">تم التثبيت: %1$s</string>
     <string name="app_manager_last_used">آخر استخدام: %1$s</string>
     <string name="app_manager_last_used_today">اليوم</string>
     <string name="app_manager_last_used_unknown">غير معروف</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">لوحة التنظيف السريع على الشاشة الرئيسية</string>
+    <string name="string_onboarding_overlay_permission_skip">تخطي</string>
+    <string name="string_onboarding_overlay_permission_title">تفعيل إذن الظهور فوق التطبيقات</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">الظهور في المقدمة</string>
+    <string name="string_onboarding_overlay_permission_function">الوظيفة</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">مراقبة ذاكرة RAM وتحسينها</string>
+    <string name="string_onboarding_overlay_permission_feature_network">مراقبة الشبكة وتحسينها</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">تنظيف ذكي للملفات غير المرغوب فيها</string>
+    <string name="string_onboarding_device_status_scan_title">حالة الجهاز</string>
+    <string name="string_onboarding_device_status_scan_content_description">رسم متحرك لفحص حالة الجهاز</string>
+    <string name="string_onboarding_device_status_scan_message">جارٍ فحص معلومات الجهاز…</string>
+    <string name="string_onboarding_device_status_used">المستخدم:</string>
+    <string name="string_onboarding_device_status_total">الإجمالي:</string>
+    <string name="string_onboarding_device_status_battery_status">الحالة:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">طراز CPU</string>
+    <string name="string_onboarding_device_status_cpu_frequency">تردد المعالج</string>
+    <string name="string_onboarding_device_status_cpu_cores">أنوية المعالج</string>
+    <string name="string_onboarding_first_device_screen">الشاشة</string>
+    <string name="string_onboarding_device_status_screen_dpi">كثافة الشاشة DPI</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">معدل تحديث الشاشة</string>
+    <string name="string_onboarding_device_status_clean_junk_files">تنظيف الملفات غير المرغوب فيها</string>
+    <string name="string_onboarding_battery_info_checking">جارٍ فحص معلومات البطارية…</string>
+    <string name="string_onboarding_battery_estimated_calculating">جارٍ حساب الوقت المتبقي</string>
+    <string name="string_onboarding_battery_status_label">حالة البطارية</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">مستخدم أجرى الفحص ✨</string>
+    <string name="string_onboarding_battery_info_check_now">افحص الآن</string>
+    <string name="string_onboarding_battery_check_title">فحص البطارية</string>
+    <string name="string_onboarding_first_junk_title">تنظيف الملفات غير المرغوب فيها</string>
+    <string name="string_onboarding_first_junk_scan_animation">رسم متحرك لفحص الملفات غير المرغوب فيها</string>
+    <string name="string_onboarding_first_junk_scanning">جارٍ فحص الملفات غير المرغوب فيها…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">العناصر: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">اكتمل الفحص، لنتخلص من الملفات غير الضرورية!</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">رسم متحرك لتنظيف الملفات غير المرغوب فيها</string>
+    <string name="string_onboarding_first_junk_cleaning">جارٍ تنظيف الملفات غير المرغوب فيها…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">يختاره 98%</string>
+    <string name="string_onboarding_first_complete_app_process">عمليات التطبيقات</string>
+    <string name="string_onboarding_first_complete_app_process_description">أغلق العمليات غير الضرورية في الخلفية بضغطة واحدة!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">يختاره 76%</string>
+    <string name="string_onboarding_first_complete_notification_blocker">حظر الإشعارات</string>
+    <string name="string_onboarding_first_complete_notification_description">رشّح التنبيهات غير المفيدة وامنع المقاطعات دفعة واحدة!</string>
+    <string name="string_onboarding_first_complete_organize">تنظيم</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">يختاره 68%</string>
+    <string name="string_onboarding_first_complete_battery_description">افحص سعة البطارية وترتيب استهلاك الطاقة لحظيًا!</string>
+    <string name="string_onboarding_first_complete_view_details">عرض التفاصيل</string>
+    <string name="string_onboarding_first_storage_access_title">طلب الإذن</string>
+    <string name="string_onboarding_first_storage_access_description">تتطلب هذه الميزة إذن الوصول إلى مساحة تخزين الملفات.</string>
+    <string name="string_onboarding_first_storage_access_allow">السماح</string>
+    <string name="string_onboarding_first_notification_access_title">طلب الوصول</string>
+    <string name="string_onboarding_first_notification_access_description">يلزم إذن الوصول لإدارة الإشعارات بضغطة واحدة.</string>
+    <string name="string_onboarding_first_notification_access_grant">منح الوصول</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">الإعدادات &gt; الظهور فوق التطبيقات الأخرى</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">السماح بالظهور فوق التطبيقات الأخرى</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  المراقبة غير نشطة</string>
+    <string name="string_onboarding_overlay_permission_back_description">فعّل إذن الظهور فوق التطبيقات الأخرى ليستأنف العنصر العائم مراقبة RAM والسرعة لحظيًا.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">ليس الآن</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ إصلاح الآن</string>
+    <string name="string_onboarding_first_junk_expand">توسيع</string>
+    <string name="string_onboarding_splash_welcome">مرحبًا بك في</string>
+    <string name="string_onboarding_splash_intro">نظّف الملفات غير الضرورية ووفّر المساحة وحافظ على سرعة هاتفك.</string>
+    <string name="string_onboarding_splash_preparing">جارٍ الاستعداد للبدء…</string>
+    <string name="string_onboarding_first_junk_cache">ملفات التخزين المؤقت غير الضرورية</string>
+    <string name="string_onboarding_first_junk_system_cache">ذاكرة التخزين المؤقت للنظام</string>
+    <string name="string_onboarding_first_junk_thumbnails">الصور المصغرة</string>
+    <string name="string_onboarding_first_junk_downloads">التنزيلات</string>
+    <string name="string_onboarding_first_junk_apks">ملفات APK</string>
+    <string name="string_onboarding_first_junk_empty_folders">مجلدات فارغة</string>
+    <string name="string_onboarding_first_junk_clean_now_size">تنظيف الآن · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">تم التنظيف بنجاح!</string>
+    <string name="string_onboarding_first_junk_complete_description">تم إخلاء %1$s من مساحة التخزين بنجاح.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">بطاريتك بحالة جيدة!</string>
+    <string name="string_onboarding_first_junk_back_home">العودة إلى الرئيسية</string>
+    <string name="string_onboarding_battery_check_scan_title">فحص الجهاز</string>
+    <string name="string_onboarding_battery_check_scan_message">جارٍ فحص جهازك…</string>
+    <string name="string_onboarding_battery_home_placeholder">فحص حالة البطارية</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">ممتلئة</string>
+    <string name="string_onboarding_battery_home_remaining">المتبقي</string>
+    <string name="string_onboarding_battery_estimated_charging">%1$s حتى اكتمال الشحن</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s متبقية</string>
+    <string name="string_onboarding_battery_fully_charge_time">الوقت حتى اكتمال الشحن:</string>
+    <string name="string_onboarding_battery_remaining_time">الوقت المتبقي المقدّر:</string>
+    <string name="string_onboarding_battery_status_pending">قيد الانتظار</string>
+    <string name="string_onboarding_battery_power_label">الطاقة</string>
+    <string name="string_onboarding_battery_health_overheat">ارتفاع الحرارة</string>
+    <string name="string_onboarding_battery_health_over_voltage">جهد زائد</string>
+    <string name="string_onboarding_battery_health_failure">عطل غير محدد</string>
+    <string name="string_onboarding_overlay_permission_description">تنظيف أسرع 3 مرات لإزالة الملفات غير الضرورية وإخلاء\nالمساحة في ثانية واحدة أينما كنت</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">تعذر فتح إعدادات إذن الظهور فوق التطبيقات.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">تفعيل الظهور فوق التطبيقات الأخرى</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">ذاكرة التخزين المؤقت للتطبيقات</string>
+    <string name="string_onboarding_ad_junk">ملفات إعلانية غير ضرورية</string>
+    <string name="string_onboarding_memory_cache">ذاكرة مؤقتة</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d ساعة و%2$d دقيقة</string>
+    <string name="string_onboarding_duration_minutes">%1$d دقيقة</string>
+    <string name="string_onboarding_fix_now">إصلاح الآن</string>
+    <string name="string_onboarding_overlay_description_simple">نظّف الملفات غير الضرورية بسرعة ووفّر المساحة أينما كنت.</string>
+    <string name="string_ram_usage_access_description">اسمح بالوصول إلى بيانات الاستخدام لعرض التطبيقات الحديثة. يقيّد Android الوصول إلى العمليات في الخلفية.</string>
+    <string name="string_ram_allow_usage_access">السماح بالوصول إلى بيانات الاستخدام</string>
+    <string name="string_ram_recent_apps_count">%1$d من التطبيقات المستخدمة مؤخرًا</string>
+    <string name="string_ram_usage_access_required">يلزم الوصول إلى بيانات الاستخدام</string>
+    <string name="string_ram_no_recent_apps">لم يتم العثور على تطبيقات مستخدمة مؤخرًا</string>
     <string name="string_network_overline">نظرة سريعة على شبكتك</string>
     <string name="string_network_intro">فحص سريع لاتصالك.</string>
     <string name="string_network_results_hint">ستظهر النتائج هنا أثناء الاختبار.</string>
     <string name="string_network_results_complete">تعكس النتائج حالة اتصالك أثناء الاختبار.</string>
     <string name="string_network_download">تنزيل</string>
     <string name="string_network_upload">رفع</string>
-    <string name="string_network_complete_title">اكتمل الاختبار</string>
     <string name="string_network_step_ping">1  زمن الاستجابة</string>
     <string name="string_network_step_download">2  تنزيل</string>
     <string name="string_network_step_upload">3  رفع</string>
+    <string name="string_network_complete_title">اكتمل الاختبار</string>
+    <string name="string_onboarding_complete_status">اكتمل التنظيف</string>
+    <string name="string_onboarding_complete_check_status">اكتمل الفحص</string>
+    <string name="string_onboarding_complete_tools_title">حافظ على هذا الأداء الجيد</string>
+    <string name="string_onboarding_complete_tools_label">المزيد من الأدوات</string>
+    <string name="string_onboarding_complete_result">%1$s\nمن مساحة التخزين تم إخلاؤها. مساحة أكبر لك.</string>
+    <string name="string_onboarding_complete_battery_title">يبدو جيدًا!</string>
+    <string name="string_onboarding_complete_battery_result">بحالة جيدة\nبطاريتك جاهزة لليوم.</string>
+    <string name="string_onboarding_complete_process_description">أغلق العمليات غير الضرورية\nفي الخلفية بضغطة واحدة.</string>
+    <string name="string_onboarding_complete_notification_description">تنبيهات أقل. مقاطعات أقل.</string>
+    <string name="string_onboarding_complete_battery_description">تعرّف على بطاريتك بشكل أفضل.</string>
+    <string name="string_junk_cleaning_session_expired">يرجى إعادة الفحص قبل التنظيف.</string>
+    <string name="string_junk_cleaning_failed">تعذر تنظيف الملفات المحددة. أعد الفحص وحاول مجددًا.</string>
+    <string name="string_feature_scan_complete">اكتمل الفحص</string>
+    <string name="string_feature_scan_failed">تعذر إكمال الفحص. يرجى المحاولة مجددًا.</string>
+    <string name="string_home_permission_required">الإذن مطلوب</string>
+    <string name="string_home_unused_today">لم يُستخدم اليوم</string>
+    <string name="string_stop_app_tips">اضغط على زر «&lt;font color=\"#FF0000\"&gt;فرض الإيقاف&lt;/font&gt;» لإغلاق التطبيق.</string>
+    <string name="string_feature_scan_estimated_progress">التقدم المقدّر</string>
 </resources>

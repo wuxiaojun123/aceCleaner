@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Laai...%1$d%%</string>
     <string name="agree_to_battery">Deur voort te gaan, stem jy in tot</string>
     <string name="app_guide_tips">"Let wel: Die eerste skandering kan langer neem omdat dit na rommellêers soek en jou foon se\ndata ontleed."</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">Berging gebruik</string>
     <string name="guide_system">Stelselbedryfstelselweergawe</string>
     <string name="privacy_policy">Privaatheidsbeleid</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Moet nooit ’n belangrike wenk misloop nie</string>
     <string name="clean_up">MAAK SKOON</string>
     <string name="quick_clean_tile_label">Vinnige skoonmaak</string>
@@ -40,46 +37,37 @@
     <string name="network_test">Netwerktoets</string>
     <string name="feature_coming_soon">Hierdie funksie kom binnekort</string>
     <string name="settings">Instellings</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">Battery</string>
     <string name="notification_clean_up">Maak skoon</string>
     <string name="clean_cache_now">Maak kasgeheue nou skoon</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Groot lêers</string>
     <string name="home_photos">Soortgelyk</string>
     <string name="home_empty">Leë items</string>
     <string name="home_notifications">Kennisgewings</string>
-    <string name="more_indicator" translatable="false">›››</string>
     <string name="language_entry_content_description">Taal</string>
     <string name="language_title">Taal</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Skandeer...</string>
     <string name="scanned_files_progress">Lêers geskandeer: %1$d</string>
     <string name="clean_scan_summary">Lêers geskandeer: %1$d · Vouers nagegaan: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">Vind groot lêers wat spasie opneem</string>
     <string name="clean_success_screenshot_hint">Vee skermkiekies uit wat jy nie meer nodig het nie</string>
     <string name="clean_success_duplicate_hint">Maak spasie vry van soortgelyke foto’s</string>
+    <string name="string_delete_success_space_freed">%1$s vrygemaak</string>
+    <string name="string_delete_success_continue_with">Gebruik %1$s verder vir meer optimalisering.</string>
+    <string name="string_delete_success_more_tools">Meer skoonmaaknutsgoed</string>
+    <string name="string_delete_success_video_hint">Hersien video’s wat spasie gebruik</string>
     <string name="done">Klaar</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Gekies</string>
     <string name="remove_selected_size">Verwyder %1$s</string>
     <string name="clean_confirm_title">Maak gekose lêers skoon?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">Kennisgewingsdiens koppel tans</string>
     <string name="notif_title">Kennisgewings</string>
     <string name="notif_subtitle">Bestuur rommel en verminder afleidings</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">Hou jou kennisgewings netjies</string>
     <string name="notif_hero_subtitle">Sien waar kennisgewings vandaan kom en groepeer hulle volgens program</string>
     <string name="notif_intercept_title">Blokkeer kennisgewings</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">Geblokkeerde kennisgewings is uitgevee</string>
     <string name="uninstall_count">Deïnstalleer (%1$d)</string>
     <string name="uninstall_cancelled">Deïnstallering gekanselleer</string>
+    <string name="string_delete_success_apps_uninstalled">%1$d toepassings gedeïnstalleer</string>
     <string name="apps_found">%1$d programme</string>
     <string name="apps_found_initial">0 programme</string>
     <string name="picture">Prent</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 maande</string>
     <string name="one_year">1 jaar</string>
     <string name="all_time">Alle tyd</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Skandeer prent...</string>
     <string name="scanning_large_files">Skandeer groot lêers...</string>
     <string name="scanning_video">Skandeer video...</string>
@@ -294,57 +282,167 @@
     <string name="connection_mobile">Mobiele data</string>
     <string name="connection_ethernet">Ethernet</string>
     <string name="connection_other">Ander</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">Soortgelyke foto’s</string>
+    <string name="dup_subtitle">Foto’s op hierdie toestel gevind</string>
+    <string name="dup_keep_best_title">Behou die beste foto’s</string>
+    <string name="dup_keep_best_subtitle">Behou die beste foto in elke groep en verwyder die res</string>
+    <string name="dup_best_photo">Beste</string>
+    <string name="dup_cluster_title">Duplikaatgroep %1$d</string>
+    <string name="dup_cluster_count">%1$d foto’s</string>
+    <string name="dup_none_selected">0 gekies</string>
+    <string name="dup_selected_count">%1$d gekies</string>
+    <string name="dup_action_note">Tik die regmerkies om te kies</string>
+    <string name="dup_selected_size">%1$s gekies</string>
+    <string name="dup_delete">Verwyder gekose foto’s</string>
+    <string name="dup_delete_confirm_title">Seker jy wil skoonmaak?</string>
+    <string name="dup_delete_confirm_message">Gekies: %1$d foto’s\nTotale grootte: %2$s</string>
+    <string name="dup_deleted">%1$d foto’s suksesvol verwyder</string>
+    <string name="dup_delete_failed">Sommige foto’s kon nie verwyder word nie</string>
+    <string name="dup_loading">Soek na soortgelyke foto’s…</string>
+    <string name="dup_scan_failed">Kan nie foto’s skandeer nie</string>
+    <string name="dup_empty_title">Geen soortgelyke foto’s gevind nie</string>
+    <string name="dup_empty_desc">Jou fotobiblioteek lyk netjies</string>
+    <string name="dup_preview_unavailable">Geen toepassing beskikbaar om foto’s te bekyk nie</string>
     <string name="app_manager_installed">Geïnstalleer: %1$s</string>
     <string name="app_manager_last_used">Laas gebruik: %1$s</string>
     <string name="app_manager_last_used_today">Vandag</string>
     <string name="app_manager_last_used_unknown">onbekend</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">Tuisskerm se vinnige skoonmaakpaneel</string>
+    <string name="string_onboarding_overlay_permission_skip">Slaan oor</string>
+    <string name="string_onboarding_overlay_permission_title">Aktiveer oorlegtoestemming</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">Wys bo-op</string>
+    <string name="string_onboarding_overlay_permission_function">Funksie</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">RAM-monitering en optimalisering</string>
+    <string name="string_onboarding_overlay_permission_feature_network">Netwerkmonitering en optimalisering</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">Slim rommellêerskoonmaak</string>
+    <string name="string_onboarding_device_status_scan_title">Toestelstatus</string>
+    <string name="string_onboarding_device_status_scan_content_description">Animasie van toestelstatusskandering</string>
+    <string name="string_onboarding_device_status_scan_message">Skandeer toestelinligting…</string>
+    <string name="string_onboarding_device_status_used">Gebruik:</string>
+    <string name="string_onboarding_device_status_total">Totaal:</string>
+    <string name="string_onboarding_device_status_battery_status">Status:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">CPU-model</string>
+    <string name="string_onboarding_device_status_cpu_frequency">SVE-frekwensie</string>
+    <string name="string_onboarding_device_status_cpu_cores">SVE-kerne</string>
+    <string name="string_onboarding_first_device_screen">Skerm</string>
+    <string name="string_onboarding_device_status_screen_dpi">Skerm-DPI</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">Skermverfristempo</string>
+    <string name="string_onboarding_device_status_clean_junk_files">Maak rommellêers skoon</string>
+    <string name="string_onboarding_battery_info_checking">Gaan batteryinligting na…</string>
+    <string name="string_onboarding_battery_estimated_calculating">Bereken oorblywende tyd</string>
+    <string name="string_onboarding_battery_status_label">Batterystatus</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">gebruikers het nagegaan ✨</string>
+    <string name="string_onboarding_battery_info_check_now">Gaan nou na</string>
+    <string name="string_onboarding_battery_check_title">Batterytoets</string>
+    <string name="string_onboarding_first_junk_title">Rommelskoonmaak</string>
+    <string name="string_onboarding_first_junk_scan_animation">Animasie van rommellêerskandering</string>
+    <string name="string_onboarding_first_junk_scanning">Skandeer rommellêers…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">Items: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">Skandering voltooi. Kom ons ruim die rommel op!</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">Animasie van rommelskoonmaak</string>
+    <string name="string_onboarding_first_junk_cleaning">Maak rommellêers skoon…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">98% kies dit</string>
+    <string name="string_onboarding_first_complete_app_process">Toepassingsproses</string>
+    <string name="string_onboarding_first_complete_app_process_description">Sluit onnodige agtergrondprosesse met een tik!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">76% kies dit</string>
+    <string name="string_onboarding_first_complete_notification_blocker">Kennisgewingblokkeerder</string>
+    <string name="string_onboarding_first_complete_notification_description">Filtreer nuttelose waarskuwings en blokkeer onderbrekings saam!</string>
+    <string name="string_onboarding_first_complete_organize">Organiseer</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">68% kies dit</string>
+    <string name="string_onboarding_first_complete_battery_description">Gaan batterykapasiteit en kragverbruikranglyste intyds na!</string>
+    <string name="string_onboarding_first_complete_view_details">Bekyk besonderhede</string>
+    <string name="string_onboarding_first_storage_access_title">Toestemmingversoek</string>
+    <string name="string_onboarding_first_storage_access_description">Hierdie funksie benodig toegang tot lêerberging.</string>
+    <string name="string_onboarding_first_storage_access_allow">Laat toe</string>
+    <string name="string_onboarding_first_notification_access_title">Toegangversoek</string>
+    <string name="string_onboarding_first_notification_access_description">Toegang is nodig om kennisgewings met een tik te bestuur.</string>
+    <string name="string_onboarding_first_notification_access_grant">Verleen toegang</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">Instellings &gt; Wys oor ander toepassings</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">Laat vertoning oor ander toepassings toe</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  Monitering onaktief</string>
+    <string name="string_onboarding_overlay_permission_back_description">Aktiveer “Wys oor ander toepassings” sodat die swewende legstuk weer RAM en spoed regstreeks kan monitor.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">Nie nou nie</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ Herstel nou</string>
+    <string name="string_onboarding_first_junk_expand">Vou uit</string>
+    <string name="string_onboarding_splash_welcome">Welkom by</string>
+    <string name="string_onboarding_splash_intro">Verwyder rommellêers, maak spasie vry en hou jou foon vinnig.</string>
+    <string name="string_onboarding_splash_preparing">Berei voor om te begin…</string>
+    <string name="string_onboarding_first_junk_cache">Kasrommel</string>
+    <string name="string_onboarding_first_junk_system_cache">Stelselkas</string>
+    <string name="string_onboarding_first_junk_thumbnails">Duimnaels</string>
+    <string name="string_onboarding_first_junk_downloads">Aflaaie</string>
+    <string name="string_onboarding_first_junk_apks">APK-lêers</string>
+    <string name="string_onboarding_first_junk_empty_folders">Leë vouers</string>
+    <string name="string_onboarding_first_junk_clean_now_size">Maak nou skoon · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">Suksesvol skoongemaak!</string>
+    <string name="string_onboarding_first_junk_complete_description">%1$s bergingspasie is suksesvol vrygemaak.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">Jou battery is in ’n goeie toestand!</string>
+    <string name="string_onboarding_first_junk_back_home">Terug na tuis</string>
+    <string name="string_onboarding_battery_check_scan_title">Toesteltoets</string>
+    <string name="string_onboarding_battery_check_scan_message">Gaan jou toestel na…</string>
+    <string name="string_onboarding_battery_home_placeholder">Gaan batterystatus na</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">Vol</string>
+    <string name="string_onboarding_battery_home_remaining">Oorblywend</string>
+    <string name="string_onboarding_battery_estimated_charging">%1$s tot vol</string>
+    <string name="string_onboarding_battery_estimated_remaining">%1$s oor</string>
+    <string name="string_onboarding_battery_fully_charge_time">Tyd tot volle lading:</string>
+    <string name="string_onboarding_battery_remaining_time">Geskatte oorblywende tyd:</string>
+    <string name="string_onboarding_battery_status_pending">Hangend</string>
+    <string name="string_onboarding_battery_power_label">Krag</string>
+    <string name="string_onboarding_battery_health_overheat">Oorverhit</string>
+    <string name="string_onboarding_battery_health_over_voltage">Oorspanning</string>
+    <string name="string_onboarding_battery_health_failure">Ongespesifiseerde fout</string>
+    <string name="string_onboarding_overlay_permission_description">Maak 3 keer vinniger skoon en maak oral\nspasie vry in 1 sekonde</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">Kan nie die oorlegtoestemminginstellings oopmaak nie.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">Aktiveer vertoning oor ander toepassings</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">Toepassingskas</string>
+    <string name="string_onboarding_ad_junk">Advertensierommel</string>
+    <string name="string_onboarding_memory_cache">Geheuekas</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d u %2$d min</string>
+    <string name="string_onboarding_duration_minutes">%1$d min</string>
+    <string name="string_onboarding_fix_now">Herstel nou</string>
+    <string name="string_onboarding_overlay_description_simple">Verwyder rommel vinniger en maak oral spasie vry.</string>
+    <string name="string_ram_usage_access_description">Laat gebruikstoegang toe om onlangse toepassings te sien. Android beperk toegang tot agtergrondprosesse.</string>
+    <string name="string_ram_allow_usage_access">Laat gebruikstoegang toe</string>
+    <string name="string_ram_recent_apps_count">%1$d onlangs gebruikte toepassings</string>
+    <string name="string_ram_usage_access_required">Gebruikstoegang benodig</string>
+    <string name="string_ram_no_recent_apps">Geen onlangs gebruikte toepassings gevind nie</string>
     <string name="string_network_overline">JOU NETWERK IN EEN OOGOPSLAG</string>
     <string name="string_network_intro">Toets jou verbinding vinnig.</string>
     <string name="string_network_results_hint">Resultate sal tydens die toets verskyn.</string>
     <string name="string_network_results_complete">Resultate weerspieël jou verbinding tydens die toets.</string>
     <string name="string_network_download">Aflaai</string>
     <string name="string_network_upload">Oplaai</string>
-    <string name="string_network_complete_title">Toets voltooi</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  Aflaai</string>
     <string name="string_network_step_upload">3  Oplaai</string>
+    <string name="string_network_complete_title">Toets voltooi</string>
+    <string name="string_onboarding_complete_status">SKOONMAAK VOLTOOI</string>
+    <string name="string_onboarding_complete_check_status">TOETS VOLTOOI</string>
+    <string name="string_onboarding_complete_tools_title">Hou die goeie werk vol</string>
+    <string name="string_onboarding_complete_tools_label">MEER NUTSGOED</string>
+    <string name="string_onboarding_complete_result">%1$s\nbergingspasie vrygemaak. Meer plek vir jou.</string>
+    <string name="string_onboarding_complete_battery_title">Lyk goed!</string>
+    <string name="string_onboarding_complete_battery_result">In ’n goeie toestand\nJou battery is gereed vir die dag.</string>
+    <string name="string_onboarding_complete_process_description">Sluit onnodige agtergrondprosesse\nmet een tik.</string>
+    <string name="string_onboarding_complete_notification_description">Minder waarskuwings. Minder onderbrekings.</string>
+    <string name="string_onboarding_complete_battery_description">Leer jou battery beter ken.</string>
+    <string name="string_junk_cleaning_session_expired">Skandeer asseblief weer voor skoonmaak.</string>
+    <string name="string_junk_cleaning_failed">Kon nie die gekose lêers skoonmaak nie. Skandeer weer en probeer weer.</string>
+    <string name="string_feature_scan_complete">Skandering voltooi</string>
+    <string name="string_feature_scan_failed">Kon nie die skandering voltooi nie. Probeer asseblief weer.</string>
+    <string name="string_home_permission_required">Toestemming benodig</string>
+    <string name="string_home_unused_today">Nie vandag gebruik nie</string>
+    <string name="string_stop_app_tips">Tik “&lt;font color=\"#FF0000\"&gt;Dwing stop&lt;/font&gt;” om die toepassing te sluit.</string>
+    <string name="string_feature_scan_estimated_progress">Geskatte vordering</string>
 </resources>
-

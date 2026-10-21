@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Завантаження...%1$d%%</string>
     <string name="agree_to_battery">Продовжуючи, ви погоджуєтеся з</string>
-    <string name="app_guide_tips">"Зверніть увагу: перше сканування може тривати довше, оскільки застосунок шукає непотрібні файли та аналізує дані телефона."</string>
+    <string name="app_guide_tips">"Зверніть увагу:\nперше сканування може тривати довше, оскільки застосунок шукає непотрібні файли та аналізує дані телефона."</string>
     <string name="guide_complete">Готово</string>
     <string name="guide_density">Щільність екрана</string>
     <string name="guide_device">Пристрій</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">Використано сховища</string>
     <string name="guide_system">Версія ОС</string>
     <string name="privacy_policy">Політика конфіденційності</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Не пропускайте важливі поради</string>
     <string name="clean_up">ОЧИСТИТИ</string>
     <string name="quick_clean_tile_label">Швидке очищення</string>
@@ -40,46 +37,37 @@
     <string name="network_test">Тест мережі</string>
     <string name="feature_coming_soon">Ця функція незабаром з’явиться</string>
     <string name="settings">Налаштування</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">Батарея</string>
     <string name="notification_clean_up">Очистити</string>
     <string name="clean_cache_now">Очистити кеш зараз</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Великі файли</string>
     <string name="home_photos">Схожі</string>
     <string name="home_empty">Порожні</string>
     <string name="home_notifications">Сповіщення</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">Мова</string>
+    <string name="language_title">Мова</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Сканування...</string>
     <string name="scanned_files_progress">Проскановано файлів: %1$d</string>
     <string name="clean_scan_summary">Проскановано файлів: %1$d · Перевірено папок: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">Знайдіть великі файли, що займають місце</string>
     <string name="clean_success_screenshot_hint">Видаліть знімки екрана, які більше не потрібні</string>
     <string name="clean_success_duplicate_hint">Звільніть місце, видаливши схожі фото</string>
+    <string name="string_delete_success_space_freed">Звільнено %1$s</string>
+    <string name="string_delete_success_continue_with">Продовжуйте користуватися %1$s для подальшої оптимізації.</string>
+    <string name="string_delete_success_more_tools">Інші засоби очищення</string>
+    <string name="string_delete_success_video_hint">Перегляньте відео, що займають місце</string>
     <string name="done">Готово</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Вибрано</string>
     <string name="remove_selected_size">Видалити %1$s</string>
     <string name="clean_confirm_title">Очистити вибрані файли?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">Служба сповіщень підключається</string>
     <string name="notif_title">Сповіщення</string>
     <string name="notif_subtitle">Упорядковуйте безлад і зменшуйте відволікання</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">Тримайте сповіщення впорядкованими</string>
     <string name="notif_hero_subtitle">Переглядайте джерело сповіщень і групуйте їх за застосунками</string>
     <string name="notif_intercept_title">Блокувати сповіщення</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">Заблоковані сповіщення очищено</string>
     <string name="uninstall_count">Видалити (%1$d)</string>
     <string name="uninstall_cancelled">Видалення скасовано</string>
+    <string name="string_delete_success_apps_uninstalled">Видалено додатків: %1$d</string>
     <string name="apps_found">Застосунків: %1$d</string>
     <string name="apps_found_initial">0 застосунків</string>
     <string name="picture">Зображення</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 місяців</string>
     <string name="one_year">1 рік</string>
     <string name="all_time">За весь час</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Сканування зображень...</string>
     <string name="scanning_large_files">Сканування великих файлів...</string>
     <string name="scanning_video">Сканування відео...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">Роздільна здатність</string>
     <string name="link_speed">Швидкість з’єднання</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s пікселів</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">Пристрій</string>
     <string name="android_version">Версія Android</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">Мобільні дані</string>
     <string name="connection_ethernet">Ethernet</string>
     <string name="connection_other">Інше</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">Схожі фотографії</string>
+    <string name="dup_subtitle">Фотографії, знайдені на цьому пристрої</string>
+    <string name="dup_keep_best_title">Зберегти найкращі знімки</string>
+    <string name="dup_keep_best_subtitle">Збережіть найкраще фото в кожній групі, а решту видаліть</string>
+    <string name="dup_best_photo">Найкраще</string>
+    <string name="dup_cluster_title">Група дублікатів %1$d</string>
+    <string name="dup_cluster_count">Фотографій: %1$d</string>
+    <string name="dup_none_selected">Вибрано: 0</string>
+    <string name="dup_selected_count">Вибрано: %1$d</string>
+    <string name="dup_action_note">Торкніться позначок, щоб вибрати</string>
+    <string name="dup_selected_size">Вибрано: %1$s</string>
+    <string name="dup_delete">Видалити вибране</string>
+    <string name="dup_delete_confirm_title">Виконати очищення?</string>
+    <string name="dup_delete_confirm_message">Вибрано фотографій: %1$d\nЗагальний розмір: %2$s</string>
+    <string name="dup_deleted">Успішно видалено фотографій: %1$d</string>
+    <string name="dup_delete_failed">Не вдалося видалити деякі фотографії</string>
+    <string name="dup_loading">Пошук схожих фотографій…</string>
+    <string name="dup_scan_failed">Не вдалося перевірити фотографії</string>
+    <string name="dup_empty_title">Схожих фотографій не знайдено</string>
+    <string name="dup_empty_desc">Ваша фотогалерея впорядкована</string>
+    <string name="dup_preview_unavailable">Немає додатка для перегляду фотографій</string>
     <string name="app_manager_installed">Установлено: %1$s</string>
     <string name="app_manager_last_used">Останнє використання: %1$s</string>
     <string name="app_manager_last_used_today">Сьогодні</string>
     <string name="app_manager_last_used_unknown">невідомо</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">Панель швидкого очищення на головному екрані</string>
+    <string name="string_onboarding_overlay_permission_skip">Пропустити</string>
+    <string name="string_onboarding_overlay_permission_title">Дозволити накладання поверх додатків</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">Показувати поверх</string>
+    <string name="string_onboarding_overlay_permission_function">Функція</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">Моніторинг та оптимізація ОЗП</string>
+    <string name="string_onboarding_overlay_permission_feature_network">Моніторинг та оптимізація мережі</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">Розумне очищення непотрібних файлів</string>
+    <string name="string_onboarding_device_status_scan_title">Стан пристрою</string>
+    <string name="string_onboarding_device_status_scan_content_description">Анімація перевірки стану пристрою</string>
+    <string name="string_onboarding_device_status_scan_message">Перевірка відомостей про пристрій…</string>
+    <string name="string_onboarding_device_status_used">Зайнято:</string>
+    <string name="string_onboarding_device_status_total">Усього:</string>
+    <string name="string_onboarding_device_status_battery_status">Стан:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">Модель CPU</string>
+    <string name="string_onboarding_device_status_cpu_frequency">Частота процесора</string>
+    <string name="string_onboarding_device_status_cpu_cores">Ядра процесора</string>
+    <string name="string_onboarding_first_device_screen">Екран</string>
+    <string name="string_onboarding_device_status_screen_dpi">DPI екрана</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">Частота оновлення екрана</string>
+    <string name="string_onboarding_device_status_clean_junk_files">Очистити непотрібні файли</string>
+    <string name="string_onboarding_battery_info_checking">Перевірка відомостей про батарею…</string>
+    <string name="string_onboarding_battery_estimated_calculating">Обчислення часу, що залишився</string>
+    <string name="string_onboarding_battery_status_label">Стан батареї</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">користувачів виконали перевірку ✨</string>
+    <string name="string_onboarding_battery_info_check_now">Перевірити зараз</string>
+    <string name="string_onboarding_battery_check_title">Перевірка батареї</string>
+    <string name="string_onboarding_first_junk_title">Очищення сміття</string>
+    <string name="string_onboarding_first_junk_scan_animation">Анімація пошуку непотрібних файлів</string>
+    <string name="string_onboarding_first_junk_scanning">Пошук непотрібних файлів…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">Об’єкти: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">Перевірку завершено — позбудьтеся зайвого!</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">Анімація очищення непотрібних файлів</string>
+    <string name="string_onboarding_first_junk_cleaning">Очищення непотрібних файлів…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">Обирають 98%</string>
+    <string name="string_onboarding_first_complete_app_process">Процеси додатків</string>
+    <string name="string_onboarding_first_complete_app_process_description">Закривайте зайві фонові процеси одним дотиком!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">Обирають 76%</string>
+    <string name="string_onboarding_first_complete_notification_blocker">Блокувальник сповіщень</string>
+    <string name="string_onboarding_first_complete_notification_description">Фільтруйте непотрібні сповіщення та блокуйте перешкоди разом!</string>
+    <string name="string_onboarding_first_complete_organize">Упорядкувати</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">Обирають 68%</string>
+    <string name="string_onboarding_first_complete_battery_description">Перевіряйте ємність батареї та рейтинг енергоспоживання в реальному часі!</string>
+    <string name="string_onboarding_first_complete_view_details">Докладніше</string>
+    <string name="string_onboarding_first_storage_access_title">Запит дозволу</string>
+    <string name="string_onboarding_first_storage_access_description">Для цієї функції потрібен доступ до сховища файлів.</string>
+    <string name="string_onboarding_first_storage_access_allow">Дозволити</string>
+    <string name="string_onboarding_first_notification_access_title">Запит доступу</string>
+    <string name="string_onboarding_first_notification_access_description">Для керування сповіщеннями одним дотиком потрібен доступ.</string>
+    <string name="string_onboarding_first_notification_access_grant">Надати доступ</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">Налаштування &gt; Поверх інших додатків</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">Дозволити показ поверх інших додатків</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  Моніторинг неактивний</string>
+    <string name="string_onboarding_overlay_permission_back_description">Увімкніть показ поверх інших додатків, щоб плаваючий віджет знову відстежував ОЗП і швидкість у реальному часі.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">Не зараз</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ Виправити зараз</string>
+    <string name="string_onboarding_first_junk_expand">Розгорнути</string>
+    <string name="string_onboarding_splash_welcome">Ласкаво просимо до</string>
+    <string name="string_onboarding_splash_intro">Видаляйте непотрібні файли, звільняйте місце та зберігайте швидкодію телефона.</string>
+    <string name="string_onboarding_splash_preparing">Підготовка до запуску…</string>
+    <string name="string_onboarding_first_junk_cache">Непотрібний кеш</string>
+    <string name="string_onboarding_first_junk_system_cache">Системний кеш</string>
+    <string name="string_onboarding_first_junk_thumbnails">Мініатюри</string>
+    <string name="string_onboarding_first_junk_downloads">Завантаження</string>
+    <string name="string_onboarding_first_junk_apks">Файли APK</string>
+    <string name="string_onboarding_first_junk_empty_folders">Порожні папки</string>
+    <string name="string_onboarding_first_junk_clean_now_size">Очистити зараз · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">Успішно очищено!</string>
+    <string name="string_onboarding_first_junk_complete_description">Успішно звільнено %1$s пам’яті.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">Ваша батарея в доброму стані!</string>
+    <string name="string_onboarding_first_junk_back_home">На головний екран</string>
+    <string name="string_onboarding_battery_check_scan_title">Перевірка пристрою</string>
+    <string name="string_onboarding_battery_check_scan_message">Перевірка пристрою…</string>
+    <string name="string_onboarding_battery_home_placeholder">Перевірити стан батареї</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">Повний заряд</string>
+    <string name="string_onboarding_battery_home_remaining">Залишилося</string>
+    <string name="string_onboarding_battery_estimated_charging">До повної зарядки: %1$s</string>
+    <string name="string_onboarding_battery_estimated_remaining">Залишилося %1$s</string>
+    <string name="string_onboarding_battery_fully_charge_time">Час до повної зарядки:</string>
+    <string name="string_onboarding_battery_remaining_time">Орієнтовний залишковий час:</string>
+    <string name="string_onboarding_battery_status_pending">Очікування</string>
+    <string name="string_onboarding_battery_power_label">Потужність</string>
+    <string name="string_onboarding_battery_health_overheat">Перегрів</string>
+    <string name="string_onboarding_battery_health_over_voltage">Підвищена напруга</string>
+    <string name="string_onboarding_battery_health_failure">Невідома несправність</string>
+    <string name="string_onboarding_overlay_permission_description">Очищайте в 3 рази швидше та звільняйте\nмісце за 1 секунду будь-де</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">Не вдалося відкрити налаштування дозволу накладання.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">Увімкнути показ поверх інших додатків</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">Кеш додатків</string>
+    <string name="string_onboarding_ad_junk">Рекламне сміття</string>
+    <string name="string_onboarding_memory_cache">Кеш пам’яті</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d год %2$d хв</string>
+    <string name="string_onboarding_duration_minutes">%1$d хв</string>
+    <string name="string_onboarding_fix_now">Виправити зараз</string>
+    <string name="string_onboarding_overlay_description_simple">Швидше видаляйте сміття та звільняйте місце будь-де.</string>
+    <string name="string_ram_usage_access_description">Дозвольте доступ до статистики використання для перегляду нещодавніх додатків. Android обмежує доступ до фонових процесів.</string>
+    <string name="string_ram_allow_usage_access">Дозволити доступ до статистики використання</string>
+    <string name="string_ram_recent_apps_count">Нещодавно використаних додатків: %1$d</string>
+    <string name="string_ram_usage_access_required">Потрібен доступ до статистики використання</string>
+    <string name="string_ram_no_recent_apps">Нещодавно використаних додатків не знайдено</string>
     <string name="string_network_overline">ВАША МЕРЕЖА З ОДНОГО ПОГЛЯДУ</string>
     <string name="string_network_intro">Швидка перевірка з’єднання.</string>
     <string name="string_network_results_hint">Результати з’являться під час перевірки.</string>
     <string name="string_network_results_complete">Результати відображають стан мережі під час перевірки.</string>
     <string name="string_network_download">Завантаження</string>
     <string name="string_network_upload">Надсилання</string>
-    <string name="string_network_complete_title">Перевірку завершено</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  Завантаження</string>
     <string name="string_network_step_upload">3  Надсилання</string>
+    <string name="string_network_complete_title">Перевірку завершено</string>
+    <string name="string_onboarding_complete_status">ОЧИЩЕННЯ ЗАВЕРШЕНО</string>
+    <string name="string_onboarding_complete_check_status">ПЕРЕВІРКУ ЗАВЕРШЕНО</string>
+    <string name="string_onboarding_complete_tools_title">Зберігайте добрий результат</string>
+    <string name="string_onboarding_complete_tools_label">ІНШІ ЗАСОБИ</string>
+    <string name="string_onboarding_complete_result">%1$s\nпам’яті звільнено. Більше місця для вас.</string>
+    <string name="string_onboarding_complete_battery_title">Усе гаразд!</string>
+    <string name="string_onboarding_complete_battery_result">Добрий стан\nБатарея готова до нового дня.</string>
+    <string name="string_onboarding_complete_process_description">Закривайте зайві фонові\nпроцеси одним дотиком.</string>
+    <string name="string_onboarding_complete_notification_description">Менше сповіщень. Менше перешкод.</string>
+    <string name="string_onboarding_complete_battery_description">Дізнайтеся більше про свою батарею.</string>
+    <string name="string_junk_cleaning_session_expired">Перед очищенням повторіть перевірку.</string>
+    <string name="string_junk_cleaning_failed">Не вдалося очистити вибрані файли. Повторіть перевірку та спробуйте ще раз.</string>
+    <string name="string_feature_scan_complete">Сканування завершено</string>
+    <string name="string_feature_scan_failed">Не вдалося завершити перевірку. Спробуйте ще раз.</string>
+    <string name="string_home_permission_required">Потрібен дозвіл</string>
+    <string name="string_home_unused_today">Сьогодні не використовувалося</string>
+    <string name="string_stop_app_tips">Торкніться «&lt;font color=\"#FF0000\"&gt;Примусово зупинити&lt;/font&gt;», щоб закрити додаток.</string>
+    <string name="string_feature_scan_estimated_progress">Орієнтовний прогрес</string>
 </resources>

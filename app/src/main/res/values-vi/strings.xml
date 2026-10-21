@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">&#160;Smart Cleaner</string>
     <string name="loading">Đang tải...%1$d%%</string>
     <string name="agree_to_battery">Bằng việc tiếp tục, bạn đồng ý với</string>
-    <string name="app_guide_tips">"Lưu ý: Lần quét đầu tiên có thể mất nhiều thời gian hơn vì ứng dụng tìm tệp rác và phân tích dữ liệu trên điện thoại của bạn."</string>
+    <string name="app_guide_tips">"Lưu ý:\nLần quét đầu tiên có thể mất nhiều thời gian hơn vì ứng dụng tìm tệp rác và phân tích dữ liệu trên điện thoại của bạn."</string>
     <string name="guide_complete">Hoàn tất</string>
     <string name="guide_density">Mật độ màn hình</string>
     <string name="guide_device">Thiết bị</string>
@@ -13,9 +13,6 @@
     <string name="guide_storage">Bộ nhớ đã dùng</string>
     <string name="guide_system">Phiên bản hệ điều hành</string>
     <string name="privacy_policy">Chính sách quyền riêng tư</string>
-    <string name="guide_android_version" translatable="false">Android %1$s</string>
-    <string name="guide_screen_resolution_value" translatable="false">%1$d x %2$d</string>
-    <string name="guide_storage_value" translatable="false">%1$s/%2$s</string>
     <string name="never_miss_key_tip">Đừng bỏ lỡ mẹo quan trọng</string>
     <string name="clean_up">DỌN DẸP</string>
     <string name="quick_clean_tile_label">Dọn nhanh</string>
@@ -40,46 +37,37 @@
     <string name="network_test">Kiểm tra mạng</string>
     <string name="feature_coming_soon">Tính năng này sắp ra mắt</string>
     <string name="settings">Cài đặt</string>
-    <string name="zero_percentage" translatable="false" formatted="false">0%</string>
-    <string name="zero_bytes" translatable="false">0 B</string>
-    <string name="storage_usage_placeholder" translatable="false">0 B / 0 B</string>
-    <string name="storage_usage_value" translatable="false">%1$s / %2$s</string>
-    <string name="network_speed_placeholder" translatable="false">0 B/s</string>
-    <string name="notification_speed_suffix" translatable="false">/s</string>
     <string name="notification_battery">Pin</string>
     <string name="notification_clean_up">Dọn dẹp</string>
     <string name="clean_cache_now">Dọn bộ nhớ đệm ngay</string>
-    <string name="notification_badge_sample" translatable="false">2</string>
     <string name="home_large_files">Tệp lớn</string>
     <string name="home_photos">Tương tự</string>
     <string name="home_empty">Tệp trống</string>
     <string name="home_notifications">Thông báo</string>
-    <string name="more_indicator" translatable="false">›››</string>
-    <string name="language_entry_content_description">Language</string>
-    <string name="language_title">Language</string>
+    <string name="language_entry_content_description">Ngôn ngữ</string>
+    <string name="language_title">Ngôn ngữ</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">&#26085;&#26412;&#35486;</string>
-    <string name="language_hindi">&#2361;&#2367;&#2306;&#2342;&#2368;</string>
-    <string name="language_korean">&#54620;&#44397;&#50612;</string>
-    <string name="language_spanish">Espa&#241;ol</string>
-    <string name="language_portuguese">Portugu&#233;s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_portuguese">Portugués</string>
     <string name="language_german">Deutsch</string>
-    <string name="language_french">Fran&#231;ais</string>
-    <string name="language_turkish">T&#252;rk&#231;e</string>
+    <string name="language_french">Français</string>
+    <string name="language_turkish">Türkçe</string>
     <string name="language_italian">Italiano</string>
     <string name="language_afrikaans">Afrikaans</string>
     <string name="language_xhosa">IsiXhosa</string>
     <string name="language_zulu">isiZulu</string>
-    <string name="language_russian">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</string>
-    <string name="language_ukrainian">&#1059;&#1082;&#1088;&#1072;&#1110;&#1085;&#1089;&#1100;&#1082;&#1072;</string>
-    <string name="language_vietnamese">Ti&#7871;ng Vi&#7879;t</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_ukrainian">Украінська</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_indonesian">Bahasa Indonesia</string>
     <string name="language_malay">Bahasa Melayu</string>
-    <string name="language_thai">&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;</string>
+    <string name="language_thai">ภาษาไทย</string>
     <string name="language_filipino">Pilipino</string>
     <string name="language_tagalog">Tagalog</string>
     <string name="language_cebuano">Pinulongan sa Cebu</string>
-    <string name="scan_percentage" translatable="false">%1$d%%</string>
     <string name="scanning">Đang quét...</string>
     <string name="scanned_files_progress">Tệp đã quét: %1$d</string>
     <string name="clean_scan_summary">Tệp đã quét: %1$d · Thư mục đã kiểm tra: %2$d</string>
@@ -111,10 +99,11 @@
     <string name="clean_success_big_file_hint">Tìm các tệp lớn đang chiếm dung lượng</string>
     <string name="clean_success_screenshot_hint">Xóa ảnh chụp màn hình bạn không còn cần</string>
     <string name="clean_success_duplicate_hint">Giải phóng dung lượng từ các ảnh tương tự</string>
+    <string name="string_delete_success_space_freed">Đã giải phóng %1$s</string>
+    <string name="string_delete_success_continue_with">Tiếp tục dùng %1$s để tối ưu hóa thêm.</string>
+    <string name="string_delete_success_more_tools">Công cụ dọn dẹp khác</string>
+    <string name="string_delete_success_video_hint">Xem lại video đang chiếm dung lượng</string>
     <string name="done">Xong</string>
-    <string name="percentage_value" translatable="false">%1$d%%</string>
-    <string name="download_speed_value" translatable="false">%1$s/s ↓</string>
-    <string name="network_speed_value" translatable="false">%1$s/s</string>
     <string name="selected">Đã chọn</string>
     <string name="remove_selected_size">Xóa %1$s</string>
     <string name="clean_confirm_title">Dọn các tệp đã chọn?</string>
@@ -150,7 +139,6 @@
     <string name="notification_access_unavailable">Dịch vụ thông báo đang kết nối</string>
     <string name="notif_title">Thông báo</string>
     <string name="notif_subtitle">Quản lý sự lộn xộn và giảm xao nhãng</string>
-    <string name="notif_badge" translatable="false">99+</string>
     <string name="notif_hero_title">Giữ thông báo luôn gọn gàng</string>
     <string name="notif_hero_subtitle">Xem thông báo đến từ đâu và nhóm theo ứng dụng</string>
     <string name="notif_intercept_title">Chặn thông báo</string>
@@ -181,6 +169,7 @@
     <string name="notif_clear_success_subtitle">Đã xóa các thông báo bị chặn</string>
     <string name="uninstall_count">Gỡ cài đặt (%1$d)</string>
     <string name="uninstall_cancelled">Đã hủy gỡ cài đặt</string>
+    <string name="string_delete_success_apps_uninstalled">Đã gỡ cài đặt %1$d ứng dụng</string>
     <string name="apps_found">%1$d ứng dụng</string>
     <string name="apps_found_initial">0 ứng dụng</string>
     <string name="picture">Hình ảnh</string>
@@ -209,7 +198,6 @@
     <string name="six_months">6 tháng</string>
     <string name="one_year">1 năm</string>
     <string name="all_time">Mọi thời gian</string>
-    <string name="filter_value" translatable="false">%1$s  ▾</string>
     <string name="scanning_picture">Đang quét hình ảnh...</string>
     <string name="scanning_large_files">Đang quét tệp lớn...</string>
     <string name="scanning_video">Đang quét video...</string>
@@ -243,7 +231,7 @@
     <string name="resolution">Độ phân giải</string>
     <string name="link_speed">Tốc độ liên kết</string>
     <string name="android_version_value">Android %1$s</string>
-    <string name="resolution_pixels_value">%1$s Pixels</string>
+    <string name="resolution_pixels_value">%1$s pixel</string>
     <string name="link_speed_value">%1$dMbps</string>
     <string name="device_model">Thiết bị</string>
     <string name="android_version">Phiên bản Android</string>
@@ -294,56 +282,167 @@
     <string name="connection_mobile">Dữ liệu di động</string>
     <string name="connection_ethernet">Ethernet</string>
     <string name="connection_other">Khác</string>
-    <string name="ping_value" translatable="false">%1$d ms</string>
-    <string name="ping_placeholder" translatable="false">-- ms</string>
-    <string name="speed_value" translatable="false">%1$.1f Mbps</string>
-    <string name="speed_placeholder" translatable="false">-- Mbps</string>
-    <string name="temperature_value" translatable="false">%1$.1f °C</string>
-    <string name="voltage_value" translatable="false">%1$.2f V</string>
-    <string name="current_value" translatable="false">%1$d mA</string>
-    <string name="capacity_value" translatable="false">%1$d mAh</string>
-    <string name="capacity_value_spaced" translatable="false">%1$d mAh</string>
-    <string name="current_capacity_value" translatable="false">%1$dmAh</string>
-    <string name="temperature_value_compact" translatable="false">%1$.1f°C</string>
-    <string name="voltage_value_compact" translatable="false">%1$.2fV</string>
-    <string name="density_value" translatable="false">%1$d dpi</string>
-    <string name="duration_hours_minutes" translatable="false">%1$d h %2$d m</string>
-    <string name="version_value" translatable="false">V%1$s</string>
-    <string name="dup_title" translatable="false">Similar Photos</string>
-    <string name="dup_subtitle" translatable="false">Photos found on this device</string>
-    <string name="dup_keep_best_title" translatable="false">Keep best shots</string>
-    <string name="dup_keep_best_subtitle" translatable="false">Keep the best photo in each group, clean the rest</string>
-    <string name="dup_best_photo" translatable="false">Best</string>
-    <string name="dup_cluster_title" translatable="false">Duplicate group %1$d</string>
-    <string name="dup_cluster_count" translatable="false">%1$d photos</string>
-    <string name="dup_none_selected" translatable="false">0 selected</string>
-    <string name="dup_selected_count" translatable="false">%1$d selected</string>
-    <string name="dup_action_note" translatable="false">Tap checkmarks to select</string>
-    <string name="dup_selected_size" translatable="false">%1$s selected</string>
-    <string name="dup_delete" translatable="false">Delete selected</string>
-    <string name="dup_delete_confirm_title" translatable="false">Sure to clean?</string>
-    <string name="dup_delete_confirm_message" translatable="false">Selected: %1$d photos\nTotal size: %2$s</string>
-    <string name="dup_deleted" translatable="false">Deleted %1$d photos successfully</string>
-    <string name="dup_delete_failed" translatable="false">Some photos could not be deleted</string>
-    <string name="dup_loading" translatable="false">Scanning similar photos…</string>
-    <string name="dup_scan_failed" translatable="false">Unable to scan photos</string>
-    <string name="dup_empty_title" translatable="false">No similar photos found</string>
-    <string name="dup_empty_desc" translatable="false">Your photo library looks clean</string>
-    <string name="dup_preview_unavailable" translatable="false">No photo viewer is available</string>
-
+    <string name="dup_title">Ảnh tương tự</string>
+    <string name="dup_subtitle">Ảnh tìm thấy trên thiết bị này</string>
+    <string name="dup_keep_best_title">Giữ ảnh đẹp nhất</string>
+    <string name="dup_keep_best_subtitle">Giữ ảnh đẹp nhất trong mỗi nhóm và xóa những ảnh còn lại</string>
+    <string name="dup_best_photo">Đẹp nhất</string>
+    <string name="dup_cluster_title">Nhóm ảnh trùng %1$d</string>
+    <string name="dup_cluster_count">%1$d ảnh</string>
+    <string name="dup_none_selected">Đã chọn 0</string>
+    <string name="dup_selected_count">Đã chọn %1$d</string>
+    <string name="dup_action_note">Nhấn dấu tích để chọn</string>
+    <string name="dup_selected_size">Đã chọn %1$s</string>
+    <string name="dup_delete">Xóa mục đã chọn</string>
+    <string name="dup_delete_confirm_title">Bạn có chắc muốn dọn dẹp?</string>
+    <string name="dup_delete_confirm_message">Đã chọn: %1$d ảnh\nTổng dung lượng: %2$s</string>
+    <string name="dup_deleted">Đã xóa thành công %1$d ảnh</string>
+    <string name="dup_delete_failed">Không thể xóa một số ảnh</string>
+    <string name="dup_loading">Đang quét ảnh tương tự…</string>
+    <string name="dup_scan_failed">Không thể quét ảnh</string>
+    <string name="dup_empty_title">Không tìm thấy ảnh tương tự</string>
+    <string name="dup_empty_desc">Thư viện ảnh của bạn đã gọn gàng</string>
+    <string name="dup_preview_unavailable">Không có ứng dụng xem ảnh</string>
     <string name="app_manager_installed">Đã cài: %1$s</string>
     <string name="app_manager_last_used">Lần dùng gần nhất: %1$s</string>
     <string name="app_manager_last_used_today">Hôm nay</string>
     <string name="app_manager_last_used_unknown">không xác định</string>
-
+    <string name="string_onboarding_overlay_permission_page_name">Bảng dọn dẹp nhanh trên màn hình chính</string>
+    <string name="string_onboarding_overlay_permission_skip">Bỏ qua</string>
+    <string name="string_onboarding_overlay_permission_title">Bật quyền hiển thị đè lên ứng dụng</string>
+    <string name="string_onboarding_overlay_permission_appear_on_top">Hiển thị trên cùng</string>
+    <string name="string_onboarding_overlay_permission_function">Chức năng</string>
+    <string name="string_onboarding_overlay_permission_feature_ram">Giám sát và tối ưu RAM</string>
+    <string name="string_onboarding_overlay_permission_feature_network">Giám sát và tối ưu mạng</string>
+    <string name="string_onboarding_overlay_permission_feature_junk">Dọn tệp rác thông minh</string>
+    <string name="string_onboarding_device_status_scan_title">Trạng thái thiết bị</string>
+    <string name="string_onboarding_device_status_scan_content_description">Hoạt ảnh quét trạng thái thiết bị</string>
+    <string name="string_onboarding_device_status_scan_message">Đang quét thông tin thiết bị…</string>
+    <string name="string_onboarding_device_status_used">Đã dùng:</string>
+    <string name="string_onboarding_device_status_total">Tổng:</string>
+    <string name="string_onboarding_device_status_battery_status">Trạng thái:</string>
+    <string name="string_onboarding_first_device_cpu">CPU</string>
+    <string name="string_onboarding_device_status_cpu_model">Mẫu CPU</string>
+    <string name="string_onboarding_device_status_cpu_frequency">Tần số CPU</string>
+    <string name="string_onboarding_device_status_cpu_cores">Số lõi CPU</string>
+    <string name="string_onboarding_first_device_screen">Màn hình</string>
+    <string name="string_onboarding_device_status_screen_dpi">DPI màn hình</string>
+    <string name="string_onboarding_device_status_screen_refresh_rate">Tần số quét màn hình</string>
+    <string name="string_onboarding_device_status_clean_junk_files">Dọn tệp rác</string>
+    <string name="string_onboarding_battery_info_checking">Đang kiểm tra thông tin pin…</string>
+    <string name="string_onboarding_battery_estimated_calculating">Đang tính thời gian còn lại</string>
+    <string name="string_onboarding_battery_status_label">Trạng thái pin</string>
+    <string name="string_onboarding_battery_checked_user_count">190,992+</string>
+    <string name="string_onboarding_battery_users_checked_today">người dùng đã kiểm tra ✨</string>
+    <string name="string_onboarding_battery_info_check_now">Kiểm tra ngay</string>
+    <string name="string_onboarding_battery_check_title">Kiểm tra pin</string>
+    <string name="string_onboarding_first_junk_title">Dọn rác</string>
+    <string name="string_onboarding_first_junk_scan_animation">Hoạt ảnh quét tệp rác</string>
+    <string name="string_onboarding_first_junk_scanning">Đang quét tệp rác…</string>
+    <string name="string_onboarding_first_junk_files_scanned_zero">Mục: 0</string>
+    <string name="string_onboarding_first_junk_scan_complete">Quét xong! Hãy dọn những thứ không cần thiết.</string>
+    <string name="string_onboarding_first_junk_cleaning_animation">Hoạt ảnh dọn tệp rác</string>
+    <string name="string_onboarding_first_junk_cleaning">Đang dọn tệp rác…</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_process">98% lựa chọn</string>
+    <string name="string_onboarding_first_complete_app_process">Tiến trình ứng dụng</string>
+    <string name="string_onboarding_first_complete_app_process_description">Đóng tiến trình nền không cần thiết chỉ với một lần nhấn!</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge_battery">76% lựa chọn</string>
+    <string name="string_onboarding_first_complete_notification_blocker">Chặn thông báo</string>
+    <string name="string_onboarding_first_complete_notification_description">Lọc cảnh báo vô ích và chặn hàng loạt sự gián đoạn!</string>
+    <string name="string_onboarding_first_complete_organize">Sắp xếp</string>
+    <string formatted="false" name="string_onboarding_first_complete_choice_badge">68% lựa chọn</string>
+    <string name="string_onboarding_first_complete_battery_description">Kiểm tra dung lượng pin và xếp hạng tiêu thụ điện theo thời gian thực!</string>
+    <string name="string_onboarding_first_complete_view_details">Xem chi tiết</string>
+    <string name="string_onboarding_first_storage_access_title">Yêu cầu quyền</string>
+    <string name="string_onboarding_first_storage_access_description">Tính năng này cần quyền truy cập bộ nhớ tệp.</string>
+    <string name="string_onboarding_first_storage_access_allow">Cho phép</string>
+    <string name="string_onboarding_first_notification_access_title">Yêu cầu truy cập</string>
+    <string name="string_onboarding_first_notification_access_description">Cần quyền truy cập để quản lý thông báo bằng một lần nhấn.</string>
+    <string name="string_onboarding_first_notification_access_grant">Cấp quyền truy cập</string>
+    <string name="string_onboarding_overlay_permission_dialog_settings_path">Cài đặt &gt; Hiển thị trên ứng dụng khác</string>
+    <string name="string_onboarding_overlay_permission_dialog_permission_label">Cho phép hiển thị trên ứng dụng khác</string>
+    <string name="string_onboarding_overlay_permission_dialog_inactive">⚠️  Giám sát không hoạt động</string>
+    <string name="string_onboarding_overlay_permission_back_description">Bật “Hiển thị trên ứng dụng khác” để tiện ích nổi tiếp tục theo dõi RAM và tốc độ theo thời gian thực.</string>
+    <string name="string_onboarding_overlay_permission_dialog_not_now">Không phải bây giờ</string>
+    <string name="string_onboarding_overlay_permission_dialog_fix_now">⚡ Khắc phục ngay</string>
+    <string name="string_onboarding_first_junk_expand">Mở rộng</string>
+    <string name="string_onboarding_splash_welcome">Chào mừng đến với</string>
+    <string name="string_onboarding_splash_intro">Dọn tệp rác, giải phóng dung lượng và giữ điện thoại luôn nhanh.</string>
+    <string name="string_onboarding_splash_preparing">Đang chuẩn bị khởi động…</string>
+    <string name="string_onboarding_first_junk_cache">Rác bộ nhớ đệm</string>
+    <string name="string_onboarding_first_junk_system_cache">Bộ nhớ đệm hệ thống</string>
+    <string name="string_onboarding_first_junk_thumbnails">Ảnh thu nhỏ</string>
+    <string name="string_onboarding_first_junk_downloads">Tệp tải xuống</string>
+    <string name="string_onboarding_first_junk_apks">Tệp APK</string>
+    <string name="string_onboarding_first_junk_empty_folders">Thư mục trống</string>
+    <string name="string_onboarding_first_junk_clean_now_size">Dọn ngay · %1$s</string>
+    <string name="string_onboarding_first_junk_complete_title">Dọn dẹp thành công!</string>
+    <string name="string_onboarding_first_junk_complete_description">Đã giải phóng thành công %1$s dung lượng lưu trữ.</string>
+    <string name="string_onboarding_first_junk_complete_battery_status_good">Pin của bạn ở tình trạng tốt!</string>
+    <string name="string_onboarding_first_junk_back_home">Về trang chủ</string>
+    <string name="string_onboarding_battery_check_scan_title">Kiểm tra thiết bị</string>
+    <string name="string_onboarding_battery_check_scan_message">Đang kiểm tra thiết bị…</string>
+    <string name="string_onboarding_battery_home_placeholder">Kiểm tra trạng thái pin</string>
+    <string name="string_onboarding_battery_home_value">%1$d%% · %2$s</string>
+    <string name="string_onboarding_battery_home_full">Đầy</string>
+    <string name="string_onboarding_battery_home_remaining">Còn lại</string>
+    <string name="string_onboarding_battery_estimated_charging">%1$s đến khi đầy</string>
+    <string name="string_onboarding_battery_estimated_remaining">Còn %1$s</string>
+    <string name="string_onboarding_battery_fully_charge_time">Thời gian đến khi sạc đầy:</string>
+    <string name="string_onboarding_battery_remaining_time">Thời gian còn lại ước tính:</string>
+    <string name="string_onboarding_battery_status_pending">Đang chờ</string>
+    <string name="string_onboarding_battery_power_label">Điện năng</string>
+    <string name="string_onboarding_battery_health_overheat">Quá nóng</string>
+    <string name="string_onboarding_battery_health_over_voltage">Quá áp</string>
+    <string name="string_onboarding_battery_health_failure">Lỗi không xác định</string>
+    <string name="string_onboarding_overlay_permission_description">Dọn nhanh gấp 3 lần và giải phóng\ndung lượng trong 1 giây ở bất cứ đâu</string>
+    <string name="string_onboarding_overlay_permission_settings_unavailable">Không thể mở cài đặt quyền hiển thị trên ứng dụng khác.</string>
+    <string name="string_onboarding_overlay_permission_dialog_animation_description">Bật hiển thị trên ứng dụng khác</string>
+    <string name="string_onboarding_literal_2">--</string>
+    <string name="string_onboarding_literal_3">--%</string>
+    <string name="string_onboarding_literal_5">✓</string>
+    <string name="string_onboarding_app_cache">Bộ nhớ đệm ứng dụng</string>
+    <string name="string_onboarding_ad_junk">Rác quảng cáo</string>
+    <string name="string_onboarding_memory_cache">Bộ nhớ đệm</string>
+    <string name="string_onboarding_frequency">%1$d MHz</string>
+    <string name="string_onboarding_dpi">%1$d DPI</string>
+    <string name="string_onboarding_refresh_rate">%1$d Hz</string>
+    <string name="string_onboarding_voltage">%1$d mV</string>
+    <string name="string_onboarding_duration_hours">%1$d giờ %2$d phút</string>
+    <string name="string_onboarding_duration_minutes">%1$d phút</string>
+    <string name="string_onboarding_fix_now">Khắc phục ngay</string>
+    <string name="string_onboarding_overlay_description_simple">Dọn rác nhanh hơn và giải phóng dung lượng ở bất cứ đâu.</string>
+    <string name="string_ram_usage_access_description">Cho phép truy cập dữ liệu sử dụng để xem ứng dụng gần đây. Android hạn chế truy cập tiến trình nền.</string>
+    <string name="string_ram_allow_usage_access">Cho phép truy cập dữ liệu sử dụng</string>
+    <string name="string_ram_recent_apps_count">%1$d ứng dụng dùng gần đây</string>
+    <string name="string_ram_usage_access_required">Cần quyền truy cập dữ liệu sử dụng</string>
+    <string name="string_ram_no_recent_apps">Không tìm thấy ứng dụng dùng gần đây</string>
     <string name="string_network_overline">TỔNG QUAN MẠNG CỦA BẠN</string>
     <string name="string_network_intro">Kiểm tra nhanh kết nối của bạn.</string>
     <string name="string_network_results_hint">Kết quả sẽ xuất hiện trong khi kiểm tra.</string>
     <string name="string_network_results_complete">Kết quả phản ánh kết nối của bạn trong lúc kiểm tra.</string>
     <string name="string_network_download">Tải xuống</string>
     <string name="string_network_upload">Tải lên</string>
-    <string name="string_network_complete_title">Kiểm tra hoàn tất</string>
     <string name="string_network_step_ping">1  Ping</string>
     <string name="string_network_step_download">2  Tải xuống</string>
     <string name="string_network_step_upload">3  Tải lên</string>
+    <string name="string_network_complete_title">Kiểm tra hoàn tất</string>
+    <string name="string_onboarding_complete_status">DỌN DẸP HOÀN TẤT</string>
+    <string name="string_onboarding_complete_check_status">KIỂM TRA HOÀN TẤT</string>
+    <string name="string_onboarding_complete_tools_title">Duy trì trạng thái tốt</string>
+    <string name="string_onboarding_complete_tools_label">CÔNG CỤ KHÁC</string>
+    <string name="string_onboarding_complete_result">%1$s\ndung lượng đã được giải phóng. Thêm chỗ trống cho bạn.</string>
+    <string name="string_onboarding_complete_battery_title">Mọi thứ đều tốt!</string>
+    <string name="string_onboarding_complete_battery_result">Tình trạng tốt\nPin đã sẵn sàng cho ngày mới.</string>
+    <string name="string_onboarding_complete_process_description">Đóng tiến trình nền không cần thiết\nchỉ bằng một lần nhấn.</string>
+    <string name="string_onboarding_complete_notification_description">Ít cảnh báo hơn. Ít gián đoạn hơn.</string>
+    <string name="string_onboarding_complete_battery_description">Hiểu rõ hơn về pin của bạn.</string>
+    <string name="string_junk_cleaning_session_expired">Vui lòng quét lại trước khi dọn.</string>
+    <string name="string_junk_cleaning_failed">Không thể dọn các tệp đã chọn. Hãy quét lại rồi thử lại.</string>
+    <string name="string_feature_scan_complete">Quét hoàn tất</string>
+    <string name="string_feature_scan_failed">Không thể hoàn tất quá trình quét. Vui lòng thử lại.</string>
+    <string name="string_home_permission_required">Cần cấp quyền</string>
+    <string name="string_home_unused_today">Chưa dùng hôm nay</string>
+    <string name="string_stop_app_tips">Nhấn “&lt;font color=\"#FF0000\"&gt;Buộc dừng&lt;/font&gt;” để đóng ứng dụng.</string>
+    <string name="string_feature_scan_estimated_progress">Tiến độ ước tính</string>
 </resources>
