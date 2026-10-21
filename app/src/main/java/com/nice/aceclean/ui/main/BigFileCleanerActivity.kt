@@ -286,10 +286,10 @@ class BigFileCleanerActivity : StorageCleanerActivity<FragmentBigFileCleanerBind
             return
         }
         val files = selected.toList()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && files.any { mediaDeleteUriFor(it) != null }) {
-            performDelete(files)
-            return
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && files.any { mediaDeleteUriFor(it) != null }) {
+//            performDelete(files)
+//            return
+//        }
         deleteConfirmationDialog = IosDeleteConfirmDialog.show(
             activity = this,
             confirmEventName = EventUtils.CLICK_LARGE_FILES_CONFIRM_DELETE,

@@ -51,7 +51,10 @@ class FirstJunkCompleteActivity : BaseOnboardingActivity<OnboardingActivityFirst
         overlayPermission.restorePendingRequest()
         trackOnboardingAnimation(binding.finishImage)
         renderResult()
-        binding.backButton.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_BACK) { leaveComplete() }
+        binding.backButton.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_BACK) {
+            openHome()
+//            leaveComplete()
+        }
         listOf(binding.appProcessCard, binding.appProcessButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_RAM) { openFeature(RamStatusActivity::class.java) } }
         listOf(binding.notificationBlockerCard, binding.notificationBlockerButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_NOTIFICATIONS) { openFeature(NotificationCleanerActivity::class.java) } }
         listOf(binding.batteryInfoCard, binding.batteryInfoButton).forEach { it.setTrackedClickListener(EventUtils.CLICK_FIRST_COMPLETE_BATTERY) { openFeature(MainBatteryInfoActivity::class.java) } }

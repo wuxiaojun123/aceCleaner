@@ -1,373 +1,422 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:background="@color/white">
+
     <ImageView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/go_back"
         android:id="@+id/backButton"
+        android:layout_width="44dp"
         android:layout_height="48dp"
         android:layout_marginStart="13dp"
-        android:layout_width="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/go_back"
         android:padding="11dp"
         android:src="@drawable/onboarding_ic_first_complete_back"
-        android:tint="@color/color_FF252A30" />
-    <TextView
-        style="@style/OnboardingCompleteHeading"
+        android:tint="@color/color_FF252A30"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/titleView"
+        style="@style/OnboardingCompleteHeading"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_width="0dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical"
         android:minHeight="48dp"
         android:text="@string/string_onboarding_first_junk_title"
         android:textColor="@color/color_FF252A30"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_FFF8F9F9"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleView"
-        android:background="@color/color_FFF8F9F9"
-        android:fillViewport="true"
-        android:id="@+id/contentScroll"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:overScrollMode="never"
-        android:scrollbars="none">
+        app:layout_constraintTop_toBottomOf="@id/titleView">
+
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="18dp">
+
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/onboarding_bg_complete_hero"
                 android:clipToOutline="true"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="30dp"
+                android:paddingStart="18dp"
                 android:paddingEnd="18dp"
-                android:paddingStart="18dp">
+                android:paddingBottom="30dp">
+
                 <FrameLayout
-                    android:clipChildren="false"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="236dp"
                     android:layout_height="183dp"
-                    android:layout_width="236dp">
+                    android:layout_gravity="center_horizontal"
+                    android:clipChildren="false">
+
                     <ImageView
-                        android:contentDescription="@null"
+                        android:layout_width="236dp"
                         android:layout_height="230dp"
                         android:layout_marginTop="-23.5dp"
-                        android:layout_width="236dp"
+                        android:contentDescription="@null"
                         android:src="@drawable/onboarding_image_complete_orbits" />
+
                     <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/finishImage"
+                        android:layout_width="182dp"
+                        android:layout_height="182dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
                         app:lottie_autoPlay="false"
                         app:lottie_loop="false"
                         app:lottie_rawRes="@raw/onboarding_orange_complete"
-                        android:contentDescription="@null"
-                        android:id="@+id/finishImage"
-                        android:importantForAccessibility="no"
-                        android:layout_gravity="center"
-                        android:layout_height="182dp"
-                        android:layout_width="182dp"
                         tools:lottie_progress="1" />
                 </FrameLayout>
+
                 <TextView
-                    style="@style/OnboardingCompleteHeading"
                     android:id="@+id/completionStatusLabel"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    style="@style/OnboardingCompleteHeading"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="9dp"
                     android:letterSpacing="0.17"
                     android:text="@string/string_onboarding_complete_status"
                     android:textColor="@color/color_FFAD431B"
                     android:textSize="10sp" />
+
                 <TextView
-                    style="@style/OnboardingCompleteHeading"
-                    android:gravity="center"
                     android:id="@+id/resultTitle"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    style="@style/OnboardingCompleteHeading"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="9dp"
+                    android:gravity="center"
                     android:letterSpacing="-0.035"
                     android:text="@string/string_onboarding_first_junk_complete_title"
                     android:textColor="@color/color_FF252A30"
                     android:textSize="26sp" />
+
                 <TextView
-                    style="@style/OnboardingCompleteText"
-                    android:gravity="center"
                     android:id="@+id/resultMessage"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    style="@style/OnboardingCompleteText"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
                     android:lineSpacingExtra="9dp"
                     android:textColor="@color/color_FF67717B"
                     android:textSize="12sp"
                     tools:text="@string/string_onboarding_complete_preview_result" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingEnd="18dp"
-                android:paddingStart="18dp"
-                android:paddingTop="23dp">
-                <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="13dp"
-                    android:layout_marginEnd="3dp"
-                    android:layout_marginStart="3dp"
+
+                <FrameLayout
+                    android:id="@+id/adContainer"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="23dp"
+                android:paddingEnd="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="13dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <TextView
                         style="@style/OnboardingCompleteHeading"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_width="0dp"
                         android:text="@string/string_onboarding_complete_tools_title"
                         android:textColor="@color/color_FF252A30"
                         android:textSize="18sp" />
+
                     <TextView
                         style="@style/OnboardingCompleteText"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:letterSpacing="0.1"
                         android:text="@string/string_onboarding_complete_tools_label"
                         android:textColor="@color/color_FF67717B"
                         android:textSize="9sp" />
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/appProcessCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/onboarding_bg_complete_feature"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:id="@+id/appProcessCard"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
                     android:orientation="vertical"
-                    android:paddingBottom="18dp"
-                    android:paddingEnd="14dp"
                     android:paddingStart="19dp"
-                    android:paddingTop="17dp">
+                    android:paddingTop="17dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="18dp">
+
                     <LinearLayout
-                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="13dp"
-                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
+
                         <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
                             android:background="@drawable/onboarding_bg_complete_icon"
                             android:contentDescription="@null"
-                            android:layout_height="43dp"
-                            android:layout_width="43dp"
                             android:padding="9dp"
                             android:src="@drawable/onboarding_ic_detail_chip" />
+
                         <TextView
                             style="@style/OnboardingCompleteText"
-                            android:gravity="end|center_vertical"
-                            android:layout_gravity="center_vertical"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="end|center_vertical"
                             android:text="@string/string_onboarding_first_complete_choice_badge_process"
                             android:textColor="@color/color_FF8C4525"
                             android:textSize="10sp" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:gravity="bottom"
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
                         android:orientation="horizontal">
+
                         <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_width="0dp"
                             android:orientation="vertical">
+
                             <TextView
                                 style="@style/OnboardingCompleteHeading"
-                                android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="@string/string_onboarding_first_complete_app_process"
                                 android:textColor="@color/color_FF252A30"
                                 android:textSize="20sp" />
+
                             <TextView
                                 style="@style/OnboardingCompleteText"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
-                                android:layout_width="wrap_content"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/string_onboarding_complete_process_description"
                                 android:textColor="@color/color_FF765948"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
                         <ImageView
+                            android:id="@+id/appProcessButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="bottom"
                             android:background="@drawable/onboarding_bg_complete_arrow"
                             android:clickable="true"
                             android:contentDescription="@string/string_onboarding_first_complete_app_process"
                             android:focusable="true"
                             android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:id="@+id/appProcessButton"
-                            android:layout_gravity="bottom"
-                            android:layout_height="48dp"
-                            android:layout_width="48dp"
                             android:padding="11.5dp"
                             android:src="@drawable/onboarding_ic_complete_diagonal" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:background="@drawable/onboarding_bg_complete_tools"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+                    android:background="@drawable/onboarding_bg_complete_tools"
                     android:orientation="vertical"
-                    android:paddingEnd="15dp"
-                    android:paddingStart="15dp">
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+
                     <LinearLayout
+                        android:id="@+id/notificationBlockerCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:id="@+id/notificationBlockerCard"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
                         android:minHeight="81dp"
                         android:orientation="horizontal"
-                        android:paddingBottom="13dp"
-                        android:paddingTop="13dp">
+                        android:paddingTop="13dp"
+                        android:paddingBottom="13dp">
+
                         <ImageView
-                            android:contentDescription="@null"
-                            android:layout_height="42dp"
                             android:layout_width="37dp"
+                            android:layout_height="42dp"
+                            android:contentDescription="@null"
                             android:padding="6dp"
                             android:src="@drawable/icon_notification" />
+
                         <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
                             android:layout_weight="1"
-                            android:layout_width="0dp"
                             android:orientation="vertical">
+
                             <TextView
                                 style="@style/OnboardingCompleteHeading"
-                                android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="@string/string_onboarding_first_complete_notification_blocker"
                                 android:textColor="@color/color_FF252A30"
                                 android:textSize="14sp" />
+
                             <TextView
                                 style="@style/OnboardingCompleteText"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:layout_width="wrap_content"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/string_onboarding_complete_notification_description"
                                 android:textColor="@color/color_FF67717B"
                                 android:textSize="10sp" />
                         </LinearLayout>
+
                         <LinearLayout
-                            android:gravity="end"
-                            android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:orientation="vertical">
+
                             <TextView
                                 style="@style/OnboardingCompleteText"
-                                android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="@string/string_onboarding_first_complete_choice_badge_battery"
                                 android:textColor="@color/color_FF7C654F"
                                 android:textSize="9sp" />
+
                             <ImageView
+                                android:id="@+id/notificationBlockerButton"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:contentDescription="@string/string_onboarding_first_complete_notification_blocker"
                                 android:focusable="true"
-                                android:id="@+id/notificationBlockerButton"
-                                android:layout_height="44dp"
-                                android:layout_width="44dp"
                                 android:padding="15dp"
                                 android:rotation="180"
                                 android:src="@drawable/onboarding_ic_first_complete_back"
                                 android:tint="@color/color_FF88919A" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <View
-                        android:background="@color/color_FFEDF0F0"
+                        android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_width="match_parent" />
+                        android:background="@color/color_FFEDF0F0" />
+
                     <LinearLayout
+                        android:id="@+id/batteryInfoCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:id="@+id/batteryInfoCard"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
                         android:minHeight="81dp"
                         android:orientation="horizontal"
-                        android:paddingBottom="13dp"
-                        android:paddingTop="13dp">
+                        android:paddingTop="13dp"
+                        android:paddingBottom="13dp">
+
                         <ImageView
-                            android:contentDescription="@null"
-                            android:layout_height="42dp"
                             android:layout_width="37dp"
+                            android:layout_height="42dp"
+                            android:contentDescription="@null"
                             android:padding="6dp"
                             android:src="@drawable/onboarding_ic_detail_battery" />
+
                         <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
                             android:layout_weight="1"
-                            android:layout_width="0dp"
                             android:orientation="vertical">
+
                             <TextView
                                 style="@style/OnboardingCompleteHeading"
-                                android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="@string/battery_info"
                                 android:textColor="@color/color_FF252A30"
                                 android:textSize="14sp" />
+
                             <TextView
                                 style="@style/OnboardingCompleteText"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:layout_width="wrap_content"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/string_onboarding_complete_battery_description"
                                 android:textColor="@color/color_FF67717B"
                                 android:textSize="10sp" />
                         </LinearLayout>
+
                         <LinearLayout
-                            android:gravity="end"
-                            android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:orientation="vertical">
+
                             <TextView
                                 style="@style/OnboardingCompleteText"
-                                android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="@string/string_onboarding_first_complete_choice_badge"
                                 android:textColor="@color/color_FF7C654F"
                                 android:textSize="9sp" />
+
                             <ImageView
+                                android:id="@+id/batteryInfoButton"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:contentDescription="@string/battery_info"
                                 android:focusable="true"
-                                android:id="@+id/batteryInfoButton"
-                                android:layout_height="44dp"
-                                android:layout_width="44dp"
                                 android:padding="15dp"
                                 android:rotation="180"
                                 android:src="@drawable/onboarding_ic_first_complete_back"
@@ -376,13 +425,11 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <FrameLayout
-                android:id="@+id/adContainer"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="18dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent" />
+
+
+
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
