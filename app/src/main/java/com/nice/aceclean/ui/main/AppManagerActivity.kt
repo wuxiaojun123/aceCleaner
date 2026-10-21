@@ -26,7 +26,6 @@ import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.EventUtils
 import com.nice.aceclean.util.InstalledAppInfo
 import com.nice.aceclean.util.NetworkSpeedSampler
-import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
@@ -250,7 +249,9 @@ class AppManagerActivity : BaseActivity<FragmentAppManagerBinding>(
     }
 }
 
-private class ManagedAppAdapter(
+// ActivityGuard relocates this class while the Activity keeps its package.
+// internal emits a public JVM class so construction remains legal across packages.
+internal class ManagedAppAdapter(
     private val onSelectionChanged: (List<InstalledAppInfo>) -> Unit,
 ) : RecyclerView.Adapter<ManagedAppAdapter.ManagedAppViewHolder>() {
 
@@ -291,7 +292,7 @@ private class ManagedAppAdapter(
         fun bind(app: InstalledAppInfo) = with(binding) {
             val context = root.context
             appNameText.text = app.label
-            appSizeText.text = NetworkSpeedSampler.format(app.sizeBytes)
+            appSizeText.text = NetworkSpeedSampler.format(context, app.sizeBytes)
             installDateText.text = context.getString(R.string.app_manager_installed, app.installedOn)
             lastUsedText.text = context.getString(
                 R.string.app_manager_last_used,
@@ -325,7 +326,7 @@ private class ManagedAppAdapter(
             set(Calendar.MILLISECOND, 0)
         }.timeInMillis
         if (time >= startOfToday) return context.getString(R.string.app_manager_last_used_today)
-        return SimpleDateFormat("yyyy/MM/dd", Locale.US).format(Date(time))
+        return java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, context.resources.configuration.locales[0]).format(Date(time))
     }
 }
 

@@ -29,7 +29,7 @@
         android:paddingTop="2dp"
         android:paddingEnd="5dp"
         android:paddingBottom="2dp"
-        android:text="AD"
+        android:text="@string/string_ad_label"
         android:textColor="@android:color/white"
         android:textSize="9sp"
         app:layout_constraintStart_toStartOf="@id/nativeAdMedia"

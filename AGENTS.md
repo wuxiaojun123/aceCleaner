@@ -6,6 +6,17 @@
 - 在 Android Activity、Fragment、Dialog 和 `RecyclerView` 的 ViewHolder 中，使用生成的 ViewBinding 类访问布局视图。不要为应用布局中的视图新增 `findViewById` 调用，也不要使用封装了 `findViewById` 的方法（例如 `BaseActivity.view()`）。修改仍然通过视图 ID 直接查找视图的页面时，应将该页面迁移到 ViewBinding。
 - 向 `res/values/colors.xml` 添加颜色时，资源名称必须是 `color_` 加上大写的八位 ARGB 十六进制值，例如 `<color name="color_FF42B8FF">#FF42B8FF</color>`。添加前先检查是否已有相同颜色值的资源；如果有，直接复用，不要重复添加。
 - 用户可见的字符串不要在 Kotlin、Java 或布局 XML 中硬编码；统一添加到 `res/values/strings.xml`，资源名称以 `string_` 开头，并通过 `R.string.string_xxx`、`getString(...)` 或 `@string/string_xxx` 引用。已有相同文案时，优先复用现有字符串资源。
+- 字符串集中在各模块及各语言目录自己的 `strings.xml` 中，不要新增 `strings_xxx.xml`。纯预览/协议/符号可按需使用 `translatable="false"`，实际需要翻译的界面文案不要标记为不可翻译。
+- 修改文案后运行 `python3 tools/check_string_resources.py` 和 `sh gradlew :app:checkLocalization`。正式包的 `preReleaseBuild` 自动执行资源检查，正常 APK/AAB 发布构建还会运行 fatal Android Lint；不要跳过检查或用 suppression 掩盖硬编码。检查范围与译文补齐要求见 `tools/README-localization.md`。
+
+## ActivityGuard 移包与 JVM 访问权限
+
+- release 构建会先由 ActivityGuard 改类名和包名，再执行 R8。Activity 因白名单保留原包名，不能假设同一 Kotlin 文件或源代码包中的类在 release 中仍然同包。曾发生 `RamStatusActivity` 访问 `RunningAppsAdapter`（最终混淆名 `he.z`）时抛出 `IllegalAccessError`。
+- 被 Activity、Fragment、Service 或其他可能保留包名的类直接访问的独立辅助类（例如适配器、ViewHolder、模型），不要声明为文件级 `private class/object/interface`；优先使用 Kotlin `internal`（编译为 JVM `public`），或确有必要时使用 `public`。Java 中相应的类、构造器和跨包访问成员也必须具有合法的访问权限，不能依赖默认包可见性。
+- 不要为避免此问题把所有 `private` 一律改成公开。私有成员、文件内私有函数以及与外部类一起迁移且只在同包使用的私有嵌套类可以保留；检查它们是否通过合法的 JVM 访问器调用，以及混淆后访问方与目标类是否仍同包。Kotlin 源码可见性不能代替 JVM 字节码可见性检查。
+- 新增或修改辅助类、继承关系、ActivityGuard 白名单、移包规则、R8 配置时，必须检查受影响的类及构造器/成员访问。不要仅增加 R8 `-keep` 规则来掩盖 ActivityGuard 已经造成的非法跨包访问；若通过白名单修复，需要同时保证相关类仍在兼容的包中。
+- 验证时先生成本次代码对应的 release 类和 ActivityGuard 映射（`:app:activityGuardReleaseClassTask`），再执行 `python3 tools/check_obfuscated_class_access.py`。脚本会检查 app、广告库、推送库编译类中的类引用和移包后的非公开类访问，输入缺失时必须报错；不要使用旧映射或旧编译产物得出通过结论。脚本不覆盖成员访问、反射或 R8 最终优化结果，仍需结合代码检查。
+- 发布验证应检查最终 release APK/AAB 的 DEX 访问标记，并使用该产物回归受影响页面。遇到混淆名时先串联 `app/mapping.txt`（ActivityGuard）和 `app/build/outputs/mapping/release/mapping.txt`（R8）还原目标。debug 编译通过不能替代混淆产物验证；构建受阻、跳过检查或没有设备时必须明确说明验证范围，不能宣称完整 release 回归通过。
 
 ## 沉浸式系统栏
 

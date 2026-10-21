@@ -170,7 +170,7 @@ class NetworkTestActivity : DeviceToolActivity<ActivityNetworkTestBinding>({ Act
                 delay(LIVE_SPEED_REFRESH_MILLIS)
                 latestLiveSpeedMbps?.let { speed ->
                     binding.networkLiveSpeed.text =
-                        String.format(java.util.Locale.US, "%.1f", speed)
+                        getString(R.string.string_network_speed_number, speed)
                 }
             }
         }

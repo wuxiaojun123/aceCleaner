@@ -85,8 +85,8 @@ class DeviceScanActivity : BaseActivity<ActivityDeviceScanBinding>({ ActivityDev
             resources.displayMetrics.densityDpi.toString(),
             getString(
                 R.string.guide_storage_value,
-                NetworkSpeedSampler.format(storage.usedBytes),
-                NetworkSpeedSampler.format(storage.totalBytes),
+                NetworkSpeedSampler.format(this, storage.usedBytes),
+                NetworkSpeedSampler.format(this, storage.totalBytes),
             ),
             getString(R.string.guide_complete),
         )

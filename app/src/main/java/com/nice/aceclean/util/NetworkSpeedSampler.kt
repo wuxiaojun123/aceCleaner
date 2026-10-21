@@ -1,8 +1,9 @@
 package com.nice.aceclean.util
 
+import android.content.Context
 import android.net.TrafficStats
 import android.os.SystemClock
-import java.util.Locale
+import com.nice.aceclean.R
 
 /** Samples the device's combined download and upload traffic. */
 class NetworkSpeedSampler(
@@ -34,13 +35,16 @@ class NetworkSpeedSampler(
                 TrafficStats.getTotalTxBytes().validTrafficBytes()
 
         /** Matches the compact binary-unit format used by the reference app. */
-        fun format(bytes: Long): String {
+        fun format(context: Context, bytes: Long): String =
+            format(bytes) { resource, value -> context.getString(resource, value) }
+
+        internal fun format(bytes: Long, formatValue: (Int, Number) -> String): String {
             val safeBytes = bytes.coerceAtLeast(0L)
             return when {
-                safeBytes < KIB -> "$safeBytes B"
-                safeBytes < MIB -> String.format(Locale.US, "%.1f KB", safeBytes / KIB)
-                safeBytes < GIB -> String.format(Locale.US, "%.1f MB", safeBytes / MIB)
-                else -> String.format(Locale.US, "%.1f GB", safeBytes / GIB)
+                safeBytes < KIB -> formatValue(R.string.string_size_bytes, safeBytes)
+                safeBytes < MIB -> formatValue(R.string.string_size_kilobytes, safeBytes / KIB)
+                safeBytes < GIB -> formatValue(R.string.string_size_megabytes, safeBytes / MIB)
+                else -> formatValue(R.string.string_size_gigabytes, safeBytes / GIB)
             }
         }
 

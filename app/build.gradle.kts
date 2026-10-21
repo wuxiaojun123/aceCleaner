@@ -208,6 +208,18 @@ android {
         buildConfig = true
         viewBinding = true
     }
+    lint {
+        checkReleaseBuilds = true
+        checkDependencies = true
+        abortOnError = true
+        fatal += setOf("HardcodedText", "SetTextI18n", "StringFormatInvalid", "StringFormatMatches", "StringFormatCount")
+    }
+}
+
+tasks.register("checkLocalization") {
+    group = "verification"
+    description = "Check XML resources and Android Lint localization rules, including library modules."
+    dependsOn(rootProject.tasks.named("checkStringResources"), "lintVitalRelease")
 }
 
 kotlin {

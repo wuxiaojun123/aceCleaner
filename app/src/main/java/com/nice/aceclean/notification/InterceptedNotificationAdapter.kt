@@ -3,26 +3,20 @@ package com.nice.aceclean.notification
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nice.aceclean.R
-import java.text.DateFormat
-import java.text.SimpleDateFormat
+import com.nice.aceclean.databinding.ItemInterceptedNotificationBinding
 import java.util.Date
-import java.util.Locale
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class InterceptedNotificationAdapter :
     ListAdapter<InterceptedNotification, InterceptedNotificationAdapter.ViewHolder>(DiffCallback) {
 
-    private val timeFormatter: DateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_intercepted_notification, parent, false),
+        ItemInterceptedNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
@@ -36,12 +30,13 @@ class InterceptedNotificationAdapter :
         }
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val icon = view.findViewById<ImageView>(R.id.intercepted_app_icon)
-        private val fallback = view.findViewById<TextView>(R.id.intercepted_app_icon_fallback)
-        private val title = view.findViewById<TextView>(R.id.intercepted_notification_title)
-        private val content = view.findViewById<TextView>(R.id.intercepted_notification_content)
-        private val time = view.findViewById<TextView>(R.id.intercepted_notification_time)
+    inner class ViewHolder(binding: ItemInterceptedNotificationBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val icon = binding.interceptedAppIcon
+        private val fallback = binding.interceptedAppIconFallback
+        private val title = binding.interceptedNotificationTitle
+        private val content = binding.interceptedNotificationContent
+        private val time = binding.interceptedNotificationTime
+        private val timeFormatter = android.text.format.DateFormat.getTimeFormat(itemView.context)
 
         fun bind(item: InterceptedNotification) {
             itemView.translationX = 0f
@@ -54,7 +49,8 @@ class InterceptedNotificationAdapter :
             icon.visibility = if (drawable != null) View.VISIBLE else View.GONE
             fallback.visibility = if (drawable == null) View.VISIBLE else View.GONE
             icon.setImageDrawable(drawable)
-            fallback.text = item.appName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            fallback.text = item.appName.firstOrNull()?.uppercaseChar()?.toString()
+                ?: itemView.context.getString(R.string.string_app_icon_fallback)
             icon.contentDescription = item.appName
         }
     }

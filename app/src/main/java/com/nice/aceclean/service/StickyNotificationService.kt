@@ -116,7 +116,7 @@ class StickyNotificationService : Service() {
         bytesPerSecond: Long,
     ) =
         RemoteViews(packageName, layoutId).apply {
-            val speed = NetworkSpeedSampler.format(bytesPerSecond)
+            val speed = NetworkSpeedSampler.format(localizedContext, bytesPerSecond)
                 .replace(" ", "\n") + localizedContext.getString(R.string.notification_speed_suffix)
             setTextViewText(
                 R.id.notification_network_speed,

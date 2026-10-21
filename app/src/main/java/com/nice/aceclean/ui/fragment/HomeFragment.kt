@@ -199,7 +199,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
                     if (renderedDay != FeatureUsageStore.todayKey()) renderFeatureBadges()
                     val bytesPerSecond = speedSampler.sampleBytesPerSecond()
                     binding.homePrimaryNetwork.homeNetworkSpeed.text =
-                        getString(R.string.network_speed_value, NetworkSpeedSampler.Companion.format(bytesPerSecond))
+                        getString(R.string.network_speed_value, NetworkSpeedSampler.format(requireContext(), bytesPerSecond))
                 }
             }
         }

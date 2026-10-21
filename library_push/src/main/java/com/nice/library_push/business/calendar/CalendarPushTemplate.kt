@@ -7,6 +7,7 @@ import com.nice.library_push.api.PushEvent
 import com.nice.library_push.api.PushStyle
 import com.nice.library_push.api.PushTemplate
 import com.nice.library_push.config.PushTemplateSpec
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -24,7 +25,7 @@ class CalendarPushTemplate : PushTemplate {
             button = spec.buttonText.ifBlank { context.getString(R.string.string_push_calendar_action) },
             target = event.target.ifBlank { spec.target }, style = PushStyle.CALENDAR,
             label = context.getString(R.string.string_push_calendar_today),
-            date = SimpleDateFormat("MMM d, yyyy", locale).format(now),
+            date = DateFormat.getDateInstance(DateFormat.MEDIUM, locale).format(now),
             day = SimpleDateFormat("d", locale).format(now),
             weekday = SimpleDateFormat("EEEE", locale).format(now),
         )

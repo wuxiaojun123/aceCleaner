@@ -144,7 +144,9 @@ class RamStatusActivity : DeviceToolActivity<ActivityRamStatusBinding>({ Activit
 
 }
 
-private class RunningAppsAdapter(
+// ActivityGuard relocates this class separately from the Activity. Keep it JVM-public
+// so the Activity can still access it after release package obfuscation.
+internal class RunningAppsAdapter(
     private val onCloseClick: (RunningAppInfo) -> Unit,
 ) : ListAdapter<RunningAppInfo, RunningAppsAdapter.ViewHolder>(DIFF_CALLBACK) {
 

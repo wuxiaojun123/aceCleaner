@@ -13,7 +13,6 @@ import android.os.StatFs
 import android.os.storage.StorageManager
 import android.text.format.Formatter
 import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
@@ -67,7 +66,7 @@ object DeviceStats {
         } else {
             emptyMap()
         }
-        val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+        val dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, context.resources.configuration.locales[0])
 
         return resolves.asSequence()
             .map { it.activityInfo.applicationInfo }

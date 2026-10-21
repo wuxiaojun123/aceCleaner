@@ -103,7 +103,7 @@
                         android:minWidth="26dp"
                         android:paddingStart="6dp"
                         android:paddingEnd="6dp"
-                        android:text="0"
+                        android:text="@string/string_zero"
                         android:textColor="@color/notification_manager_amber"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -258,7 +258,7 @@
                         android:id="@+id/notification_intercepted_today"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/string_zero"
                         android:textColor="@color/notification_manager_amber"
                         android:textSize="20sp"
                         android:textStyle="bold" />

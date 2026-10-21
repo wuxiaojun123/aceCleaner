@@ -69,9 +69,10 @@ class DeleteSuccessActivity : BaseActivity<ActivityDeleteSuccessBinding>(
         }
         binding.deleteSuccessResultMessage.text = getString(resultMessageRes, removedCount).let { result ->
             if (freedBytes > 0L) {
-                result + "\n" + getString(
-                    R.string.string_delete_success_space_freed,
-                    DeviceStats.formatBytes(this, freedBytes),
+                getString(
+                    R.string.string_result_with_detail,
+                    result,
+                    getString(R.string.string_delete_success_space_freed, DeviceStats.formatBytes(this, freedBytes)),
                 )
             } else {
                 result

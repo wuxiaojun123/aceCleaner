@@ -106,10 +106,10 @@ class NotificationCleanerActivity : BaseActivity<FragmentNotificationCleanerBind
         binding.notificationInterceptedToday.text =
             numberFormatter.format(NotificationInterceptStore.interceptedToday(this))
         binding.notificationWhitelistCount.text =
-            NotificationInterceptStore.whitelist(this).size.toString()
+            numberFormatter.format(NotificationInterceptStore.whitelist(this).size)
 
         binding.notificationBadgeValue.text =
-            if (snapshot.totalToday > 99) getString(R.string.notif_badge) else snapshot.totalToday.toString()
+            if (snapshot.totalToday > 99) getString(R.string.notif_badge) else numberFormatter.format(snapshot.totalToday)
         renderAppList(snapshot.topApps)
     }
 

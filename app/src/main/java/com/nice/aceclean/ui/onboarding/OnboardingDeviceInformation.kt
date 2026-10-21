@@ -70,7 +70,8 @@ internal fun android.app.Activity.renderOnboardingDeviceInformation(binding: com
     }.getOrNull()?.let { getString(R.string.string_onboarding_frequency, it) } ?: getString(R.string.string_onboarding_literal_2)
     binding.cpuModelValue.text = cpuModel.ifBlank { Build.SUPPORTED_ABIS.firstOrNull().orEmpty() }
     binding.cpuFrequencyValue.text = styleDeviceDetailUnit(frequency, 10f / 24f)
-    binding.cpuCoresValue.text = Runtime.getRuntime().availableProcessors().toString()
+    binding.cpuCoresValue.text = java.text.NumberFormat.getIntegerInstance(resources.configuration.locales[0])
+        .format(Runtime.getRuntime().availableProcessors())
 
     val metrics = resources.displayMetrics
     @Suppress("DEPRECATION") val refreshRate = windowManager.defaultDisplay.refreshRate

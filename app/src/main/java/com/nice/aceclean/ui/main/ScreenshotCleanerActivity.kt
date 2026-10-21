@@ -124,7 +124,7 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
         resultBinding.pictureSelectAll.isChecked = files.isNotEmpty() && selected.containsAll(files)
         resultBinding.pictureEmpty.visibility = if (files.isEmpty()) View.VISIBLE else View.GONE
         adapter.submit(buildList {
-            files.groupBy { it.monthLabel() }.forEach { (month, monthFiles) ->
+            files.groupBy { it.monthLabel(this@ScreenshotCleanerActivity) }.forEach { (month, monthFiles) ->
                 add(PictureRow.Header(month, monthFiles))
                 monthFiles.forEach { add(PictureRow.Picture(it)) }
             }

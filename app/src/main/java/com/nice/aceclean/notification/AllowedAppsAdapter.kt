@@ -39,7 +39,7 @@ class AllowedAppsAdapter(
             icon.visibility = if (drawable != null) View.VISIBLE else View.GONE
             fallback.visibility = if (drawable == null) View.VISIBLE else View.GONE
             icon.setImageDrawable(drawable)
-            fallback.text = item.appName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            fallback.text = item.appName.firstOrNull()?.uppercaseChar()?.toString() ?: itemView.context.getString(R.string.string_app_icon_fallback)
             allowSwitch.setOnCheckedChangeListener(null)
             allowSwitch.setTrackOnColor(
                 ContextCompat.getColor(itemView.context, R.color.notification_manager_amber),

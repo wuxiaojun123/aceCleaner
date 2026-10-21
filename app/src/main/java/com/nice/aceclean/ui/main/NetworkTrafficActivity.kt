@@ -64,7 +64,8 @@ class NetworkTrafficActivity : BaseActivity<FragmentNetworkTrafficBinding>(
     }
 }
 
-private class NetworkAppAdapter : ListAdapter<InstalledAppInfo, NetworkAppAdapter.ViewHolder>(DIFF_CALLBACK) {
+// ActivityGuard relocates this class separately from the Activity; it must stay JVM-public.
+internal class NetworkAppAdapter : ListAdapter<InstalledAppInfo, NetworkAppAdapter.ViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemNetworkAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

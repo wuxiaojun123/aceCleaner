@@ -107,7 +107,7 @@ class VideoCleanerActivity : StorageCleanerActivity<FragmentScreenshotCleanerBin
             visibility = if (videos.isEmpty()) View.VISIBLE else View.GONE
         }
         adapter.submit(buildList {
-            videos.groupBy { it.monthLabel() }.forEach { (month, files) ->
+            videos.groupBy { it.monthLabel(this@VideoCleanerActivity) }.forEach { (month, files) ->
                 add(VideoRow.Header(month, files))
                 files.forEach { add(VideoRow.Video(it)) }
             }

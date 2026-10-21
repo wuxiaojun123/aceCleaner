@@ -13,8 +13,8 @@ import android.os.BatteryManager
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import com.nice.aceclean.R
 import java.net.Inet4Address
-import java.util.Locale
 import kotlin.math.roundToLong
 
 data class MemorySnapshot(
@@ -114,15 +114,23 @@ object DeviceToolsRepository {
         (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager)
             .defaultDisplay.getRealMetrics(metrics)
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        val glVersion = activityManager.deviceConfigurationInfo.glEsVersion ?: "-"
+        val glVersion = activityManager.deviceConfigurationInfo.glEsVersion
+            ?: context.getString(R.string.string_value_unavailable)
         return DeviceReport(
             androidVersion = Build.VERSION.RELEASE,
             cpuModel = cpuModel(),
-            memory = "${formatReportBytes(memory.availableBytes)} / ${formatReportBytes(memory.totalBytes)}",
-            storage = "${formatReportBytes(storage.availableBytes, forceGigabytes = true)} / " +
-                formatReportBytes(storage.totalBytes, forceGigabytes = true),
+            memory = context.getString(
+                R.string.storage_usage_value,
+                formatReportBytes(context, memory.availableBytes),
+                formatReportBytes(context, memory.totalBytes),
+            ),
+            storage = context.getString(
+                R.string.storage_usage_value,
+                formatReportBytes(context, storage.availableBytes, forceGigabytes = true),
+                formatReportBytes(context, storage.totalBytes, forceGigabytes = true),
+            ),
             ramAvailablePercent = calculatePercent(memory.availableBytes, memory.totalBytes),
-            resolution = "${metrics.widthPixels} x ${metrics.heightPixels}",
+            resolution = context.getString(R.string.guide_screen_resolution_value, metrics.widthPixels, metrics.heightPixels),
             ipAddress = ipAddress(context),
             openGlEs = glVersion,
             vulkanVersion = vulkanVersion(context),
@@ -193,14 +201,14 @@ object DeviceToolsRepository {
 
     private fun ipAddress(context: Context): String {
         val connectivity = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivity.activeNetwork ?: return "-"
+        val network = connectivity.activeNetwork ?: return context.getString(R.string.string_value_unavailable)
         return connectivity.getLinkProperties(network)?.linkAddresses
             ?.asSequence()
             ?.map { it.address }
             ?.filterIsInstance<Inet4Address>()
             ?.firstOrNull { !it.isLoopbackAddress }
             ?.hostAddress
-            ?: "-"
+            ?: context.getString(R.string.string_value_unavailable)
     }
 
     @Suppress("DEPRECATION")
@@ -218,13 +226,13 @@ object DeviceToolsRepository {
             ?.takeIf { it > 0 }
     }
 
-    private fun formatReportBytes(bytes: Long, forceGigabytes: Boolean = false): String {
+    private fun formatReportBytes(context: Context, bytes: Long, forceGigabytes: Boolean = false): String {
         val gigabyte = 1_000_000_000.0
         val megabyte = 1_000_000.0
         return if (forceGigabytes || bytes >= gigabyte) {
-            String.format(Locale.US, "%.2f GB", bytes / gigabyte)
+            context.getString(R.string.string_report_size_gigabytes, bytes / gigabyte)
         } else {
-            String.format(Locale.US, "%.0f MB", bytes / megabyte)
+            context.getString(R.string.string_report_size_megabytes, bytes / megabyte)
         }
     }
 

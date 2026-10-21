@@ -24,3 +24,16 @@ plugins {
     id("com.google.gms.google-services") version "4.4.4" apply false
     id("com.google.firebase.crashlytics") version "3.0.8" apply false
 }
+
+val checkStringResources by tasks.registering(Exec::class) {
+    group = "verification"
+    description = "Check centralized string resources and hardcoded XML/Kotlin/Java UI text."
+    workingDir(rootDir)
+    commandLine("python3", "tools/check_string_resources.py", "--report", "build/reports/localization/strings.json")
+}
+
+subprojects {
+    tasks.matching { it.name == "preReleaseBuild" }.configureEach {
+        dependsOn(checkStringResources)
+    }
+}

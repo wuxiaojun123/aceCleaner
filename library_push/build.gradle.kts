@@ -33,6 +33,11 @@ android {
         jvmTarget = "11"
     }
     buildFeatures { viewBinding = true }
+    lint {
+        checkReleaseBuilds = true
+        abortOnError = true
+        fatal += setOf("HardcodedText", "SetTextI18n", "StringFormatInvalid", "StringFormatMatches", "StringFormatCount")
+    }
 }
 
 dependencies {

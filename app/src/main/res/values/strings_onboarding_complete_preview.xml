@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- IDE sample only. Runtime result continues to use cleaned_bytes. -->
-    <string name="string_onboarding_complete_preview_result" translatable="false"><font size="72" color="#FF252A30">94</font><font size="25" color="#FFAE4218"> MB</font>\nof storage cleared. More room for you.</string>
-</resources>

@@ -7,7 +7,6 @@ import android.os.Build
 import android.provider.MediaStore
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 data class MediaFileInfo(
     val uri: Uri,
@@ -17,7 +16,11 @@ data class MediaFileInfo(
     val mimeType: String,
     val relativePath: String,
 ) {
-    fun monthLabel(): String = SimpleDateFormat("yyyy-MM", Locale.US).format(Date(modifiedSeconds * 1000L))
+    fun monthLabel(context: Context): String {
+        val locale = context.resources.configuration.locales[0]
+        val pattern = android.text.format.DateFormat.getBestDateTimePattern(locale, "yMMMM")
+        return SimpleDateFormat(pattern, locale).format(Date(modifiedSeconds * 1000L))
+    }
 }
 
 object MediaStoreRepository {
