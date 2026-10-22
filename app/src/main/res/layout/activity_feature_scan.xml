@@ -30,7 +30,8 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/go_back"
                 android:padding="10dp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/scan_title"

@@ -49,7 +49,6 @@ class FeatureScanActivity : BaseActivity<ActivityFeatureScanBinding>(
         binding.scanProgressValue.text =
             getString(R.string.percentage_value, model.state.value.progress)
         binding.scanProgressBar.progress = model.state.value.progress
-        binding.scanBack.setOnClickListener { if (!transitionRunning) finish() }
         binding.scanRetry.setOnClickListener {
             binding.scanRetry.visibility = View.GONE
             binding.scanStatus.setText(R.string.scanning)
