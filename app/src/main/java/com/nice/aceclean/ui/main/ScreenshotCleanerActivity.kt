@@ -24,6 +24,7 @@ import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentScreenshotCleanerBinding
 import com.nice.aceclean.databinding.ItemScreenshotBinding
 import com.nice.aceclean.databinding.ItemScreenshotGroupHeaderBinding
+import com.nice.aceclean.similarphoto.SimilarPhotoItem
 import com.nice.aceclean.ui.dialog.IosDeleteConfirmDialog
 import com.nice.aceclean.util.DeviceStats
 import com.nice.aceclean.util.EventUtils
@@ -198,6 +199,23 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
 
     private fun visibleFiles() = if (showingScreenshots) screenshots else others
 
+    private fun openPhoto(file: MediaFileInfo) {
+        val files = visibleFiles()
+        val index = files.indexOfFirst { it.uri == file.uri }
+        if (index < 0) return
+        val photos = files.map { picture ->
+            SimilarPhotoItem(
+                id = picture.uri.lastPathSegment?.toLongOrNull() ?: 0L,
+                uri = picture.uri,
+                displayName = picture.name,
+                sizeBytes = picture.sizeBytes,
+                dateTaken = picture.modifiedSeconds * 1000L,
+                relativePath = picture.relativePath,
+            )
+        }
+        PhotoViewerActivity.start(this, photos, index)
+    }
+
     override fun onDestroy() {
         deleteConfirmationDialog?.dismiss()
         deleteConfirmationDialog = null
@@ -265,8 +283,9 @@ class ScreenshotCleanerActivity : StorageCleanerActivity<FragmentScreenshotClean
                 thumbnailCache.get(key)?.let(thumbnail::setImageBitmap) ?: loadThumbnail(file, key)
                 size.text = DeviceStats.formatBytes(itemView.context, file.sizeBytes)
                 check.isChecked = file in selected
-                itemView.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_SELECT) {
-                    if (file in selected) selected.remove(file) else selected.add(file)
+                itemView.setOnClickListener { openPhoto(file) }
+                check.setTrackedClickListener(EventUtils.CLICK_SCREENSHOTS_SELECT) {
+                    if (check.isChecked) selected.add(file) else selected.remove(file)
                     render()
                 }
             }
