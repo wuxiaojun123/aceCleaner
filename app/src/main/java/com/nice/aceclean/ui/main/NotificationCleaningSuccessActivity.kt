@@ -15,12 +15,12 @@ import kotlinx.coroutines.launch
 class NotificationCleaningSuccessActivity : BaseActivity<ActivityNotificationCleaningBinding>({ ActivityNotificationCleaningBinding.inflate(it) }, R.layout.activity_notification_cleaning) {
     override fun initViews() {
         lifecycleScope.launch {
-            delay(1_200L)
+            delay(1_500L)
             binding.notificationCleaningProgress.visibility = View.GONE
             binding.notificationCleaningSuccessIcon.visibility = View.VISIBLE
             binding.notificationCleaningTitle.setText(R.string.notif_clear_success_title)
             binding.notificationCleaningSubtitle.setText(R.string.notif_clear_success_subtitle)
-            delay(1_200L)
+            delay(1_500L)
             startActivity(
                 Intent(this@NotificationCleaningSuccessActivity, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP),

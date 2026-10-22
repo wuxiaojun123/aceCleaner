@@ -14,6 +14,7 @@ import com.nice.library_push.business.calendar.CalendarPushTemplate
 import com.nice.library_push.business.weather.WeatherPushTemplate
 import com.nice.library_push.api.PushNewsItem
 import com.nice.library_push.api.PushWeatherData
+import com.nice.library_push.business.battery.BatteryPushTemplate
 
 /** Business templates remain independent of triggers and backend transport. */
 object PushTemplates {
@@ -23,6 +24,7 @@ object PushTemplates {
         onNewsShown: (String) -> Unit = {},
     ): List<PushTemplate> = listOf(
         BasicTemplate("default"), BasicTemplate("image"),
+        BatteryPushTemplate(),
         CalendarPushTemplate(), WeatherPushTemplate(weather), NewsPushTemplate(news, onNewsShown),
         WebPushTemplate(), VideoPushTemplate(), SocialPushTemplate(), FilePushTemplate(),
     )

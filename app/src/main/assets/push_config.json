@@ -1,7 +1,70 @@
 {
-  "globalDailyLimit": 3,
+  "globalDailyLimit": 10,
   "globalIntervalMillis": 60000,
   "scenes": {
+    "rq": {
+      "sts": 1,
+      "cd": 3600,
+      "dcm": 2,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 907, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "ab": {
+      "sts": 1,
+      "cd": 3600,
+      "dcm": 2,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "wifi": {
+      "sts": 1,
+      "cd": 60,
+      "dcm": 10,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "dc": {
+      "sts": 1,
+      "cd": 60,
+      "dcm": 1,
+      "display_type": 1,
+      "levels": [49],
+      "temps": [
+        { "tempId": 908, "type": "battery", "subType": 3, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "file": {
+      "sts": 1,
+      "cd": 60,
+      "dcm": 10,
+      "display_type": 1,
+      "suffixes": ["jpg", "jpeg", "png", "webp", "heic", "heif", "gif", "bmp", "avif", "dng"],
+      "temps": [
+        { "tempId": 907, "subType": 1, "wgt": 100, "cx": 1 },
+        { "tempId": 907, "subType": 2, "wgt": 100, "cx": 1 }
+      ]
+    },
+    "pkg": {
+      "sts": 1,
+      "cd": 60,
+      "dcm": 10,
+      "display_type": 1,
+      "temps": [
+        { "tempId": 904, "wgt": 100, "cx": 1 },
+        { "tempId": 905, "wgt": 100, "cx": 1 },
+        { "tempId": 910, "wgt": 100, "cx": 1 }
+      ]
+    },
     "ul": {
       "sts": 1,
       "cd": 21600,
