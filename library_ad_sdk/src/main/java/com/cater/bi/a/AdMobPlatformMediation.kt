@@ -3,12 +3,15 @@ package com.cater.bi.a
 
 import android.app.Activity
 import android.content.Context
-import com.google.android.gms.ads.MobileAds
+import android.content.pm.PackageManager
+import com.google.android.libraries.ads.mobile.sdk.MobileAds
+import com.google.android.libraries.ads.mobile.sdk.initialization.InitializationConfig
 import com.nice.library_ad_sdk.util.LogUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.concurrent.thread
 
 /**
  * AdMob platform mediation implementation
@@ -17,6 +20,8 @@ import kotlinx.coroutines.withTimeoutOrNull
  * @author holmes
  */
 object AdMobPlatformMediation : AdPlatformMediation() {
+
+    private const val APPLICATION_ID_META = "com.google.android.gms.ads.APPLICATION_ID"
 
     private val umpState = MutableStateFlow(UmpState.IDLE)
     @Volatile
@@ -37,23 +42,37 @@ object AdMobPlatformMediation : AdPlatformMediation() {
 
         latestExtras = extras.toMap()
         
-        try {
-//            RequestConfiguration.Builder().setTestDeviceIds(listOf<String>("6D81DA8ADC0F95A1CDE9817A103523C0"))
-//                .build().also {
-//                    MobileAds.setRequestConfiguration(it)
-//                }
-            MobileAds.initialize(context) { initializationStatus ->
-                val statusMap = initializationStatus.adapterStatusMap
-                for (adapterClass in statusMap.keys) {
-                    val status = statusMap[adapterClass]
-                    LogUtils.d(tag = "AdMob", msg = "Adapter: $adapterClass, Status: ${status?.description}, Latency: ${status?.latency}")
-                }
-                onInitSuccess()
-            }
+        val appContext = context.applicationContext
+        val effectiveAppId = appId.takeIf { it.isNotBlank() } ?: readAppIdFromManifest(appContext)
 
-            tryStartConsentFlow(context)
+        thread(name = "gma-next-gen-init") {
+            try {
+                val config = InitializationConfig.Builder(effectiveAppId).build()
+                MobileAds.initialize(appContext, config) { initializationStatus ->
+                    val statusMap = initializationStatus.adapterStatusMap
+                    for (adapterClass in statusMap.keys) {
+                        val status = statusMap[adapterClass]
+                        LogUtils.d(tag = "AdMob", msg = "Adapter: $adapterClass, Status: ${status?.description}, Latency: ${status?.latency}")
+                    }
+                }
+                Adm.handler.post { onInitSuccess() }
+            } catch (e: Exception) {
+                Adm.handler.post { onInitFailed("AdMob initialization failed: ${e.message}") }
+            }
+        }
+
+        tryStartConsentFlow(context)
+    }
+
+    private fun readAppIdFromManifest(context: Context): String {
+        return try {
+            val appInfo = context.packageManager.getApplicationInfo(
+                context.packageName,
+                PackageManager.GET_META_DATA
+            )
+            appInfo.metaData?.getString(APPLICATION_ID_META).orEmpty()
         } catch (e: Exception) {
-            onInitFailed("AdMob initialization failed: ${e.message}")
+            ""
         }
     }
 
@@ -172,7 +191,7 @@ object AdMobPlatformMediation : AdPlatformMediation() {
     override fun getPlatformConfig(): Map<String, Any> {
         return mapOf(
             "platform" to "AdMob",
-            "version" to "22.0.0", // Example version
+            "version" to "1.4.0",
             "initialized" to isInitedSuccess()
         )
     }

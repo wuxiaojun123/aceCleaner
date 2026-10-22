@@ -268,7 +268,7 @@ class TopOnNativeAd(metadata: AdMetadata) : TopOnAds(metadata) {
 
         val sceneCode = getSceneCode()
         if (!sceneCode.isNullOrEmpty()) {
-            TUNative.entryAdScenario(getUnitCode(), sceneCode)
+            ad.entryAdScenario(sceneCode)
         }
 
         if (!ad.checkAdStatus().isReady) {

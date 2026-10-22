@@ -42,6 +42,12 @@ android {
     }
 }
 
+// Mediation adapters may still declare the legacy GMA SDK transitively.
+configurations.configureEach {
+    exclude(group = "com.google.android.gms", module = "play-services-ads")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
+}
+
 dependencies {
     api(libs.androidx.core.ktx)
     api(libs.androidx.fragment.ktx)
@@ -54,7 +60,7 @@ dependencies {
     implementation(libs.okio)
 
     implementation(libs.topon.core)
-    implementation(libs.topon.adapter.admob)
+    implementation(libs.topon.adapter.gma.next.gen)
     implementation(libs.topon.adapter.sdm)
     implementation(libs.topon.adapter.vungle)
     implementation(libs.topon.adapter.unityads)
@@ -64,7 +70,7 @@ dependencies {
     implementation(libs.topon.adapter.yandex)
     implementation(libs.topon.tramini.plugin)
 
-    implementation(libs.admob)
+    implementation(libs.google.ads.mobile.sdk)
     implementation(libs.google.play.services.basement)
     implementation(libs.google.play.services.ads.identifier)
     implementation(libs.google.ump)

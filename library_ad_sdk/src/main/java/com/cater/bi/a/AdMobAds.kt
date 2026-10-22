@@ -2,29 +2,35 @@ package com.cater.bi.a
 
 import android.content.Context
 import android.view.ViewGroup
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MediaAspectRatio
-import com.google.android.gms.ads.VideoOptions
-import com.google.android.gms.ads.appopen.AppOpenAd
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.gms.ads.nativead.MediaView
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdOptions
-import com.google.android.gms.ads.nativead.NativeAdView
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.appopen.AppOpenAd
+import com.google.android.libraries.ads.mobile.sdk.appopen.AppOpenAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAd
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdRequest
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdRequest
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.FullScreenContentError
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.common.VideoOptions
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.nativead.MediaView
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAd
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdLoader
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdLoaderCallback
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdRequest
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdView
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAd
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAdEventCallback
 import android.widget.ImageView
 import android.widget.TextView
 
 /**
- * AdMob ad implementations
+ * AdMob ad implementations (GMA Next-Gen SDK)
  *
  * created on 2025/8/10
  * @author holmes
@@ -37,71 +43,78 @@ abstract class AdmobAd(metadata: AdMetadata) : AbstractAd(metadata) {
     }
 
 }
-
 class AdMobBannerAd(metadata: AdMetadata) : AdmobAd(metadata) {
 
     private var adView: AdView? = null
+    private var bannerAd: BannerAd? = null
 
     override fun getPlatform(): String = "AdMob"
 
     override fun loadAd(context: Context) {
         val unitId = getUnitCode()
         val bannerAdView = AdView(context)
-        bannerAdView.adUnitId = unitId
         val displayMetrics = context.resources.displayMetrics
         val adWidthDp = (displayMetrics.widthPixels / displayMetrics.density)
             .toInt()
             .coerceAtLeast(1)
-        bannerAdView.setAdSize(
-            AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-                context,
-                adWidthDp
-            )
+        val adSize = AdSize.getLargeAnchoredAdaptiveBannerAdSize(
+            context,
+            adWidthDp
         )
 
-        bannerAdView.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                this@AdMobBannerAd.onLoadSuccess()
+        val adRequest = BannerAdRequest.Builder(unitId, adSize).build()
+
+        bannerAdView.loadAd(
+            adRequest,
+            object : AdLoadCallback<BannerAd> {
+                override fun onAdLoaded(ad: BannerAd) {
+                    handler.post {
+                        bannerAd = ad
+                        ad.adEventCallback = object : BannerAdEventCallback {
+                            override fun onAdClicked() {
+                                handler.post {
+                                    this@AdMobBannerAd.onAdClicked()
+                                }
+                            }
+
+                            override fun onAdImpression() {
+                                handler.post {
+                                    this@AdMobBannerAd.onShowSuccess()
+                                }
+                            }
+
+                            override fun onAdPaid(value: AdValue) {
+                                handler.post {
+                                    val revenue = value.valueMicros / 1000000.0
+                                    materialEcpm = revenue * 1000
+                                    materialRevenue = AdRevenue(
+                                        getPlatform(),
+                                        getSourceNetwork(),
+                                        getAdType(),
+                                        getUnitCode(),
+                                        revenue,
+                                        value.currencyCode,
+                                    )
+                                    onPaid()
+                                }
+                            }
+                        }
+                        this@AdMobBannerAd.onLoadSuccess()
+                    }
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        this@AdMobBannerAd.onLoadFailed(
+                            AdErrorC(
+                                adError.code.toString(),
+                                adError.message
+                            )
+                        )
+                    }
+                }
             }
-
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                super.onAdFailedToLoad(loadAdError)
-                this@AdMobBannerAd.onLoadFailed(
-                    AdErrorC(
-                        loadAdError.code.toString(),
-                        loadAdError.message
-                    )
-                )
-            }
-
-            override fun onAdClicked() {
-                super.onAdClicked()
-                this@AdMobBannerAd.onAdClicked()
-            }
-
-            override fun onAdImpression() {
-                super.onAdImpression()
-                this@AdMobBannerAd.onShowSuccess()
-            }
-        }
-
-        bannerAdView.setOnPaidEventListener { adValue ->
-            val revenue = adValue.valueMicros / 1000000.0
-            materialEcpm = revenue * 1000
-            materialRevenue = AdRevenue(
-                getPlatform(),
-                getSourceNetwork(),
-                getAdType(),
-                bannerAdView?.adUnitId ?: "",
-                revenue,
-                adValue.currencyCode,
-            )
-            onPaid()
-        }
-
-        val adRequest = AdRequest.Builder().build()
-        bannerAdView.loadAd(adRequest)
+        )
         adView = bannerAdView
     }
 
@@ -130,10 +143,11 @@ class AdMobBannerAd(metadata: AdMetadata) : AdmobAd(metadata) {
     override fun destroyAd() {
         adView?.destroy()
         adView = null
+        bannerAd = null
     }
 
     override fun getSourceNetwork(): String {
-        return adView?.responseInfo?.loadedAdapterResponseInfo?.adSourceName ?: ""
+        return bannerAd?.getResponseInfo()?.loadedAdSourceResponseInfo?.name ?: ""
     }
 }
 
@@ -145,26 +159,28 @@ class AdMobInterstitialAd(metadata: AdMetadata) : AdmobAd(metadata) {
 
     override fun loadAd(context: Context) {
         val unitId = getUnitCode()
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder(unitId).build()
 
         InterstitialAd.load(
-            context,
-            unitId,
             adRequest,
-            object : InterstitialAdLoadCallback() {
+            object : AdLoadCallback<InterstitialAd> {
                 override fun onAdLoaded(ad: InterstitialAd) {
-                    interstitialAd = ad
-                    this@AdMobInterstitialAd.onLoadSuccess()
+                    handler.post {
+                        interstitialAd = ad
+                        this@AdMobInterstitialAd.onLoadSuccess()
+                    }
                 }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    interstitialAd = null
-                    this@AdMobInterstitialAd.onLoadFailed(
-                        AdErrorC(
-                            loadAdError.code.toString(),
-                            loadAdError.message
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        interstitialAd = null
+                        this@AdMobInterstitialAd.onLoadFailed(
+                            AdErrorC(
+                                adError.code.toString(),
+                                adError.message
+                            )
                         )
-                    )
+                    }
                 }
             }
         )
@@ -183,45 +199,57 @@ class AdMobInterstitialAd(metadata: AdMetadata) : AdmobAd(metadata) {
             return
         }
 
-        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+        ad.adEventCallback = object : InterstitialAdEventCallback {
             override fun onAdClicked() {
-                this@AdMobInterstitialAd.onAdClicked()
+                handler.post {
+                    this@AdMobInterstitialAd.onAdClicked()
+                }
             }
 
             override fun onAdDismissedFullScreenContent() {
-                this@AdMobInterstitialAd.onAdClosed()
+                handler.post {
+                    this@AdMobInterstitialAd.onAdClosed()
+                }
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
-                this@AdMobInterstitialAd.onShowFailed(
-                    AdErrorC(
-                        adError.code.toString(),
-                        adError.message
+            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                handler.post {
+                    this@AdMobInterstitialAd.onShowFailed(
+                        AdErrorC(
+                            fullScreenContentError.code.toString(),
+                            fullScreenContentError.message
+                        )
                     )
-                )
+                }
             }
 
             override fun onAdShowedFullScreenContent() {
-                this@AdMobInterstitialAd.onShowSuccess()
+                handler.post {
+                    this@AdMobInterstitialAd.onShowSuccess()
+                }
             }
 
             override fun onAdImpression() {
-                this@AdMobInterstitialAd.onShowSuccess()
+                handler.post {
+                    this@AdMobInterstitialAd.onShowSuccess()
+                }
             }
-        }
 
-        ad.setOnPaidEventListener { adValue ->
-            val revenue = adValue.valueMicros / 1000000.0
-            materialEcpm = revenue * 1000
-            materialRevenue = AdRevenue(
-                getPlatform(),
-                getSourceNetwork(),
-                getAdType(),
-                ad?.adUnitId ?: "",
-                revenue,
-                adValue.currencyCode,
-            )
-            onPaid()
+            override fun onAdPaid(value: AdValue) {
+                handler.post {
+                    val revenue = value.valueMicros / 1000000.0
+                    materialEcpm = revenue * 1000
+                    materialRevenue = AdRevenue(
+                        getPlatform(),
+                        getSourceNetwork(),
+                        getAdType(),
+                        getUnitCode(),
+                        revenue,
+                        value.currencyCode,
+                    )
+                    onPaid()
+                }
+            }
         }
 
         ad.show(activity)
@@ -232,7 +260,7 @@ class AdMobInterstitialAd(metadata: AdMetadata) : AdmobAd(metadata) {
     }
 
     override fun getSourceNetwork(): String {
-        return interstitialAd?.responseInfo?.loadedAdapterResponseInfo?.adSourceName ?: ""
+        return interstitialAd?.getResponseInfo()?.loadedAdSourceResponseInfo?.name ?: ""
     }
 }
 
@@ -249,38 +277,63 @@ class AdMobNativeAd(metadata: AdMetadata) : AdmobAd(metadata) {
             .setStartMuted(true)
             .build()
 
-        val adOptions = NativeAdOptions.Builder()
+        val adRequest = NativeAdRequest
+            .Builder(unitId, listOf(NativeAd.NativeAdType.NATIVE))
             .setVideoOptions(videoOptions)
-            .setMediaAspectRatio(MediaAspectRatio.LANDSCAPE)
+            .setMediaAspectRatio(NativeAd.NativeMediaAspectRatio.LANDSCAPE)
             .build()
 
-        val adLoader = AdLoader.Builder(context, unitId)
-            .forNativeAd { ad ->
-                nativeAd = ad
-                this@AdMobNativeAd.onLoadSuccess()
-            }
-            .withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    this@AdMobNativeAd.onLoadFailed(
-                        AdErrorC(
-                            loadAdError.code.toString(),
-                            loadAdError.message
+        NativeAdLoader.load(
+            adRequest,
+            object : NativeAdLoaderCallback {
+                override fun onNativeAdLoaded(nativeAd: NativeAd) {
+                    handler.post {
+                        this@AdMobNativeAd.nativeAd = nativeAd
+                        nativeAd.adEventCallback = object : NativeAdEventCallback {
+                            override fun onAdClicked() {
+                                handler.post {
+                                    this@AdMobNativeAd.onAdClicked()
+                                }
+                            }
+
+                            override fun onAdImpression() {
+                                handler.post {
+                                    this@AdMobNativeAd.onShowSuccess()
+                                }
+                            }
+
+                            override fun onAdPaid(value: AdValue) {
+                                handler.post {
+                                    val revenue = value.valueMicros / 1000000.0
+                                    materialEcpm = revenue * 1000
+                                    materialRevenue = AdRevenue(
+                                        getPlatform(),
+                                        getSourceNetwork(),
+                                        getAdType(),
+                                        getUnitCode(),
+                                        revenue,
+                                        value.currencyCode,
+                                    )
+                                    onPaid()
+                                }
+                            }
+                        }
+                        this@AdMobNativeAd.onLoadSuccess()
+                    }
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        this@AdMobNativeAd.onLoadFailed(
+                            AdErrorC(
+                                adError.code.toString(),
+                                adError.message
+                            )
                         )
-                    )
+                    }
                 }
-
-                override fun onAdClicked() {
-                    this@AdMobNativeAd.onAdClicked()
-                }
-
-                override fun onAdImpression() {
-                    this@AdMobNativeAd.onShowSuccess()
-                }
-            })
-            .withNativeAdOptions(adOptions)
-            .build()
-
-        adLoader.loadAd(AdRequest.Builder().build())
+            }
+        )
     }
 
     override fun showAd(context: Context, container: AdContainer?) {
@@ -333,20 +386,6 @@ class AdMobNativeAd(metadata: AdMetadata) : AdmobAd(metadata) {
             onShowFailed(AdErrorC(AdErrorC.ERROR_INTERNAL, "Container is required"))
             return
         }
-        // Set up revenue tracking
-        ad.setOnPaidEventListener { adValue ->
-            val revenue = adValue.valueMicros / 1000000.0
-            materialEcpm = revenue * 1000
-            materialRevenue = AdRevenue(
-                getPlatform(),
-                getSourceNetwork(),
-                getAdType(),
-                "",
-                revenue,
-                adValue.currencyCode,
-            )
-            onPaid()
-        }
 
         // Get the root view from render
         val rootView = render.getRoot(activity, rootContainer, ad)
@@ -370,14 +409,16 @@ class AdMobNativeAd(metadata: AdMetadata) : AdmobAd(metadata) {
         }
 
         // Handle media content
+        var mediaView: MediaView? = null
         render.getMediaContainer()?.let { mediaContainer ->
-            val mediaView = MediaView(activity)
-            mediaView.setMediaContent(ad.mediaContent)
-            mediaView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            val view = MediaView(activity)
+            view.mediaContent = ad.mediaContent
+            view.imageScaleType = ImageView.ScaleType.CENTER_CROP
+            mediaView = view
 
             mediaContainer.removeAllViews()
             mediaContainer.addView(
-                mediaView,
+                view,
                 ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
@@ -406,15 +447,10 @@ class AdMobNativeAd(metadata: AdMetadata) : AdmobAd(metadata) {
         nativeAdView.iconView = render.getIconView()
         nativeAdView.callToActionView = render.getActionView()
         nativeAdView.advertiserView = render.getLogoView()
-        render.getMediaContainer()?.let { mediaContainer ->
-            if (mediaContainer.childCount > 0 && mediaContainer.getChildAt(0) is MediaView) {
-                nativeAdView.mediaView = mediaContainer.getChildAt(0) as MediaView
-            }
-        }
 
         // Add root view to native ad view
         nativeAdView.addView(rootView)
-        nativeAdView.setNativeAd(ad)
+        nativeAdView.registerNativeAd(ad, mediaView)
 
         // Add to container
         rootContainer.removeAllViews()
@@ -441,7 +477,7 @@ class AdMobNativeAd(metadata: AdMetadata) : AdmobAd(metadata) {
     }
 
     override fun getSourceNetwork(): String {
-        return nativeAd?.responseInfo?.loadedAdapterResponseInfo?.adSourceName ?: ""
+        return nativeAd?.getResponseInfo()?.loadedAdSourceResponseInfo?.name ?: ""
     }
 }
 
@@ -453,26 +489,28 @@ class AdMobRewardedAd(metadata: AdMetadata) : AdmobAd(metadata) {
 
     override fun loadAd(context: Context) {
         val unitId = getUnitCode()
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder(unitId).build()
 
         RewardedAd.load(
-            context,
-            unitId,
             adRequest,
-            object : RewardedAdLoadCallback() {
+            object : AdLoadCallback<RewardedAd> {
                 override fun onAdLoaded(ad: RewardedAd) {
-                    rewardedAd = ad
-                    this@AdMobRewardedAd.onLoadSuccess()
+                    handler.post {
+                        rewardedAd = ad
+                        this@AdMobRewardedAd.onLoadSuccess()
+                    }
                 }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    rewardedAd = null
-                    this@AdMobRewardedAd.onLoadFailed(
-                        AdErrorC(
-                            loadAdError.code.toString(),
-                            loadAdError.message
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        rewardedAd = null
+                        this@AdMobRewardedAd.onLoadFailed(
+                            AdErrorC(
+                                adError.code.toString(),
+                                adError.message
+                            )
                         )
-                    )
+                    }
                 }
             }
         )
@@ -491,49 +529,63 @@ class AdMobRewardedAd(metadata: AdMetadata) : AdmobAd(metadata) {
             return
         }
 
-        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+        ad.adEventCallback = object : RewardedAdEventCallback {
             override fun onAdClicked() {
-                this@AdMobRewardedAd.onAdClicked()
+                handler.post {
+                    this@AdMobRewardedAd.onAdClicked()
+                }
             }
 
             override fun onAdDismissedFullScreenContent() {
-                this@AdMobRewardedAd.onAdClosed()
+                handler.post {
+                    this@AdMobRewardedAd.onAdClosed()
+                }
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
-                this@AdMobRewardedAd.onShowFailed(
-                    AdErrorC(
-                        adError.code.toString(),
-                        adError.message
+            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                handler.post {
+                    this@AdMobRewardedAd.onShowFailed(
+                        AdErrorC(
+                            fullScreenContentError.code.toString(),
+                            fullScreenContentError.message
+                        )
                     )
-                )
+                }
             }
 
             override fun onAdShowedFullScreenContent() {
-                this@AdMobRewardedAd.onShowSuccess()
+                handler.post {
+                    this@AdMobRewardedAd.onShowSuccess()
+                }
             }
 
             override fun onAdImpression() {
-                this@AdMobRewardedAd.onShowSuccess()
+                handler.post {
+                    this@AdMobRewardedAd.onShowSuccess()
+                }
+            }
+
+            override fun onAdPaid(value: AdValue) {
+                handler.post {
+                    val revenue = value.valueMicros / 1000000.0
+                    materialEcpm = revenue * 1000
+                    materialRevenue = AdRevenue(
+                        getPlatform(),
+                        getSourceNetwork(),
+                        getAdType(),
+                        getUnitCode(),
+                        revenue,
+                        value.currencyCode,
+                    )
+                    onPaid()
+                }
             }
         }
 
-        ad.setOnPaidEventListener { adValue ->
-            val revenue = adValue.valueMicros / 1000000.0
-            materialEcpm = revenue * 1000
-            materialRevenue = AdRevenue(
-                getPlatform(),
-                getSourceNetwork(),
-                getAdType(),
-                ad?.adUnitId ?: "",
-                revenue,
-                adValue.currencyCode,
-            )
-            onPaid()
-        }
-
         ad.show(activity) { rewardItem ->
-            this@AdMobRewardedAd.onAdRewarded()
+            handler.post {
+                this@AdMobRewardedAd.onAdRewarded()
+            }
         }
     }
 
@@ -542,7 +594,7 @@ class AdMobRewardedAd(metadata: AdMetadata) : AdmobAd(metadata) {
     }
 
     override fun getSourceNetwork(): String {
-        return rewardedAd?.responseInfo?.loadedAdapterResponseInfo?.adSourceName ?: ""
+        return rewardedAd?.getResponseInfo()?.loadedAdSourceResponseInfo?.name ?: ""
     }
 }
 
@@ -554,26 +606,28 @@ class AdMobSplashAd(metadata: AdMetadata) : AdmobAd(metadata) {
 
     override fun loadAd(context: Context) {
         val unitId = getUnitCode()
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder(unitId).build()
 
         AppOpenAd.load(
-            context,
-            unitId,
             adRequest,
-            object : AppOpenAd.AppOpenAdLoadCallback() {
+            object : AdLoadCallback<AppOpenAd> {
                 override fun onAdLoaded(ad: AppOpenAd) {
-                    appOpenAd = ad
-                    this@AdMobSplashAd.onLoadSuccess()
+                    handler.post {
+                        appOpenAd = ad
+                        this@AdMobSplashAd.onLoadSuccess()
+                    }
                 }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    appOpenAd = null
-                    this@AdMobSplashAd.onLoadFailed(
-                        AdErrorC(
-                            loadAdError.code.toString(),
-                            loadAdError.message
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        appOpenAd = null
+                        this@AdMobSplashAd.onLoadFailed(
+                            AdErrorC(
+                                adError.code.toString(),
+                                adError.message
+                            )
                         )
-                    )
+                    }
                 }
             }
         )
@@ -592,40 +646,52 @@ class AdMobSplashAd(metadata: AdMetadata) : AdmobAd(metadata) {
             return
         }
 
-        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+        ad.adEventCallback = object : AppOpenAdEventCallback {
             override fun onAdClicked() {
-                this@AdMobSplashAd.onAdClicked()
+                handler.post {
+                    this@AdMobSplashAd.onAdClicked()
+                }
             }
 
             override fun onAdDismissedFullScreenContent() {
-                this@AdMobSplashAd.onAdClosed()
+                handler.post {
+                    this@AdMobSplashAd.onAdClosed()
+                }
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
-                this@AdMobSplashAd.onShowFailed(AdErrorC(adError.code.toString(), adError.message))
+            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                handler.post {
+                    this@AdMobSplashAd.onShowFailed(AdErrorC(fullScreenContentError.code.toString(), fullScreenContentError.message))
+                }
             }
 
             override fun onAdShowedFullScreenContent() {
-                this@AdMobSplashAd.onShowSuccess()
+                handler.post {
+                    this@AdMobSplashAd.onShowSuccess()
+                }
             }
 
             override fun onAdImpression() {
-                this@AdMobSplashAd.onShowSuccess()
+                handler.post {
+                    this@AdMobSplashAd.onShowSuccess()
+                }
             }
-        }
 
-        ad.setOnPaidEventListener { adValue ->
-            val revenue = adValue.valueMicros / 1000000.0
-            materialEcpm = revenue * 1000
-            materialRevenue = AdRevenue(
-                getPlatform(),
-                getSourceNetwork(),
-                getAdType(),
-                ad?.adUnitId ?: "",
-                revenue,
-                adValue.currencyCode,
-            )
-            onPaid()
+            override fun onAdPaid(value: AdValue) {
+                handler.post {
+                    val revenue = value.valueMicros / 1000000.0
+                    materialEcpm = revenue * 1000
+                    materialRevenue = AdRevenue(
+                        getPlatform(),
+                        getSourceNetwork(),
+                        getAdType(),
+                        getUnitCode(),
+                        revenue,
+                        value.currencyCode,
+                    )
+                    onPaid()
+                }
+            }
         }
 
         ad.show(activity)
@@ -636,6 +702,6 @@ class AdMobSplashAd(metadata: AdMetadata) : AdmobAd(metadata) {
     }
 
     override fun getSourceNetwork(): String {
-        return appOpenAd?.responseInfo?.loadedAdapterResponseInfo?.adSourceName ?: ""
+        return appOpenAd?.getResponseInfo()?.loadedAdSourceResponseInfo?.name ?: ""
     }
 }
