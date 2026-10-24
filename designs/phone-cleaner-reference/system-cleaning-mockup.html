@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cleaner · System Cleaning</title>
+  <style>
+    :root { font-family: Arial, Helvetica, sans-serif; color: #101116; background: #e7e7e7; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body { overflow: hidden; }
+    button { font: inherit; cursor: pointer; }
+    .viewport { position: fixed; inset: 0; overflow: hidden; background: radial-gradient(circle at 13% 12%, #fff 0 21%, #e8e8e8 59%, #c8c8c8 100%); }
+    .scene { position: absolute; width: 1748px; height: 1298px; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(var(--scene-scale,1)); transform-origin: center; overflow: hidden; }
+    .plinth { position: absolute; background: #f7f7f6; box-shadow: 0 45px 80px #68686833; }
+    .plinth.one { width: 1610px; height: 1210px; left: -135px; top: 225px; transform: rotate(-17deg) skewX(16deg); border: 1px solid #ffffff; }
+    .plinth.two { width: 1210px; height: 640px; right: -120px; top: 255px; transform: rotate(-18deg) skewX(10deg); background: #dedede; opacity: .45; }
+    .phone {
+      position: absolute; width: 390px; height: 844px; left: 78px; top: 150px;
+      transform-origin: top left; transform: matrix(1.78,-.50,.86,1.36,0,0);
+      border: 6px solid #08090b; border-radius: 54px;
+      background: #e1efff;
+      box-shadow: -7px 6px 0 #c9c9c9, -10px 8px 2px #737575, 7px 15px 0 #e3e3e3, 12px 21px 0 #7d7f80, 28px 53px 48px #0006;
+      isolation: isolate;
+    }
+    .phone::before { content: ""; position: absolute; left: -12px; top: 258px; height: 88px; width: 3px; border-radius: 3px; background: linear-gradient(90deg,#777,#f7f7f7,#444); box-shadow: 0 110px 0 #b0b0b0; }
+    .phone::after { content: ""; position: absolute; right: 46px; bottom: -13px; width: 75px; height: 3px; border-radius: 100%; background: #161616; box-shadow: -45px 1px 0 -1px #303030, 99px 0 0 -1px #343434; }
+    .screen { position: relative; width: 100%; height: 100%; border-radius: 47px; overflow: hidden; background: #deedff; }
+    .island { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 108px; height: 29px; border-radius: 22px; background: #020303; z-index: 5; }
+    .island::after { content: ""; position: absolute; right: 11px; top: 10px; width: 10px; height: 10px; background: radial-gradient(circle at 37% 38%,#274761,#060d17 65%); border-radius: 50%; }
+    .topbar { height: 119px; position: relative; padding-top: 63px; display: flex; align-items: flex-start; justify-content: space-between; padding-left: 20px; padding-right: 20px; }
+    .topbar h1 { margin: 4px 0 0; font-size: 17px; line-height: 34px; font-weight: 600; letter-spacing: -.3px; }
+    .icon-button { width: 42px; height: 34px; border: 0; border-radius: 14px; background: #fff; display: grid; place-items: center; padding: 0; color: #08090b; }
+    .icon-button svg { width: 21px; height: 21px; stroke: currentColor; stroke-width: 2.1; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .meter-zone { position: relative; height: 325px; display: grid; place-items: start center; }
+    .meter-shadow { position: absolute; width: 315px; height: 315px; top: 2px; left: 50%; transform: translateX(-50%); border-radius: 50%; background: #7cb9ff; filter: blur(25px); opacity: .31; }
+    .meter { position: relative; width: 320px; height: 320px; margin-top: 2px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 44% 49%,#d9edff 0 43%,#8bc0ff 61%,#d5eaff 72%); box-shadow: 0 6px 5px #479dff18; }
+    .meter .ring { position: absolute; border-radius: 50%; inset: 0; }
+    .meter .ring.outer { inset: 3px; background: conic-gradient(from -50deg,#d7ebff 0deg,#80b7f7 83deg,#6caefb 158deg,#afd5ff 222deg,#e5f2ff 309deg,#d7ebff 360deg); mask: radial-gradient(transparent 0 63%,#000 64%); opacity: .84; }
+    .meter .ring.middle { inset: 19px; background: conic-gradient(from -40deg,#a4d0ff,#5ba6f8 29%,#acd5ff 56%,#70b3fb 75%,#d4e9ff); mask: radial-gradient(transparent 0 65%,#000 66%); box-shadow: inset 0 6px 9px #317dce57; opacity: .88; }
+    .meter .ring.inner { inset: 35px; background: conic-gradient(from -18deg,#75b5fb,#469cf3 28%,#d4ecff 55%,#6bb0fa 78%,#8fc5ff); mask: radial-gradient(transparent 0 74%,#000 75%); opacity: .81; }
+    .meter .core { width: 231px; height: 231px; position: relative; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle at 49% 39%,#e6f3ff 0 37%,#c1e0ff 72%,#75b5f7 100%); box-shadow: inset 0 10px 24px #2577d563, inset 0 -2px 10px #fff9, 0 0 15px #247ffb33; }
+    .amount { margin-top: 14px; font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -1.8px; }
+    .meter-label { margin-top: 8px; font-size: 14px; color: #151920; letter-spacing: -.2px; }
+    .sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 386px; background: #fff; border-radius: 36px 36px 0 0; padding: 22px 23px 28px; box-shadow: 0 -4px 20px #fff6; }
+    .handle { width: 78px; height: 3px; border-radius: 5px; margin: 0 auto 18px; background: #92959a; }
+    .cleanup-list { display: flex; flex-direction: column; gap: 6px; }
+    .cleanup-row { width: 100%; height: 67px; display: flex; align-items: center; gap: 15px; text-align: left; border: 0; padding: 0; background: none; color: inherit; }
+    .row-icon { flex: 0 0 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: white; }
+    .row-icon.orange { background: #f58c00; } .row-icon.periwinkle { background: #8392ff; } .row-icon.purple { background: #d874f4; }
+    .row-icon svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .row-copy { min-width: 0; flex: 1; }
+    .row-title { display: block; font-size: 17px; font-weight: 700; letter-spacing: -.3px; white-space: nowrap; }
+    .row-status { display: block; margin-top: 4px; color: #92949b; font-size: 13px; letter-spacing: .1px; }
+    .row-size { margin-left: auto; color: #92949b; font-size: 13px; white-space: nowrap; }
+    .check { width: 21px; height: 21px; border: 1.5px solid #a4a9b0; border-radius: 50%; margin-left: 8px; flex: 0 0 auto; display: grid; place-items: center; }
+    .check svg { width: 14px; height: 14px; display: none; stroke: white; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .cleanup-row[aria-pressed="true"] .check { border-color: #1681fa; background: #1681fa; }
+    .cleanup-row[aria-pressed="true"] .check svg { display: block; }
+    .clean-now { width: 100%; height: 54px; margin-top: 19px; border: 0; border-radius: 11px; background: #117cfa; color: white; font-size: 16px; font-weight: 500; box-shadow: 0 14px 21px #117cfa36; }
+    .clean-now:active { transform: translateY(1px); }
+    .view-switch { position: fixed; z-index: 100; right: 22px; top: 20px; padding: 4px; display: flex; gap: 2px; border-radius: 99px; background: #ffffffdc; border: 1px solid #dde3ea; box-shadow: 0 9px 28px #0002; backdrop-filter: blur(12px); }
+    .view-switch button { border: 0; border-radius: 99px; padding: 9px 16px; color: #444; background: transparent; font-size: 13px; }
+    .view-switch button.active { color: #fff; background: #147efa; }
+    .viewport.flat { background: #e9edf3; display: grid; place-items: center; }
+    .viewport.flat .scene { width: 390px; height: 844px; transform: translate(-50%,-50%) scale(var(--flat-scale,1)); overflow: visible; }
+    .viewport.flat .plinth { display: none; }
+    .viewport.flat .phone { top: 0; left: 0; transform: none; box-shadow: 0 26px 70px #1424403d; }
+    @media (max-width: 680px) { .view-switch { display: none; } .viewport.flat .phone { border-width: 0; border-radius: 0; } .viewport.flat .screen { border-radius: 0; } .viewport.flat .phone::before, .viewport.flat .phone::after { display:none; } }
+  </style>
+</head>
+<body>
+  <main class="viewport" id="viewport">
+    <div class="scene" id="scene">
+      <div class="plinth one" aria-hidden="true"></div>
+      <div class="plinth two" aria-hidden="true"></div>
+      <section class="phone" aria-label="System cleaning screen" data-screen-label="System Cleaning">
+        <div class="screen">
+          <div class="island" aria-hidden="true"></div>
+          <header class="topbar">
+            <button class="icon-button" aria-label="Back" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"></path></svg></button>
+            <h1>Cleaner</h1>
+            <button class="icon-button" aria-label="Settings" type="button"><svg viewBox="0 0 24 24"><path d="M10 2.5h4l.6 2.2 1.8.8 2-.9 2.8 2.8-.9 2 .8 1.8 2.2.6v4l-2.2.6-.8 1.8.9 2-2.8 2.8-2-.9-1.8.8-.6 2.2h-4l-.6-2.2-1.8-.8-2 .9-2.8-2.8.9-2-.8-1.8-2.2-.6v-4l2.2-.6.8-1.8-.9-2 2.8-2.8 2 .9 1.8-.8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+          </header>
+          <section class="meter-zone" aria-label="4.69 gigabytes available for system cleaning">
+            <div class="meter-shadow" aria-hidden="true"></div>
+            <div class="meter">
+              <div class="ring outer" aria-hidden="true"></div>
+              <div class="ring middle" aria-hidden="true"></div>
+              <div class="ring inner" aria-hidden="true"></div>
+              <div class="core"><span class="amount">4.69GB</span><span class="meter-label">System Cleaning</span></div>
+            </div>
+          </section>
+          <section class="sheet" aria-label="Cleaning categories">
+            <div class="handle" aria-hidden="true"></div>
+            <div class="cleanup-list">
+              <button class="cleanup-row" type="button" aria-pressed="true">
+                <span class="row-icon orange"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5V19H4z"></path><path d="M12 4v7l8-2.5"></path></svg></span>
+                <span class="row-copy"><span class="row-title">Big Files</span><span class="row-status">Completed</span></span>
+                <span class="row-size">9.56 GB</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+              </button>
+              <button class="cleanup-row" type="button" aria-pressed="false">
+                <span class="row-icon periwinkle"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m10 8 6 4-6 4z" fill="white" stroke="none"></path></svg></span>
+                <span class="row-copy"><span class="row-title">Audio And Vedio</span><span class="row-status">Progress</span></span>
+                <span class="row-size">0.005 B</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+              </button>
+              <button class="cleanup-row" type="button" aria-pressed="true">
+                <span class="row-icon purple"><svg viewBox="0 0 24 24"><path d="M5 7h14v13H5zM4 7l3-3h10l3 3"></path><path d="M10 10v4m4-4v4"></path></svg></span>
+                <span class="row-copy"><span class="row-title">Main Memory</span><span class="row-status">Completed</span></span>
+                <span class="row-size">28.55GB</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+              </button>
+            </div>
+            <button class="clean-now" type="button">Clean Now</button>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+  <nav class="view-switch" aria-label="Preview angle">
+    <button type="button" id="angled" class="active" aria-pressed="true">效果图</button>
+    <button type="button" id="flat" aria-pressed="false">正视图</button>
+  </nav>
+  <script>
+    const viewport = document.getElementById('viewport');
+    const angled = document.getElementById('angled');
+    const flat = document.getElementById('flat');
+    const scene = document.getElementById('scene');
+    function resizeScene() {
+      scene.style.setProperty('--scene-scale', Math.min(innerWidth / 1748, innerHeight / 1298).toString());
+      scene.style.setProperty('--flat-scale', Math.min(innerWidth / 390, innerHeight / 844, 1.15).toString());
+    }
+    function setView(isFlat) {
+      viewport.classList.toggle('flat', isFlat);
+      angled.classList.toggle('active', !isFlat);
+      flat.classList.toggle('active', isFlat);
+      angled.setAttribute('aria-pressed', String(!isFlat));
+      flat.setAttribute('aria-pressed', String(isFlat));
+      resizeScene();
+    }
+    angled.addEventListener('click', () => setView(false));
+    flat.addEventListener('click', () => setView(true));
+    document.querySelectorAll('.cleanup-row').forEach(row => row.addEventListener('click', () => row.setAttribute('aria-pressed', String(row.getAttribute('aria-pressed') !== 'true'))));
+    addEventListener('resize', resizeScene);
+    resizeScene();
+    if (innerWidth < 680) setView(true);
+  </script>
+</body>
+</html>

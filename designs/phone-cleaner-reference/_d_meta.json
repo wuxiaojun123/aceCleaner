@@ -1,0 +1,18 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "system-cleaning": {
+      "versions": [
+        {
+          "path": "system-cleaning.html",
+          "createdAt": "2026-10-24T08:28:44.368Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-10-24T08:28:44.380Z",
+  "updatedAt": "2026-10-24T14:46:59.204Z"
+}

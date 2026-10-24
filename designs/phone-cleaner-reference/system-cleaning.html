@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#deedff">
+  <title>Cleaner · System Cleaning</title>
+  <style>
+    :root { font-family: Arial, Helvetica, sans-serif; color: #111216; background: #e6e9ee; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible, input:focus-visible { outline: 3px solid #005ac2; outline-offset: 3px; }
+    .app { position: relative; width: min(100%, 430px); height: min(100dvh, 932px); min-height: 760px; margin: 0 auto; overflow: hidden; background: #deedff; box-shadow: 0 20px 70px #25395520; }
+    .screen { position: absolute; inset: 0; }
+    .screen[hidden], .overlay[hidden] { display: none; }
+    .clean-screen { background: #deedff; }
+    .topbar { position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: 110px; display: grid; grid-template-columns: 44px 1fr 44px; align-items: end; gap: 10px; padding: 0 22px 17px; }
+    .topbar h1 { margin: 0; text-align: center; font-size: 20px; line-height: 42px; font-weight: 600; letter-spacing: -.4px; }
+    .icon-button { width: 44px; height: 42px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 16px; color: #0d1014; background: #fff; }
+    .icon-button svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .meter-section { position: absolute; top: 103px; left: 0; right: 0; height: 360px; display: grid; place-items: center; }
+    .meter { position: relative; width: min(80vw, 340px); height: min(86vw, 360px); max-width: 340px; max-height: 360px; display: grid; place-items: center; filter: drop-shadow(0 7px 10px #4fa4fb1f); }
+    .meter-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .meter-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-12px); }
+    .meter-amount { font-size: 42px; line-height: 1; font-weight: 700; letter-spacing: -2px; }
+    .meter-caption { margin-top: 9px; font-size: 16px; letter-spacing: -.2px; }
+    .sheet { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 370px; padding: 22px 25px max(27px,env(safe-area-inset-bottom)); border-radius: 39px 39px 0 0; background: #fff; box-shadow: 0 -3px 18px #fff9; }
+    .handle { width: 77px; height: 3px; margin: 0 auto 2px; border-radius: 4px; background: #93969c; }
+    .item-list { display: grid; gap: 4px; }
+    .item { width: 100%; min-height: 71px; padding: 0; display: grid; grid-template-columns: 48px minmax(0,1fr) auto 23px; align-items: center; column-gap: 14px; border: 0; background: none; text-align: left; color: inherit; }
+    .item-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; color: #fff; }
+    .item-icon svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    .orange { background: #f58b00; } .violet { background: #8393ff; } .pink { background: #d976ef; }
+    .item-copy { min-width: 0; }
+    .item-title { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.35px; white-space: nowrap; }
+    .item-subtitle { display: block; margin-top: 6px; font-size: 14px; color: #9699a1; }
+    .item-size { font-size: 14px; color: #92959e; white-space: nowrap; }
+    .check { width: 22px; height: 22px; margin-left: 1px; border: 1.5px solid #9ea3ab; border-radius: 50%; display: grid; place-items: center; }
+    .check svg { width: 15px; height: 15px; display: none; fill: none; stroke: #fff; stroke-width: 2.7; stroke-linecap: round; stroke-linejoin: round; }
+    .item[aria-pressed="true"] .check { border-color: #147df7; background: #147df7; }
+    .item[aria-pressed="true"] .check svg { display: block; }
+    .primary { width: 100%; height: 57px; margin-top: 20px; border: 0; border-radius: 12px; background: #157dF8; color: #fff; font-size: 17px; font-weight: 500; box-shadow: 0 17px 20px #1278ee32; }
+    .primary:active { transform: translateY(1px); }
+    .primary:disabled { background: #aacbf5; box-shadow: none; cursor: not-allowed; }
+    .home-screen { background: #edf1f7; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; overscroll-behavior: contain; }
+    .home-screen::-webkit-scrollbar { display: none; }
+    .home-pinned { position: sticky; z-index: 5; top: 0; height: 56px; margin-bottom: -56px; padding: 0 25px; display: flex; align-items: center; justify-content: space-between; border-radius: 0 0 18px 18px; background: #fff; box-shadow: 0 7px 20px #1a46751c; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .home-pinned.visible { opacity: 1; pointer-events: auto; }
+    .home-pinned strong { font-size: 17px; }
+    .home-intro { position: relative; height: 449px; }
+    .home-hero { position: absolute; inset: 0 0 auto; height: 401px; border-radius: 0 0 34px 34px; background: radial-gradient(circle at 50% 47%,#f4faff 0,#fff 57%); }
+    .home-topbar { position: absolute; z-index: 2; top: 49px; left: 25px; right: 25px; display: flex; align-items: center; justify-content: space-between; }
+    .menu-button { width: 42px; height: 42px; border: 0; border-radius: 14px; display: grid; place-items: center; color: #0879f6; background: #e9edff; }
+    .menu-button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+    .language-button { width: 42px; height: 42px; border: 0; padding: 0; border-radius: 50%; display: grid; place-items: center; color: #087af8; background: #e9edff; }
+    .language-button svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+    .home-gauge { position: absolute; width: min(70vw, 275px); height: min(70vw, 275px); left: 50%; top: 95px; transform: translateX(-50%); }
+    .home-gauge svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 9px 12px #2285ef14); }
+    .gauge-copy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 11px; }
+    .gauge-number { font-size: 69px; font-weight: 700; line-height: 1; letter-spacing: -3px; }
+    .gauge-caption { margin-top: 14px; color: #9499a2; font-size: 15px; line-height: 1.65; text-align: center; }
+    .smart-button { position: absolute; z-index: 3; top: 375px; left: 50%; transform: translateX(-50%); width: 198px; height: 55px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 30px; color: #fff; background: #117cfa; box-shadow: 0 18px 25px #1380f763; font-size: 16px; white-space: nowrap; }
+    .smart-button:active { transform: translateX(-50%) translateY(1px); }
+    .smart-button svg { width: 21px; height: 21px; fill: #fff; }
+    .feature-grid { position: relative; margin: 0 25px 22px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-rows: 168px; gap: 16px; }
+    .feature-card { min-width: 0; padding: 20px 17px 17px; border: 0; border-radius: 27px; text-align: left; color: #111216; background: #fff; display: flex; flex-direction: column; align-items: flex-start; }
+    .feature-card:active { transform: translateY(1px); }
+    .feature-icon { width: 59px; height: 59px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; color: var(--icon-color,#087af8); background: var(--icon-bg,#e4f0ff); }
+    .feature-icon svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .tone-network { --icon-color: #087af8; --icon-bg: #e4f0ff; }
+    .tone-duplicate { --icon-color: #f59400; --icon-bg: #fff0d9; }
+    .tone-apps { --icon-color: #08b98d; --icon-bg: #dff9f0; }
+    .tone-screenshots { --icon-color: #7e58e9; --icon-bg: #f1eafe; }
+    .tone-large { --icon-color: #f36659; --icon-bg: #ffe9e5; }
+    .tone-videos { --icon-color: #5669da; --icon-bg: #e9ecff; }
+    .tone-ram { --icon-color: #0ba7a9; --icon-bg: #ddf8f7; }
+    .tone-device { --icon-color: #34a8e2; --icon-bg: #e1f5ff; }
+    .tone-battery { --icon-color: #c69500; --icon-bg: #fff8d9; }
+    .tone-speed { --icon-color: #679c18; --icon-bg: #eff8de; }
+    .feature-title { display: block; margin-top: auto; font-size: 17px; font-weight: 700; line-height: 1.08; }
+    .feature-subtitle { display: block; width: 100%; margin-top: 11px; color: #92969f; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.25px; }
+    .feature-grid.more { margin-top: 0; margin-bottom: 38px; }
+    .notification-banner { width: calc(100% - 50px); min-height: 70px; margin: 2px 25px 22px; padding: 13px 17px; display: flex; align-items: center; gap: 13px; border-radius: 24px; background: #fff; }
+    .notification-mark { width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; color: #d94faf; background: #fce8f5; }
+    .notification-mark svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .notification-main { min-width: 0; flex: 1; padding: 0; border: 0; color: #111216; background: none; text-align: left; }
+    .notification-main strong { display: block; font-size: 14px; }
+    .notification-main small { display: block; margin-top: 3px; color: #92969f; font-size: 12px; }
+    .notification-toggle { appearance: none; width: 42px; height: 25px; flex: 0 0 auto; position: relative; border: 0; border-radius: 99px; background: #d6deea; cursor: pointer; }
+    .notification-toggle::after { content: ""; position: absolute; left: 3px; top: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px #0002; transition: transform .2s; }
+    .notification-toggle:checked { background: #117cfa; }
+    .notification-toggle:checked::after { transform: translateX(17px); }
+    .menu-entry { width: 100%; min-height: 57px; padding: 0; display: flex; align-items: center; justify-content: space-between; border: 0; border-top: 1px solid #edf0f4; color: #172033; background: none; text-align: left; font-size: 16px; }
+    .info-copy { color: #818b98; line-height: 1.5; margin: 0 0 25px; }
+    .overlay { position: absolute; z-index: 10; inset: 0; display: flex; align-items: end; background: #101d347a; }
+    .panel { width: 100%; padding: 24px 25px max(32px,env(safe-area-inset-bottom)); border-radius: 34px 34px 0 0; background: #fff; box-shadow: 0 -25px 50px #0d315b30; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .panel-header h2 { margin: 0; font-size: 23px; letter-spacing: -.5px; }
+    .close { width: 35px; height: 35px; border: 0; border-radius: 50%; background: #edf2f8; font-size: 22px; color: #5b6571; }
+    .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 62px; font-size: 16px; border-top: 1px solid #edf0f4; }
+    .setting-row input { appearance: none; width: 44px; height: 26px; border-radius: 99px; background: #d5dbe5; position: relative; cursor: pointer; }
+    .setting-row input::after { content: ""; position: absolute; width: 20px; height: 20px; top: 3px; left: 3px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px #0002; transition: transform .2s; }
+    .setting-row input:checked { background: #157df8; }
+    .setting-row input:checked::after { transform: translateX(18px); }
+    .result { padding: 20px 0 5px; text-align: center; }
+    .result-mark { width: 66px; height: 66px; margin: 0 auto 17px; display: grid; place-items: center; border-radius: 50%; background: #e8f3ff; color: #117cf6; font-size: 35px; }
+    .result strong { display: block; font-size: 23px; }
+    .result p { color: #87909d; margin: 10px 0 18px; }
+    .result .primary { margin-top: 0; }
+    @media (max-width: 430px) { body { background: #deedff; } .app { width: 100%; box-shadow: none; } }
+    @media (max-height: 830px) { .meter-section { top: 96px; } .sheet { height: 355px; } .handle { margin-bottom: 1px; } .item { min-height: 66px; } .primary { margin-top: 17px; } .home-intro { height: 428px; } .home-hero { height: 380px; } .home-gauge { top: 87px; width: min(66vw,255px); height: min(66vw,255px); } .smart-button { top: 354px; } .feature-card { padding: 15px; } .feature-icon { width: 50px; height: 50px; } .feature-subtitle { font-size: 12px; } }
+  </style>
+  <link rel="stylesheet" href="feature-pages.css?v=14">
+</head>
+<body>
+  <main class="app" id="app">
+    <section class="screen clean-screen" id="cleanScreen" data-screen-label="System Cleaning" hidden>
+      <header class="topbar">
+        <button class="icon-button" id="backButton" aria-label="Back" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"></path></svg></button>
+        <h1>Cleaner</h1>
+        <button class="icon-button" id="settingsButton" aria-label="Settings" type="button"><svg viewBox="0 0 24 24"><path d="M10 2.5h4l.6 2.2 1.8.8 2-.9 2.8 2.8-.9 2 .8 1.8 2.2.6v4l-2.2.6-.8 1.8.9 2-2.8 2.8-2-.9-1.8.8-.6 2.2h-4l-.6-2.2-1.8-.8-2 .9-2.8-2.8.9-2-.8-1.8-2.2-.6v-4l2.2-.6.8-1.8-.9-2 2.8-2.8 2 .9 1.8-.8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      </header>
+      <section class="meter-section" aria-label="System cleaning amount">
+        <div class="meter" aria-hidden="true">
+          <svg class="meter-art" viewBox="0 0 365 310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="outerGlow" cx="50%" cy="44%" r="62%"><stop offset="0" stop-color="#82baff"/><stop offset=".66" stop-color="#90c3ff"/><stop offset="1" stop-color="#e0efff"/></radialGradient>
+              <linearGradient id="outerLayer" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9edff"/><stop offset=".28" stop-color="#83baff"/><stop offset=".63" stop-color="#6daff7"/><stop offset="1" stop-color="#cce5ff"/></linearGradient>
+              <linearGradient id="middleLayer" x1=".12" y1="0" x2=".88" y2="1"><stop offset="0" stop-color="#c5e2ff"/><stop offset=".35" stop-color="#65a9f3"/><stop offset=".68" stop-color="#83bbfa"/><stop offset="1" stop-color="#b5daff"/></linearGradient>
+              <radialGradient id="innerBlue" cx="50%" cy="46%" r="59%"><stop offset="0" stop-color="#d8edff"/><stop offset=".61" stop-color="#a5d2ff"/><stop offset=".87" stop-color="#61a9f4"/><stop offset="1" stop-color="#418fe6"/></radialGradient>
+              <radialGradient id="bowl" cx="50%" cy="39%" r="63%"><stop offset="0" stop-color="#e3f2ff"/><stop offset=".47" stop-color="#e0f0ff"/><stop offset=".73" stop-color="#c8e4ff"/><stop offset=".93" stop-color="#9dceff"/><stop offset="1" stop-color="#6dacfa"/></radialGradient>
+              <filter id="soft"><feGaussianBlur stdDeviation="3.7"/></filter>
+              <filter id="softer"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <ellipse cx="183" cy="152" rx="177" ry="145" fill="url(#outerGlow)" opacity=".32" filter="url(#softer)"/>
+            <ellipse cx="182" cy="154" rx="172" ry="140" fill="url(#outerLayer)" opacity=".54"/>
+            <ellipse cx="190" cy="157" rx="153" ry="122" fill="url(#middleLayer)" opacity=".64"/>
+            <ellipse cx="173" cy="164" rx="148" ry="119" fill="url(#outerLayer)" opacity=".47"/>
+            <ellipse cx="185" cy="165" rx="132" ry="105" fill="url(#innerBlue)" opacity=".80"/>
+            <ellipse cx="176" cy="165" rx="117" ry="94" fill="url(#bowl)" filter="url(#soft)"/>
+            <path d="M13 147C29 68 86 19 177 15c76-3 137 42 165 113" fill="none" stroke="#e3f1ff" stroke-width="10" opacity=".26" filter="url(#softer)"/>
+            <path d="M24 190c24 67 83 103 161 103 78 0 135-38 161-99" fill="none" stroke="#6aaef5" stroke-width="10" opacity=".21" filter="url(#softer)"/>
+          </svg>
+          <div class="meter-copy"><span class="meter-amount" id="meterAmount">4.69GB</span><span class="meter-caption" id="meterCaption">System Cleaning</span></div>
+        </div>
+      </section>
+      <section class="sheet" aria-label="Cleaning categories">
+        <div class="handle" aria-hidden="true"></div>
+        <div class="item-list">
+          <button class="item" type="button" aria-pressed="true">
+            <span class="item-icon orange"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5V19H4z"></path><path d="M12 4v7l8-2.5"></path></svg></span>
+            <span class="item-copy"><span class="item-title">Big Files</span><span class="item-subtitle">Completed</span></span>
+            <span class="item-size">9.56 GB</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+          </button>
+          <button class="item" type="button" aria-pressed="false">
+            <span class="item-icon violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m10 8 6 4-6 4z" fill="white" stroke="none"></path></svg></span>
+            <span class="item-copy"><span class="item-title">Audio And Vedio</span><span class="item-subtitle">Progress</span></span>
+            <span class="item-size">0.005 B</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+          </button>
+          <button class="item" type="button" aria-pressed="true">
+            <span class="item-icon pink"><svg viewBox="0 0 24 24"><path d="M5 7h14v13H5zM4 7l3-3h10l3 3"></path><path d="M10 10v4m4-4v4"></path></svg></span>
+            <span class="item-copy"><span class="item-title">Main Memory</span><span class="item-subtitle">Completed</span></span>
+            <span class="item-size">28.55GB</span><span class="check"><svg viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"></path></svg></span>
+          </button>
+        </div>
+        <button class="primary" id="cleanButton" type="button">Clean Now</button>
+      </section>
+    </section>
+
+    <section class="screen home-screen" id="homeScreen" data-screen-label="Cleaner Home">
+      <div class="home-pinned" id="homePinned"><strong>Smart AI Cleaner</strong><button class="language-button" id="pinnedLanguageButton" type="button" aria-label="Language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"></path></svg></button></div>
+      <div class="home-intro">
+        <div class="home-hero" aria-hidden="true"></div>
+        <header class="home-topbar">
+          <button class="menu-button" id="menuButton" type="button" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M6 12h12M9 17h6"></path></svg></button>
+          <button class="language-button" id="languageButton" type="button" aria-label="Language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"></path></svg></button>
+        </header>
+        <div class="home-gauge" aria-label="90 files can be cleaned">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="150" cy="150" r="128" fill="none" stroke="#edf3f5" stroke-width="17"></circle>
+            <path d="M109 29 A128 128 0 1 1 22 150" fill="none" stroke="#117cf9" stroke-width="17" stroke-linecap="round"></path>
+            <circle cx="37" cy="35" r="8" fill="#117cf9"></circle><circle cx="279" cy="69" r="10" fill="#117cf9"></circle>
+            <circle cx="45" cy="257" r="2" fill="#117cf9"></circle><circle cx="242" cy="261" r="2" fill="#117cf9"></circle>
+            <circle cx="70" cy="151" r="2" fill="#117cf9"></circle><circle cx="206" cy="263" r="2" fill="#117cf9"></circle>
+          </svg>
+          <div class="gauge-copy"><strong class="gauge-number">90</strong><span class="gauge-caption">Can be cleaned<br>out 90 file</span></div>
+        </div>
+        <button class="smart-button" id="openCleaning" type="button"><svg viewBox="0 0 24 24"><path d="M3 4c6-1 13 2 17 10l-5 1-2 5c-8-4-11-11-10-16Zm8 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM7 17l-3 3 1-5 2 2Zm10 0 3-1-1 4-3 1 1-4Z"></path></svg><span>Smart Cleaning</span></button>
+      </div>
+      <div class="feature-grid" aria-label="Main cleaning tools">
+        <button class="feature-card tone-network" type="button" data-feature="Network Traffic">
+          <span class="feature-icon"><svg viewBox="0 0 32 32"><path d="M4 11c7-7 17-7 24 0M8 16c5-5 11-5 16 0M12 21c2-2 6-2 8 0"></path><circle cx="16" cy="26" r="1.5" fill="currentColor" stroke="none"></circle></svg></span>
+          <span class="feature-title">Network Traffic</span><span class="feature-subtitle">Live data usage</span>
+        </button>
+        <button class="feature-card tone-duplicate" type="button" data-feature="Duplicate Photo Cleaner">
+          <span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="9" y="5" width="18" height="20" rx="3"></rect><path d="M5 10v15a3 3 0 0 0 3 3h14M12 20l4-4 3 3 4-5"></path></svg></span>
+          <span class="feature-title">Duplicate Photos</span><span class="feature-subtitle">Find similar pictures</span>
+        </button>
+        <button class="feature-card tone-apps" type="button" data-feature="APP Manager">
+          <span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="4" y="4" width="10" height="10" rx="2"></rect><rect x="18" y="4" width="10" height="10" rx="2"></rect><rect x="4" y="18" width="10" height="10" rx="2"></rect><rect x="18" y="18" width="10" height="10" rx="2"></rect></svg></span>
+          <span class="feature-title">APP Manager</span><span class="feature-subtitle">Manage installed apps</span>
+        </button>
+        <button class="feature-card tone-screenshots" type="button" data-feature="Screenshot Cleaner">
+          <span class="feature-icon"><svg viewBox="0 0 32 32"><path d="M4 12V6a2 2 0 0 1 2-2h6m8 0h6a2 2 0 0 1 2 2v6m0 8v6a2 2 0 0 1-2 2h-6m-8 0H6a2 2 0 0 1-2-2v-6"></path><rect x="9" y="10" width="14" height="12" rx="2"></rect></svg></span>
+          <span class="feature-title">Screenshots</span><span class="feature-subtitle">Remove old captures</span>
+        </button>
+      </div>
+      <div class="notification-banner">
+        <span class="notification-mark"><svg viewBox="0 0 24 24"><path d="M5 17h14l-2-3V9a5 5 0 0 0-10 0v5zM10 20h4"></path></svg></span>
+        <button class="notification-main" id="notificationEntry" type="button"><strong>Notification Cleaner</strong><small>Never Miss a Key Tip</small></button>
+        <input class="notification-toggle" id="notificationToggle" type="checkbox" aria-label="Notification Cleaner">
+      </div>
+      <div class="feature-grid more" aria-label="More tools">
+        <button class="feature-card tone-large" type="button" data-feature="Big File Cleaner"><span class="feature-icon"><svg viewBox="0 0 32 32"><path d="M8 3h11l6 6v20H8zM19 3v7h6M12 17h9M12 22h7"></path></svg></span><span class="feature-title">Big Files</span><span class="feature-subtitle">Find large files</span></button>
+        <button class="feature-card tone-videos" type="button" data-feature="Video Cleaner"><span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="3"></rect><path d="m13 12 7 4-7 4z"></path></svg></span><span class="feature-title">Videos</span><span class="feature-subtitle">Review large videos</span></button>
+        <button class="feature-card tone-ram" type="button" data-feature="RAM Status"><span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="5" y="9" width="22" height="14" rx="2"></rect><path d="M9 13v6m5-6v6m5-6v6M8 6v3m6-3v3m6-3v3M8 23v3m6-3v3m6-3v3"></path></svg></span><span class="feature-title">RAM Status</span><span class="feature-subtitle">Memory overview</span></button>
+        <button class="feature-card tone-device" type="button" data-feature="Device Scan"><span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="9" y="3" width="14" height="26" rx="3"></rect><path d="M13 7h6m-4 18h2M12 16l3 3 5-6"></path></svg></span><span class="feature-title">Device Scan</span><span class="feature-subtitle">Check device health</span></button>
+        <button class="feature-card tone-battery" type="button" data-feature="Battery Info"><span class="feature-icon"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="23" height="14" rx="3"></rect><path d="M27 13h2v6h-2m-12-7-4 6h5l-1 5 6-8h-5l1-3"></path></svg></span><span class="feature-title">Battery Info</span><span class="feature-subtitle">Power and health</span></button>
+        <button class="feature-card tone-speed" type="button" data-feature="Network Test"><span class="feature-icon"><svg viewBox="0 0 32 32"><path d="M4 24a12 12 0 1 1 24 0M16 24l7-9M8 24h16"></path><circle cx="16" cy="24" r="2"></circle></svg></span><span class="feature-title">Network Test</span><span class="feature-subtitle">Measure connection</span></button>
+      </div>
+    </section>
+
+    <section class="screen tool-screen" id="toolScreen" hidden aria-label="Feature page">
+      <header class="tool-header"><button class="icon-button" id="toolBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"></path></svg></button><h1 id="toolTitle"></h1><span class="tool-header-spacer"></span></header>
+      <div class="tool-scroll" id="toolScroll"><div id="toolContent"></div></div>
+      <footer class="tool-footer" id="toolFooter" hidden></footer>
+    </section>
+
+    <div class="overlay" id="infoOverlay" hidden>
+      <section class="panel" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+        <div class="panel-header"><h2 id="infoTitle">Cleaner</h2><button class="close" id="closeInfo" aria-label="Close" type="button">×</button></div>
+        <p class="info-copy" id="infoCopy">Review this tool.</p>
+        <button class="primary" id="infoCloseAction" type="button">Back to Home</button>
+      </section>
+    </div>
+    <div class="overlay" id="menuOverlay" hidden>
+      <section class="panel" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+        <div class="panel-header"><h2 id="menuTitle">Cleaner</h2><button class="close" id="closeMenu" aria-label="Close menu" type="button">×</button></div>
+        <button class="menu-entry" id="menuClean" type="button"><span>Smart Cleaning</span><span>→</span></button>
+        <button class="menu-entry" id="menuLanguage" type="button"><span>Language</span><span>→</span></button>
+        <button class="menu-entry" id="menuSettings" type="button"><span>Settings</span><span>→</span></button>
+      </section>
+    </div>
+
+    <div class="overlay" id="settingsOverlay" hidden>
+      <section class="panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="panel-header"><h2 id="settingsTitle">Settings</h2><button class="close" id="closeSettings" aria-label="Close settings" type="button">×</button></div>
+        <label class="setting-row"><span>Smart cleaning</span><input type="checkbox" checked></label>
+        <label class="setting-row"><span>Cleaning reminders</span><input type="checkbox"></label>
+      </section>
+    </div>
+    <div class="overlay" id="resultOverlay" hidden>
+      <section class="panel" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <div class="result"><div class="result-mark">✓</div><strong id="resultTitle">Cleaning complete</strong><p id="resultText">Your selected items have been cleaned.</p><button class="primary" id="doneButton" type="button">Done</button></div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const cleanScreen = document.getElementById('cleanScreen');
+    const homeScreen = document.getElementById('homeScreen');
+    const infoOverlay = document.getElementById('infoOverlay');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const settingsOverlay = document.getElementById('settingsOverlay');
+    const resultOverlay = document.getElementById('resultOverlay');
+    const cleanButton = document.getElementById('cleanButton');
+    const meterAmount = document.getElementById('meterAmount');
+    const meterCaption = document.getElementById('meterCaption');
+    const items = [...document.querySelectorAll('.item')];
+    let cleaningTimer;
+    let infoTrigger;
+    const featureDescriptions = {
+      'Network Traffic': 'View live network usage and connection speed.',
+      'Duplicate Photo Cleaner': 'Find matching photos and choose which copies to keep.',
+      'APP Manager': 'Review installed apps and their storage usage.',
+      'Screenshot Cleaner': 'Review screenshots and clear the ones you no longer need.',
+      'Big File Cleaner': 'Find large files that take up storage space.',
+      'Video Cleaner': 'Review videos and free up space.',
+      'RAM Status': 'Check memory usage and recently used apps.',
+      'Device Scan': 'Check device information and status.',
+      'Battery Info': 'View battery level, health, and power details.',
+      'Network Test': 'Measure your connection speed.',
+      'Notification Cleaner': 'Review and manage notifications.'
+    };
+
+    function openDetail() {
+      infoOverlay.hidden = true;
+      menuOverlay.hidden = true;
+      homeScreen.hidden = true;
+      cleanScreen.hidden = false;
+      document.getElementById('backButton').focus();
+    }
+    function resetDetail() {
+      clearTimeout(cleaningTimer);
+      meterAmount.textContent = '4.69GB';
+      meterCaption.textContent = 'System Cleaning';
+      cleanButton.textContent = 'Clean Now';
+      items.forEach((item, index) => {
+        item.setAttribute('aria-pressed', String(index !== 1));
+        item.querySelector('.item-subtitle').textContent = index === 1 ? 'Progress' : 'Completed';
+      });
+      updateSelection();
+    }
+    function showInfo(title, copy) {
+      infoTrigger = menuOverlay.hidden ? document.activeElement : document.getElementById('menuButton');
+      menuOverlay.hidden = true;
+      document.getElementById('infoTitle').textContent = title;
+      document.getElementById('infoCopy').textContent = copy;
+      infoOverlay.hidden = false;
+      document.getElementById('closeInfo').focus();
+    }
+
+    function updateSelection() {
+      cleanButton.disabled = !items.some(item => item.getAttribute('aria-pressed') === 'true');
+    }
+    items.forEach(item => item.addEventListener('click', () => {
+      if (cleanButton.disabled && cleanButton.textContent !== 'Clean Now') return;
+      item.setAttribute('aria-pressed', String(item.getAttribute('aria-pressed') !== 'true'));
+      updateSelection();
+    }));
+    document.getElementById('settingsButton').addEventListener('click', () => { settingsOverlay.hidden = false; document.getElementById('closeSettings').focus(); });
+    document.getElementById('closeSettings').addEventListener('click', () => { settingsOverlay.hidden = true; document.getElementById('settingsButton').focus(); });
+    settingsOverlay.addEventListener('click', event => { if (event.target === settingsOverlay) settingsOverlay.hidden = true; });
+    document.getElementById('backButton').addEventListener('click', () => {
+      settingsOverlay.hidden = true;
+      resultOverlay.hidden = true;
+      resetDetail();
+      cleanScreen.hidden = true;
+      homeScreen.hidden = false;
+      document.getElementById('openCleaning').focus();
+    });
+    document.getElementById('openCleaning').addEventListener('click', openDetail);
+    document.getElementById('menuButton').addEventListener('click', () => { menuOverlay.hidden = false; document.getElementById('closeMenu').focus(); });
+    document.getElementById('closeMenu').addEventListener('click', () => { menuOverlay.hidden = true; document.getElementById('menuButton').focus(); });
+    menuOverlay.addEventListener('click', event => { if (event.target === menuOverlay) menuOverlay.hidden = true; });
+    document.getElementById('menuClean').addEventListener('click', openDetail);
+    document.getElementById('menuLanguage').addEventListener('click', () => openFeature('Language'));
+    document.getElementById('languageButton').addEventListener('click', () => openFeature('Language'));
+    document.getElementById('pinnedLanguageButton').addEventListener('click', () => openFeature('Language'));
+    homeScreen.addEventListener('scroll', () => document.getElementById('homePinned').classList.toggle('visible', homeScreen.scrollTop > 165));
+    document.getElementById('menuSettings').addEventListener('click', () => { menuOverlay.hidden = true; settingsOverlay.hidden = false; document.getElementById('closeSettings').focus(); });
+    document.querySelectorAll('[data-feature]').forEach(card => card.addEventListener('click', () => openFeature(card.dataset.feature)));
+    document.getElementById('notificationEntry').addEventListener('click', () => openFeature('Notification Cleaner'));
+    document.getElementById('notificationToggle').addEventListener('change', event => { featureState.notificationsEnabled = event.target.checked; openFeature('Notification Cleaner'); });
+    function closeInfo() { infoOverlay.hidden = true; infoTrigger?.focus(); }
+    document.getElementById('closeInfo').addEventListener('click', closeInfo);
+    document.getElementById('infoCloseAction').addEventListener('click', closeInfo);
+    infoOverlay.addEventListener('click', event => { if (event.target === infoOverlay) infoOverlay.hidden = true; });
+    cleanButton.addEventListener('click', () => {
+      const selectedCount = items.filter(item => item.getAttribute('aria-pressed') === 'true').length;
+      if (!selectedCount) return;
+      cleanButton.disabled = true;
+      cleanButton.textContent = 'Cleaning…';
+      meterCaption.textContent = 'Cleaning…';
+      cleaningTimer = setTimeout(() => {
+        cleanButton.textContent = 'Clean Now';
+        meterAmount.textContent = '0GB';
+        meterCaption.textContent = 'Cleaning Complete';
+        document.getElementById('resultText').textContent = `${selectedCount} selected ${selectedCount === 1 ? 'category' : 'categories'} processed in this preview.`;
+        resultOverlay.hidden = false;
+        document.getElementById('doneButton').focus();
+        items.forEach(item => { if (item.getAttribute('aria-pressed') === 'true') item.querySelector('.item-subtitle').textContent = 'Cleaned'; });
+        updateSelection();
+      }, 1100);
+    });
+    document.getElementById('doneButton').addEventListener('click', () => { resultOverlay.hidden = true; document.getElementById('cleanButton').focus(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') { settingsOverlay.hidden = true; resultOverlay.hidden = true; infoOverlay.hidden = true; menuOverlay.hidden = true; } });
+    updateSelection();
+  </script>
+  <script src="feature-pages.js?v=14"></script>
+</body>
+</html>
