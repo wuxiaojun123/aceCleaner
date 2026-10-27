@@ -449,4 +449,5 @@
     <string name="string_photo_select">เลือกรูปภาพ</string>
     <string name="string_photo_deselect">ยกเลิกการเลือกรูปภาพ</string>
     <string name="string_photo_load_failed">โหลดรูปภาพไม่ได้</string>
+    <string name="string_home_smart_cleaning">ทำความสะอาดอัจฉริยะ</string>
 </resources>

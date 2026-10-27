@@ -449,4 +449,5 @@
     <string name="string_photo_select">Khetha ifoto</string>
     <string name="string_photo_deselect">Susa ukhetho lwefoto</string>
     <string name="string_photo_load_failed">Ayikwazanga ukulayisha ifoto</string>
+    <string name="string_home_smart_cleaning">Ukucoca ngobuchule</string>
 </resources>

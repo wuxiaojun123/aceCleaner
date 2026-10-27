@@ -3,12 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_home_not_clean_bg"
+        android:background="@color/white"
         android:tag="system_bar_background" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -19,193 +17,285 @@
             android:id="@+id/home_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_home_ref_page"
             android:clipToPadding="false"
             android:fillViewport="true"
             android:overScrollMode="never"
-            android:paddingBottom="32dp"
+            android:paddingBottom="38dp"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="14dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="14dp">
-
-                <LinearLayout
-                    android:id="@+id/home_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/app_name"
-                        android:textColor="#FF000000"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
-
-                    <ImageButton
-                        android:id="@+id/settings_button"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/settings"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_settings"
-                        android:visibility="gone" />
-
-                    <ImageButton
-                        android:id="@+id/language_button"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/language_entry_content_description"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_language" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/notification_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_home_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="14dp">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/icon_notification" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:text="@string/never_miss_key_tip"
-                        android:textColor="#FF353535"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <com.nice.aceclean.ui.widget.IosSwitchView
-                        android:id="@+id/notification_switch"
-                        android:layout_width="51dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/notification_cleaner" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/storage_usage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/storage_usage_placeholder"
-                    android:textColor="#FF000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                android:orientation="vertical">
 
                 <FrameLayout
-                    android:layout_width="210dp"
-                    android:layout_height="210dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_home_gauge_outer"
-                    android:elevation="12dp"
-                    android:padding="33dp">
+                    android:id="@+id/home_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="425dp">
 
-                    <TextView
-                        android:id="@+id/storage_percentage"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_home_gauge_inner"
-                        android:gravity="center"
-                        android:text="@string/zero_percentage"
-                        android:textColor="#FFFFFFFF"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+                        android:layout_height="377dp"
+                        android:background="@drawable/bg_home_ref_hero" />
+
+                    <LinearLayout
+                        android:id="@+id/home_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="25dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/settings_button"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:background="@drawable/bg_home_ref_header_icon"
+                            android:contentDescription="@string/settings"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_settings"
+                            android:tint="#FF087AF8" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/language_button"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:background="@drawable/bg_home_ref_header_icon"
+                            android:contentDescription="@string/language_entry_content_description"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_language"
+                            android:tint="#FF087AF8" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/home_gauge"
+                        android:layout_width="275dp"
+                        android:layout_height="275dp"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="71dp">
+
+                        <com.nice.aceclean.ui.widget.HomeStorageGaugeView
+                            android:id="@+id/storage_gauge"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingTop="12dp">
+
+                            <TextView
+                                android:id="@+id/storage_percentage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_percentage"
+                                android:textColor="#FF111216"
+                                android:textSize="62sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/guide_storage"
+                                android:textColor="#FF92969F"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/storage_usage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/storage_usage_placeholder"
+                                android:textColor="#FF92969F"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="198dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="351dp"
+                        android:clipChildren="false"
+                        android:clipToPadding="false">
+
+                        <com.nice.aceclean.ui.widget.ShimmerShakeButton
+                            android:id="@+id/clean_up_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:background="@drawable/bg_home_ref_button"
+                            android:clickable="true"
+                            android:drawableStart="@drawable/ic_home_ref_broom"
+                            android:drawablePadding="8dp"
+                            android:drawableTint="#FFFFFFFF"
+                            android:elevation="8dp"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:text="@string/string_home_smart_cleaning"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <include
+                            android:id="@+id/clean_up_badge"
+                            layout="@layout/view_home_feature_badge"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="top|end"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="2dp" />
+                    </FrameLayout>
                 </FrameLayout>
 
-                <FrameLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/home_primary_network"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/home_primary_duplicate"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/home_primary_app_manager"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/home_secondary_screenshot"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+                <include
+                    android:id="@+id/home_wide_notification"
+                    layout="@layout/item_home_wide_notification"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginEnd="48dp"
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-                    <com.nice.aceclean.ui.widget.ShimmerShakeButton
-                        android:id="@+id/clean_up_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_home_clean_button"
-                        android:clickable="true"
-                        android:elevation="5dp"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:text="@string/clean_up"
-                        android:textColor="#FFFFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    android:layout_height="70dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="22dp" />
 
-                    <include
-                        android:id="@+id/clean_up_badge"
-                        android:elevation="6dp"
-                        layout="@layout/view_home_feature_badge"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="top|end"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginEnd="6dp" />
-                </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="112dp"
-                    android:layout_marginTop="28dp"
-                    android:orientation="horizontal">
+                <include
+                    android:id="@+id/home_secondary_large_file"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
 
-                    <include android:id="@+id/home_primary_network" layout="@layout/item_home_primary_network" />
+                <include
+                    android:id="@+id/home_wide_video"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-                    <include android:id="@+id/home_primary_duplicate" layout="@layout/item_home_primary_duplicate" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
 
-                    <include android:id="@+id/home_primary_app_manager" layout="@layout/item_home_primary_app_manager" />
-                </LinearLayout>
+                <include
+                    android:id="@+id/home_tool_ram"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="68dp"
-                    android:layout_marginTop="14dp"
-                    android:orientation="horizontal">
+                <include
+                    android:id="@+id/home_tool_device"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-                    <include android:id="@+id/home_secondary_screenshot" layout="@layout/item_home_secondary_screenshot" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
 
-                    <include android:id="@+id/home_secondary_large_file" layout="@layout/item_home_secondary_large_file" />
-                </LinearLayout>
+                <include
+                    android:id="@+id/home_tool_battery"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
 
-                <include android:id="@+id/home_wide_notification" layout="@layout/item_home_wide_notification" />
-
-                <include android:id="@+id/home_wide_video" layout="@layout/item_home_wide_video" />
-
-                <include android:id="@+id/home_tool_ram" layout="@layout/item_home_tool_ram" />
-
-                <include android:id="@+id/home_tool_device" layout="@layout/item_home_tool_device" />
-
-                <include android:id="@+id/home_tool_battery" layout="@layout/item_home_tool_battery" />
-
-                <include android:id="@+id/home_tool_network_test" layout="@layout/item_home_tool_network_test" />
+                <include
+                    android:id="@+id/home_tool_network_test"
+                    layout="@layout/item_home_feature_card"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
@@ -219,8 +309,8 @@
         android:elevation="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
         android:tag="system_bar_top_overlay"
         android:visibility="gone">
 
@@ -232,17 +322,17 @@
             android:maxLines="1"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/pinned_language_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_home_ref_header_icon"
             android:contentDescription="@string/language_entry_content_description"
-            android:padding="8dp"
-            android:src="@drawable/ic_language" />
+            android:padding="9dp"
+            android:src="@drawable/ic_language"
+            android:tint="#FF087AF8" />
     </LinearLayout>
-
 </FrameLayout>

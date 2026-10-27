@@ -449,4 +449,5 @@
     <string name="string_photo_select">Khetha isithombe</string>
     <string name="string_photo_deselect">Susa ukukhetha isithombe</string>
     <string name="string_photo_load_failed">Ayikwazanga ukulayisha isithombe</string>
+    <string name="string_home_smart_cleaning">Ukuhlanza okuhlakaniphile</string>
 </resources>

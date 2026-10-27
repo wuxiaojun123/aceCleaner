@@ -449,4 +449,5 @@
     <string name="string_photo_select">Selecionar foto</string>
     <string name="string_photo_deselect">Desmarcar foto</string>
     <string name="string_photo_load_failed">Não foi possível carregar a foto</string>
+    <string name="string_home_smart_cleaning">Limpeza inteligente</string>
 </resources>

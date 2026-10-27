@@ -1,6 +1,8 @@
 package com.nice.aceclean.ui.fragment
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.provider.Settings
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.nice.aceclean.R
 import com.nice.aceclean.analytics.setTrackedClickListener
 import com.nice.aceclean.databinding.FragmentHomeBinding
+import com.nice.aceclean.databinding.ItemHomeFeatureCardBinding
 import com.nice.aceclean.databinding.ViewHomeFeatureBadgeBinding
 import com.nice.aceclean.permission.SpecialPermission
 import com.nice.aceclean.permission.SpecialPermissionAccess
@@ -36,6 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
     private var renderedDay: String? = null
 
     override fun initViews() {
+        configureFeatureCards()
         setupPinnedTopBar()
         binding.cleanUpButton.setTrackedClickListener(EventUtils.CLICK_HOME_CLEANUP) {
             (activity as? MainActivity)?.openCleanUp()
@@ -89,16 +93,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
                 )
             )
         }
-        binding.notificationCard.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATION_TIP) {
-            (activity as? MainActivity)?.openNotificationCleaner()
-        }
-        binding.notificationSwitch.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATION_SWITCH)
-        binding.notificationSwitch.setOnCheckedChangeListener { _, _ ->
+        binding.homeWideNotification.notificationSwitch.setTrackedClickListener(EventUtils.CLICK_HOME_NOTIFICATION_SWITCH)
+        binding.homeWideNotification.notificationSwitch.setOnCheckedChangeListener { _, _ ->
             if (!syncingNotificationSwitch) (activity as? MainActivity)?.openNotificationCleaner()
         }
 
         renderDeviceState()
         observeNetworkSpeed()
+    }
+
+    private fun configureFeatureCards() {
+        configureCard(binding.homePrimaryNetwork, R.string.network_traffic,
+            R.string.network_speed_placeholder, R.drawable.ic_home_ref_network, "#087AF8", "#E4F0FF")
+        configureCard(binding.homePrimaryDuplicate, R.string.dup_title,
+            R.string.clean_success_duplicate_hint, R.drawable.ic_home_ref_duplicate, "#F59400", "#FFF0D9")
+        configureCard(binding.homePrimaryAppManager, R.string.app_manager,
+            R.string.installed_apps, R.drawable.ic_home_ref_apps, "#08B98D", "#DFF9F0")
+        configureCard(binding.homeSecondaryScreenshot, R.string.screenshot_cleaner,
+            R.string.clean_success_screenshot_hint, R.drawable.ic_home_ref_screenshots, "#7E58E9", "#F1EAFE")
+        configureCard(binding.homeSecondaryLargeFile, R.string.home_large_files,
+            R.string.clean_success_big_file_hint, R.drawable.ic_home_ref_large, "#F36659", "#FFE9E5")
+        configureCard(binding.homeWideVideo, R.string.videos,
+            R.string.string_delete_success_video_hint, R.drawable.ic_home_ref_videos, "#5669DA", "#E9ECFF")
+        configureCard(binding.homeToolRam, R.string.ram_status,
+            R.string.memory, R.drawable.ic_home_ref_ram, "#0BA7A9", "#DDF8F7")
+        configureCard(binding.homeToolDevice, R.string.device_scan,
+            R.string.string_onboarding_battery_check_scan_title, R.drawable.ic_home_ref_device, "#34A8E2", "#E1F5FF")
+        configureCard(binding.homeToolBattery, R.string.battery_info,
+            R.string.battery_health, R.drawable.ic_home_ref_battery, "#C69500", "#FFF8D9")
+        configureCard(binding.homeToolNetworkTest, R.string.network_test,
+            R.string.link_speed, R.drawable.ic_home_ref_speed, "#679C18", "#EFF8DE")
+    }
+
+    private fun configureCard(
+        card: ItemHomeFeatureCardBinding,
+        title: Int,
+        subtitle: Int,
+        icon: Int,
+        foreground: String,
+        background: String,
+    ) {
+        card.featureTitle.setText(title)
+        card.featureSubtitle.setText(subtitle)
+        card.featureIcon.setImageResource(icon)
+        card.featureIcon.imageTintList = ColorStateList.valueOf(Color.parseColor(foreground))
+        card.featureIconBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor(background))
     }
 
     private fun setupPinnedTopBar() {
@@ -113,7 +152,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
     }
 
     private fun updatePinnedTopBar(scrollY: Int) {
-        val showDistance = binding.homeHeader.bottom.coerceAtLeast(1)
+        val showDistance = (binding.homeIntro.height * 0.4f).toInt().coerceAtLeast(1)
         val alpha = (scrollY.toFloat() / showDistance).coerceIn(0f, 1f)
         binding.homePinnedTopBar.alpha = alpha
         binding.homePinnedTopBar.visibility = if (alpha > 0f) View.VISIBLE else View.GONE
@@ -134,6 +173,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
         val storage = DeviceStats.storageSnapshot(requireContext())
         binding.storagePercentage.text =
             getString(R.string.percentage_value, storage.usedPercent)
+        binding.storageGauge.usedPercent = storage.usedPercent
         binding.storageUsage.text = getString(
             R.string.storage_usage_value,
             DeviceStats.formatBytes(requireContext(), storage.usedBytes),
@@ -143,13 +183,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
             requireContext(),
             SpecialPermission.NOTIFICATION_LISTENER,
         )
-        binding.notificationCard.visibility = if (notificationPermissionGranted) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
         syncingNotificationSwitch = true
-        binding.notificationSwitch.isChecked =
+        binding.homeWideNotification.notificationSwitch.isChecked =
             notificationPermissionGranted
         syncingNotificationSwitch = false
         renderFeatureBadges()
@@ -198,7 +233,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ inflater, container, at
                     // Also refresh across local midnight while the home screen stays open.
                     if (renderedDay != FeatureUsageStore.todayKey()) renderFeatureBadges()
                     val bytesPerSecond = speedSampler.sampleBytesPerSecond()
-                    binding.homePrimaryNetwork.homeNetworkSpeed.text =
+                    binding.homePrimaryNetwork.featureSubtitle.text =
                         getString(R.string.network_speed_value, NetworkSpeedSampler.format(requireContext(), bytesPerSecond))
                 }
             }

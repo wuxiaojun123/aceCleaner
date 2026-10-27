@@ -449,4 +449,5 @@
     <string name="string_photo_select">تحديد الصورة</string>
     <string name="string_photo_deselect">إلغاء تحديد الصورة</string>
     <string name="string_photo_load_failed">تعذّر تحميل الصورة</string>
+    <string name="string_home_smart_cleaning">التنظيف الذكي</string>
 </resources>

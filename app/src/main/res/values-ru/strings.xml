@@ -449,4 +449,5 @@
     <string name="string_photo_select">Выбрать фото</string>
     <string name="string_photo_deselect">Отменить выбор фото</string>
     <string name="string_photo_load_failed">Не удалось загрузить фото</string>
+    <string name="string_home_smart_cleaning">Умная очистка</string>
 </resources>

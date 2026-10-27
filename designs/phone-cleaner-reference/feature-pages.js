@@ -60,7 +60,10 @@ const chips = (values,active,kind) => `<div class="tool-chipbar">${values.map(v=
 const stats = pairs => `<div class="tool-statgrid">${pairs.map(([value,label])=>`<div class="tool-stat"><strong>${value}</strong><small>${label}</small></div>`).join('')}</div>`;
 const foot = (label,action,disabled=false,notice='') => { toolFooter.hidden=false;toolFooter.innerHTML=`${notice?`<p class="tool-result-note">${notice}</p>`:''}<button class="primary" type="button" data-action="${action}" ${disabled?'disabled':''}>${label}</button>`; };
 const notify = (heading,body) => {document.getElementById('resultTitle').textContent=heading;document.getElementById('resultText').textContent=body;resultOverlay.hidden=false;document.getElementById('doneButton').focus();};
-function openFeature(name, from) {
+function openFeature(name, from, skipScan=false) {
+  if(!skipScan&&['Duplicate Photo Cleaner','Screenshot Cleaner','Big File Cleaner'].includes(name)&&typeof beginScan==='function'){
+    beginScan(name,from);return;
+  }
   clearTimeout(featureState.networkTimer);
   if(from==='tool') featureState.parent=featureState.current;
   featureState.previous = from || (cleanScreen.hidden ? 'home' : 'clean');

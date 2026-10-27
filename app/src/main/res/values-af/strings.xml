@@ -449,4 +449,5 @@
     <string name="string_photo_select">Kies foto</string>
     <string name="string_photo_deselect">Ontkies foto</string>
     <string name="string_photo_load_failed">Kon nie foto laai nie</string>
+    <string name="string_home_smart_cleaning">Slim skoonmaak</string>
 </resources>

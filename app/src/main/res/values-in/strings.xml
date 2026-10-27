@@ -449,4 +449,5 @@
     <string name="string_photo_select">Pilih foto</string>
     <string name="string_photo_deselect">Batalkan pilihan foto</string>
     <string name="string_photo_load_failed">Tidak dapat memuat foto</string>
+    <string name="string_home_smart_cleaning">Pembersihan pintar</string>
 </resources>

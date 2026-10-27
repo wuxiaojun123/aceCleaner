@@ -111,7 +111,8 @@
     @media (max-width: 430px) { body { background: #deedff; } .app { width: 100%; box-shadow: none; } }
     @media (max-height: 830px) { .meter-section { top: 96px; } .sheet { height: 355px; } .handle { margin-bottom: 1px; } .item { min-height: 66px; } .primary { margin-top: 17px; } .home-intro { height: 428px; } .home-hero { height: 380px; } .home-gauge { top: 87px; width: min(66vw,255px); height: min(66vw,255px); } .smart-button { top: 354px; } .feature-card { padding: 15px; } .feature-icon { width: 50px; height: 50px; } .feature-subtitle { font-size: 12px; } }
   </style>
-  <link rel="stylesheet" href="feature-pages.css?v=14">
+  <link rel="stylesheet" href="feature-pages.css?v=15">
+  <link rel="stylesheet" href="scan-animation.css?v=18">
 </head>
 <body>
   <main class="app" id="app">
@@ -221,6 +222,12 @@
       </div>
     </section>
 
+    <section class="screen scan-screen" id="scanScreen" hidden data-screen-label="Scanning">
+      <header class="tool-header"><button class="icon-button" id="scanBack" type="button" aria-label="Cancel scan"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"></path></svg></button><h1 id="scanTitle">Scanning</h1><span class="tool-header-spacer"></span></header>
+      <div class="scan-body"><div class="scan-art"><div class="scan-fallback" aria-hidden="true"></div><canvas id="scanCanvas" width="360" height="360" role="img" aria-label="Scanning animation"></canvas></div><p class="scan-kicker" id="scanKicker">SMART SCAN</p><h2 id="scanHeading">Searching…</h2><p id="scanDescription">Finding items to review</p></div>
+      <footer class="scan-footer"><div><span id="scanProgressLabel">Scanning your files</span><strong id="scanPercent">0%</strong></div><div class="scan-track"><span id="scanProgress"></span></div></footer>
+    </section>
+
     <section class="screen tool-screen" id="toolScreen" hidden aria-label="Feature page">
       <header class="tool-header"><button class="icon-button" id="toolBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"></path></svg></button><h1 id="toolTitle"></h1><span class="tool-header-spacer"></span></header>
       <div class="tool-scroll" id="toolScroll"><div id="toolContent"></div></div>
@@ -267,7 +274,6 @@
     const meterAmount = document.getElementById('meterAmount');
     const meterCaption = document.getElementById('meterCaption');
     const items = [...document.querySelectorAll('.item')];
-    let cleaningTimer;
     let infoTrigger;
     const featureDescriptions = {
       'Network Traffic': 'View live network usage and connection speed.',
@@ -291,7 +297,6 @@
       document.getElementById('backButton').focus();
     }
     function resetDetail() {
-      clearTimeout(cleaningTimer);
       meterAmount.textContent = '4.69GB';
       meterCaption.textContent = 'System Cleaning';
       cleanButton.textContent = 'Clean Now';
@@ -349,10 +354,8 @@
     cleanButton.addEventListener('click', () => {
       const selectedCount = items.filter(item => item.getAttribute('aria-pressed') === 'true').length;
       if (!selectedCount) return;
-      cleanButton.disabled = true;
-      cleanButton.textContent = 'Cleaning…';
-      meterCaption.textContent = 'Cleaning…';
-      cleaningTimer = setTimeout(() => {
+      beginScan('cleaning', 'clean', false, () => {
+        cleanScreen.hidden = false;
         cleanButton.textContent = 'Clean Now';
         meterAmount.textContent = '0GB';
         meterCaption.textContent = 'Cleaning Complete';
@@ -361,12 +364,14 @@
         document.getElementById('doneButton').focus();
         items.forEach(item => { if (item.getAttribute('aria-pressed') === 'true') item.querySelector('.item-subtitle').textContent = 'Cleaned'; });
         updateSelection();
-      }, 1100);
+      });
     });
     document.getElementById('doneButton').addEventListener('click', () => { resultOverlay.hidden = true; document.getElementById('cleanButton').focus(); });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') { settingsOverlay.hidden = true; resultOverlay.hidden = true; infoOverlay.hidden = true; menuOverlay.hidden = true; } });
     updateSelection();
   </script>
-  <script src="feature-pages.js?v=14"></script>
+  <script src="feature-pages.js?v=15"></script>
+  <script src="animations/vendor/canvaskit.js"></script>
+  <script src="scan-animation.js?v=22"></script>
 </body>
 </html>

@@ -449,4 +449,5 @@
     <string name="string_photo_select">Pilia ang litrato</string>
     <string name="string_photo_deselect">Tangtanga ang pagpili sa litrato</string>
     <string name="string_photo_load_failed">Dili ma-load ang litrato</string>
+    <string name="string_home_smart_cleaning">Maalamong paglimpyo</string>
 </resources>

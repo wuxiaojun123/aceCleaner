@@ -515,4 +515,5 @@
     <string name="string_photo_load_failed">Could not load photo</string>
     <string name="string_photo_viewer_counter" translatable="false">%1$d / %2$d</string>
     <string name="string_photo_viewer_info" translatable="false">%1$s · %2$s</string>
+    <string name="string_home_smart_cleaning">Smart Cleaning</string>
 </resources>

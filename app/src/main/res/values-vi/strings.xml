@@ -449,4 +449,5 @@
     <string name="string_photo_select">Chọn ảnh</string>
     <string name="string_photo_deselect">Bỏ chọn ảnh</string>
     <string name="string_photo_load_failed">Không thể tải ảnh</string>
+    <string name="string_home_smart_cleaning">Dọn dẹp thông minh</string>
 </resources>

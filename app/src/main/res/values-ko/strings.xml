@@ -449,4 +449,5 @@
     <string name="string_photo_select">사진 선택</string>
     <string name="string_photo_deselect">사진 선택 해제</string>
     <string name="string_photo_load_failed">사진을 불러올 수 없습니다</string>
+    <string name="string_home_smart_cleaning">스마트 정리</string>
 </resources>

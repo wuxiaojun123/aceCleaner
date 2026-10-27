@@ -449,4 +449,5 @@
     <string name="string_photo_select">Fotoğrafı seç</string>
     <string name="string_photo_deselect">Fotoğraf seçimini kaldır</string>
     <string name="string_photo_load_failed">Fotoğraf yüklenemedi</string>
+    <string name="string_home_smart_cleaning">Akıllı temizleme</string>
 </resources>

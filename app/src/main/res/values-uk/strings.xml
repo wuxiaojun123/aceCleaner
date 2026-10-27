@@ -449,4 +449,5 @@
     <string name="string_photo_select">Вибрати фото</string>
     <string name="string_photo_deselect">Скасувати вибір фото</string>
     <string name="string_photo_load_failed">Не вдалося завантажити фото</string>
+    <string name="string_home_smart_cleaning">Розумне очищення</string>
 </resources>

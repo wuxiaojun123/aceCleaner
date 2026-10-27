@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/notification_cleaner_card"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
-    android:layout_marginTop="14dp"
-    android:background="@drawable/bg_home_card"
+    android:layout_height="70dp"
+    android:background="@drawable/bg_home_ref_card"
     android:clickable="true"
     android:focusable="true">
 
@@ -13,32 +11,57 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="14dp"
-        android:paddingEnd="36dp">
+        android:paddingStart="17dp"
+        android:paddingEnd="17dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="@null"
-            android:src="@drawable/icon_notification" />
+        <FrameLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_home_ref_icon"
+            android:backgroundTint="#FFFCE8F5">
 
-        <TextView
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_home_ref_notification"
+                android:tint="#FFD94FAF" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="13dp"
             android:layout_weight="1"
-            android:text="@string/notification_cleaner"
-            android:textColor="#FF353535"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/more_indicator"
-            android:textColor="#FFE7EDFE"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/notification_cleaner_single"
+                android:textColor="#FF111216"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/never_miss_key_tip"
+                android:textColor="#FF92969F"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.nice.aceclean.ui.widget.IosSwitchView
+            android:id="@+id/notification_switch"
+            android:layout_width="51dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/notification_cleaner_single" />
     </LinearLayout>
 
     <include
@@ -47,6 +70,6 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="top|end"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="6dp" />
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp" />
 </FrameLayout>

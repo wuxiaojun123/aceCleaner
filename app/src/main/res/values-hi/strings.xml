@@ -449,4 +449,5 @@
     <string name="string_photo_select">फ़ोटो चुनें</string>
     <string name="string_photo_deselect">फ़ोटो का चयन हटाएँ</string>
     <string name="string_photo_load_failed">फ़ोटो लोड नहीं हो सकी</string>
+    <string name="string_home_smart_cleaning">स्मार्ट सफ़ाई</string>
 </resources>
