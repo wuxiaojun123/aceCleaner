@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Скасувати вибір фото</string>
     <string name="string_photo_load_failed">Не вдалося завантажити фото</string>
     <string name="string_home_smart_cleaning">Розумне очищення</string>
+    <string name="string_cleanup_title">Очищення</string>
+    <string name="string_cleanup_system_cleaning">Очищення системи</string>
+    <string name="string_cleanup_clean_now">Очистити зараз</string>
+    <string name="string_device_overview">ОГЛЯД ПРИСТРОЮ</string>
+    <string name="string_device_at_a_glance">Ваш пристрій з першого погляду.</string>
+    <string name="string_device_healthy">У доброму стані</string>
+    <string name="string_device_processor">Процесор</string>
+    <string name="string_device_system">Система</string>
+    <string name="string_device_available_ram">Доступна ОЗП</string>
+    <string name="string_device_display_graphics">Екран і графіка</string>
+    <string name="string_device_network">Мережа</string>
+    <string name="string_device_connected">Підключено</string>
+    <string name="string_device_core_count">%1$d ядер</string>
 </resources>

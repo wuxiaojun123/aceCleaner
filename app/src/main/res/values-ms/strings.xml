@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Nyahpilih foto</string>
     <string name="string_photo_load_failed">Foto tidak dapat dimuatkan</string>
     <string name="string_home_smart_cleaning">Pembersihan pintar</string>
+    <string name="string_cleanup_title">Pembersih</string>
+    <string name="string_cleanup_system_cleaning">Pembersihan Sistem</string>
+    <string name="string_cleanup_clean_now">Bersihkan Sekarang</string>
+    <string name="string_device_overview">GAMBARAN KESELURUHAN PERANTI</string>
+    <string name="string_device_at_a_glance">Peranti anda sepintas lalu.</string>
+    <string name="string_device_healthy">Baik</string>
+    <string name="string_device_processor">Pemproses</string>
+    <string name="string_device_system">Sistem</string>
+    <string name="string_device_available_ram">RAM tersedia</string>
+    <string name="string_device_display_graphics">Paparan dan grafik</string>
+    <string name="string_device_network">Rangkaian</string>
+    <string name="string_device_connected">Disambungkan</string>
+    <string name="string_device_core_count">%1$d teras</string>
 </resources>

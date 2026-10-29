@@ -33,14 +33,16 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/notification_back"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/go_back"
                     android:padding="9dp"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_back"
+                    android:clickable="true"
+                    android:focusable="true" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -441,14 +443,16 @@
         android:tag="system_bar_top_overlay"
         android:visibility="gone">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/notification_pinned_back"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/go_back"
             android:padding="9dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:clickable="true"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="0dp"

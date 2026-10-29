@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">ยกเลิกการเลือกรูปภาพ</string>
     <string name="string_photo_load_failed">โหลดรูปภาพไม่ได้</string>
     <string name="string_home_smart_cleaning">ทำความสะอาดอัจฉริยะ</string>
+    <string name="string_cleanup_title">ตัวล้างข้อมูล</string>
+    <string name="string_cleanup_system_cleaning">การล้างข้อมูลระบบ</string>
+    <string name="string_cleanup_clean_now">ล้างข้อมูลตอนนี้</string>
+    <string name="string_device_overview">ภาพรวมอุปกรณ์</string>
+    <string name="string_device_at_a_glance">ข้อมูลอุปกรณ์ของคุณในหน้าจอเดียว</string>
+    <string name="string_device_healthy">สภาพดี</string>
+    <string name="string_device_processor">โปรเซสเซอร์</string>
+    <string name="string_device_system">ระบบ</string>
+    <string name="string_device_available_ram">RAM ที่ใช้ได้</string>
+    <string name="string_device_display_graphics">จอแสดงผลและกราฟิก</string>
+    <string name="string_device_network">เครือข่าย</string>
+    <string name="string_device_connected">เชื่อมต่อแล้ว</string>
+    <string name="string_device_core_count">%1$d คอร์</string>
 </resources>

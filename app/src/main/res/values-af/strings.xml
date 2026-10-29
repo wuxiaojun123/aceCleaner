@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Ontkies foto</string>
     <string name="string_photo_load_failed">Kon nie foto laai nie</string>
     <string name="string_home_smart_cleaning">Slim skoonmaak</string>
+    <string name="string_cleanup_title">Skoonmaker</string>
+    <string name="string_cleanup_system_cleaning">Stelselskoonmaak</string>
+    <string name="string_cleanup_clean_now">Maak nou skoon</string>
+    <string name="string_device_overview">TOESTEL OORSIG</string>
+    <string name="string_device_at_a_glance">Jou toestel in een oogopslag.</string>
+    <string name="string_device_healthy">Gesond</string>
+    <string name="string_device_processor">Verwerker</string>
+    <string name="string_device_system">Stelsel</string>
+    <string name="string_device_available_ram">Beskikbare RAM</string>
+    <string name="string_device_display_graphics">Skerm en grafika</string>
+    <string name="string_device_network">Netwerk</string>
+    <string name="string_device_connected">Gekoppel</string>
+    <string name="string_device_core_count">%1$d kerne</string>
 </resources>

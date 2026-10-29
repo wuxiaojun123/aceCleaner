@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Bỏ chọn ảnh</string>
     <string name="string_photo_load_failed">Không thể tải ảnh</string>
     <string name="string_home_smart_cleaning">Dọn dẹp thông minh</string>
+    <string name="string_cleanup_title">Trình dọn dẹp</string>
+    <string name="string_cleanup_system_cleaning">Dọn dẹp hệ thống</string>
+    <string name="string_cleanup_clean_now">Dọn dẹp ngay</string>
+    <string name="string_device_overview">TỔNG QUAN THIẾT BỊ</string>
+    <string name="string_device_at_a_glance">Thông tin nhanh về thiết bị của bạn.</string>
+    <string name="string_device_healthy">Tốt</string>
+    <string name="string_device_processor">Bộ xử lý</string>
+    <string name="string_device_system">Hệ thống</string>
+    <string name="string_device_available_ram">RAM khả dụng</string>
+    <string name="string_device_display_graphics">Màn hình và đồ họa</string>
+    <string name="string_device_network">Mạng</string>
+    <string name="string_device_connected">Đã kết nối</string>
+    <string name="string_device_core_count">%1$d lõi</string>
 </resources>

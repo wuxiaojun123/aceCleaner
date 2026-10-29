@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">إلغاء تحديد الصورة</string>
     <string name="string_photo_load_failed">تعذّر تحميل الصورة</string>
     <string name="string_home_smart_cleaning">التنظيف الذكي</string>
+    <string name="string_cleanup_title">المنظّف</string>
+    <string name="string_cleanup_system_cleaning">تنظيف النظام</string>
+    <string name="string_cleanup_clean_now">تنظيف الآن</string>
+    <string name="string_device_overview">نظرة عامة على الجهاز</string>
+    <string name="string_device_at_a_glance">نظرة سريعة على جهازك.</string>
+    <string name="string_device_healthy">بحالة جيدة</string>
+    <string name="string_device_processor">المعالج</string>
+    <string name="string_device_system">النظام</string>
+    <string name="string_device_available_ram">ذاكرة RAM المتاحة</string>
+    <string name="string_device_display_graphics">الشاشة والرسومات</string>
+    <string name="string_device_network">الشبكة</string>
+    <string name="string_device_connected">متصل</string>
+    <string name="string_device_core_count">%1$d أنوية</string>
 </resources>

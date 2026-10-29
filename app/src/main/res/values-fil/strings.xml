@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Alisin sa pagkakapili ang larawan</string>
     <string name="string_photo_load_failed">Hindi ma-load ang larawan</string>
     <string name="string_home_smart_cleaning">Matalinong paglilinis</string>
+    <string name="string_cleanup_title">Panlinis</string>
+    <string name="string_cleanup_system_cleaning">Paglilinis ng System</string>
+    <string name="string_cleanup_clean_now">Linisin Ngayon</string>
+    <string name="string_device_overview">PANGKALAHATANG-IDEYA NG DEVICE</string>
+    <string name="string_device_at_a_glance">Ang iyong device sa isang tingin.</string>
+    <string name="string_device_healthy">Maayos</string>
+    <string name="string_device_processor">Processor</string>
+    <string name="string_device_system">System</string>
+    <string name="string_device_available_ram">Available na RAM</string>
+    <string name="string_device_display_graphics">Display at graphics</string>
+    <string name="string_device_network">Network</string>
+    <string name="string_device_connected">Nakakonekta</string>
+    <string name="string_device_core_count">%1$d core</string>
 </resources>

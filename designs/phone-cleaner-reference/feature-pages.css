@@ -87,3 +87,112 @@
 .speed-connection{display:flex;align-items:center;gap:8px;margin:16px 3px 3px;color:#8795a9;font-size:12px}.speed-connection-dot{width:7px;height:7px;border-radius:50%;background:#27c596}.speed-connection strong{margin-left:auto;color:#25ad87;font-size:11px;font-weight:600}
 @media(max-height:900px){.speed-dial-wrap{height:280px}.speed-dial{width:265px;height:265px}.speed-reading{font-size:61px}.speed-steps{margin-bottom:14px}.speed-result{min-height:104px}.speed-intro{padding-top:7px}.speed-connection{margin-top:10px}}
 @media(max-height:830px){.tool-header{height:79px;padding-top:24px}.tool-scroll{padding-top:8px}}
+
+/* Device Scan: quiet surfaces with blue, lavender, and sage accents. */
+.app.device-preview{min-height:0}
+.device-page{--device-ink:#202d40;--device-muted:#6b788a;--device-line:#edf0f4;background:#f7f9fc;color:var(--device-ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.device-page .tool-header{background:#f7f9fc}
+.device-page .tool-header h1{font-size:17px;font-weight:600;letter-spacing:-.3px}
+.device-page .tool-scroll{padding:0 24px 0}
+.device-overview{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 0 26px}
+.device-eyebrow{display:block;font-size:10px;letter-spacing:1.7px;font-weight:600;color:#6b7e99}
+.device-overview h2{margin:10px 0 7px;font-size:31px;letter-spacing:-1.1px;line-height:1.12;font-weight:650}
+.device-overview p{margin:0;color:var(--device-muted);font-size:13px;line-height:1.5}
+.device-health{display:inline-flex;align-items:center;gap:4px;margin-top:16px;padding:5px 10px 5px 7px;border-radius:20px;background:#e8f4ee;color:#287454;font-size:11px;font-weight:600}
+.device-health svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.device-illustration{width:115px;height:138px;flex:none;display:grid;place-items:center;background:radial-gradient(ellipse,#e4effd 0,transparent 69%)}
+.device-phone{position:relative;width:66px;height:116px;border:3px solid #fff;border-radius:16px;display:grid;place-items:center;transform:rotate(8deg);background:linear-gradient(150deg,#f7fbff,#dcecff);box-shadow:0 0 0 1px #cad8eb,6px 12px 19px #6382aa1c,inset 0 0 0 1px #d9e5f4}
+.device-camera{position:absolute;top:7px;width:19px;height:4px;border-radius:9px;background:#9db3ce}
+.device-homebar{position:absolute;bottom:6px;width:21px;height:3px;background:#adc4df;border-radius:9px}
+.device-phone svg{width:34px;height:34px;fill:#f5faff;stroke:#4588d9;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.device-capacity{display:grid;grid-template-columns:1fr 1fr 1fr;padding:19px 0;background:white;border:1px solid var(--device-line);border-radius:19px}
+.device-capacity>div{padding-left:19px;border-left:1px solid var(--device-line)}
+.device-capacity>div:first-child{border-left:0}
+.device-capacity>div:nth-child(1) strong{color:#397ac4}
+.device-capacity>div:nth-child(2) strong{color:#8065b5}
+.device-capacity>div:nth-child(3) strong{color:#388573}
+.device-capacity>div>span{display:block;font-size:11px;color:var(--device-muted);margin-bottom:7px}
+.device-capacity strong{font-size:26px;font-weight:600;letter-spacing:-.8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.device-capacity strong span{font-size:12px;font-weight:400;color:var(--device-muted);letter-spacing:0;margin-left:5px}
+.device-section{--section-accent:#397ac4;--section-tint:#eaf3fd;--section-border:#e4edf8;--section-surface:#fbfdff;margin-top:24px}
+.device-section.device-display{--section-accent:#8065b5;--section-tint:#f0ebf9;--section-border:#ece7f5;--section-surface:#fdfcff}
+.device-section.device-network{--section-accent:#388573;--section-tint:#e6f4ee;--section-border:#e1eee8;--section-surface:#fbfefc}
+.device-section h3{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;margin:0 2px 10px;letter-spacing:-.1px}
+.device-details{background:var(--section-surface);border:1px solid var(--section-border);border-radius:18px;padding:0 16px}
+.device-detail-row{display:flex;align-items:center;gap:10px;min-height:54px;font-size:12px;border-bottom:1px solid var(--device-line)}
+.device-detail-row:last-child{border-bottom:0}
+.device-detail-row>span:not(.device-detail-icon){color:var(--device-muted)}
+.device-detail-row strong{display:flex;align-items:center;gap:5px;margin-left:auto;font-size:12px;font-weight:550;font-variant-numeric:tabular-nums;white-space:nowrap}
+.device-detail-icon{display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:9px;color:var(--section-accent);background:var(--section-tint)}
+.device-detail-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.device-mini-meter{display:block;width:36px;height:5px;border-radius:9px;background:#e8edf5;margin-left:5px;overflow:hidden}
+.device-mini-meter i{display:block;width:42%;height:100%;background:var(--section-accent);border-radius:9px}
+.device-value-unit{font-size:10px;color:var(--device-muted);font-weight:400}
+.device-graphics{display:grid;grid-template-columns:1fr 1fr;padding:16px 0;font-size:11px;color:var(--device-muted)}
+.device-graphics>div{display:flex;align-items:center;gap:12px;padding-left:38px}
+.device-graphics>div+div{border-left:1px solid var(--device-line);padding-left:20px}
+.device-graphics strong{color:var(--section-accent);font-weight:550;font-size:12px}
+.device-connected{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:400;color:#577b69}
+.device-connected i{width:5px;height:5px;border-radius:50%;background:#65a486}
+.device-preview-note{margin:17px 0 5px;text-align:center;font-size:10px;color:#768396;letter-spacing:.15px}
+.device-page .tool-footer{padding:14px 24px max(23px,env(safe-area-inset-bottom));background:#f7f9fc;box-shadow:none}
+.device-page .tool-footer .primary{height:50px;border-radius:15px;background:#2679e8;box-shadow:none;font-size:15px;font-weight:600;letter-spacing:.1px}
+.device-page .tool-footer .primary:hover{background:#176bd6}
+.device-page .tool-footer .primary:active{background:#125dbf}
+@media(max-width:360px){.device-page .tool-scroll{padding-inline:18px}.device-overview h2{font-size:28px}.device-illustration{width:89px}.device-capacity>div{padding-left:14px}.device-details{padding-inline:12px}.device-detail-row{gap:7px}.device-graphics>div{padding-left:29px}}
+@media(max-height:760px){.device-overview{padding-top:12px;padding-bottom:20px}.device-section{margin-top:20px}}
+
+/* Battery Info: a mint energy gauge, three quiet vitals, and a compact spec sheet. */
+.app.battery-preview{min-height:0}
+.battery-page{--battery-ink:#203b35;--battery-muted:#6b7d77;background:#f6f9f7;color:var(--battery-ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.battery-page .tool-header{background:#f6f9f7}
+.battery-page .tool-header h1{font-size:17px;font-weight:600;letter-spacing:-.3px}
+.battery-page .tool-scroll{padding:9px 24px 0}
+.battery-overview{padding:23px 22px 21px;border:1px solid #dcece3;border-radius:26px;background:linear-gradient(135deg,#eff8f1,#e4f3eb)}
+.battery-overview-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.battery-overview h2{margin:0;font-size:13px;font-weight:500;color:#4b6f60}
+.battery-status{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#597568;white-space:nowrap}
+.battery-status i{width:5px;height:5px;border-radius:50%;background:#789e89}
+.battery-level{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:18px 0 20px}
+.battery-level>strong{font-size:78px;line-height:1;letter-spacing:-5px;font-weight:550;font-variant-numeric:tabular-nums;color:#245744}
+.battery-level>strong>span{font-size:30px;letter-spacing:-1px;font-weight:400;margin-left:4px}
+.battery-level-caption{font-size:13px;line-height:1.6;color:#567865}
+.battery-meter{position:relative;border:1.5px solid #a4c9b1;padding:6px;border-radius:12px;margin-right:6px}
+.battery-meter:after{content:"";position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:4px;height:18px;border-radius:0 3px 3px 0;background:#a4c9b1}
+.battery-segments{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;height:37px}
+.battery-segments i{background:#69a681;border-radius:4px}
+.battery-segments .partial{background:linear-gradient(90deg,#69a681 20%,#d5e6db 20%)}
+.battery-segments .empty{background:#d5e6db}
+.battery-runtime{display:flex;align-items:center;gap:10px;border-top:1px solid #cfe3d6;margin-top:23px;padding-top:17px}
+.battery-clock{width:34px;height:34px;display:grid;place-items:center;background:#ffffff80;border-radius:50%;color:#608874}
+.battery-clock svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.battery-runtime>div{flex:1;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.battery-runtime>div>span{max-width:110px;font-size:11px;line-height:1.5;color:#587466}
+.battery-runtime strong{font-size:19px;letter-spacing:-.4px;white-space:nowrap;font-weight:600}
+.battery-runtime small{font-size:11px;font-weight:400;color:#587466;letter-spacing:0}
+.battery-condition,.battery-specs{margin-top:25px}
+.battery-condition h2,.battery-specs h2{font-size:14px;font-weight:600;margin:0 2px 12px;letter-spacing:-.2px}
+.battery-vitals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.battery-vital{display:flex;flex-direction:column;align-items:center;padding:17px 5px 16px;border-radius:18px;background:white;border:1px solid #e8eeea;min-width:0}
+.battery-vital-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#eaf4ed;color:#488562;margin-bottom:11px}
+.battery-vital-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.battery-vital.temperature .battery-vital-icon{background:#fcf0e3;color:#b48447}
+.battery-vital.voltage .battery-vital-icon{background:#eeebf8;color:#8773af}
+.battery-vital strong{font-size:21px;font-weight:600;letter-spacing:-.6px;line-height:1.2;font-variant-numeric:tabular-nums}
+.battery-vital strong span{font-size:12px;margin-left:2px;font-weight:400;letter-spacing:0}
+.battery-vital>span:last-child{font-size:10px;color:var(--battery-muted);margin-top:6px}
+.battery-spec-sheet{padding:0 18px;border:1px solid #e8eeea;border-radius:20px;background:white}
+.battery-spec-sheet dl{margin:0}
+.battery-spec-sheet dl>div{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:49px;border-bottom:1px solid #edf1ee;font-size:12px}
+.battery-spec-sheet dt{color:var(--battery-muted)}
+.battery-spec-sheet dd{margin:0;font-size:13px;font-weight:550;white-space:nowrap;font-variant-numeric:tabular-nums}
+.battery-spec-sheet dd span{font-size:10px;color:var(--battery-muted);font-weight:400;margin-left:2px}
+.battery-spec-sheet p{display:flex;align-items:center;gap:7px;margin:13px 0 15px;color:#7a8881;font-size:10px;line-height:1.5}
+.battery-spec-sheet p svg{width:14px;height:14px;flex:none;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.battery-preview-note{margin:17px 0 5px;text-align:center;font-size:10px;letter-spacing:.1px;color:#7b8882}
+.battery-page .tool-footer{padding:14px 24px max(23px,env(safe-area-inset-bottom));background:#f6f9f7;box-shadow:none}
+.battery-page .tool-footer .primary{height:50px;border-radius:15px;background:#32795b;box-shadow:none;font-size:15px;font-weight:600}
+.battery-page .tool-footer .primary:hover{background:#28694e}
+.battery-page .tool-footer .primary:active{background:#20573f}
+@media(max-width:360px){.battery-page .tool-scroll{padding-inline:18px}.battery-overview{padding:20px 17px}.battery-level>strong{font-size:68px}.battery-level-caption{font-size:11px}.battery-runtime strong{font-size:17px}.battery-clock{width:28px;height:28px}.battery-vitals{gap:7px}.battery-spec-sheet{padding-inline:15px}}
+@media(max-height:760px){.battery-level{margin:14px 0 16px}.battery-level>strong{font-size:65px}.battery-condition,.battery-specs{margin-top:21px}}

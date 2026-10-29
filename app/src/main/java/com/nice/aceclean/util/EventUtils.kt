@@ -74,6 +74,7 @@ object EventUtils {
     // 垃圾清理结果
 
     /** 垃圾清理结果：点击返回。 */
+    const val CLICK_CLEANUP_SETTINGS = "click_cleanup_settings"
     const val CLICK_CLEANUP_BACK = "click_cleanup_back"
 
     /** 垃圾清理结果：点击更多清理。 */

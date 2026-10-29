@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_ram_result_card"
-    android:elevation="2dp"
+    android:elevation="0dp"
     android:orientation="vertical"
-    android:paddingStart="9dp"
-    android:paddingTop="13dp"
-    android:paddingEnd="8dp"
+    android:paddingStart="12dp"
+    android:paddingTop="11dp"
+    android:paddingEnd="12dp"
     android:paddingBottom="8dp">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_marginTop="7dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="#FF222127"
+        android:textColor="@color/color_FF245744"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -34,6 +34,6 @@
         android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="#FF777777"
+        android:textColor="@color/color_FF6B7D77"
         android:textSize="12sp" />
 </LinearLayout>

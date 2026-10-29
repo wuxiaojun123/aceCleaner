@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Deseleccionar foto</string>
     <string name="string_photo_load_failed">No se pudo cargar la foto</string>
     <string name="string_home_smart_cleaning">Limpieza inteligente</string>
+    <string name="string_cleanup_title">Limpiador</string>
+    <string name="string_cleanup_system_cleaning">Limpieza del sistema</string>
+    <string name="string_cleanup_clean_now">Limpiar ahora</string>
+    <string name="string_device_overview">RESUMEN DEL DISPOSITIVO</string>
+    <string name="string_device_at_a_glance">Tu dispositivo de un vistazo.</string>
+    <string name="string_device_healthy">En buen estado</string>
+    <string name="string_device_processor">Procesador</string>
+    <string name="string_device_system">Sistema</string>
+    <string name="string_device_available_ram">RAM disponible</string>
+    <string name="string_device_display_graphics">Pantalla y gráficos</string>
+    <string name="string_device_network">Red</string>
+    <string name="string_device_connected">Conectado</string>
+    <string name="string_device_core_count">%1$d núcleos</string>
 </resources>

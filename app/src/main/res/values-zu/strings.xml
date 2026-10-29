@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Susa ukukhetha isithombe</string>
     <string name="string_photo_load_failed">Ayikwazanga ukulayisha isithombe</string>
     <string name="string_home_smart_cleaning">Ukuhlanza okuhlakaniphile</string>
+    <string name="string_cleanup_title">Isihlanzi</string>
+    <string name="string_cleanup_system_cleaning">Ukuhlanza Uhlelo</string>
+    <string name="string_cleanup_clean_now">Hlanza Manje</string>
+    <string name="string_device_overview">UKUBUKA KWEDEIVAYISI</string>
+    <string name="string_device_at_a_glance">Idivayisi yakho ngokushesha.</string>
+    <string name="string_device_healthy">Isesimweni esihle</string>
+    <string name="string_device_processor">Iprosesa</string>
+    <string name="string_device_system">Uhlelo</string>
+    <string name="string_device_available_ram">I-RAM etholakalayo</string>
+    <string name="string_device_display_graphics">Isibonisi nezithombe</string>
+    <string name="string_device_network">Inethiwekhi</string>
+    <string name="string_device_connected">Ixhunyiwe</string>
+    <string name="string_device_core_count">%1$d ama-core</string>
 </resources>

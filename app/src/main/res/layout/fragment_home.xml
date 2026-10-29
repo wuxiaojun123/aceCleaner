@@ -50,7 +50,7 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/settings_button"
                             android:layout_width="42dp"
                             android:layout_height="42dp"
@@ -58,14 +58,16 @@
                             android:contentDescription="@string/settings"
                             android:padding="10dp"
                             android:src="@drawable/ic_settings"
-                            android:tint="#FF087AF8" />
+                            android:tint="#FF087AF8"
+                            android:clickable="true"
+                            android:focusable="true" />
 
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_weight="1" />
 
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/language_button"
                             android:layout_width="42dp"
                             android:layout_height="42dp"
@@ -73,7 +75,9 @@
                             android:contentDescription="@string/language_entry_content_description"
                             android:padding="9dp"
                             android:src="@drawable/ic_language"
-                            android:tint="#FF087AF8" />
+                            android:tint="#FF087AF8"
+                            android:clickable="true"
+                            android:focusable="true" />
                     </LinearLayout>
 
                     <FrameLayout
@@ -139,10 +143,9 @@
                             android:background="@drawable/bg_home_ref_button"
                             android:clickable="true"
                             android:drawableStart="@drawable/ic_home_ref_broom"
-                            android:drawablePadding="8dp"
+                            android:drawablePadding="-15dp"
+                            android:paddingStart="25dp"
                             android:drawableTint="#FFFFFFFF"
-                            android:elevation="8dp"
-                            android:focusable="true"
                             android:gravity="center"
                             android:text="@string/string_home_smart_cleaning"
                             android:textColor="#FFFFFFFF"
@@ -325,7 +328,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/pinned_language_button"
             android:layout_width="42dp"
             android:layout_height="42dp"
@@ -333,6 +336,8 @@
             android:contentDescription="@string/language_entry_content_description"
             android:padding="9dp"
             android:src="@drawable/ic_language"
-            android:tint="#FF087AF8" />
+            android:tint="#FF087AF8"
+            android:clickable="true"
+            android:focusable="true" />
     </LinearLayout>
 </FrameLayout>

@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/scan_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -31,7 +31,9 @@
                 android:contentDescription="@string/go_back"
                 android:padding="10dp"
                 android:src="@drawable/ic_back"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/scan_title"

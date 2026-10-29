@@ -23,7 +23,7 @@
                 android:layout_height="52dp"
                 android:paddingStart="8dp">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/delete_success_back"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -31,7 +31,9 @@
                     android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/go_back"
                     android:padding="12dp"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_back"
+                    android:clickable="true"
+                    android:focusable="true" />
 
                 <TextView
                     android:id="@+id/delete_success_title"

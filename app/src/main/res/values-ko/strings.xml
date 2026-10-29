@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">사진 선택 해제</string>
     <string name="string_photo_load_failed">사진을 불러올 수 없습니다</string>
     <string name="string_home_smart_cleaning">스마트 정리</string>
+    <string name="string_cleanup_title">클리너</string>
+    <string name="string_cleanup_system_cleaning">시스템 정리</string>
+    <string name="string_cleanup_clean_now">지금 정리</string>
+    <string name="string_device_overview">기기 개요</string>
+    <string name="string_device_at_a_glance">기기 상태를 한눈에 확인하세요.</string>
+    <string name="string_device_healthy">양호</string>
+    <string name="string_device_processor">프로세서</string>
+    <string name="string_device_system">시스템</string>
+    <string name="string_device_available_ram">사용 가능한 RAM</string>
+    <string name="string_device_display_graphics">디스플레이 및 그래픽</string>
+    <string name="string_device_network">네트워크</string>
+    <string name="string_device_connected">연결됨</string>
+    <string name="string_device_core_count">%1$d코어</string>
 </resources>

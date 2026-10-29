@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Susa ukhetho lwefoto</string>
     <string name="string_photo_load_failed">Ayikwazanga ukulayisha ifoto</string>
     <string name="string_home_smart_cleaning">Ukucoca ngobuchule</string>
+    <string name="string_cleanup_title">Isicoci</string>
+    <string name="string_cleanup_system_cleaning">Ukucoca Inkqubo</string>
+    <string name="string_cleanup_clean_now">Coca Ngoku</string>
+    <string name="string_device_overview">ISISHWANKATHELO SESIXHOBO</string>
+    <string name="string_device_at_a_glance">Isixhobo sakho ngokukrwaqula.</string>
+    <string name="string_device_healthy">Sikwimeko entle</string>
+    <string name="string_device_processor">Iprosesa</string>
+    <string name="string_device_system">Inkqubo</string>
+    <string name="string_device_available_ram">I-RAM ekhoyo</string>
+    <string name="string_device_display_graphics">Isikrini nemizobo</string>
+    <string name="string_device_network">Uthungelwano</string>
+    <string name="string_device_connected">Ixhunyiwe</string>
+    <string name="string_device_core_count">%1$d ii-core</string>
 </resources>

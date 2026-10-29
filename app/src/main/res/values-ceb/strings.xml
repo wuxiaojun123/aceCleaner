@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Tangtanga ang pagpili sa litrato</string>
     <string name="string_photo_load_failed">Dili ma-load ang litrato</string>
     <string name="string_home_smart_cleaning">Maalamong paglimpyo</string>
+    <string name="string_cleanup_title">Tiglimpyo</string>
+    <string name="string_cleanup_system_cleaning">Paglimpyo sa Sistema</string>
+    <string name="string_cleanup_clean_now">Limpyohi Karon</string>
+    <string name="string_device_overview">KINATIBUK-ANG TAN-AW SA DEVICE</string>
+    <string name="string_device_at_a_glance">Tan-awa sa usa ka pagtan-aw ang imong device.</string>
+    <string name="string_device_healthy">Maayong kahimtang</string>
+    <string name="string_device_processor">Prosessor</string>
+    <string name="string_device_system">Sistema</string>
+    <string name="string_device_available_ram">Magamit nga RAM</string>
+    <string name="string_device_display_graphics">Display ug graphics</string>
+    <string name="string_device_network">Network</string>
+    <string name="string_device_connected">Nakakonekta</string>
+    <string name="string_device_core_count">%1$d ka core</string>
 </resources>

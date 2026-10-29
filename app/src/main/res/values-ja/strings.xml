@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">写真の選択を解除</string>
     <string name="string_photo_load_failed">写真を読み込めませんでした</string>
     <string name="string_home_smart_cleaning">スマートクリーニング</string>
+    <string name="string_cleanup_title">クリーナー</string>
+    <string name="string_cleanup_system_cleaning">システムのクリーンアップ</string>
+    <string name="string_cleanup_clean_now">今すぐクリーンアップ</string>
+    <string name="string_device_overview">デバイスの概要</string>
+    <string name="string_device_at_a_glance">デバイスの状態をひと目で確認。</string>
+    <string name="string_device_healthy">良好</string>
+    <string name="string_device_processor">プロセッサ</string>
+    <string name="string_device_system">システム</string>
+    <string name="string_device_available_ram">使用可能なRAM</string>
+    <string name="string_device_display_graphics">ディスプレイとグラフィック</string>
+    <string name="string_device_network">ネットワーク</string>
+    <string name="string_device_connected">接続済み</string>
+    <string name="string_device_core_count">%1$dコア</string>
 </resources>

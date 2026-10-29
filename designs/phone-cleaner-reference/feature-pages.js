@@ -82,12 +82,17 @@ function closeFeature() {
   clearTimeout(featureState.networkTimer);
   if(featureState.previous==='tool'){const parent=featureState.parent;featureState.previous='home';featureState.current=parent;featureState.selected.clear();renderFeature();toolScroll.scrollTop=0;return;}
   toolScreen.hidden=true;
+  document.querySelector('.app').classList.remove('device-preview', 'battery-preview');
   if(featureState.previous==='clean'){cleanScreen.hidden=false;document.getElementById('backButton').focus();}
   else {homeScreen.hidden=false;document.getElementById('openCleaning').focus();}
 }
 function featureTo(name) {openFeature(name,'tool');}
 function renderFeature() {
   const f=featureState.current;
+  toolScreen.classList.toggle('device-page', f==='Device Scan');
+  toolScreen.classList.toggle('battery-page', f==='Battery Info');
+  document.querySelector('.app').classList.toggle('battery-preview', f==='Battery Info');
+  document.querySelector('.app').classList.toggle('device-preview', f==='Device Scan');
   document.getElementById('toolTitle').textContent=({'APP Manager':'App Manager','Duplicate Photo Cleaner':'Duplicate Photos','Big File Cleaner':'Big Files','Video Cleaner':'Videos','Screenshot Cleaner':'Screenshots','Device Scan':'Device Scan','Clean Up':'Junk Cleaner'})[f]||f;
   toolFooter.hidden=true;
   const lead='<p class="tool-kicker">Sample data · interactive design preview</p>';
@@ -150,13 +155,78 @@ function renderFeature() {
     html+=title('Recently used apps')+rows([{name:'Browser',sub:'Recently active',size:'Close ›',icon:'◎'},{name:'Music',sub:'Recently active',size:'Close ›',icon:'♫'},{name:'Maps',sub:'Recently active',size:'Close ›',icon:'◈'}]);
     foot('OK','back');
   } else if(f==='Device Scan') {
-    html+=hero('Device report','Healthy','Hardware and system overview');
-    html+=`<div class="tool-card" style="padding:18px"><small class="tool-muted">CPU model</small><h2 style="margin:7px 0 0;font-size:20px">8-core processor</h2></div>`;
-    html+=stats([['128 GB','Storage'],['6 GB','Memory'],['42%','RAM available'],['Android 15','Android version'],['1080 × 2400','Resolution'],['3.2','OpenGL ES'],['1.3','Vulkan'],['192.168.1.8','IP address'],['433 Mbps','Link speed']]);
-    foot('OK','back');
+    html=`<div class="device-report" data-screen-label="Device Scan">
+      <section class="device-overview" aria-labelledby="deviceHeading">
+        <div class="device-overview-copy">
+          <span class="device-eyebrow">DEVICE OVERVIEW</span>
+          <h2 id="deviceHeading">Looking good.</h2>
+          <p>Your device at a glance.</p>
+          <span class="device-health"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10 3 3 7-7"></path></svg>Healthy</span>
+        </div>
+        <div class="device-illustration" aria-hidden="true">
+          <div class="device-phone"><span class="device-camera"></span><svg viewBox="0 0 32 32"><path d="M16 4 26 8v8c0 6-10 12-10 12S6 22 6 16V8Z"></path><path d="m11 15 4 4 7-8"></path></svg><span class="device-homebar"></span></div>
+        </div>
+      </section>
+      <section class="device-capacity" aria-label="Core hardware">
+        <div><span>Processor</span><strong>8<span>core</span></strong></div>
+        <div><span>Memory</span><strong>6<span>GB</span></strong></div>
+        <div><span>Storage</span><strong>128<span>GB</span></strong></div>
+      </section>
+      <section class="device-section" aria-labelledby="deviceSystemHeading">
+        <h3 id="deviceSystemHeading">System</h3>
+        <div class="device-details">
+          <div class="device-detail-row"><span class="device-detail-icon"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"></rect><path d="M10 6h4m-3 12h2"></path></svg></span><span>Android version</span><strong>Android 15</strong></div>
+          <div class="device-detail-row"><span class="device-detail-icon"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"></rect><path d="M9 9h6v6H9zM9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"></path></svg></span><span>Available RAM</span><strong>42%<span class="device-mini-meter" aria-hidden="true"><i></i></span></strong></div>
+        </div>
+      </section>
+      <section class="device-section device-display" aria-labelledby="deviceDisplayHeading">
+        <h3 id="deviceDisplayHeading">Display &amp; graphics</h3>
+        <div class="device-details">
+          <div class="device-detail-row"><span class="device-detail-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><span>Resolution</span><strong>1080 × 2400<span class="device-value-unit">px</span></strong></div>
+          <div class="device-graphics"><div><span>OpenGL ES</span><strong>3.2</strong></div><div><span>Vulkan</span><strong>1.3</strong></div></div>
+        </div>
+      </section>
+      <section class="device-section device-network" aria-labelledby="deviceNetworkHeading">
+        <h3 id="deviceNetworkHeading">Network<span class="device-connected"><i></i>Connected</span></h3>
+        <div class="device-details">
+          <div class="device-detail-row"><span class="device-detail-icon"><svg viewBox="0 0 24 24"><path d="M3 8a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0m-9 4a5 5 0 0 1 6 0"></path><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"></circle></svg></span><span>Link speed</span><strong>433<span class="device-value-unit">Mbps</span></strong></div>
+          <div class="device-detail-row"><span class="device-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18"></path></svg></span><span>IP address</span><strong>192.168.1.8</strong></div>
+        </div>
+      </section>
+      <p class="device-preview-note">Sample device · Design preview</p>
+    </div>`;
+    foot('Done','back');
   } else if(f==='Battery Info') {
-    html+=hero('Battery level','82%','Estimated time remaining · 8 h 25 min','green');
-    html+=stats([['4,500 mAh','Estimated capacity'],['Good','Battery health'],['Li-ion','Battery type'],['Not charging','Charging status'],['31.2°C','Temperature'],['3.89 V','Voltage'],['3,690 mAh','Current capacity']]);
+    html=`<div class="battery-report" data-screen-label="Battery Info">
+      <section class="battery-overview" aria-labelledby="batteryLevelHeading">
+        <div class="battery-overview-top"><h2 id="batteryLevelHeading">Battery level</h2><span class="battery-status"><i></i>Not charging</span></div>
+        <div class="battery-level"><strong>82<span>%</span></strong><span class="battery-level-caption">Ready for<br>the day ahead.</span></div>
+        <div class="battery-meter" role="meter" aria-label="Battery level" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+          <div class="battery-segments" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="partial"></i><i class="empty"></i></div>
+        </div>
+        <div class="battery-runtime"><span class="battery-clock" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v5l3 2"></path></svg></span><div><span>Estimated time remaining</span><strong>8 <small>h</small> 25 <small>min</small></strong></div></div>
+      </section>
+      <section class="battery-condition" aria-labelledby="batteryConditionHeading">
+        <h2 id="batteryConditionHeading">Battery condition</h2>
+        <div class="battery-vitals">
+          <div class="battery-vital health"><span class="battery-vital-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-8 9-8 9s-8-4-8-9V6Z"></path><path d="m8 12 3 3 5-6"></path></svg></span><strong>Good</strong><span>Health</span></div>
+          <div class="battery-vital temperature"><span class="battery-vital-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 14.5V5a3 3 0 0 1 6 0v9.5a5 5 0 1 1-6 0Z"></path><path d="M12 9v8"></path><circle cx="12" cy="18" r="1" fill="currentColor"></circle></svg></span><strong>31.2<span>°C</span></strong><span>Temperature</span></div>
+          <div class="battery-vital voltage"><span class="battery-vital-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-8Z"></path></svg></span><strong>3.89<span>V</span></strong><span>Voltage</span></div>
+        </div>
+      </section>
+      <section class="battery-specs" aria-labelledby="batteryDetailsHeading">
+        <h2 id="batteryDetailsHeading">A closer look</h2>
+        <div class="battery-spec-sheet">
+          <dl>
+            <div><dt>Estimated capacity</dt><dd>4,500 <span>mAh</span></dd></div>
+            <div><dt>Current capacity</dt><dd>3,690 <span>mAh</span></dd></div>
+            <div><dt>Battery type</dt><dd>Li-ion</dd></div>
+          </dl>
+          <p><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><path d="M10 9v5m0-8v.5"></path></svg>Remaining time varies with usage.</p>
+        </div>
+      </section>
+      <p class="battery-preview-note">Sample battery data · Design preview</p>
+    </div>`;
     foot('Got it','back');
   } else if(f==='Network Test') {
     const step=featureState.networkStep;
@@ -246,5 +316,5 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!toolScreen
 document.getElementById('menuClean').insertAdjacentHTML('afterend','<button class="menu-entry" id="menuJunk" type="button"><span>Junk Cleaner</span><span>→</span></button>');
 document.getElementById('menuJunk').addEventListener('click',()=>openFeature('Clean Up'));
 const previewPage = new URLSearchParams(location.search).get('page');
-const previewPages = {apps:'APP Manager',screenshots:'Screenshot Cleaner',bigfiles:'Big File Cleaner',speed:'Network Test'};
+const previewPages = {apps:'APP Manager',screenshots:'Screenshot Cleaner',bigfiles:'Big File Cleaner',speed:'Network Test',device:'Device Scan',battery:'Battery Info'};
 if(previewPages[previewPage]) openFeature(previewPages[previewPage]);

@@ -23,14 +23,16 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="14dp">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/app_manager_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/go_back"
                 android:padding="10dp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:layout_width="wrap_content"

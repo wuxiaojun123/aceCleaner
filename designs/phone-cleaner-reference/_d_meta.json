@@ -9,10 +9,20 @@
           "path": "system-cleaning.html",
           "createdAt": "2026-10-24T08:28:44.368Z",
           "status": "needs-review"
+        },
+        {
+          "path": "system-cleaning-before-device.html",
+          "createdAt": "2026-10-28T04:20:49.947Z",
+          "status": "needs-review"
+        },
+        {
+          "path": "system-cleaning-before-battery.html",
+          "createdAt": "2026-10-28T07:30:12.455Z",
+          "status": "needs-review"
         }
       ]
     }
   },
   "createdAt": "2026-10-24T08:28:44.380Z",
-  "updatedAt": "2026-10-25T02:43:05.700Z"
+  "updatedAt": "2026-10-28T07:30:12.607Z"
 }

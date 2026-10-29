@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">Fotoğraf seçimini kaldır</string>
     <string name="string_photo_load_failed">Fotoğraf yüklenemedi</string>
     <string name="string_home_smart_cleaning">Akıllı temizleme</string>
+    <string name="string_cleanup_title">Temizleyici</string>
+    <string name="string_cleanup_system_cleaning">Sistem Temizliği</string>
+    <string name="string_cleanup_clean_now">Şimdi Temizle</string>
+    <string name="string_device_overview">CİHAZ ÖZETİ</string>
+    <string name="string_device_at_a_glance">Cihazınıza genel bakış.</string>
+    <string name="string_device_healthy">İyi durumda</string>
+    <string name="string_device_processor">İşlemci</string>
+    <string name="string_device_system">Sistem</string>
+    <string name="string_device_available_ram">Kullanılabilir RAM</string>
+    <string name="string_device_display_graphics">Ekran ve grafik</string>
+    <string name="string_device_network">Ağ</string>
+    <string name="string_device_connected">Bağlı</string>
+    <string name="string_device_core_count">%1$d çekirdek</string>
 </resources>

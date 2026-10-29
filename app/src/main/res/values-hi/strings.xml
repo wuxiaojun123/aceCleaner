@@ -450,4 +450,17 @@
     <string name="string_photo_deselect">फ़ोटो का चयन हटाएँ</string>
     <string name="string_photo_load_failed">फ़ोटो लोड नहीं हो सकी</string>
     <string name="string_home_smart_cleaning">स्मार्ट सफ़ाई</string>
+    <string name="string_cleanup_title">क्लीनर</string>
+    <string name="string_cleanup_system_cleaning">सिस्टम की सफ़ाई</string>
+    <string name="string_cleanup_clean_now">अभी साफ़ करें</string>
+    <string name="string_device_overview">डिवाइस का अवलोकन</string>
+    <string name="string_device_at_a_glance">एक नज़र में आपका डिवाइस।</string>
+    <string name="string_device_healthy">सही स्थिति में</string>
+    <string name="string_device_processor">प्रोसेसर</string>
+    <string name="string_device_system">सिस्टम</string>
+    <string name="string_device_available_ram">उपलब्ध RAM</string>
+    <string name="string_device_display_graphics">डिस्प्ले और ग्राफ़िक्स</string>
+    <string name="string_device_network">नेटवर्क</string>
+    <string name="string_device_connected">कनेक्टेड</string>
+    <string name="string_device_core_count">%1$d कोर</string>
 </resources>
