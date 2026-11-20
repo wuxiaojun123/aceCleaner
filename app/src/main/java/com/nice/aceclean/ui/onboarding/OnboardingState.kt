@@ -7,8 +7,7 @@ internal enum class OnboardingStep {
     BATTERY_CHECK, JUNK_SCAN, JUNK_RESULT, CLEANING, COMPLETE, COMPLETED;
 
     fun restored(hotStart: Boolean): OnboardingStep = when (this) {
-        // NOT_STARTED -> OVERLAY // 首次悬浮窗引导暂时停用。
-        NOT_STARTED -> DEVICE_SCAN // Splash 结束后继续设备扫描，避免再次进入悬浮窗引导。
+        NOT_STARTED -> OVERLAY
         OVERLAY -> DEVICE_SCAN
         DEVICE_DETAIL -> if (hotStart) this else DEVICE_SCAN
         JUNK_RESULT, CLEANING -> JUNK_SCAN // Scan results are never reconstructed from stale file paths.

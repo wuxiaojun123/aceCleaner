@@ -10,6 +10,8 @@ internal class OnboardingSettingsPermission(
     activity: FragmentActivity,
     analytics: PermissionRequestAnalytics,
     isGranted: () -> Boolean,
+    bringCallerToFront: Boolean = true,
+    private val finishOnOpenFailure: Boolean = true,
     private val onFinished: (Boolean) -> Unit,
 ) : AutoCloseable {
     private val poller = SettingsPermissionPoller(
@@ -19,13 +21,14 @@ internal class OnboardingSettingsPermission(
         onGranted = { onFinished(true) },
         onDenied = { onFinished(false) },
         pendingExtra = "onboarding_settings_pending",
+        bringCallerToFront = bringCallerToFront,
     )
 
     fun restorePendingRequest() = poller.restorePendingRequest()
 
     fun request(vararg intents: Intent): Boolean {
         val opened = poller.openSettings(*intents)
-        if (!opened) onFinished(false)
+        if (!opened && finishOnOpenFailure) onFinished(false)
         return opened
     }
 

@@ -17,12 +17,15 @@ class DeviceStatusScanActivity : BaseOnboardingActivity<OnboardingActivityDevice
         trackOnboardingAnimation(binding.deviceScanAnimation)
         lifecycleScope.launch {
             val ad = async { AppAdManager.preload(this@DeviceStatusScanActivity, AppAdManager.ONBOARDING_DEVICE_SCAN) }
-            animateProgress(SCAN_DURATION_MS, ::renderProgress)
+            animateProgress(SCAN_DURATION_MS, ::renderProgress, maxProgress = 99)
             delay(SCAN_DURATION_MS)
             stopProgress()
+            renderProgress(99)
+            val adReady = ad.await()
+            awaitResumed()
             renderProgress(100)
             delay(450L)
-            if (ad.await()) showAd(AppAdManager.ONBOARDING_DEVICE_SCAN)
+            if (adReady) showAd(AppAdManager.ONBOARDING_DEVICE_SCAN)
             awaitResumed()
             navigateTo(DeviceStatusDetailActivity::class.java)
         }

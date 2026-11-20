@@ -16,6 +16,7 @@ DEFAULT_CLASSES = [
     ROOT / "app/build/intermediates/classes/release/transformReleaseClassesWithAsm/dirs",
     ROOT / "library_ad_sdk/build/tmp/kotlin-classes/release",
     ROOT / "library_push/build/tmp/kotlin-classes/release",
+    ROOT / "library_float/build/tmp/kotlin-classes/release",
 ]
 
 
@@ -92,7 +93,7 @@ def main():
     parser.add_argument("--mapping", type=Path, default=ROOT / "app/mapping.txt")
     parser.add_argument("--classes", type=Path, action="append", help="Repeat for each compiled class directory")
     args = parser.parse_args()
-    mapping = dict(re.findall(r"^(\S+) -> (\S+)$", args.mapping.read_text(), re.MULTILINE))
+    mapping = dict(re.findall(r"^(\S+) -> (\S+)$", args.mapping.read_text(encoding="utf-8-sig"), re.MULTILINE))
     if not mapping:
         parser.error("No ActivityGuard class mappings found")
     classes = {}

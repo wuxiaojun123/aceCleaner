@@ -237,6 +237,7 @@ configurations.configureEach {
 dependencies {
     implementation(project(":library_ad_sdk"))
     implementation(project(":library_push"))
+    implementation(project(":library_float"))
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.1.0")

@@ -24,3 +24,4 @@ rootProject.name = "AceClean"
 include(":app")
 include(":library_ad_sdk")
 include(":library_push")
+include(":library_float")

@@ -24,7 +24,13 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         notificationAnalytics.result(granted)
     }
-    private val overlayPermission = OnboardingSettingsPermission(this, PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.OVERLAY), { Settings.canDrawOverlays(this) }) {
+    private val overlayPermission = OnboardingSettingsPermission(
+        this,
+        PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.OVERLAY),
+        { Settings.canDrawOverlays(this) },
+        bringCallerToFront = false,
+        finishOnOpenFailure = false,
+    ) {
         continueToSplash()
     }
 
@@ -44,8 +50,13 @@ class OverlayPermissionGuideActivity : BaseOnboardingActivity<OnboardingActivity
     }
 
     private fun continueToSplash() {
+        if (navigating || isFinishing || isDestroyed) return
+        overlayPermission.close()
         OnboardingState.set(this, OnboardingStep.DEVICE_SCAN)
-        navigateTo(Intent(this, SplashActivity::class.java).putExtra(SplashActivity.EXTRA_FROM_ONBOARDING, true))
+        navigateTo(Intent(this, SplashActivity::class.java).apply {
+            putExtra(SplashActivity.EXTRA_FROM_ONBOARDING, true)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        })
     }
 
     override fun onGuideBackPressed() = continueToSplash()

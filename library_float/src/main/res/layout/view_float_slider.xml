@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="45dp"
+    android:layout_height="45dp"
+    android:contentDescription="@string/string_m_check">
+
+    <com.nice.library_float.FloatPulseView
+        android:id="@+id/orbHalo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/ivSliderBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        android:tint="@color/color_FFFFFFFF"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvSliderValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:importantForAccessibility="no"
+        android:textColor="@color/color_FFFFFFFF"
+        android:textSize="11sp"
+        tools:text="88%" />
+</FrameLayout>

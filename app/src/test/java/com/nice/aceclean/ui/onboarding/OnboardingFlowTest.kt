@@ -10,9 +10,9 @@ class OnboardingFlowTest {
         assertEquals(pages.size, pages.map(OnboardingNavigator::destination).toSet().size)
     }
 
-    @Test fun `new users continue to device scan after splash while overlay guide is disabled`() {
-        assertEquals(OnboardingStep.DEVICE_SCAN, OnboardingStep.NOT_STARTED.restored(false))
-        assertEquals(OnboardingStep.DEVICE_SCAN, OnboardingStep.NOT_STARTED.restored(true))
+    @Test fun `new users enter overlay guide and continue to device scan afterwards`() {
+        assertEquals(OnboardingStep.OVERLAY, OnboardingStep.NOT_STARTED.restored(false))
+        assertEquals(OnboardingStep.OVERLAY, OnboardingStep.NOT_STARTED.restored(true))
         assertEquals(OnboardingStep.DEVICE_SCAN, OnboardingStep.OVERLAY.restored(false))
         assertEquals(OnboardingStep.COMPLETED, OnboardingStep.COMPLETED.restored(false))
     }

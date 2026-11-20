@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="6dp"
+        android:paddingEnd="10dp"
+        android:paddingVertical="11dp"
+        android:background="@drawable/shape_solid_000_a50_r10">
+
+        <ImageView
+            android:id="@+id/ivTipIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@mipmap/ic_float_high_voltage"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/tvTipValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="Tap to open Control Panel"
+            android:textColor="@color/color_FFFFFFFF"
+            android:textSize="12sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivTipArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@mipmap/ic_float_tip_arrow"/>
+
+</LinearLayout>

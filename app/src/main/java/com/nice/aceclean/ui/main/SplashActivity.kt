@@ -47,13 +47,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
 
     override fun initViews() {
         disableSystemBack()
-        // 暂停首次启动的悬浮窗引导，直接显示原有 Splash 页面。
-        // 恢复此入口时，同时恢复 OnboardingStep.NOT_STARTED 的 OVERLAY 路由。
-        // if (OnboardingState.get(this) == OnboardingStep.NOT_STARTED) {
-        //     startActivity(OnboardingNavigator.intent(this, OnboardingStep.OVERLAY))
-        //     finish()
-        //     return
-        // }
+        if (OnboardingState.get(this) == OnboardingStep.NOT_STARTED) {
+            startActivity(OnboardingNavigator.intent(this, OnboardingStep.OVERLAY))
+            finish()
+            return
+        }
         renderProgress(0)
     }
 
@@ -102,6 +100,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     }
 
     private fun startupPlacement(): String {
+        if (intent.hasExtra(EXTRA_FLOAT_FEATURE)) return AppAdManager.HOT_START
         if (notificationDestination != null) return AppAdManager.HOT_START
         if (intent.getBooleanExtra(EXTRA_HOT_START, false)) return AppAdManager.HOT_START
         val prefs = getSharedPreferences("onboarding", MODE_PRIVATE)
@@ -120,6 +119,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     private fun openNextScreen() {
         if (navigating || isFinishing || isDestroyed) return
         navigating = true
+        val floatFeature = ScanFeature.entries.firstOrNull { it.name == intent.getStringExtra(EXTRA_FLOAT_FEATURE) }
+        if (floatFeature != null) {
+            startActivities(arrayOf(
+                Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                floatFeature.scanIntent(this),
+            ))
+            finish()
+            return
+        }
         notificationDestination?.let { destination ->
             val home = Intent(this, MainActivity::class.java).addFlags(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP,
@@ -149,7 +157,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         const val EXTRA_HOT_START = "extra_hot_start"
         const val EXTRA_FROM_ONBOARDING = "extra_from_onboarding"
         private const val EXTRA_NOTIFICATION_DESTINATION = "notification_destination"
+        private const val EXTRA_FLOAT_FEATURE = "float_feature"
         private const val SPLASH_DURATION_MS = 1_450L
+
+        internal fun floatingIntent(context: Context, feature: ScanFeature): Intent =
+            Intent(context, SplashActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(HotStartManager.EXTRA_NOTIFICATION_ENTRY, true)
+                putExtra(EXTRA_HOT_START, true)
+                putExtra(EXTRA_FLOAT_FEATURE, feature.name)
+            }
 
         internal fun notificationIntent(context: Context, destination: NotificationDestination): Intent =
             Intent(context, SplashActivity::class.java).apply {

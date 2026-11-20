@@ -1,0 +1,29 @@
+<resources>
+    <string name="string_image_clean">Image\nClean</string>
+    <string name="string_junk_clean">Junk\nClean</string>
+    <string name="string_app_processes">App\nProcesses</string>
+    <string name="string_notify_clean">Notification\nClean</string>
+    <string name="string_m_check">Check</string>
+    <string name="string_app_name" translatable="false">CleanBoxPro</string>
+    <string name="string_float_permission_files_access_needed">Files Access Needed! Tap to fix  &gt;&gt;</string>
+    <string name="string_float_permission_notification_access_needed">Notification Access Needed! Tap to fix &gt;&gt;</string>
+    <string name="string_float_download_junk_found">%1$s Junk Found! Clean now  &gt;&gt;</string>
+    <string name="string_float_new_photos_found">New Photos Found! Clean clutter&gt;&gt;</string>
+    <string name="string_float_too_many_notifications">Too Many Notifications! Clean now  &gt;&gt;</string>
+    <string name="string_float_too_many_apps_running">Too Many Apps Running! Clean now &gt;&gt;</string>
+    <string name="string_float_slow_internet_test_speed">Slow Internet? Test speed now &gt;&gt;</string>
+    <string name="string_float_network_speed_very_fast">Very fast</string>
+    <string name="string_float_network_speed_good">Good</string>
+    <string name="string_float_network_speed_normal">Normal</string>
+    <string name="string_float_network_speed_slow">Slow</string>
+    <string name="string_float_network_speed_very_slow">Very slow</string>
+    <string name="string_float_network_status_result">Network Status: %1$s</string>
+    <string name="string_float_percent" translatable="false">%1$d%%</string>
+    <string name="string_float_percent_symbol" translatable="false">%</string>
+    <string name="string_float_mbps" translatable="false">Mbps</string>
+    <string name="string_float_unavailable" translatable="false">--</string>
+    <string name="string_float_bytes_speed" translatable="false">%1$d B/s</string>
+    <string name="string_float_kilobytes_speed" translatable="false">%1$.1f KB/s</string>
+    <string name="string_float_megabytes_speed" translatable="false">%1$.1f MB/s</string>
+    <string name="string_float_result_speed" translatable="false">%1$.1fM</string>
+</resources>

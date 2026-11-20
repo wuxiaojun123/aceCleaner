@@ -22,7 +22,7 @@ class DeviceStatusDetailActivity : BaseOnboardingActivity<OnboardingActivityDevi
 ) {
     internal override val onboardingStep = OnboardingStep.DEVICE_DETAIL
     private val storageAnalytics = PermissionRequestAnalytics(this, PermissionRequestAnalytics.Type.STORAGE)
-    private val storageSettings = OnboardingSettingsPermission(this, storageAnalytics, { StorageAccess.hasBroadAccess(this) }, ::afterStoragePermission)
+    private val storageSettings = OnboardingSettingsPermission(this, storageAnalytics, { StorageAccess.hasBroadAccess(this) }, onFinished = ::afterStoragePermission)
     private val legacyStorage = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         storageAnalytics.result(StorageAccess.hasBroadAccess(this))
         afterStoragePermission(StorageAccess.hasBroadAccess(this))

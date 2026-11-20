@@ -27,15 +27,18 @@ class FirstJunkCleaningActivity : BaseOnboardingActivity<OnboardingActivityFirst
         lifecycleScope.launch {
             val ad = async { AppAdManager.preload(this@FirstJunkCleaningActivity, AppAdManager.ONBOARDING_FINISH) }
             val cleaning = model.clean(result)
-            animateProgress(CLEAN_DURATION_MS, ::renderProgress)
+            animateProgress(CLEAN_DURATION_MS, ::renderProgress, maxProgress = 99)
             delay(CLEAN_DURATION_MS)
             val cleanedBytes = cleaning.await()
             progressJob.cancel()
             stopProgress()
+            renderProgress(99)
+            val adReady = ad.await()
+            awaitResumed()
             renderProgress(100)
             binding.cleanedSize.text = Formatter.formatShortFileSize(this@FirstJunkCleaningActivity, cleanedBytes)
             delay(350L)
-            if (ad.await()) showAd(AppAdManager.ONBOARDING_FINISH)
+            if (adReady) showAd(AppAdManager.ONBOARDING_FINISH)
             awaitResumed()
             navigateTo(FirstJunkCompleteActivity.createIntent(this@FirstJunkCleaningActivity, cleanedBytes))
         }
