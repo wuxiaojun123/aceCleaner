@@ -14,7 +14,7 @@ import xml.etree.ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULES = ("app", "library_push", "library_ad_sdk")
+MODULES = ("app", "library_push", "library_ad_sdk", "library_float")
 ANDROID = "http://schemas.android.com/apk/res/android"
 AUTO = "http://schemas.android.com/apk/res-auto"
 TEXT_ATTRIBUTES = {

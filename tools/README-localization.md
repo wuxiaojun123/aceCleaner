@@ -13,7 +13,7 @@ python3 -m unittest discover -s tools -p 'test_check_string_resources.py'
 sh gradlew :app:checkLocalization
 ```
 
-脚本只依赖 Python 3 标准库。它检查 app、library_push、library_ad_sdk 的源文件，
+脚本只依赖 Python 3 标准库。它检查 app、library_push、library_ad_sdk、library_float 的源文件，
 拦截分散在其他 XML 中的字符串资源、同配置重复资源、布局/菜单/Manifest/style
 中的硬编码文案，以及 Kotlin/Java 中直接写给文本属性、对话框、Toast、Snackbar、
 通知和 RemoteViews 的字符串字面量。`tools:` 预览、测试夹具、日志、协议常量不作为界面文案。
@@ -21,6 +21,9 @@ sh gradlew :app:checkLocalization
 Android Lint 补充语义检查：`HardcodedText`、`SetTextI18n`、`StringFormatInvalid`、
 `StringFormatMatches`、`StringFormatCount` 均设为 fatal，包含本项目依赖库。
 `:app:checkLocalization` 运行脚本及 `lintVitalRelease`，不会执行 R8 混淆或打包。
+
+Windows 仅安装 `python` 而没有 `python3` 时，可给 Gradle 添加
+`-PpythonCommand=python`，仍执行同一资源检查脚本，不跳过校验。
 
 ## 每次正式包自动检查
 

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#80000000"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSpeedAnim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animSpeed"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:lottie_fileName="anim/float_speed_anim.json"
+            app:lottie_autoPlay="false"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintDimensionRatio="1:1"
+            app:lottie_loop="true"
+            app:lottie_renderMode="software"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="8.88"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="28sp"
+            android:textColor="@color/color_FFFFFFFF"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/animSpeed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvSpeedUnit"/>
+
+        <TextView
+            android:id="@+id/tvSpeedUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_float_mbps"
+            android:textSize="16sp"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/color_FFFFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvSpeed"
+            app:layout_constraintBottom_toBottomOf="@id/tvSpeed"
+            app:layout_constraintStart_toEndOf="@id/tvSpeed"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSpeedResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:layout_marginHorizontal="16dp">
+
+        <Space
+            android:id="@+id/sSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintStart_toStartOf="@id/ivSpeedResult"
+            app:layout_constraintTop_toTopOf="@id/ivSpeedResult"
+            app:layout_constraintBottom_toBottomOf="@id/ivSpeedResult"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/sSpace"
+            android:background="@drawable/shape_solid_fff_r20"
+            app:layout_constraintBottom_toBottomOf="@id/sSpaceBottom"/>
+
+        <ImageView
+            android:id="@+id/ivSpeedResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/img_speed_end"
+            android:contentDescription="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:contentDescription="@null"
+            android:src="@mipmap/ic_speed_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sSpace"/>
+
+        <TextView
+            android:id="@+id/tvNetUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTint="#272727"
+            tools:text="88.8M"
+            android:textColor="#272727"
+            android:textSize="16sp"
+            tools:drawableTint="#272727"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@mipmap/ic_net_up"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvNetDown"
+            app:layout_constraintTop_toBottomOf="@id/ivSpeedResult"/>
+
+        <TextView
+            android:id="@+id/tvNetDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTint="#272727"
+            tools:text="88.8M"
+            android:textColor="#272727"
+            android:textSize="16sp"
+            tools:drawableTint="#272727"
+            android:drawableStart="@mipmap/ic_net_down"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNetUp"
+            app:layout_constraintStart_toEndOf="@id/tvNetUp"/>
+
+        <TextView
+            android:id="@+id/tvNetResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="当前的网络状态良好"
+            android:textColor="#272727"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvNetUp" />
+
+        <FrameLayout
+            android:id="@+id/flAdView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tvNetResult"/>
+
+        <Space
+            android:id="@+id/sSpaceBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flAdView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

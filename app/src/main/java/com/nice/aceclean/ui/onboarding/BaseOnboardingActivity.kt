@@ -130,9 +130,9 @@ abstract class BaseOnboardingActivity<B : ViewBinding>(
         }
     }
 
-    protected fun animateProgress(durationMs: Long, render: (Int) -> Unit) {
+    protected fun animateProgress(durationMs: Long, render: (Int) -> Unit, maxProgress: Int = 100) {
         stopProgress()
-        animator = ValueAnimator.ofInt(0, 100).apply {
+        animator = ValueAnimator.ofInt(0, maxProgress).apply {
             duration = durationMs
             interpolator = android.view.animation.DecelerateInterpolator(1.25f)
             addUpdateListener { render(it.animatedValue as Int) }

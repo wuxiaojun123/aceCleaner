@@ -25,6 +25,7 @@ internal class SettingsPermissionPoller(
     private val onGranted: () -> Unit,
     private val onDenied: () -> Unit = {},
     private val pendingExtra: String? = null,
+    private val bringCallerToFront: Boolean = true,
 ) : AutoCloseable {
     private var pollingJob: Job? = null
     private var tipsJob: Job? = null
@@ -133,7 +134,7 @@ internal class SettingsPermissionPoller(
         pollingJob?.cancel()
         pollingJob = null
         if (granted) {
-            if (bringToFront && !activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+            if (bringToFront && bringCallerToFront && !activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 HotStartManager.markSkipNextHotStart()
                 runCatching {
                     activity.startActivity(Intent(activity, activity.javaClass).apply {

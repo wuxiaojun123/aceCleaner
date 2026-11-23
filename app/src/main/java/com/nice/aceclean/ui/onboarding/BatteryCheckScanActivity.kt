@@ -17,11 +17,14 @@ class BatteryCheckScanActivity : BaseOnboardingActivity<OnboardingActivityBatter
         trackOnboardingAnimation(binding.scanAnimation)
         lifecycleScope.launch {
             val ad = async { AppAdManager.preload(this@BatteryCheckScanActivity, AppAdManager.ONBOARDING_FINISH) }
-            animateProgress(SCAN_DURATION_MS, ::renderProgress)
+            animateProgress(SCAN_DURATION_MS, ::renderProgress, maxProgress = 99)
             delay(SCAN_DURATION_MS)
             stopProgress()
+            renderProgress(99)
+            val adReady = ad.await()
+            awaitResumed()
             renderProgress(100)
-            if (ad.await()) showAd(AppAdManager.ONBOARDING_FINISH)
+            if (adReady) showAd(AppAdManager.ONBOARDING_FINISH)
             awaitResumed()
             navigateTo(FirstJunkCompleteActivity.createIntent(this@BatteryCheckScanActivity, fromBattery = true))
         }

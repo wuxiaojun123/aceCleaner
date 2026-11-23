@@ -38,16 +38,20 @@ abstract class PermissionFeatureActivity<F : ViewBinding>(
         }
         val config = featureType.config
         binding.permissionToolbarTitle.setText(config.toolbarTitle)
+        binding.permissionImage.visibility = View.GONE
+        binding.permissionAnimation.visibility = View.VISIBLE
+        binding.permissionAnimation.setAnimation(
+            when (featureType) {
+                FeatureType.NETWORK_TRAFFIC -> R.raw.network_traffic_permission
+                FeatureType.APP_MANAGER -> R.raw.app_manager_permission
+                FeatureType.NOTIFICATION_CLEANER -> R.raw.notification_permission_guide
+            },
+        )
         if (featureType == FeatureType.NOTIFICATION_CLEANER) {
-            binding.permissionImage.visibility = View.GONE
-            binding.permissionAnimation.visibility = View.VISIBLE
-            binding.permissionAnimation.setAnimation(R.raw.notification_permission_guide)
             binding.permissionTitle.textSize = 24f
             binding.permissionTitle.updateLayoutParams<LinearLayout.LayoutParams> {
                 topMargin = (22 * resources.displayMetrics.density).toInt()
             }
-        } else {
-            binding.permissionImage.setImageResource(config.image)
         }
         binding.permissionTitle.setText(config.title)
         binding.permissionDescription.setText(config.description)

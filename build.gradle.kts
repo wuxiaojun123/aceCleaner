@@ -29,7 +29,7 @@ val checkStringResources by tasks.registering(Exec::class) {
     group = "verification"
     description = "Check centralized string resources and hardcoded XML/Kotlin/Java UI text."
     workingDir(rootDir)
-    commandLine("python3", "tools/check_string_resources.py", "--report", "build/reports/localization/strings.json")
+    commandLine(providers.gradleProperty("pythonCommand").getOrElse("python3"), "tools/check_string_resources.py", "--report", "build/reports/localization/strings.json")
 }
 
 subprojects {

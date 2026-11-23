@@ -24,13 +24,16 @@ class FirstJunkStartScanningActivity : BaseOnboardingActivity<OnboardingActivity
         lifecycleScope.launch {
             val ad = async { AppAdManager.preload(this@FirstJunkStartScanningActivity, AppAdManager.ONBOARDING_ANALYSIS) }
             val scan = model.scan()
-            animateProgress(SCAN_DURATION_MS, ::renderProgress)
+            animateProgress(SCAN_DURATION_MS, ::renderProgress, maxProgress = 99)
             delay(SCAN_DURATION_MS)
             FirstRunJunkSession.result = scan.await()
             stopProgress()
+            renderProgress(99)
+            val adReady = ad.await()
+            awaitResumed()
             renderProgress(100)
             delay(350L)
-            if (ad.await()) showAd(AppAdManager.ONBOARDING_ANALYSIS)
+            if (adReady) showAd(AppAdManager.ONBOARDING_ANALYSIS)
             awaitResumed()
             navigateTo(FirstJunkResultActivity::class.java)
         }
