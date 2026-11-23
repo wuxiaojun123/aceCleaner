@@ -22,8 +22,10 @@ Android Lint 补充语义检查：`HardcodedText`、`SetTextI18n`、`StringForma
 `StringFormatMatches`、`StringFormatCount` 均设为 fatal，包含本项目依赖库。
 `:app:checkLocalization` 运行脚本及 `lintVitalRelease`，不会执行 R8 混淆或打包。
 
-Windows 仅安装 `python` 而没有 `python3` 时，可给 Gradle 添加
-`-PpythonCommand=python`，仍执行同一资源检查脚本，不跳过校验。
+Gradle 在 Windows 上依次探测 `py -3`、`python` 和 `python3`，在其他系统上依次探测
+`python3` 和 `python`。如果找不到可运行的 Python 3，请安装 Python 3 并将其加入 `PATH`。
+也可以通过 `-PpythonCommand` 指定解释器的绝对路径，例如
+`\.\gradlew.bat :app:checkLocalization "-PpythonCommand=C:/Tools/Python/python.exe"`。
 
 ## 每次正式包自动检查
 
